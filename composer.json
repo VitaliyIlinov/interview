@@ -1,0 +1,8 @@
+{
+    "require": {
+        "elasticsearch/elasticsearch": "^6.1",
+        "monolog/monolog": "^1.24",
+        "guzzlehttp/guzzle": "^6.3",
+        "maximebf/debugbar": "^1.15"
+    }
+}
