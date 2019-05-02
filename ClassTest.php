@@ -5,6 +5,7 @@
  * User: ilinovvitalii
  * Date: 12/31/18
  * Time: 4:09 PM
+ * hgh
  */
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
