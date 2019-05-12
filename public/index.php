@@ -1,6 +1,10 @@
 <?php
 
 //todo RegistersExceptionHandlers
+//todo DI
+//todo response
+//todo view
+//todo middleware
 /*
 |--------------------------------------------------------------------------
 | Create The Application
@@ -12,7 +16,11 @@
 |
 */
 //error_reporting(E_ALL);
+
 ini_set('display_errors', 1);
+/**
+ * @var $app app\Core\Application
+ */
 $app = require __DIR__.'/../bootstrap/app.php';
 
 /*
@@ -27,4 +35,4 @@ $app = require __DIR__.'/../bootstrap/app.php';
 |
 */
 
-//$app->run();
+$app->run();

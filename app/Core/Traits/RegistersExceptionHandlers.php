@@ -75,7 +75,7 @@ trait RegistersExceptionHandlers
     protected function handleUncaughtException($e)
     {
 
-        var_dump($e->getMessage());
+        var_dump($e);
 //        $handler = $this->resolveExceptionHandler();
 //
 //        if ($e instanceof Error) {
