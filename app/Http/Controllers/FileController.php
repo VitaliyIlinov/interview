@@ -7,6 +7,6 @@ class FileController
 
     public function test()
     {
-       echo __FUNCTION__;
+       return view('file')->with([234,234,23233]);
     }
 }

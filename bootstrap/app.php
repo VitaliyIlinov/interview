@@ -22,7 +22,7 @@ $app = new app\Core\Application(ROOT);
 //$app->withFacades();
 
 // $app->withEloquent();
-
+$app->configure('app');
 /*
 |--------------------------------------------------------------------------
 | Register Container Bindings

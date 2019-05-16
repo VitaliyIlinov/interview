@@ -6,7 +6,9 @@ use app\Core\Traits\RegistersExceptionHandlers;
 use app\Exceptions\HttpResponseException;
 use app\Exceptions\MethodNotAllowed;
 use app\Exceptions\NotFoundHttpException;
+use app\helpers\Filesystem;
 use app\Providers\ServiceProvider;
+use config\Repository as ConfigRepository;
 
 class Application extends Container
 {
@@ -44,6 +46,20 @@ class Application extends Container
     protected $loadedProviders = [];
 
     /**
+     * All of the loaded configuration files.
+     *
+     * @var array
+     */
+    protected $loadedConfigurations = [];
+
+    /**
+     * The registered type aliases.
+     *
+     * @var string[]
+     */
+    protected $aliases = [];
+
+    /**
      * The base path of the application installation.
      *
      * @var string
@@ -67,26 +83,156 @@ class Application extends Container
     public function __construct($basePath)
     {
         $this->basePath = $basePath;
+
+        $this->bootstrapContainer();
         $this->registerErrorHandling();
         $this->bootstrapRouter();
     }
 
     /**
+     * Bootstrap the application container.
+     *
      * @return void
      */
-    public function bootstrapRouter()
+    private function bootstrapContainer()
+    {
+        $this->registerConfigBindings();
+        $this->registerViewBindings();
+        $this->registerFilesBindings();
+
+        static::setInstance($this);
+
+        $this->instance('app', $this);
+
+        $this->instance('env', config('app.env', 'production'));
+    }
+
+    /**
+     * Register the core container aliases.
+     *
+     * @return void
+     */
+    protected function registerContainerAliases()
+    {
+        $this->aliases = [
+            //
+        ];
+    }
+
+    /**
+     * @return void
+     */
+    private function bootstrapRouter()
     {
         $this->router = new Router($this);
     }
 
     /**
-     * Determine if the application is running in the console.
+     * Register container bindings for the application.
      *
-     * @return bool
+     * @return void
      */
-    public function runningInConsole()
+    private function registerConfigBindings()
     {
-        return php_sapi_name() === 'cli' || php_sapi_name() === 'phpdbg';
+        $this->singleton('config', function () {
+            return new ConfigRepository;
+        });
+    }
+
+    /**
+     * Resolve the given type from the container.
+     *
+     * @param string $abstract
+     * @param array $parameters
+     * @return mixed
+     */
+    public function make($abstract, $parameters = [])
+    {
+        if (isset($this->instances[$abstract])) {
+            return $this->instances[$abstract];
+        }
+        return parent::make($abstract, $parameters);
+    }
+
+    /**
+     * Register container bindings for the application.
+     *
+     * @return void
+     */
+    private function registerViewBindings()
+    {
+        $this->singleton('view', function () {
+            return $this->loadComponent('view', 'app\Core\View\ViewServiceProvider');
+        });
+    }
+
+    /**
+     * Register container bindings for the application.
+     *
+     * @return void
+     */
+    private function registerFilesBindings()
+    {
+        $this->singleton('files', function () {
+            return new Filesystem;
+        });
+    }
+
+    /**
+     * Configure and load the given component and provider.
+     *
+     * @param string $config
+     * @param array|string $providers
+     * @param string|null $return
+     * @return mixed
+     */
+    public function loadComponent($config, $providers, $return = null)
+    {
+        $this->configure($config);
+
+        foreach ((array)$providers as $provider) {
+            $this->register($provider);
+        }
+
+        return $this->make($return ?: $config);
+    }
+
+    /**
+     * Load a configuration file into the application.
+     *
+     * @param string $name
+     * @return void
+     */
+    public function configure($name)
+    {
+        if (isset($this->loadedConfigurations[$name])) {
+            return;
+        }
+
+        $this->loadedConfigurations[$name] = true;
+
+        $path = $this->getConfigurationPath($name);
+
+        if ($path) {
+            $this->make('config')->set($name, require $path);
+        }
+    }
+
+    /**
+     * Get the path to the given configuration file.
+     *
+     * If no name is provided, then we'll return the path to the config folder.
+     *
+     * @param string|null $name
+     * @return string
+     */
+    public function getConfigurationPath($name = null): ?string
+    {
+        $appConfigPath = $this->basePath . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . $name . '.php';
+        if (file_exists($appConfigPath)) {
+            return $appConfigPath;
+        }
+        return null;
     }
 
     /**
@@ -128,12 +274,11 @@ class Application extends Container
     public function run($request = null)
     {
         $response = $this->dispatch($request);
-        echo (string)$response;
-//        if ($response instanceof SymfonyResponse) {
-//            $response->send();
-//        } else {
-//            echo (string)$response;
-//        }
+        if ($response instanceof Response) {
+            $response->send();
+        } else {
+            echo (string)$response;
+        }
     }
 
     /**
@@ -165,6 +310,7 @@ class Application extends Container
      * @return mixed
      * @throws MethodNotAllowed
      * @throws NotFoundHttpException
+     * @throws \ReflectionException
      */
     protected function handleRoute($routeInfo)
     {
@@ -222,6 +368,8 @@ class Application extends Container
      *
      * @param array $routeInfo
      * @return mixed
+     * @throws NotFoundHttpException
+     * @throws \ReflectionException
      */
     protected function handleFoundRoute($routeInfo)
     {
@@ -324,13 +472,15 @@ class Application extends Container
      */
     public function prepareResponse($response)
     {
-        if (! $response instanceof Response) {
+        $request = app(Request::class);
+
+        if (!$response instanceof Response) {
             $response = new Response($response);
         }
 //        elseif ($response instanceof BinaryFileResponse) {
 //            $response = $response->prepare(Request::capture());
 //        }
-        return $response->prepare($response);
+        return $response->prepare($request);
     }
 
     /**
@@ -355,6 +505,7 @@ class Application extends Container
         if (!$request) {
             $request = Request::createFromGlobals();
         }
+        $this->instance(Request::class, $request);
 
         return [$request->getMethod(), '/' . trim($request->getPathInfo(), '/')];
     }

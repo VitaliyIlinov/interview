@@ -20,9 +20,13 @@ abstract class ServiceProvider
      * @param  Application  $app
      * @return void
      */
-    public function __construct($app)
+    public function __construct(Application $app)
     {
         $this->app = $app;
     }
+
+    public abstract function boot();
+
+    public abstract function register();
 
 }

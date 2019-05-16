@@ -3,6 +3,7 @@
 namespace app\Core;
 
 use app\Core\Bag\ResponseHeaderBag;
+use app\Core\contracts\Support\Renderable;
 
 class Response
 {
@@ -128,6 +129,11 @@ class Response
      */
     public function setContent($content)
     {
+
+        if ($content instanceof Renderable) {
+            $content = $content->render();
+        }
+
         if (null !== $content && !\is_string($content) && !is_numeric($content) && !\is_callable([
                 $content,
                 '__toString',
@@ -197,10 +203,67 @@ class Response
      * the Request that is "associated" with this Response.
      *
      * @param Request $request
-     * @return void
+     * @return self
      */
     public function prepare(Request $request)
     {
-
+        return $this;
     }
+
+    /**
+     * Sends HTTP headers and content.
+     *
+     * @return $this
+     */
+    public function send()
+    {
+        $this->sendHeaders();
+        $this->sendContent();
+
+        if (\function_exists('fastcgi_finish_request')) {
+            fastcgi_finish_request();
+        } elseif (!\in_array(\PHP_SAPI, ['cli', 'phpdbg'], true)) {
+//            static::closeOutputBuffers(0, true);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Sends HTTP headers.
+     *
+     * @return $this
+     */
+    public function sendHeaders()
+    {
+        // headers have already been sent by the developer
+        if (headers_sent()) {
+            return $this;
+        }
+
+        // headers
+        foreach ($this->headers as $name => $values) {
+            $replace = 0 === strcasecmp($name, 'Content-Type');
+            foreach ($values as $value) {
+                header($name.': '.$value, $replace, $this->statusCode);
+            }
+        }
+
+        // status
+        header(sprintf('HTTP/%s %s %s', '1.0', $this->statusCode, $this->statusText), true, $this->statusCode);
+
+        return $this;
+    }
+    /**
+     * Sends content for the current web response.
+     *
+     * @return $this
+     */
+    public function sendContent()
+    {
+        echo $this->content;
+
+        return $this;
+    }
+
 }

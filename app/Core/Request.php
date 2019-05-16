@@ -8,7 +8,6 @@ use app\Core\Bag\FileBag;
 use app\Core\Bag\HeaderBag;
 use app\Core\Bag\ParameterBag;
 use app\Core\Bag\ServerBag;
-use http\Exception\InvalidArgumentException;
 
 class Request
 {
@@ -201,7 +200,7 @@ class Request
             return $this->method = $method;
         }
 
-        throw new InvalidArgumentException(sprintf('Invalid method override "%s".', $method));
+        throw new \InvalidArgumentException(sprintf('Invalid method override "%s".', $method));
     }
 
     /**

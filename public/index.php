@@ -1,9 +1,11 @@
 <?php
 
+//todo view
+//todo done config in lumen load view() /lumen/vendor/laravel/lumen-framework/config/view.php
 //todo RegistersExceptionHandlers
 //todo DI
 //todo response
-//todo view
+//todo events
 //todo middleware
 /*
 |--------------------------------------------------------------------------
