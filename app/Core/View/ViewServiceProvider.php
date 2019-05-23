@@ -24,7 +24,7 @@ class ViewServiceProvider extends ServiceProvider
     {
         $this->app->singleton('view', function ($app) {
             return new View(
-                new FileViewFinder($app['config']['view.path'],$app['files'])
+                new FileViewFinder($app['config']['view'],$app['files'])
             );
         });
     }

@@ -13,28 +13,28 @@ class View implements Renderable
      *
      * @var $finder FileViewFinder;
      */
-    protected $finder;
-
-    /**
-     * The name of the view.
-     *
-     * @var string
-     */
-    protected $view;
-
-    /**
-     * The array of view data.
-     *
-     * @var array
-     */
-    protected $data = [];
+    private $finder;
 
     /**
      * The path to the view file.
      *
      * @var string
      */
-    protected $path;
+    private $view;
+
+    /**
+     * The path to the layout file.
+     *
+     * @var string
+     */
+    private $layout;
+
+    /**
+     * The array of view data.
+     *
+     * @var array
+     */
+    private $data = [];
 
     public function __construct(FileViewFinder $finder)
     {
@@ -47,15 +47,72 @@ class View implements Renderable
         return $this;
     }
 
-    public function make($view, $data, $mergeData)
+    public function render()
     {
-        $this->path = $this->finder->find(
-            $view = $this->normalizeName($view)
-        );
+        $this->with(['view' => $this->view]);
+        return $this->renderContents($this->data);
+    }
 
-        $this->view = $view;
-        $this->data = array_merge($this->data, $data);
+    /**
+     * @param $view
+     * @param $data
+     * @param $layout
+     * @return $this
+     */
+    public function make($view, $data, $layout)
+    {
+        $this->setLayout($layout);
+        $this->setView($view);
+        $this->data = $data;
         return $this;
+    }
+
+    /**
+     * @param string $view
+     * @return View
+     */
+    public function setView(string $view): self
+    {
+        $this->view = $this->finder->find(
+            $this->normalizeName($view)
+        );
+        return $this;
+    }
+
+    /**
+     * @param string $layout
+     * @return View
+     */
+    public function setLayout(string $layout): self
+    {
+        $this->layout = $this->finder->find(
+            $this->normalizeName($layout)
+        );
+        return $this;
+    }
+
+    /**
+     * Get the contents of the view instance.
+     *
+     * @param array $data
+     * @return string
+     * @throws Throwable
+     */
+    private function renderContents(array $data)
+    {
+        ob_start();
+
+        extract($data, EXTR_SKIP);
+
+        try {
+            include $this->layout;
+        } catch (Exception $e) {
+            throw $e;
+        } catch (Throwable $e) {
+            throw $e;
+        }
+
+        return ltrim(ob_get_clean());
     }
 
     /**
@@ -75,33 +132,5 @@ class View implements Renderable
         [$namespace, $name] = explode($delimiter, $name);
 
         return $namespace . $delimiter . str_replace('/', '.', $name);
-    }
-
-    public function render()
-    {
-        return $this->renderContents();
-    }
-
-    /**
-     * Get the contents of the view instance.
-     *
-     * @return string
-     * @throws Throwable
-     */
-    private function renderContents()
-    {
-        ob_start();
-
-        extract($this->data, EXTR_SKIP);
-
-        try {
-            include $this->path;
-        } catch (Exception $e) {
-            throw $e;
-        } catch (Throwable $e) {
-            throw $e;
-        }
-
-        return ltrim(ob_get_clean());
     }
 }

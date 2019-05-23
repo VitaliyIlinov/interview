@@ -7,6 +7,7 @@
 //todo response
 //todo events
 //todo middleware
+//todo compile view
 /*
 |--------------------------------------------------------------------------
 | Create The Application

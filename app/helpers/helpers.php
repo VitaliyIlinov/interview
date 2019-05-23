@@ -28,18 +28,18 @@ if (!function_exists('view')) {
      *
      * @param string $view
      * @param array $data
-     * @param array $mergeData
+     * @param string $layout
      * @return View
      */
-    function view($view = null, $data = [], $mergeData = []): View
+    function view(string $view, array $data = [], string $layout = 'base'): View
     {
-        $factory = app('view');
+        $viewObject = app('view');
 
         if (func_num_args() === 0) {
-            return $factory;
+            return $viewObject;
         }
 
-        return $factory->make($view, $data, $mergeData);
+        return $viewObject->make($view, $data, $layout);
     }
 }
 

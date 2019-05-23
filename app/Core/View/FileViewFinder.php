@@ -36,6 +36,13 @@ class FileViewFinder
     protected $views = [];
 
     /**
+     * The array of views that have been located.
+     *
+     * @var array
+     */
+    protected $layouts = [];
+
+    /**
      * Register a view extension with the finder.
      *
      * @var array
@@ -44,10 +51,10 @@ class FileViewFinder
 
     /**
      * Create a new file view loader instance.
-     * @param string $path
+     * @param array $path
      * @param Filesystem $filesystem
      */
-    public function __construct(string $path, Filesystem $filesystem)
+    public function __construct(array $path, Filesystem $filesystem)
     {
         $this->paths = $path;
         $this->files = $filesystem;
@@ -66,9 +73,11 @@ class FileViewFinder
         if (isset($this->views[$name])) {
             return $this->views[$name];
         }
-        foreach ($this->getPossibleViewFiles($name) as $file) {
-            if ($this->files->exists($viewPath = $this->paths . '/' . $file)) {
-                return $viewPath;
+        foreach ($this->paths as $path) {
+            foreach ($this->getPossibleViewFiles($name) as $file) {
+                if ($this->files->exists($viewPath = $path . '/' . $file)) {
+                    return $this->views[$name] = $viewPath;
+                }
             }
         }
 
