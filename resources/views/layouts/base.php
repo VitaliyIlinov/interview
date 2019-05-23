@@ -11,7 +11,8 @@
     <!-- Bootstrap core CSS -->
     <link href="/libs/bootstrap-4.3.1-dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <!-- Custom styles for this template -->
-    <link href="css/main.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
+    <link href="/libs/highlightjs/styles/darkula.css" rel="stylesheet">
 </head>
 <body>
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
@@ -64,6 +65,9 @@
 <footer class="container">
     <p>&copy; Company 2017-2019</p>
 </footer>
-<script src="js/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+<script src="/libs/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+<script src="/libs/highlightjs/highlight.pack.js"></script>
+<script src="/js/main.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 </body>
 </html>
