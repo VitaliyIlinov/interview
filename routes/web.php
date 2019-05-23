@@ -7,7 +7,7 @@ $router->get('/', function () use ($router) {
     return 'User ';
 });
 
-$router->group(['prefix' => 'solid','middleware'=>'solid|solid2', 'namespace' => 'Solid'], function () use ($router) {
+$router->group(['prefix' => 'solide','middleware'=>'solid|solid2', 'namespace' => 'Solid'], function () use ($router) {
     $router->get('single_responsibility', function ($id) {
         return 'User ' . $id;
     });
@@ -40,4 +40,8 @@ $router->get('profile', [ 'uses' => 'UserController@showProfile']);
 $router->get('user','FileController@test');
 $router->get('user/{name}', function ($name = null) {
     return $name;
+});
+
+$router->group(['prefix' => 'solid'], function () use ($router) {
+    $router->get('openclosed','SolidController@openClosed');
 });
