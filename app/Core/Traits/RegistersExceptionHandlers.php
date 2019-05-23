@@ -2,19 +2,20 @@
 
 namespace app\Core\Traits;
 
+use app\contracts\Debug\ExceptionHandler;
+use app\Core\Request;
 use app\Exceptions\FatalErrorException;
 use ErrorException;
 use HttpException;
 
 trait RegistersExceptionHandlers
 {
-
     /**
      * Throw an HttpException with the given data.
      *
-     * @param  int     $code
-     * @param  string  $message
-     * @param  array   $headers
+     * @param int $code
+     * @param string $message
+     * @param array $headers
      * @return void
      *
      * @throws HttpException
@@ -36,6 +37,7 @@ trait RegistersExceptionHandlers
     protected function registerErrorHandling()
     {
         error_reporting(-1);
+        //ini_set('display_errors', 1);
 
         set_error_handler(function ($level, $message, $file = '', $line = 0) {
             if (error_reporting() & $level) {
@@ -59,7 +61,7 @@ trait RegistersExceptionHandlers
      */
     protected function handleShutdown()
     {
-        if (! is_null($error = error_get_last()) && $this->isFatalError($error['type'])) {
+        if (!is_null($error = error_get_last())) {
             $this->handleUncaughtException(new FatalErrorException(
                 $error['message'], $error['type'], 0, $error['file'], $error['line']
             ));
@@ -69,32 +71,27 @@ trait RegistersExceptionHandlers
     /**
      * Handle an uncaught exception instance.
      *
-     * @param  \Throwable  $e
+     * @param \Throwable $e
      * @return void
      */
-    protected function handleUncaughtException($e)
+    protected function handleUncaughtException(\Throwable $e)
     {
-
+        /**
+         * @var $handler ExceptionHandler
+         */
         var_dump($e);
-//        $handler = $this->resolveExceptionHandler();
-//
-//        if ($e instanceof Error) {
-//            $e = new FatalErrorException($e);
-//        }
-//
-//        $handler->report($e);
-//
-//        if ($this->runningInConsole()) {
-//            $handler->renderForConsole(new ConsoleOutput, $e);
-//        } else {
-//            $handler->render($this->make('request'), $e)->send();
-//        }
+        return;
+        $handler = app(ExceptionHandler::class);
+        var_dump($e);
+        $handler->report($e);
+
+        $handler->render(app(Request::class), $e)->send();
     }
 
     /**
      * Determine if the error type is fatal.
      *
-     * @param  int  $type
+     * @param int $type
      * @return bool
      */
     protected function isFatalError($type)
@@ -107,5 +104,4 @@ trait RegistersExceptionHandlers
 
         return in_array($type, $errorCodes);
     }
-
 }

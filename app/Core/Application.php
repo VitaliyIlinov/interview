@@ -403,7 +403,7 @@ class Application extends Container
         $action = $routeInfo[1];
 
         if (isset($action['uses'])) {
-            return $this->prepareResponse($this->callControllerAction($routeInfo));
+            return $this->callControllerAction($routeInfo);
         }
 
         foreach ($action as $value) {
@@ -414,7 +414,7 @@ class Application extends Container
         }
 
         try {
-            return $this->prepareResponse($this->call($closure, $routeInfo[2]));
+            return $this->call($closure, $routeInfo[2]);
         } catch (HttpResponseException $e) {
             return $e->getResponse();
         }
@@ -451,9 +451,7 @@ class Application extends Container
     protected function callControllerCallable(callable $callable, array $parameters = [])
     {
         try {
-            return $this->prepareResponse(
-                $this->call($callable, $parameters)
-            );
+            return $this->call($callable, $parameters);
         } catch (HttpResponseException $e) {
             return $e->getResponse();
         }

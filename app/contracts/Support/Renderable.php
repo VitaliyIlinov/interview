@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Core\contracts\Support;
+namespace app\contracts\Support;
 
 interface Renderable
 {

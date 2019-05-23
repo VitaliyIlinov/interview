@@ -3,7 +3,7 @@
 namespace app\Core;
 
 use app\Core\Bag\ResponseHeaderBag;
-use app\Core\contracts\Support\Renderable;
+use app\contracts\Support\Renderable;
 
 class Response
 {

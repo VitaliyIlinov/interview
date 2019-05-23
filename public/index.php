@@ -18,9 +18,7 @@
 | is ready to receive HTTP .
 |
 */
-//error_reporting(E_ALL);
 
-ini_set('display_errors', 1);
 /**
  * @var $app app\Core\Application
  */

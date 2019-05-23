@@ -2,7 +2,7 @@
 
 namespace app\Core\View;
 
-use app\Core\contracts\Support\Renderable;
+use app\contracts\Support\Renderable;
 use Exception;
 use Throwable;
 

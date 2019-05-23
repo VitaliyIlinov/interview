@@ -4,6 +4,7 @@ namespace app\Core;
 
 use app\Core\Container as ContainerContract;
 use ArrayAccess;
+use Closure;
 
 class Container implements ArrayAccess
 {
@@ -128,11 +129,18 @@ class Container implements ArrayAccess
      * Register binding in the container.
      *
      * @param string $abstract
-     * @param \Closure $closure
+     * @param \Closure|string|null $closure
      * @return void
      */
-    public function singleton(string $abstract, \Closure $closure)
+    public function singleton(string $abstract, $closure = null)
     {
+        if (!$closure instanceof Closure) {
+            $closure = function ($container, $parameters = []) use ($abstract, $closure) {
+                return $container->make(
+                    $closure, $parameters
+                );
+            };
+        }
         $this->bindings[$abstract] = $closure;
     }
 
