@@ -29,6 +29,20 @@ class SolidController
      * @return View
      * @throws FileNotFoundException
      */
+    public function singleResponsibility(): View
+    {
+        $content = $this->filesystem->get(
+            $this->getPath('SingleResponsibility')
+        );
+        $content = str_replace('<?php', '', $content);
+        return view('solid.openclosed')->with(['content' => $content]);
+    }
+
+
+    /**
+     * @return View
+     * @throws FileNotFoundException
+     */
     public function openClosed(): View
     {
         $content = $this->filesystem->get(
@@ -38,6 +52,50 @@ class SolidController
         return view('solid.openclosed')->with(['content' => $content]);
     }
 
+    /**
+     * @return View
+     * @throws FileNotFoundException
+     */
+    public function liskovBarbara(): View
+    {
+        $content = $this->filesystem->get(
+            $this->getPath('BarbaraLiskov')
+        );
+        $content = str_replace('<?php', '', $content);
+        return view('solid.openclosed')->with(['content' => $content]);
+    }
+
+    /**
+     * @return View
+     * @throws FileNotFoundException
+     */
+    public function interfaceSegregation(): View
+    {
+        $content = $this->filesystem->get(
+            $this->getPath('InterfaceSegregation')
+        );
+        $content = str_replace('<?php', '', $content);
+        return view('solid.openclosed')->with(['content' => $content]);
+    }
+
+    /**
+     * @return View
+     * @throws FileNotFoundException
+     */
+    public function DependencyInversion(): View
+    {
+        $content = $this->filesystem->get(
+            $this->getPath('DependencyInversion')
+        );
+        $content = str_replace('<?php', '', $content);
+        return view('solid.openclosed')->with(['content' => $content]);
+    }
+
+
+    /**
+     * @param string $file
+     * @return string
+     */
     private function getPath(string $file): string
     {
         return str_replace(

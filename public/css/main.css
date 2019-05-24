@@ -1,0 +1,31 @@
+#catalog a {
+    padding: .75rem 1.25rem;
+    display: block;
+    text-align: left;
+    transition-property: all;
+    transition-duration: 0.7s;
+    cursor: pointer;
+}
+#catalog a:hover {
+    text-decoration: none;
+}
+#catalog > .list-group-item ul {
+    display: none;
+}
+
+#catalog > .list-group-item ul.active {
+    display: block;
+}
+
+#catalog li.list-group-item {
+    padding: 0;
+    background-color: transparent;
+}
+
+#catalog li.list-group-item ul {
+    padding-left: 0;
+}
+
+#catalog li.list-group-item ul a {
+    padding-left: 3em;
+}

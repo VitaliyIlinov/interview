@@ -12,6 +12,7 @@
     <link href="/libs/bootstrap-4.3.1-dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <!-- Custom styles for this template -->
     <link href="/css/main.css" rel="stylesheet">
+    <link href="/css/animate.css" rel="stylesheet">
     <link href="/libs/highlightjs/styles/darkula.css" rel="stylesheet">
 </head>
 <body>
@@ -25,7 +26,7 @@
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Link</a>
@@ -35,7 +36,8 @@
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
-                   aria-expanded="false">Dropdown</a>
+                   aria-expanded="false">Dropdown
+                </a>
                 <div class="dropdown-menu" aria-labelledby="dropdown01">
                     <a class="dropdown-item" href="#">Action</a>
                     <a class="dropdown-item" href="#">Another action</a>
@@ -50,22 +52,63 @@
     </div>
 </nav>
 
-<main role="main">
-    <div class="jumbotron">
-        <div class="container">
-            <h1 class="display-3">Hello, world!</h1>
-            <p>This is a template for a simple marketing or informational website. It includes a large callout called a
-                jumbotron and three supporting pieces of content. Use it as a starting point to create something more
-                unique.</p>
-            <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+<main role="main" style="padding-top: 5rem;">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-3">
+
+                <ul class="list-group" id="catalog">
+                    <li class="list-group-item">
+                        <a href="#solid" class="btn btn-outline-primary">Solid</a>
+                        <ul id="solid">
+                            <li class="list-group-item">
+                                <a href="/solid/single_responsibility" class="btn-outline-primary">Single Responsibility</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="/solid/openclosed" class="btn-outline-primary">Open-closed</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="/solid/liskov_barbara" class="btn-outline-primary">Liskov substitution</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="/solid/interface_segregation" class="btn-outline-primary">Interface segregation</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="/solid/dependency_inversion" class="btn-outline-primary">Dependency inversion</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="#pattern" class="btn btn-outline-primary">Patterns</a>
+                        <ul id="pattern">
+                            <li class="list-group-item">
+                                <a href="solid/single_responsibility23" class="btn-outline-primary">Single Responsibility</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="/solid/openclosed23">Open-closed</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="/solid/liskov_barbarsdfsda">Git</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="/solid/interface_segsdfsdfsdregation">Mysql</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-xl-9">
+                <?php include $view; ?>
+            </div>
         </div>
     </div>
-    <?php require $view; ?>
 </main>
 <footer class="container">
     <p>&copy; Company 2017-2019</p>
 </footer>
 <script src="/libs/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+<script src="/libs/bootstrap-4.3.1-dist/js/bootstrap.js"></script>
 <script src="/libs/highlightjs/highlight.pack.js"></script>
 <script src="/js/main.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>

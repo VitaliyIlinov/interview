@@ -1,6 +1,5 @@
 <?php
 
-//require_once __DIR__.'/../vendor/autoload.php';
 define('ROOT', dirname(__DIR__));
 
 require_once __DIR__ . '/../app/Core/ClassLoader.php';
@@ -12,8 +11,8 @@ require_once __DIR__ . '/../app/Core/LoadEnvironmentVariables.php';
 |--------------------------------------------------------------------------
 |
 | Here we will load the environment and create the application instance
-| that serves as the central piece of this framework. We'll use this
-| application as an "IoC" container and router for this framework.
+| that serves as the central piece of this. We'll use this
+| application as an "IoC" container and router.
 |
 */
 
@@ -39,11 +38,6 @@ $app->singleton(
     app\Exceptions\Handler::class
 );
 
-//$app->singleton(
-//    Illuminate\Contracts\Console\Kernel::class,
-//    App\Console\Kernel::class
-//);
-
 /*
 |--------------------------------------------------------------------------
 | Register Middleware
@@ -55,13 +49,9 @@ $app->singleton(
 |
 */
 
- $app->middleware([
-     app\Http\Middleware\ExampleMiddleware::class
- ]);
-
-// $app->routeMiddleware([
-//     'auth' => App\Http\Middleware\Authenticate::class,
-// ]);
+$app->middleware([
+    app\Http\Middleware\ExampleMiddleware::class,
+]);
 
 /*
 |--------------------------------------------------------------------------

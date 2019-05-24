@@ -9,6 +9,7 @@
 //todo middleware
 //todo compile view
 //todo if wrong path to file ->404 NOT 200!!!
+//todo redirect
 /*
 |--------------------------------------------------------------------------
 | Create The Application

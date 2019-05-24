@@ -4,7 +4,8 @@
  */
 
 $router->get('/', function () use ($router) {
-    return 'User ';
+    header('Location: '.'solid/single_responsibility');
+    exit;
 });
 
 $router->group(['prefix' => 'solide','middleware'=>'solid|solid2', 'namespace' => 'Solid'], function () use ($router) {
@@ -43,5 +44,9 @@ $router->get('user/{name}', function ($name = null) {
 });
 
 $router->group(['prefix' => 'solid'], function () use ($router) {
+    $router->get('single_responsibility','SolidController@singleResponsibility');
     $router->get('openclosed','SolidController@openClosed');
+    $router->get('liskov_barbara','SolidController@liskovBarbara');
+    $router->get('interface_segregation','SolidController@interfaceSegregation');
+    $router->get('dependency_inversion','SolidController@DependencyInversion');
 });
