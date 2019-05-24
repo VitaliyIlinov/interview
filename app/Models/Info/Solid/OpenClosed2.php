@@ -6,8 +6,6 @@
  * Time: 5:55 PM
  */
 
-namespace SOLID;
-
 use PDO;
 
 /**

@@ -64,7 +64,7 @@ class Application extends Container
      *
      * @var string
      */
-    protected $basePath;
+    private $basePath;
 
     /**
      * The Router instance.
@@ -102,9 +102,30 @@ class Application extends Container
 
         static::setInstance($this);
 
-        $this->instance('app', $this);
+        $this->instance(self::class, $this);
 
         $this->instance('env', config('app.env', 'production'));
+    }
+
+    /**
+     * Get the path to the application "app" directory.
+     *
+     * @return string
+     */
+    public function path()
+    {
+        return $this->basePath.DIRECTORY_SEPARATOR.'app';
+    }
+
+    /**
+     * Get the base path for the application.
+     *
+     * @param string|null $path
+     * @return string
+     */
+    public function getBasePath($path = null): string
+    {
+        return $this->basePath . ($path ? DIRECTORY_SEPARATOR . $path : $path);
     }
 
     /**
@@ -426,7 +447,6 @@ class Application extends Container
      * @param array $routeInfo
      * @return mixed
      * @throws NotFoundHttpException
-     * @throws \ReflectionException
      */
     protected function callControllerAction($routeInfo)
     {
@@ -459,7 +479,74 @@ class Application extends Container
 
     protected function call(callable $callback, array $parameters = [])
     {
-        return call_user_func_array($callback, $parameters);
+        return call_user_func_array(
+            $callback, static::getMethodDependencies($this, $callback, $parameters)
+        );
+    }
+
+    /**
+     * Get all dependencies for a given method.
+     *
+     * @param $container
+     * @param callable|string $callback
+     * @param array $parameters
+     * @return void
+     *
+     * @throws \ReflectionException
+     */
+    protected static function getMethodDependencies($container, $callback, array $parameters = [])
+    {
+        $dependencies = [];
+        foreach (static::getCallReflector($callback)->getParameters() as $parameter) {
+            static::addDependencyForCallParameter($container, $parameter, $parameters, $dependencies);
+        }
+        return array_merge($dependencies, $parameters);
+    }
+
+    /**
+     * Get the dependency for the given call parameter.
+     *
+     * @param $container
+     * @param \ReflectionParameter $parameter
+     * @param array $parameters
+     * @param array $dependencies
+     * @return void
+     * @throws \ReflectionException
+     */
+    protected static function addDependencyForCallParameter($container, $parameter, array &$parameters, &$dependencies)
+    {
+        if (array_key_exists($parameter->name, $parameters)) {
+            $dependencies[] = $parameters[$parameter->name];
+
+            unset($parameters[$parameter->name]);
+        } elseif ($parameter->getClass() && array_key_exists($parameter->getClass()->name, $parameters)) {
+            $dependencies[] = $parameters[$parameter->getClass()->name];
+
+            unset($parameters[$parameter->getClass()->name]);
+        } elseif ($parameter->getClass()) {
+            $dependencies[] = $container->make($parameter->getClass()->name);
+        } elseif ($parameter->isDefaultValueAvailable()) {
+            $dependencies[] = $parameter->getDefaultValue();
+        }
+    }
+
+    /**
+     * Get the proper reflection instance for the given callback.
+     *
+     * @param callable|string $callback
+     * @return \ReflectionFunctionAbstract
+     *
+     * @throws \ReflectionException
+     */
+    protected static function getCallReflector($callback)
+    {
+        if (is_string($callback) && strpos($callback, '::') !== false) {
+            $callback = explode('::', $callback);
+        }
+
+        return is_array($callback)
+            ? new \ReflectionMethod($callback[0], $callback[1])
+            : new \ReflectionFunction($callback);
     }
 
     /**
@@ -475,9 +562,6 @@ class Application extends Container
         if (!$response instanceof Response) {
             $response = new Response($response);
         }
-//        elseif ($response instanceof BinaryFileResponse) {
-//            $response = $response->prepare(Request::capture());
-//        }
         return $response->prepare($request);
     }
 

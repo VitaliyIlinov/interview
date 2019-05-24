@@ -83,32 +83,25 @@ class Container implements ArrayAccess
 
         $reflector = new \ReflectionClass($abstract);
 
-        // If the type is not instantiable, the developer is attempting to resolve
-        // an abstract type such as an Interface or Abstract Class and there is
-        // no binding registered for the abstractions so we need to bail out.
         if (!$reflector->isInstantiable()) {
             throw new \ReflectionException("Target [$abstract] is not instantiable.");
         }
 
         $constructor = $reflector->getConstructor();
 
-        // If there are no constructors, that means there are no dependencies then
-        // we can just resolve the instances of the objects right away, without
-        // resolving any other types or dependencies out of these containers.
         if (is_null($constructor)) {
             return new $abstract;
         }
 
-        $dependencies = $constructor->getParameters();
+        $dependencies = [];
 
-        // Once we have all the constructor's parameters we can create each of the
-        // dependency instances and then use the reflection instances to make a
-        // new instance of this class, injecting the created dependencies in.
-//        $instances = $this->resolveDependencies(
-//            $dependencies
-//        );
+        foreach ($constructor->getParameters() as $parameter) {
+            if (!is_null($parameter->getClass())) {
+                $dependencies[] = $this->make($parameter->getClass()->name);
+            }
+        }
 
-        return $reflector->newInstanceArgs($parameters);
+        return $reflector->newInstanceArgs($dependencies);
     }
 
     /**

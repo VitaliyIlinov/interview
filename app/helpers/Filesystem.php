@@ -2,15 +2,15 @@
 
 namespace app\helpers;
 
+use app\Exceptions\FileNotFoundException;
 use ErrorException;
 
 class Filesystem
 {
-
     /**
      * Determine if a file or directory exists.
      *
-     * @param  string  $path
+     * @param string $path
      * @return bool
      */
     public function exists($path)
@@ -19,9 +19,26 @@ class Filesystem
     }
 
     /**
+     * Get the contents of a file.
+     *
+     * @param string $path
+     * @return string
+     *
+     * @throws FileNotFoundException
+     */
+    public function get($path)
+    {
+        if ($this->isFile($path)) {
+            return file_get_contents($path);
+        }
+
+        throw new FileNotFoundException("File does not exist at path {$path}");
+    }
+
+    /**
      * Determine if the given path is a file.
      *
-     * @param  string  $file
+     * @param string $file
      * @return bool
      */
     public function isFile($file)
@@ -32,9 +49,9 @@ class Filesystem
     /**
      * Write the contents of a file.
      *
-     * @param  string  $path
-     * @param  string  $contents
-     * @param  bool  $lock
+     * @param string $path
+     * @param string $contents
+     * @param bool $lock
      * @return int|bool
      */
     public function put($path, $contents, $lock = false)
@@ -45,8 +62,8 @@ class Filesystem
     /**
      * Append to a file.
      *
-     * @param  string  $path
-     * @param  string  $data
+     * @param string $path
+     * @param string $data
      * @return int
      */
     public function append($path, $data)
@@ -57,8 +74,8 @@ class Filesystem
     /**
      * Get or set UNIX mode of a file or directory.
      *
-     * @param  string  $path
-     * @param  int  $mode
+     * @param string $path
+     * @param int $mode
      * @return mixed
      */
     public function chmod($path, $mode = null)
@@ -73,7 +90,7 @@ class Filesystem
     /**
      * Delete the file at a given path.
      *
-     * @param  string|array  $paths
+     * @param string|array $paths
      * @return bool
      */
     public function delete($paths)
@@ -84,7 +101,7 @@ class Filesystem
 
         foreach ($paths as $path) {
             try {
-                if (! @unlink($path)) {
+                if (!@unlink($path)) {
                     $success = false;
                 }
             } catch (ErrorException $e) {
@@ -95,12 +112,11 @@ class Filesystem
         return $success;
     }
 
-
     /**
      * Move a file to a new location.
      *
-     * @param  string  $path
-     * @param  string  $target
+     * @param string $path
+     * @param string $target
      * @return bool
      */
     public function move($path, $target)
@@ -111,8 +127,8 @@ class Filesystem
     /**
      * Copy a file to a new location.
      *
-     * @param  string  $path
-     * @param  string  $target
+     * @param string $path
+     * @param string $target
      * @return bool
      */
     public function copy($path, $target)
@@ -123,7 +139,7 @@ class Filesystem
     /**
      * Extract the file name from a file path.
      *
-     * @param  string  $path
+     * @param string $path
      * @return string
      */
     public function name($path)
@@ -134,7 +150,7 @@ class Filesystem
     /**
      * Extract the trailing name component from a file path.
      *
-     * @param  string  $path
+     * @param string $path
      * @return string
      */
     public function basename($path)
@@ -145,7 +161,7 @@ class Filesystem
     /**
      * Extract the parent directory from a file path.
      *
-     * @param  string  $path
+     * @param string $path
      * @return string
      */
     public function dirname($path)
@@ -156,7 +172,7 @@ class Filesystem
     /**
      * Extract the file extension from a file path.
      *
-     * @param  string  $path
+     * @param string $path
      * @return string
      */
     public function extension($path)
@@ -167,7 +183,7 @@ class Filesystem
     /**
      * Get the file type of a given file.
      *
-     * @param  string  $path
+     * @param string $path
      * @return string
      */
     public function type($path)
@@ -178,7 +194,7 @@ class Filesystem
     /**
      * Get the mime-type of a given file.
      *
-     * @param  string  $path
+     * @param string $path
      * @return string|false
      */
     public function mimeType($path)
@@ -189,7 +205,7 @@ class Filesystem
     /**
      * Get the file size of a given file.
      *
-     * @param  string  $path
+     * @param string $path
      * @return int
      */
     public function size($path)
@@ -200,7 +216,7 @@ class Filesystem
     /**
      * Get the file's last modification time.
      *
-     * @param  string  $path
+     * @param string $path
      * @return int
      */
     public function lastModified($path)
@@ -211,7 +227,7 @@ class Filesystem
     /**
      * Determine if the given path is a directory.
      *
-     * @param  string  $directory
+     * @param string $directory
      * @return bool
      */
     public function isDirectory($directory)
@@ -222,7 +238,7 @@ class Filesystem
     /**
      * Determine if the given path is readable.
      *
-     * @param  string  $path
+     * @param string $path
      * @return bool
      */
     public function isReadable($path)
@@ -233,10 +249,10 @@ class Filesystem
     /**
      * Create a directory.
      *
-     * @param  string  $path
-     * @param  int     $mode
-     * @param  bool    $recursive
-     * @param  bool    $force
+     * @param string $path
+     * @param int $mode
+     * @param bool $recursive
+     * @param bool $force
      * @return bool
      */
     public function makeDirectory($path, $mode = 0755, $recursive = false, $force = false)
