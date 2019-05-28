@@ -55,7 +55,7 @@
 <main role="main" style="padding-top: 5rem;">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-xl-3">
+            <div class="col-xl-2 col-lg-3 col-md-4">
 
                 <ul class="list-group" id="catalog">
                     <li class="list-group-item">
@@ -98,7 +98,7 @@
                 </ul>
             </div>
 
-            <div class="col-xl-9">
+            <div class="col-xl-10 col-lg-9 col-md-8">
                 <?php include $view; ?>
             </div>
         </div>

@@ -35,9 +35,8 @@ class SolidController
             $this->getPath('SingleResponsibility')
         );
         $content = str_replace('<?php', '', $content);
-        return view('solid.openclosed')->with(['content' => $content]);
+        return view('solid.single')->with(['content' => $content]);
     }
-
 
     /**
      * @return View
@@ -48,8 +47,12 @@ class SolidController
         $content = $this->filesystem->get(
             $this->getPath('OpenClosed')
         );
+        $content2 = $this->filesystem->get(
+            $this->getPath('OpenClosed2')
+        );
         $content = str_replace('<?php', '', $content);
-        return view('solid.openclosed')->with(['content' => $content]);
+        $content2 = str_replace('<?php', '', $content2);
+        return view('solid.openclosed')->with(['content' => $content, 'content2' => $content2]);
     }
 
     /**
@@ -62,7 +65,7 @@ class SolidController
             $this->getPath('BarbaraLiskov')
         );
         $content = str_replace('<?php', '', $content);
-        return view('solid.openclosed')->with(['content' => $content]);
+        return view('solid.liskov')->with(['content' => $content]);
     }
 
     /**
@@ -90,7 +93,6 @@ class SolidController
         $content = str_replace('<?php', '', $content);
         return view('solid.openclosed')->with(['content' => $content]);
     }
-
 
     /**
      * @param string $file

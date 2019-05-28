@@ -1,19 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ilinovvitalii
- * Date: 3/5/19
- * Time: 5:55 PM
- */
 
 /**
- * Принцип открытости/закрытости (Open-closed)
- * программные сущности должны быть открыты для расширения, но закрыты для модификации
- *
- *
  * Такой подход нарушает принцип открытости-закрытости. Как видно, здесь, если нам надо дать некоей группе клиентов
  * особую скидку, приходится добавлять в класс новый код.
- * https://medium.com/webbdev/solid-4ffc018077da
  */
 class DiscountWRONG
 {
@@ -23,7 +12,7 @@ class DiscountWRONG
 
     public function giveDiscount()
     {
-        if ($this->userRole == 'defaul') {
+        if ($this->userRole == 'default') {
             return $this->price * 0.2;
         }
         if ($this->userRole == 'vip') {
@@ -32,6 +21,11 @@ class DiscountWRONG
     }
 }
 
+/**
+ * Для того чтобы переработать этот код в соответствии с принципом открытости-закрытости, добавим в проект новый класс,
+ * расширяющий класс Discount
+ * Тут используется расширение возможностей классов, а не их модификация.
+ */
 abstract class discount
 {
     protected $price;

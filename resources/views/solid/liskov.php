@@ -14,24 +14,8 @@
         Источник&raquo;
     </a>
 </p>
-<p>
-    Представим, что у нас есть магазин. Мы даём клиентам скидку в 20%, используя такой класс :
-</p>
 <pre>
     <code class="php">
 <?= $content; ?>
-    </code>
-</pre>
-
-<p>
-    Рассмотрим еще один  пример:
-    <a class="btn btn-secondary" target="_blank" href="https://habr.com/ru/post/208442/" role="button">
-        Источник&raquo;
-    </a>
-</p>
-
-<pre>
-    <code class="php">
-<?= $content2; ?>
     </code>
 </pre>
