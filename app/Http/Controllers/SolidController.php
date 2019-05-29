@@ -91,7 +91,7 @@ class SolidController
             $this->getPath('DependencyInversion')
         );
         $content = str_replace('<?php', '', $content);
-        return view('solid.openclosed')->with(['content' => $content]);
+        return view('solid.dependecyInvertion')->with(['content' => $content]);
     }
 
     /**
