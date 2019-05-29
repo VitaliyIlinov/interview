@@ -1,12 +1,4 @@
 <?php
-
-/**
- * Class InterfaceSegregation - Принцип разделения интерфейса
- * «Много специализированных интерфейсов лучше, чем один универсальный»
- * https://habr.com/ru/post/208442/
- *
- *
- */
 interface IItemWrong
 {
     public function applyDiscount($discount);
@@ -53,42 +45,24 @@ interface IDiscountable
 
 class Book implements IItem, IDiscountable
 {
-    public function setCondition($condition)
-    {/*...*/
-    }
+    public function setCondition($condition){/*...*/}
 
-    public function setPrice($price)
-    {/*...*/
-    }
+    public function setPrice($price){/*...*/}
 
-    public function applyDiscount($discount)
-    {/*...*/
-    }
+    public function applyDiscount($discount){/*...*/}
 
-    public function applyPromocode($promocode)
-    {/*...*/
-    }
+    public function applyPromocode($promocode){/*...*/}
 }
 
 class KidsClothes implements IItem, IClothes
 {
-    public function setCondition($condition)
-    {/*...*/
-    }
+    public function setCondition($condition){/*...*/}
 
-    public function setPrice($price)
-    {/*...*/
-    }
+    public function setPrice($price){/*...*/}
 
-    public function setColor($color)
-    {/*...*/
-    }
+    public function setColor($color){/*...*/}
 
-    public function setSize($size)
-    {/*...*/
-    }
+    public function setSize($size){/*...*/}
 
-    public function setMaterial($material)
-    {/*...*/
-    }
+    public function setMaterial($material){/*...*/}
 }
