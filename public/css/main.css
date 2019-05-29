@@ -1,3 +1,6 @@
+body{
+    font-size: 0.9rem;
+}
 #catalog a {
     padding: .75rem 1.25rem;
     display: block;
