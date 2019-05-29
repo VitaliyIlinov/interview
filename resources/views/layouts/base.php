@@ -62,7 +62,9 @@
                         <a href="#solid" class="btn btn-outline-primary">Solid</a>
                         <ul id="solid">
                             <li class="list-group-item">
-                                <a href="/solid/single_responsibility" class="btn-outline-primary">Single Responsibility</a>
+                                <a href="/solid/single_responsibility" class="btn-outline-primary">Single
+                                    Responsibility
+                                </a>
                             </li>
                             <li class="list-group-item">
                                 <a href="/solid/openclosed" class="btn-outline-primary">Open-closed</a>
@@ -71,10 +73,13 @@
                                 <a href="/solid/liskov_barbara" class="btn-outline-primary">Liskov substitution</a>
                             </li>
                             <li class="list-group-item">
-                                <a href="/solid/interface_segregation" class="btn-outline-primary">Interface segregation</a>
+                                <a href="/solid/interface_segregation" class="btn-outline-primary">Interface
+                                    segregation
+                                </a>
                             </li>
                             <li class="list-group-item">
-                                <a href="/solid/dependency_inversion" class="btn-outline-primary">Dependency inversion</a>
+                                <a href="/solid/dependency_inversion" class="btn-outline-primary">Dependency inversion
+                                </a>
                             </li>
                         </ul>
                     </li>
@@ -82,18 +87,18 @@
                         <a href="#pattern" class="btn btn-outline-primary">Patterns</a>
                         <ul id="pattern">
                             <li class="list-group-item">
-                                <a href="solid/single_responsibility23" class="btn-outline-primary">Single Responsibility</a>
+                                <a href="#first" class="btn-outline-primary">Single Responsibility</a>
                             </li>
                             <li class="list-group-item">
-                                <a href="/solid/openclosed23">Open-closed</a>
+                                <a href="#second">Open-closed</a>
                             </li>
                         </ul>
                     </li>
                     <li class="list-group-item">
-                        <a href="/solid/liskov_barbarsdfsda">Git</a>
+                        <a href="#git">Git</a>
                     </li>
                     <li class="list-group-item">
-                        <a href="/solid/interface_segsdfsdfsdregation">Mysql</a>
+                        <a href="/#mysql">Mysql</a>
                     </li>
                 </ul>
             </div>

@@ -78,7 +78,7 @@ class SolidController
             $this->getPath('InterfaceSegregation')
         );
         $content = str_replace('<?php', '', $content);
-        return view('solid.openclosed')->with(['content' => $content]);
+        return view('solid.single')->with(['content' => $content]);
     }
 
     /**

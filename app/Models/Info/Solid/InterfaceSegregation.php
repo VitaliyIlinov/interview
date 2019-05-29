@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ilinovvitalii
- * Date: 3/26/19
- * Time: 11:23 AM
- */
 
 /**
  * Class InterfaceSegregation - Принцип разделения интерфейса
