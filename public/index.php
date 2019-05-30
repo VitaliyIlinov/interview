@@ -1,6 +1,8 @@
 <?php
 
 //todo view
+// https://laravel.com/docs/5.8/views Share&&Composer for catalog
+//todo artisan console: create controller&&so on
 //todo done config in lumen load view() /lumen/vendor/laravel/lumen-framework/config/view.php
 //todo RegistersExceptionHandlers
 //todo DI

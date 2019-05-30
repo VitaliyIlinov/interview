@@ -50,3 +50,14 @@ $router->group(['prefix' => 'solid'], function () use ($router) {
     $router->get('interface_segregation','SolidController@interfaceSegregation');
     $router->get('dependency_inversion','SolidController@DependencyInversion');
 });
+
+$router->group(['prefix' => 'php'], function () use ($router) {
+    $router->get('class_object_oop','PhpController@classObjectOpp');
+});
+
+$router->group(['prefix' => 'mysql'], function () use ($router) {
+    $router->get('engine','MysqlController@engine');
+    $router->get('indexes','MysqlController@indexes');
+    $router->get('relation_type','MysqlController@relationType');
+    $router->get('useful_information','MysqlController@usefulInformation');
+});

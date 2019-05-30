@@ -84,6 +84,25 @@
                         </ul>
                     </li>
                     <li class="list-group-item">
+                        <a href="#php" class="btn btn-outline-primary">PHP</a>
+                        <ul id="php">
+                            <li class="list-group-item">
+                                <a href="/php/class_object_oop" class="btn-outline-primary">Класс,Обьекты,ООП</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="#mysql" class="btn btn-outline-primary">MYSQL</a>
+                        <ul id="mysql">
+                            <li class="list-group-item">
+                                <a href="/mysql/engine" class="btn-outline-primary">Движки</a>
+                                <a href="/mysql/indexes" class="btn-outline-primary">Индексы</a>
+                                <a href="/mysql/relation_type" class="btn-outline-primary">Типы связей</a>
+                                <a href="/mysql/useful_information" class="btn-outline-primary">Полезная инфа</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="list-group-item">
                         <a href="#pattern" class="btn btn-outline-primary">Patterns</a>
                         <ul id="pattern">
                             <li class="list-group-item">
@@ -97,9 +116,6 @@
                     <li class="list-group-item">
                         <a href="#git">Git</a>
                     </li>
-                    <li class="list-group-item">
-                        <a href="/#mysql">Mysql</a>
-                    </li>
                 </ul>
             </div>
 
@@ -110,7 +126,7 @@
     </div>
 </main>
 <footer class="container">
-    <p>&copy; Company 2017-2019</p>
+    <p class="text-center">&copy; Company 2017-2019</p>
 </footer>
 <script src="/libs/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
 <script src="/libs/bootstrap-4.3.1-dist/js/bootstrap.js"></script>
