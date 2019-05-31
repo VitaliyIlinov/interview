@@ -23,4 +23,14 @@ class MysqlController
     {
         return view('mysql.relation_type');
     }
+
+    public function query()
+    {
+        return view('mysql.query');
+    }
+
+    public function joins()
+    {
+        return view('mysql.joins');
+    }
 }

@@ -59,5 +59,7 @@ $router->group(['prefix' => 'mysql'], function () use ($router) {
     $router->get('engine','MysqlController@engine');
     $router->get('indexes','MysqlController@indexes');
     $router->get('relation_type','MysqlController@relationType');
+    $router->get('query','MysqlController@query');
+    $router->get('joins','MysqlController@joins');
     $router->get('useful_information','MysqlController@usefulInformation');
 });

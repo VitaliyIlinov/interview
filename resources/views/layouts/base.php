@@ -98,6 +98,8 @@
                                 <a href="/mysql/engine" class="btn-outline-primary">Движки</a>
                                 <a href="/mysql/indexes" class="btn-outline-primary">Индексы</a>
                                 <a href="/mysql/relation_type" class="btn-outline-primary">Типы связей</a>
+                                <a href="/mysql/query" class="btn-outline-primary">Запросы</a>
+                                <a href="/mysql/joins" class="btn-outline-primary">Joins</a>
                                 <a href="/mysql/useful_information" class="btn-outline-primary">Полезная инфа</a>
                             </li>
                         </ul>
