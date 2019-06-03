@@ -54,6 +54,7 @@ $router->group(['prefix' => 'solid'], function () use ($router) {
 $router->group(['prefix' => 'php'], function () use ($router) {
     $router->get('class_object_oop','PhpController@classObjectOpp');
     $router->get('kiss_and_dry','PhpController@kissAndDry');
+    $router->get('question_answer','PhpController@questionAnswer');
 });
 
 $router->group(['prefix' => 'mysql'], function () use ($router) {

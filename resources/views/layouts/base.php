@@ -89,6 +89,7 @@
                             <li class="list-group-item">
                                 <a href="/php/class_object_oop" class="btn-outline-primary">Класс,Обьекты,ООП</a>
                                 <a href="/php/kiss_and_dry" class="btn-outline-primary">KISS&&DRY</a>
+                                <a href="/php/question_answer" class="btn-outline-primary">Вопрос\Ответ</a>
                             </li>
                         </ul>
                     </li>

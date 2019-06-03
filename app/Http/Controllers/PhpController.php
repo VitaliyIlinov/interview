@@ -13,4 +13,9 @@ class PhpController
     {
         return view('php.kiss_and_dry');
     }
+
+    public function questionAnswer()
+    {
+        return view('php.question_answer');
+    }
 }
