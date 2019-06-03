@@ -6,9 +6,12 @@ $(document).ready(function () {
         current_path: window.location.pathname
     };
 
-    $("#catalog>li>a").click(function (e) {
-        e.preventDefault();
-        $($(this).attr('href')).toggleClass(options.catalog_anim_class);
+    $("#catalog>li a").click(function (e) {
+        var href =$(this).attr('href');
+        if(href[0]==='#'){
+            e.preventDefault();
+            $($(this).attr('href')).toggleClass(options.catalog_anim_class);
+        }
     });
 
 

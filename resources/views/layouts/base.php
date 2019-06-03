@@ -110,10 +110,20 @@
                         <a href="#pattern" class="btn btn-outline-primary">Patterns</a>
                         <ul id="pattern">
                             <li class="list-group-item">
-                                <a href="#first" class="btn-outline-primary">Single Responsibility</a>
+                                <a href="/patterns/what_is_pattern" class="btn-outline-primary">Что такое паттерны?</a>
+                                <a href="/patterns/why_learn_patterns" class="btn-outline-primary">Зачем знать паттерны?</a>
+                                <a href="/patterns/criticism" class="btn-outline-primary">Критика паттернов</a>
+                                <a href="/patterns/classification" class="btn-outline-primary">Классификация паттернов</a>
                             </li>
                             <li class="list-group-item">
-                                <a href="#second">Open-closed</a>
+                                <a href="#patterns_catalog" class="btn btn-outline-primary">Каталог</a>
+                                <ul id="patterns_catalog">
+                                    <li class="list-group-item">
+                                        <a href="/patterns/creational_patterns" class="btn-outline-primary">Порождающие паттерны</a>
+                                        <a href="/patterns/structural_patterns" class="btn-outline-primary">Структурные паттерны</a>
+                                        <a href="/patterns/behavioral_patterns" class="btn-outline-primary">Поведенческие паттерны</a>
+                                    </li>
+                                </ul>
                             </li>
                         </ul>
                     </li>
