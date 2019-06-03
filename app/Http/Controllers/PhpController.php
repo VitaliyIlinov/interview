@@ -8,4 +8,9 @@ class PhpController
     {
         return view('php.class_object_oop');
     }
+
+    public function kissAndDry()
+    {
+        return view('php.kiss_and_dry');
+    }
 }
