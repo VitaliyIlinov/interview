@@ -128,7 +128,14 @@
                         </ul>
                     </li>
                     <li class="list-group-item">
-                        <a href="#git">Git</a>
+                        <a href="#git" class="btn btn-outline-primary">Git</a>
+                        <ul id="git">
+                            <li class="list-group-item">
+                                <a href="/git/rebase" class="btn-outline-primary">Rebase</a>
+                                <a href="/git/merge" class="btn-outline-primary">Merge</a>
+                                <a href="/git/cherry_pick" class="btn-outline-primary">Cherry pick</a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </div>

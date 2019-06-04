@@ -65,3 +65,9 @@ $router->group(['prefix' => 'mysql'], function () use ($router) {
     $router->get('joins','MysqlController@joins');
     $router->get('useful_information','MysqlController@usefulInformation');
 });
+
+$router->group(['prefix' => 'git'], function () use ($router) {
+    $router->get('rebase','GitController@rebase');
+    $router->get('merge','GitController@merge');
+    $router->get('cherry_pick','GitController@cherryPick');
+});
