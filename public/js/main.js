@@ -23,5 +23,7 @@ function setActiveCategory(path, className) {
     var current = $('#catalog a[href="' + path + '"]');
     current.addClass('active')
         .closest('ul').addClass(className)
+        .prev('a').addClass('active')
+        .closest('ul').addClass(className)
         .prev('a').addClass('active');
 }

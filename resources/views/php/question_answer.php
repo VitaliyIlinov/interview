@@ -25,26 +25,30 @@
 </a>
 <div class="collapse multi-collapse" id="a2">
     <div class="card card-body">
-        В объектно-ориентированных языках программирования существует три способа организации взаимодействия между
+        В объектно-ориентированных языках программирования существует способы организации взаимодействия между
         классами. Наследование — это когда класс-наследник имеет все поля и методы родительского класса, и, как правило,
         добавляет какой-то новый функционал или/и поля. Наследование описывается словом «является». Легковой автомобиль
         является автомобилем. Вполне естественно, если он будет его наследником.
         <br>
         Ассоциация – это когда один класс включает в себя другой класс в качестве одного из полей. Ассоциация
-        описывается словом «имеет». Автомобиль имеет двигатель. Вполне естественно, что он не будет являться наследником
-        двигателя (хотя такая архитектура тоже возможна в некоторых ситуациях).
+        описывается словом «имеет». Автомобиль имеет двигатель.
         <br>
         Выделяют два частных случая ассоциации: композицию и агрегацию.
         <br>
         Композиция – это когда двигатель не существует отдельно от автомобиля. Он создается при создании автомобиля и
-        полностью управляется автомобилем. В типичном примере, экземпляр двигателя будет создаваться в конструкторе
-        автомобиля.
+        полностью управляется автомобилем. Экземпляр двигателя будет создаваться в конструкторе
+        автомобиля.<br>
+        Свойство,которое будет содержать ссылку на другой объект этого класса, когда один объект предоставляет другому
+        свою функциональность частично или полностью.
         <br>
         Агрегация – это когда экземпляр двигателя создается где-то в другом месте кода, и передается в конструктор
         автомобиля в качестве параметра.
 
-        <a href="   https://habr.com/ru/post/354046/" class="btn btn-secondary">
-            Источник https://refactoring.guru/ru/design-patterns/catalog
+        <a href="https://habr.com/ru/post/354046/" class="btn btn-secondary">
+            "https://habr.com/ru/post/354046/
+        </a>
+        <a href="https://habr.com/ru/post/325478/" class="btn btn-secondary">
+            https://habr.com/ru/post/325478/
         </a>
 
     </div>
@@ -173,7 +177,7 @@ Workers
         <h2>В процессе</h2>
     </div>
 </div>
-<a href="#workers2"  data-toggle="collapse" class="list-group-item list-group-item-action">
+<a href="#workers2" data-toggle="collapse" class="list-group-item list-group-item-action">
     Как перезапускать воркера? В каких случаях это нужно делать?
 </a>
 <div class="collapse multi-collapse" id="workers2">
@@ -185,7 +189,7 @@ Workers
 <hr>
 PSR
 <hr>
-<a href="#psr1" data-toggle="collapse"  class="list-group-item list-group-item-action">
+<a href="#psr1" data-toggle="collapse" class="list-group-item list-group-item-action">
     Что такое PSR-стандарты и зачем они нужны?
 </a>
 <div class="collapse multi-collapse" id="psr1">
@@ -193,7 +197,7 @@ PSR
         <h2>В процессе</h2>
     </div>
 </div>
-<a href="#psr2" data-toggle="collapse"  class="list-group-item list-group-item-action">
+<a href="#psr2" data-toggle="collapse" class="list-group-item list-group-item-action">
     PSR-4 (Autoload) зачем нужен и что решает?
 </a>
 <div class="collapse multi-collapse" id="psr2">
@@ -201,7 +205,7 @@ PSR
         <h2>В процессе</h2>
     </div>
 </div>
-<a href="#psr3" data-toggle="collapse"  class="list-group-item list-group-item-action">
+<a href="#psr3" data-toggle="collapse" class="list-group-item list-group-item-action">
     PSR-2 зачем нужен и что решает?
 </a>
 <div class="collapse multi-collapse" id="psr3">

@@ -111,19 +111,32 @@
                         <ul id="pattern">
                             <li class="list-group-item">
                                 <a href="/patterns/what_is_pattern" class="btn-outline-primary">Что такое паттерны?</a>
-                                <a href="/patterns/why_learn_patterns" class="btn-outline-primary">Зачем знать паттерны?</a>
+                                <a href="/patterns/why_learn_patterns" class="btn-outline-primary">Зачем знать
+                                    паттерны?
+                                </a>
                                 <a href="/patterns/criticism" class="btn-outline-primary">Критика паттернов</a>
-                                <a href="/patterns/classification" class="btn-outline-primary">Классификация паттернов</a>
+                                <a href="/patterns/classification" class="btn-outline-primary">Классификация паттернов
+                                </a>
                             </li>
                             <li class="list-group-item">
-                                <a href="#patterns_catalog" class="btn btn-outline-primary">Каталог</a>
-                                <ul id="patterns_catalog">
+                                <a href="#creational-patterns" class="btn btn-outline-primary">Порождающие паттерны</a>
+                                <ul id="creational-patterns">
                                     <li class="list-group-item">
-                                        <a href="/patterns/creational_patterns" class="btn-outline-primary">Порождающие паттерны</a>
-                                        <a href="/patterns/structural_patterns" class="btn-outline-primary">Структурные паттерны</a>
-                                        <a href="/patterns/behavioral_patterns" class="btn-outline-primary">Поведенческие паттерны</a>
+                                        <a href="/patterns/factory_method" class="btn-outline-primary">Фабричный метод
+                                        </a>
+                                        <a href="/patterns/abstract_factory" class="btn-outline-primary">Абстрактная
+                                            фабрика
+                                        </a>
+                                        <a href="/patterns/builder" class="btn-outline-primary">Строитель</a>
+                                        <a href="/patterns/singleton" class="btn-outline-primary">Одиночка</a>
                                     </li>
                                 </ul>
+                                <a href="/patterns/structural_patterns" class="btn btn-outline-primary">Структурные
+                                    паттерны
+                                </a>
+                                <a href="/patterns/behavioral_patterns" class="btn btn-outline-primary">Поведенческие
+                                    паттерны
+                                </a>
                             </li>
                         </ul>
                     </li>
