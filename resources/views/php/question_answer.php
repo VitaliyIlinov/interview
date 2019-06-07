@@ -1,8 +1,17 @@
 <a href="/solid/single_responsibility" target="_blank" class="list-group-item list-group-item-action">
     Solid.<br>
-    В чем основной смысл принципа инверсии зависимостей? Что именно мы инвертируем?<br>
     Что такое программирование на основе интерфейса. Нужен пример.
 </a>
+<a href="#solid1" data-toggle="collapse" target="_blank" class="list-group-item list-group-item-action">
+    В чем основной смысл принципа инверсии зависимостей? Что именно мы инвертируем?
+</a>
+<div class="collapse multi-collapse" id="solid1">
+    <div class="card card-body">
+        Зависимость от абстракций, а не от чего-то конкретного. Применяя этот принцип, одни модули можно легко
+        заменять другими, всего лишь меняя модуль зависимости, и тогда никакие перемены в низкоуровневом модуле не
+        повлияют на высокоуровневый.
+    </div>
+</div>
 <a href="/php/kiss_and_dry" class="list-group-item list-group-item-action">
     DRY && KISS
 </a>
@@ -15,6 +24,7 @@
         Валидация<br>
         Работа с БД<br>
         Чекер<br>
+        Сессия<br>
     </div>
 </div>
 <a href="/php/class_object_oop" target="_blank" class="list-group-item list-group-item-action">
@@ -26,28 +36,25 @@
 <div class="collapse multi-collapse" id="a2">
     <div class="card card-body">
         В объектно-ориентированных языках программирования существует способы организации взаимодействия между
-        классами. Наследование — это когда класс-наследник имеет все поля и методы родительского класса, и, как правило,
+        классами.
+        <br>
+        <b>Наследование</b> — это когда класс-наследник имеет все поля и методы родительского класса, и, как правило,
         добавляет какой-то новый функционал или/и поля. Наследование описывается словом «является». Легковой автомобиль
-        является автомобилем. Вполне естественно, если он будет его наследником.
+        является автомобилем.
         <br>
-        Ассоциация – это когда один класс включает в себя другой класс в качестве одного из полей. Ассоциация
-        описывается словом «имеет». Автомобиль имеет двигатель.
+        <b>Композиция</b> – Свойство,которое будет содержать ссылку на другой объект этого класса, когда один объект
+        предоставляет другому свою функциональность частично или полностью. Экземпляр зависимого обьекта будет
+        создаваться в конструкторе. Двигатель не существует отдельно от автомобиля. Он создается при создании автомобиля
+        и полностью управляется автомобилем.
         <br>
-        Выделяют два частных случая ассоциации: композицию и агрегацию.
-        <br>
-        Композиция – это когда двигатель не существует отдельно от автомобиля. Он создается при создании автомобиля и
-        полностью управляется автомобилем. Экземпляр двигателя будет создаваться в конструкторе
-        автомобиля.<br>
-        Свойство,которое будет содержать ссылку на другой объект этого класса, когда один объект предоставляет другому
-        свою функциональность частично или полностью.
-        <br>
-        Агрегация – это когда экземпляр двигателя создается где-то в другом месте кода, и передается в конструктор
-        автомобиля в качестве параметра.
+        Агрегация – это когда экземпляр зависимого обьекта создается где-то в другом месте кода, и передается в
+        конструктор в качестве параметра.
 
-        <a href="https://habr.com/ru/post/354046/" class="btn btn-secondary">
-            "https://habr.com/ru/post/354046/
+        <a href="https://habr.com/ru/post/354046/" target="_blank" class="btn btn-primary">
+            https://habr.com/ru/post/354046/
         </a>
-        <a href="https://habr.com/ru/post/325478/" class="btn btn-secondary">
+        <br>
+        <a href="https://habr.com/ru/post/325478/" target="_blank" class="btn btn-primary">
             https://habr.com/ru/post/325478/
         </a>
 
@@ -56,6 +63,18 @@
 <hr>
 Паттерны
 <hr>
+<a href="#pattern3" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Зачем нужны паттерны?
+</a>
+<div class="collapse multi-collapse" id="pattern3">
+    <div class="card card-body">
+        <b>Паттерн проектирования</b> — это часто встречающееся решение определённой проблемы при проектировании
+        архитектуры программ.
+        <a href="https://refactoring.guru/ru/design-patterns/why-learn-patterns" class="btn btn-secondary">
+            https://refactoring.guru/ru/design-patterns/why-learn-patterns
+        </a>
+    </div>
+</div>
 <a href="#pattern1" data-toggle="collapse" class="list-group-item list-group-item-action" tabindex="-1">
     Какие паттерны знаешь?
 </a>
@@ -76,22 +95,12 @@
         </a>
     </div>
 </div>
-<a href="#pattern3" data-toggle="collapse" class="list-group-item list-group-item-action">
-    Зачем нужны паттерны?
-</a>
-<div class="collapse multi-collapse" id="pattern3">
-    <div class="card card-body">
-        <a href="https://refactoring.guru/ru/design-patterns/why-learn-patterns" class="btn btn-secondary">
-            https://refactoring.guru/ru/design-patterns/why-learn-patterns
-        </a>
-    </div>
-</div>
 <a href="#pattern4" data-toggle="collapse" class="list-group-item list-group-item-action">
     Какую задачу решает паттерн Внедрение зависимостей (Dependency Injection)
 </a>
 <div class="collapse multi-collapse" id="pattern4">
     <div class="card card-body">
-        Reflection class -> create new object by arf class name
+        Уменьшить связность кода,также чтобы получить более тестируемый, сопровождаемый и расширяемый код.
     </div>
 </div>
 <a href="#pattern5" data-toggle="collapse" class="list-group-item list-group-item-action">
@@ -99,9 +108,32 @@
 </a>
 <div class="collapse multi-collapse" id="pattern5">
     <div class="card card-body">
-        <a href="https://refactoring.guru/ru/design-patterns/builder" class="btn btn-secondary">
-            https://refactoring.guru/ru/design-patterns/builder
+        В системе могут существовать сложные объекты, создание которых за одну операцию затруднительно или невозможно.
+        Требуется поэтапное построение объектов(cоздавать объекты пошагово).
+        <br>
+        Одним из лучших применений паттерна Строитель является конструктор запросов SQL.
+        <br>
+        <a target="_blank" href="https://refactoring.guru/ru/design-patterns/builder/php/example#example-1"
+           class="btn btn-secondary">
+            https://refactoring.guru/ru/design-patterns/builder/php/example#example-1
         </a>
+        <br>Небольшой пример
+        <a target="_blank" href="https://tproger.ru/translations/design-patterns-simple-words-1/#12"
+           class="btn btn-secondary">
+            https://tproger.ru/translations/design-patterns-simple-words-1/#12
+        </a>
+        <br>
+        <pre>
+            <code class="php">
+                <?= str_replace(
+                    '<?php',
+                    '',
+                    app('files')->get(
+                        app()->path() . '/Models/Info/Patterns/Creational/Builder.php')
+                ); ?>
+            </code>
+        </pre>
+
     </div>
 </div>
 
