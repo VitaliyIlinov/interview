@@ -268,7 +268,7 @@ Workers
             результате, они не заметят изменений в вашей базе кода после своего запуска. Поэтому самый простой способ
             развернуть приложения используя воркеры очереди - перезагрузить воркеров во время процесса развертывания
         </p>
-        <b>For supervisor </b>ssupervisorctl restart < name > || service supervisor restart
+        <b>For supervisor </b>supervisorctl restart < name > || service supervisor restart
         <br>
         <b>For cron </b>sudo service cron reload || /etc/init.d/cron reload
         <br>
@@ -292,44 +292,131 @@ PSR
 </a>
 <div class="collapse multi-collapse" id="psr1">
     <div class="card card-body">
-        <h2>В процессе</h2>
+        Стандарты рекоммендаций PHP
+        <ul>
+            <li>PSR-1 — основной стандарт написания кода.</li>
+            <li>PSR-2 — руководство по стилю написания кода.</li>
+            <li>PSR-3 — описание единого интерфейса для ведения логирования.</li>
+            <li>PSR-4 — стандарт автозагрузки.</li>
+            <li>PSR-6 — стандарт интерфейсов кеширования.</li>
+            <li>PSR-7 — стандарт интерфейса HTTP-сообщений.</li>
+            <li>PSR-11 — стандарт контейнера интерфейсов.</li>
+            <li>PSR-15 — стандарт гиперссылок.</li>
+            <li>PSR-16 — стандарт простого кеширования.</li>
+        </ul>
+        <a target="_blank" class="btn btn-secondary"
+           href="https://world-hello.ru/php/psr/about-psr.html">
+            https://world-hello.ru/php/psr/about-psr.html
+        </a>
+        <br>
+        <a target="_blank" class="btn btn-secondary"
+           href="https://www.php-fig.org/psr/">
+            https://www.php-fig.org/psr/
+        </a>
+
     </div>
 </div>
 <a href="#psr2" data-toggle="collapse" class="list-group-item list-group-item-action">
-    PSR-4 (Autoload) зачем нужен и что решает?
+    PSR-4 (Autoload),PSR-2 (Coding Style Guide) зачем нужен и что решает?
 </a>
 <div class="collapse multi-collapse" id="psr2">
     <div class="card card-body">
-        <h2>В процессе</h2>
+        <a target="_blank" class="btn btn-secondary"
+           href="https://www.php-fig.org/psr/">
+            https://www.php-fig.org/psr/
+        </a>
+        <br>
+        <a target="_blank" class="btn btn-secondary"
+           href="https://art-lemon.com/chto-takoe-php-fig">
+            https://art-lemon.com/chto-takoe-php-fig
+        </a>
     </div>
 </div>
-<a href="#psr3" data-toggle="collapse" class="list-group-item list-group-item-action">
-    PSR-2 зачем нужен и что решает?
-</a>
-<div class="collapse multi-collapse" id="psr3">
-    <div class="card card-body">
-        <h2>В процессе</h2>
-    </div>
-</div>
+
 <hr>
 PHP: Base (типы данных, type hint, global vars)
 <hr>
-<a href="#3" target="_blank" class="list-group-item list-group-item-action disabled" tabindex="-1"
-   aria-disabled="true">Какие типы данных PHP?
+<a href="#base1" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Какие типы данных PHP?
 </a>
-<a href="#3" target="_blank" class="list-group-item list-group-item-action disabled" tabindex="-1"
-   aria-disabled="true">Что такое type hinting?
+<div class="collapse multi-collapse" id="base1">
+    <div class="card card-body">
+        Bool, int, float, string, array, object, callback, iterable,resource,null
+        <a target="_blank" class="btn btn-secondary" href="https://www.php.net/manual/ru/language.types.intro.php">
+            www.php.net
+        </a>
+    </div>
+</div>
+<a href="#base2" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Что такое type hinting?
 </a>
-<a href="#3" target="_blank" class="list-group-item list-group-item-action disabled" tabindex="-1"
-   aria-disabled="true">Чем отличается isset от empty?
+<div class="collapse multi-collapse" id="base2">
+    <div class="card card-body">
+        type-hint ("намек на тип") -- указание на ожидаемый тип значения (например, для входных аргументов функции).
+        <a target="_blank" class="btn btn-secondary" href="https://www.php.net/manual/ru/language.oop5.typehinting.php">
+            www.php.net
+        </a>
+    </div>
+</div>
+<a href="#base3" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Чем отличается isset от empty?
 </a>
-<a href="#3" target="_blank" class="list-group-item list-group-item-action disabled" tabindex="-1"
-   aria-disabled="true">Какие суперглобальные переменные в PHP знаешь?
-</a>
-<a href="#3" target="_blank" class="list-group-item list-group-item-action disabled" tabindex="-1"
-   aria-disabled="true">Как получить тело PUT-запроса в PHP?
-</a>
+<div class="collapse multi-collapse" id="base3">
+    <div class="card card-body">
+        <p>
+            <b>isset</b> — Определяет, была ли установлена переменная значением, отличным от <b>NULL</b>
+        </p>
+        <a target="_blank" class="btn btn-secondary" href="https://www.php.net/manual/ru/function.isset.php">
+            www.php.net isset
+        </a>
+        <br>
+        <p>
 
+            <b>empty</b> — Проверяет, пуста ли переменная.
+        </p>
+        <br>
+        Следующие значения воспринимаются как пустые:
+        <ul>
+            <li>"" (пустая строка)</li>
+            <li>0 (целое число)</li>
+            <li>0.0 (число с плавающей точкой)</li>
+            <li>"0" (строка)</li>
+            <li>NULL</li>
+            <li>FALSE</li>
+            <li>array() (пустой массив)</li>
+        </ul>
+        <a target="_blank" class="btn btn-secondary" href="https://www.php.net/manual/ru/function.empty.php">
+            www.php.net empty
+        </a>
+    </div>
+</div>
+<a href="#base4" data-toggle="collapse" class="list-group-item list-group-item-action">
+    >Какие суперглобальные переменные в PHP знаешь?
+</a>
+<div class="collapse multi-collapse" id="base4">
+    <div class="card card-body">
+        $_SERVER, $_GET, $_POST, $_REQUEST, $_COOKIE, $_SESSION, $_FILES, $_ENV, $GLOBALS
+        <br>
+        $_REQUEST — Переменные HTTP-запроса.Ассоциативный массив (array), который по умолчанию содержит данные
+        переменных $_GET, $_POST и $_COOKIE.
+        <a target="_blank" class="btn btn-secondary"
+           href="https://www.php.net/manual/ru/language.variables.superglobals.php">
+            www.php.net
+        </a>
+    </div>
+</div>
+<a href="#base5" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Как получить тело PUT-запроса в PHP?
+</a>
+<div class="collapse multi-collapse" id="base5">
+    <div class="card card-body">
+        php:// — Доступ к различным потокам ввода-вывода
+        file_get_contents('php://input ');
+        <a target="_blank" class="btn btn-secondary" href="https://www.php.net/manual/ru/wrappers.php.php">
+            www.php.net
+        </a>
+    </div>
+</div>
 <hr>
 PHP: Common (session, exceptions)
 <hr>
