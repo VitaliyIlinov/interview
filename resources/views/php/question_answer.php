@@ -180,7 +180,7 @@
                 переиспользовали существующий.
             </li>
         </ul>
-        <a href=" https://habr.com/ru/company/mailru/blog/301004/" class="btn btn-secondary">
+        <a target="_blank" href=" https://habr.com/ru/company/mailru/blog/301004/" class="btn btn-secondary">
             https://habr.com/ru/company/mailru/blog/301004/
         </a>
 
@@ -206,7 +206,56 @@ Workers
 </a>
 <div class="collapse multi-collapse" id="workers1">
     <div class="card card-body">
-        <h2>В процессе</h2>
+        <p>
+            <b>Воркер</b> - это интерфейс, который позволяет подключаться и общаться с самой очередью
+        </p>
+        есть несколько подходов
+        <ul>
+            <li><b>Cron</b></li>
+            <li><b>Supervisord</b> - монитор процессов</li>
+        </ul>
+        Для запуска нескольких копий одного процесса необходимо также указать параметр process_name для определения
+        уникального имени процесса.
+        <br>
+        добавляется строчка process_name=%(program_name)s_%(process_num)02d, которая задает имена всех копий процесса, в
+        нашем случае worker_00, worker_01 и т.д.
+        <br>
+        В файле конфигурации (nano /etc/supervisor/supervisord.conf), в самом низу добавляем настройки для нужного
+        воркера:
+        <pre>
+            <code>
+                [program:worker]
+                command=/usr/bin/php /var/www/worker.php
+                process_name=%(program_name)s_%(process_num)02d
+                numprocs=10
+                directory=/var/www/worker
+                stdout_logfile=/var/log/worker.log
+                autostart=true
+                autorestart=true
+                user=www-data
+                stopsignal=KILL
+            </code>
+        </pre>
+        Supervisor сам будет следить за процессами, запускать их в случае падения, а также после перезагрузки системы.
+        Вы можете запускать несколько копий.
+
+        <ul>
+            <li><b>[program:worker]</b> — название процесса/воркера, к которому будут относиться все последующие
+                параметры секции;
+            </li>
+            <li><b>command=/usr/bin/php /var/www/worker.php</b> — команда на запуск файла, то есть путь к нужному файлу;
+            </li>
+            <li><b>stdout_logfile=/var/log/worker.log</b> — вывод консоли в файл;</li>
+            <li><b>autostart=true</b> — запуск воркера вместе с запуском supervisor;</li>
+            <li><b>autorestart=true</b> — перезапуск воркера, если тот по какой-то причине упал;</li>
+            <li><b>user=www-data</b> — запуск процесса под определенным пользователем;</li>
+            <li><b>stopsignal=KILL</b> — сигнал остановки (убийства) процесса. Если не определяется, то используется
+                команда по умолчанию — TERM;
+            </li>
+            <li><b>numprocs=1</b> — количество инстансов заданного воркера</li>
+        </ul>
+        <b>После добавления новых процессов/воркеров не забывайте перезагружать supervisor</b>
+        <b>Supervisor дергает пхп скрипты(воркеры) а воркеры дергают сервер очередей</b>
     </div>
 </div>
 <a href="#workers2" data-toggle="collapse" class="list-group-item list-group-item-action">
@@ -214,7 +263,24 @@ Workers
 </a>
 <div class="collapse multi-collapse" id="workers2">
     <div class="card card-body">
-        <h2>В процессе</h2>
+        <p>
+            <b>Воркеры очереди</b> - длительные процессы и хранят в памяти состояние загруженного приложения. В
+            результате, они не заметят изменений в вашей базе кода после своего запуска. Поэтому самый простой способ
+            развернуть приложения используя воркеры очереди - перезагрузить воркеров во время процесса развертывания
+        </p>
+        <b>For supervisor </b>ssupervisorctl restart < name > || service supervisor restart
+        <br>
+        <b>For cron </b>sudo service cron reload || /etc/init.d/cron reload
+        <br>
+        <a target="_blank" class="btn btn-secondary"
+           href="https://ruhighload.com/%D0%97%D0%B0%D0%BF%D1%83%D1%81%D0%BA+%D0%BF%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81%D0%BE%D0%B2+%D0%B2+supervisor">
+            ruhighload
+        </a>
+        <br>
+        <a target="_blank" class="btn btn-secondary"
+           href="https://badcode.ru/chto-takoie-php-ochieried-zadach/">
+            ruhighload
+        </a>
     </div>
 </div>
 
