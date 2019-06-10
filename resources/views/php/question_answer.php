@@ -264,9 +264,10 @@ Workers
 <div class="collapse multi-collapse" id="workers2">
     <div class="card card-body">
         <p>
-            <b>Воркеры очереди</b> - длительные процессы и хранят в памяти состояние загруженного приложения. В
-            результате, они не заметят изменений в вашей базе кода после своего запуска. Поэтому самый простой способ
-            развернуть приложения используя воркеры очереди - перезагрузить воркеров во время процесса развертывания
+            <b>Воркеры очереди</b> - длительные процессы и хранят в памяти состояние загруженного приложения.(создает
+            екземпляр класса и хранить его в памяти) В результате, они не заметят изменений в вашей базе кода после
+            своего запуска. Поэтому самый простой способ развернуть приложения используя воркеры очереди - перезагрузить
+            воркеров во время процесса развертывания
         </p>
         <b>For supervisor </b>supervisorctl restart < name > || service supervisor restart
         <br>
@@ -283,7 +284,20 @@ Workers
         </a>
     </div>
 </div>
-
+<a href="#workers3" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Очереди-воркеры
+</a>
+<div class="collapse multi-collapse" id="workers3">
+    <div class="card card-body">
+        <p>
+            Очередь записывает в <b>сторендж</b>(РЕДИС,МУСКУЛЬ).<br>
+            <b>Демон</b> - длительные процессы(фоновые циклы) которые дергают обработчики(воркеры),а они дергают
+            сторендж,которые были кинуты извне(в очередь кинутые).
+            <br>
+            супервизор следить за демоном,потомучто пхп демон падает,супервизор его перезапускает.
+        </p>
+    </div>
+</div>
 <hr>
 PSR
 <hr>
@@ -497,5 +511,194 @@ PHP: Common (session, exceptions)
 <div class="collapse multi-collapse" id="common5">
     <div class="card card-body">
 
+    </div>
+</div>
+
+<hr>
+PHP: OOP (interfaces, traits)
+<hr>
+
+<a href="#oop1" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Что мы описываем в Interface: сигнатуры методов, методы, константы? Какие области видимости мы можем использовать в
+    Interface: public, protected, private?
+</a>
+<div class="collapse multi-collapse" id="oop1">
+    <div class="card card-body">
+        Интерфейсы объектов позволяют создавать код, который указывает, какие методы должен реализовать класс, без
+        необходимости определять, как именно они должны быть реализованы.
+        <br>
+        Интерфейсы объявляются так же, как и обычные классы, но с использованием ключевого слова interface вместо class.
+        Тела методов интерфейсов должны быть пустыми.
+        <br>
+        Все методы, определенные в интерфейсах должны быть общедоступными, что следует из самой природы интерфейса.
+        <br>
+        Обратите внимание, что возможно объявить конструктор в интерфейсе. Это может быть полезно для некоторых задач,
+        например при реализации фабрик.
+        <br>
+        Интерфейс, совместно с контролем типов, предоставляет отличный способ проверки того, что определенный объект
+        содержит определенный набор методов
+        <a target="_blank" class="btn btn-secondary" href="https://www.php.net/manual/ru/language.oop5.interfaces.php">
+            www.php.net
+        </a>
+    </div>
+</div>
+<a href="#oop2" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Какие магические методы ты знаешь?
+</a>
+<div class="collapse multi-collapse" id="oop2">
+    <div class="card card-body">
+        <a target="_blank" class="btn btn-secondary" href="/php/class_object_oop">
+            www.php.net
+        </a>
+        <a target="_blank" class="btn btn-secondary" href="https://www.php.net/manual/ru/language.oop5.magic.php">
+            own
+        </a>
+    </div>
+</div>
+
+<a href="#oop3" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Для чего нужны Traits в PHP? Есть же абстрактный класс.
+</a>
+<div class="collapse multi-collapse" id="oop3">
+    <div class="card card-body">
+        Traits - это механизм обеспечения повторного использования кода в языках с поддержкой только одиночного
+        наследования, таких как PHP. Трейт предназначен для уменьшения некоторых ограничений одиночного наследования,
+        позволяя разработчику повторно использовать наборы методов свободно, в нескольких независимых классах и
+        реализованных с использованием разных архитектур построения классов. Семантика комбинации трейтов и классов
+        определена таким образом, чтобы снизить уровень сложности, а также избежать типичных проблем, связанных с
+        множественным наследованием и смешиванием.
+        <br>
+        <h3>Приоритет</h3>
+        Наследуемый член из базового класса переопределяется членом, находящимся в трейте. Порядок приоритета следующий:
+        члены из текущего класса переопределяют методы в трейте, которые в свою очередь переопределяют унаследованные
+        методы
+        <a target="_blank" class="btn btn-secondary" href="https://www.php.net/manual/ru/language.oop5.traits.php">
+            own
+        </a>
+    </div>
+</div>
+
+<a href="#oop4" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Для чего нужен Interface? Есть же абстрактный класс.
+</a>
+<div class="collapse multi-collapse" id="oop4">
+    <div class="card card-body">
+        Абстрактный класс нужен, когда нужно семейство классов, у которых есть много общего. Конечно, можно применить и
+        интерфейс, но тогда нужно будет писать много идентичного кода.
+        <br>
+        Интерфейс представляет собой контракт для взаимодействий
+    </div>
+</div>
+
+<a href="#oop5" data-toggle="collapse" class="list-group-item list-group-item-action">
+    В абстрактном классе какие области видимости можно использовать для абстрактных методов: public, protected, private?
+</a>
+<div class="collapse multi-collapse" id="oop5">
+    <div class="card card-body">
+        public, protected
+        <a target="_blank" class="btn btn-secondary" href="https://php.net/manual/ru/language.oop5.abstract.php">
+            php.net
+        </a>
+    </div>
+</div>
+
+<a href="#oop6" data-toggle="collapse" class="list-group-item list-group-item-action">
+    1.Можно ли в классе переопределить метод трэйта?
+    <br>
+    2.Можно ли в трейте объявить константы?
+    <br>
+    3.Можно ли Trait использовать в Type hint?
+</a>
+<div class="collapse multi-collapse" id="oop6">
+    <div class="card card-body">
+        <p>1. ДА, Если два трейта вставляют метод с одним и тем же именем, это приводит к фатальной ошибке в случае,
+            если конфликт явно не разрешен.<br>
+        </p>
+        <pre>
+            <code class="php">
+                  use A, B {
+                        B::smallTalk insteadof A; //использовать метод smallTalk трейта B вместо А
+                        A::bigTalk insteadof B;   //использовать метод bigTalk трейта A вместо B
+                        B::bigTalk as talk;       //переименовать  метод bigTalk трейта B как talk
+                        B::bigTalk as private talk; //переименовать и изменить областьвидимости метода bigTalk трейта B как talk b
+                    }
+            </code>
+        </pre>
+        <p>
+            <b>Приоритет</b> -Наследуемый член из базового класса переопределяется членом, находящимся в трейте. Порядок
+            приоритета следующий: члены из текущего класса переопределяют методы в трейте, которые в свою очередь
+            переопределяют унаследованные методы.
+        </p>
+        <pre>
+            <code class="php">
+                  class Base {
+                        public function sayHello() {
+                            echo 'Hello ';
+                        }
+                    }
+
+                    trait SayWorld {
+                        public function sayHello() {
+                            parent::sayHello();
+                            echo 'World!';
+                        }
+                    }
+
+                    class MyHelloWorld extends Base {
+                        use SayWorld;
+                    }
+
+                    $o = new MyHelloWorld();
+                    $o->sayHello(); // Hello World!
+            </code>
+        </pre>
+        <p>2. Трейты не могут иметь констант</p>
+        <p>Да, можо использовать в Type hint </p>
+        <a target="_blank" class="btn btn-secondary" href="https://www.php.net/manual/ru/language.oop5.traits.php">
+            php.net
+        </a>
+    </div>
+</div>
+
+<a href="#oop7" data-toggle="collapse" class="list-group-item list-group-item-action">
+    В каких случаях можно/стоить делать закрытый (private/protected) конструктор?
+</a>
+<div class="collapse multi-collapse" id="oop7">
+    <div class="card card-body">
+        Извне не возможно было создать екземпляр класса.
+    </div>
+</div>
+
+<a href="#oop8" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Как реализовать singleton в PHP?
+</a>
+<div class="collapse multi-collapse" id="oop8">
+    <div class="card card-body">
+        <pre>
+            <code class="php">
+        class TestController
+        {
+            public static $instance;
+
+            private function __construct()
+            {
+                // приватный конструктор ограничивает реализацию getInstance ()
+            }
+
+            protected function __clone()
+            {
+                // ограничивает клонирование объекта
+            }
+
+            public static function getInstance()
+            {
+                if (!self::$instance) {
+                    self::$instance = new self();
+                }
+                return self::$instance;
+            }
+        }
+            </code>
+        </pre>
     </div>
 </div>
