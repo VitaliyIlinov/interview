@@ -417,6 +417,85 @@ PHP: Base (типы данных, type hint, global vars)
         </a>
     </div>
 </div>
+
 <hr>
 PHP: Common (session, exceptions)
 <hr>
+
+<a href="#common1" data-toggle="collapse" class="list-group-item list-group-item-action">
+    В чем разница между include и require в PHP?
+</a>
+<div class="collapse multi-collapse" id="common1">
+    <div class="card card-body">
+        Конструкция include выдаст предупреждение уровня E_WARNING, если не сможет найти файл; поведение отлично от
+        require, который выдаст фатальную ошибку уровня E_COMPILE_ERROR.
+    </div>
+</div>
+
+<a href="#common2" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Exception vs Throwable?
+</a>
+<div class="collapse multi-collapse" id="common2">
+    <div class="card card-body">
+        Exception — это базовый класс для всех исключений в PHP 5 и базовый класс для всех пользовательских исключений в
+        PHP 7.
+        <br>
+        Throwable является родительским интерфейсом для всех объектов, выбрасывающихся с помощью выражения throw в PHP
+        7, включая классы Error( базовый класс для всех внутренних ошибок PHP) и Exception.
+    </div>
+</div>
+<a href="#common3" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Как работает сессия в PHP? Где она хранится? Как связывается браузер с сессией.
+</a>
+<div class="collapse multi-collapse" id="common3">
+    <div class="card card-body">
+        Сессии являются простым способом хранения информации для отдельных пользователей с уникальным идентификатором
+        сессии.Это может использоваться для сохранения состояния между запросами страниц. Идентификаторы сессий обычно
+        отправляются браузеру через сессионный cookie и используются для получения имеющихся данных сессии.
+        <br>
+        По умолчанию PHP использует внутренний обработчик files для сохранения сессий, который установлен в
+        INI-переменной session.save_handler. Этот обработчик сохраняет данные на сервере в директории, указанной в
+        конфигурационной директиве session.save_path.
+        <br>
+        Сессии могут запускаться вручную с помощью функции session_start(). Если директива session.auto_start
+        установлена в 1, сессия автоматически запустится, в начале запроса.
+        <br>
+        Существуют два метода передачи идентификатора сессии:
+        <ul>
+            <li>Cookies</li>
+            <li>Индефикатор через параметр URL</li>
+        </ul>
+        <br>
+        <a target="_blank" class="btn btn-secondary" href="https://www.php.net/manual/ru/session.examples.basic.php">
+            www.php.net
+        </a>
+        <br>
+        <a target="_blank" class="btn btn-secondary" href="https://www.php.net/manual/ru/session.idpassing.php">
+            www.php.net
+        </a>
+    </div>
+</div>
+<a href="#common4" data-toggle="collapse" class="list-group-item list-group-item-action">
+    В чем разница между сессией и кукой?
+</a>
+<div class="collapse multi-collapse" id="common4">
+    <div class="card card-body">
+        Cookies - это механизм хранения данных браузером,которые храняться на стороне клиента
+        <br>
+        <a target="_blank" class="btn btn-secondary" href="https://www.php.net/manual/ru/features.cookies.php">
+            www.php.net
+        </a>
+        <br>
+        <a target="_blank" class="btn btn-secondary" href="https://www.php.net/manual/ru/session.idpassing.php">
+            www.php.net
+        </a>
+    </div>
+</div>
+<a href="#common5" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Как можно использовать наследование исключений?
+</a>
+<div class="collapse multi-collapse" id="common5">
+    <div class="card card-body">
+
+    </div>
+</div>
