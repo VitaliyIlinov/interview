@@ -1123,11 +1123,163 @@ Frameworks Laravel
 </a>
 <div class="collapse multi-collapse" id="mysql1">
     <div class="card card-body">
+        <a target="_blank" class="btn btn-secondary" href="/mysql/engine">
+            mysql/engine
+        </a>
+    </div>
+</div>
+<a href="#mysql2" data-toggle="collapse" class="list-group-item list-group-item-action">
+    В чем разница между InnoDB и MyISAM в MySQL?
+</a>
+<div class="collapse multi-collapse" id="mysql2">
+    <div class="card card-body">
+        <a target="_blank" class="btn btn-secondary" href="/mysql/engine">
+            mysql/engine
+        </a>
+    </div>
+</div>
+<a href="#mysql3" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Какую задачу решает HAVING? Чем не устраивает WHERE?
+</a>
+<div class="collapse multi-collapse" id="mysql3">
+    <div class="card card-body">
+        <a target="_blank" class="btn btn-secondary" href="/mysql/query">
+            /mysql/query
+        </a>
+    </div>
+</div>
+<a href="#mysql4" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Что такое INSERT.. ON DUPLICATE KEY UPDATE... Для чего? По какому индексу проверяет уникальность записи?
+</a>
+<div class="collapse multi-collapse" id="mysql4">
+    <div class="card card-body">
         <p>
-
+            unique, Primary key
         </p>
         <a target="_blank" class="btn btn-secondary" href="http://laravel.su/docs/5.4/providers">
             http://laravel.su/docs/5.4/providers
         </a>
     </div>
 </div>
+<a href="#mysql5" data-toggle="collapse" class="list-group-item list-group-item-action">
+    При создании таблиц пишут INT(11) - что означает 11? Всегда ли 11?
+</a>
+<div class="collapse multi-collapse" id="mysql5">
+    <div class="card card-body">
+        Отображение символов в колонке
+    </div>
+</div>
+
+<a href="#mysql6" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Какие варианты хранения md5 в базе
+</a>
+<div class="collapse multi-collapse" id="mysql6">
+    <div class="card card-body">
+        CHAR 32
+    </div>
+</div>
+
+<hr>
+Проектирование
+<hr>
+<a href="#pr1" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Как реализовать связь многие ко многим?Как реализовать связь один ко многим?
+</a>
+<div class="collapse multi-collapse" id="pr1">
+    <div class="card card-body">
+        Связывающея таблца
+        <a target="_blank" class="btn btn-secondary" href="/mysql/relation_type">
+            /mysql/relation_type
+        </a>
+    </div>
+</div>
+<a href="#pr2" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Какие варианты хранения JSON в реляционной БД существуют. Какой вариант предпочтительнее?
+</a>
+<div class="collapse multi-collapse" id="pr2">
+    <div class="card card-body">
+        json_decode, json_encode ??????
+    </div>
+</div>
+<a href="#pr3" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Если мы храним JSON в текстовом поле, то как потом искать по какому-то полю из JSON?
+</a>
+<div class="collapse multi-collapse" id="pr3">
+    <div class="card card-body">
+        Like??????
+    </div>
+</div>
+
+<hr>
+MySQL Indexes
+<hr>
+<a href="#index1" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Почему не стоит добавлять индексы сразу на каждую колонку?
+</a>
+<div class="collapse multi-collapse" id="index1">
+    <div class="card card-body">
+        Ефекта не будет + место будет занимать + условия запросов поиска надо предосмотреть
+    </div>
+</div>
+<a href="#index2" data-toggle="collapse" class="list-group-item list-group-item-action">
+    ак работают внешние ключи (foreign keys)?
+</a>
+<div class="collapse multi-collapse" id="index2">
+    <div class="card card-body">
+        ссылка на запись с другой таблицы
+    </div>
+</div>
+<a href="#index3" data-toggle="collapse" class="list-group-item list-group-item-action">
+    В каких случаях не стоит использовать индексы
+</a>
+<div class="collapse multi-collapse" id="index3">
+    <div class="card card-body">
+        когда записей мало,селективность к нулю
+    </div>
+</div>
+<a href="#index4" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Задача: Если у нас есть составной индекс по двум колонкам, и мы делаем выборку только по первой колонке, сможет ли
+    MySQL использовать этот индекс? А если только по второй колонке?
+</a>
+<div class="collapse multi-collapse" id="index4">
+    <div class="card card-body">
+        очередность важна.По первому да,по второму - нет
+    </div>
+</div>
+<a href="#index5" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Какие типы индексов ты знаешь?
+</a>
+<div class="collapse multi-collapse" id="index5">
+    <div class="card card-body">
+        btree,hash,fulltext ?? primary/unique/key|index
+    </div>
+</div>
+<a href="#index6" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Как устроен индекс?
+</a>
+<div class="collapse multi-collapse" id="index6">
+    <div class="card card-body">
+        Файл со сотритрованной колонкой -> id строки
+    </div>
+</div>
+<a href="#index7" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Нужен ли индекс на поле со значениями (0 и 1)? Почему?
+</a>
+<div class="collapse multi-collapse" id="index7">
+    <div class="card card-body">
+        селективность, количество уныкальных значений индекса/количество строк
+    </div>
+</div>
+<a href="#index8" data-toggle="collapse" class="list-group-item list-group-item-action">
+    В БД есть 1 млн записей, и 80% из них имеют одинаковое значение. Нужен ли индекс на это поле? Почему?
+</a>
+<div class="collapse multi-collapse" id="index8">
+    <div class="card card-body">
+        Если по 80 то не нужен ????
+    </div>
+</div>
+
+
+<hr>
+Transactions
+<hr>
