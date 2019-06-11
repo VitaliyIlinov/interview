@@ -706,7 +706,7 @@ PHP: OOP (interfaces, traits)
 <hr>
 PHP: Advanced (Iterators, generators, links)
 <hr>
-<a href="advanced1" data-toggle="collapse" class="list-group-item list-group-item-action">
+<a href="#advanced1" data-toggle="collapse" class="list-group-item list-group-item-action">
     Для чего нужен интерфейс ArrayAccess?
 </a>
 <div class="collapse multi-collapse" id="advanced1">
@@ -728,7 +728,7 @@ PHP: Advanced (Iterators, generators, links)
         </a>
     </div>
 </div>
-<a href="advanced2" data-toggle="collapse" class="list-group-item list-group-item-action">
+<a href="#advanced2" data-toggle="collapse" class="list-group-item list-group-item-action">
     Для чего нужен интерфейс Iterator?
 </a>
 <div class="collapse multi-collapse" id="advanced2">
@@ -753,7 +753,7 @@ PHP: Advanced (Iterators, generators, links)
         </a>
     </div>
 </div>
-<a href="advanced3" data-toggle="collapse" class="list-group-item list-group-item-action">
+<a href="#advanced3" data-toggle="collapse" class="list-group-item list-group-item-action">
     Как работают генераторы в PHP? Для чего это можно использовать?
     Как написать простой генератор?
 </a>
@@ -831,7 +831,7 @@ PHP: Advanced (Iterators, generators, links)
         </a>
     </div>
 </div>
-<a href="advanced4" data-toggle="collapse" class="list-group-item list-group-item-action">
+<a href="#advanced4" data-toggle="collapse" class="list-group-item list-group-item-action">
     Как меняется поведение PHP если включить Strict Mode?
 </a>
 <div class="collapse multi-collapse" id="advanced4">
@@ -845,19 +845,21 @@ PHP: Advanced (Iterators, generators, links)
     </div>
 </div>
 
-<a href="advanced5" data-toggle="collapse" class="list-group-item list-group-item-action">
+<a href="#advanced5" data-toggle="collapse" class="list-group-item list-group-item-action">
     Какие побитовые операции ты знаешь
 </a>
-<div class="collapse multi-collapse" id="advanced4">
+<div class="collapse multi-collapse" id="advanced5">
     <div class="card card-body">
         <ul>
             <li>$a & $b <b>И</b> Устанавливаются только те биты, которые установлены и в $a, и в $b.</li>
             <li>$a | $b <b>Или</b> Устанавливаются те биты, которые установлены в $a или в $b.</li>
-            <li>$a ^ $b <b>Исключающее или</b> Устанавливаются только те биты, которые установлены либо только в $a, либо
+            <li>$a ^ $b <b>Исключающее или</b> Устанавливаются только те биты, которые установлены либо только в $a,
+                либо
                 только в $b, но не в обоих одновременно.
             </li>
             <li>~ $a <b>Отрицание</b> Устанавливаются те биты, которые не установлены в $a, и наоборот.</li>
-            <li>$a << $b <b>Сдвиг влево</b> Все биты переменной $a сдвигаются на $b позиций влево (каждая позиция подразумевает
+            <li>$a << $b <b>Сдвиг влево</b> Все биты переменной $a сдвигаются на $b позиций влево (каждая позиция
+                подразумевает
                 "умножение на 2")
             </li>
             <li>$a >> $b <b>Сдвиг вправо</b> Все биты переменной $a сдвигаются на $b позиций вправо (каждая позиция
@@ -868,6 +870,264 @@ PHP: Advanced (Iterators, generators, links)
         <a target="_blank" class="btn btn-secondary"
            href="https://www.php.net/manual/ru/language.operators.bitwise.php">
             php.net
+        </a>
+    </div>
+</div>
+
+<hr>
+Frameworks Laravel
+<hr>
+<a href="#laravel1" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Для чего нужны Service Providers?
+</a>
+<div class="collapse multi-collapse" id="laravel1">
+    <div class="card card-body">
+        <p>
+            Сервис-провайдеры лежат в основе первоначальной загрузки всех приложений на Laravel. И ваше приложение, и
+            все базовые сервисы Laravel загружаются через сервис-провайдеры.
+        </p>
+        <p>
+            Но что мы понимаем под "первоначальной загрузкой"? В общих чертах, мы имеем ввиду регистрацию таких вещей,
+            как биндингов в IoC-контейнер (фасадов и т.д.), слушателей событий, фильтров роутов и даже самих роутов.
+            Сервис-провайдеры - центральное место для конфигурирования вашего приложения.
+        </p>
+        <p>
+            Если вы откроете файл config/app.php, поставляемый с Laravel, то увидите массив providers. В нём перечислены
+            все классы сервис-провайдеров, которые загружаются для вашего приложения. Конечно, многие из них являются
+            "отложенными" провайдерами, т.е. они не загружаются при каждом запросе, а только при необходимости.
+        </p>
+        <p>
+            В этом обзоре вы узнаете, как создавать свои собственные сервис-провайдеры и регистрировать их в своём
+            приложении.
+        </p>
+        <a target="_blank" class="btn btn-secondary" href="http://laravel.su/docs/5.4/providers">
+            http://laravel.su/docs/5.4/providers
+        </a>
+    </div>
+</div>
+<a href="#laravel2" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Как работает Middlewares?
+</a>
+<div class="collapse multi-collapse" id="laravel2">
+    <div class="card card-body">
+        <p>
+            Посредники предоставляют удобный механизм для фильтрации HTTP-запросов вашего приложения. Например, в
+            Laravel есть посредник для проверки аутентификации пользователя. Если пользователь не аутентифицирован,
+            посредник перенаправит его на страницу входа в систему. Если же пользователь аутентифицирован, посредник
+            позволит запросу пройти далее в приложение.
+        </p>
+        <p>
+            Конечно, посредники нужны не только для авторизации. CORS-посредник может пригодиться для добавления особых
+            заголовков ко всем ответам в вашем приложении. А посредник логов может зарегистрировать все входящие
+            запросы.
+        </p>
+        <p>
+            В Laravel есть несколько стандартных посредников, включая посредники для аутентификации и CSRF-защиты. Все
+            они расположены в директории app/Http/Middleware.
+        </p>
+        <img class="img-fluid" src="/img/laravel/laravel-middleware.png">
+        <a target="_blank" class="btn btn-secondary" href="http://laravel.su/docs/5.4/middleware">
+            http://laravel.su/docs/5.4/middleware
+        </a>
+    </div>
+</div>
+<a href="#laravel2" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Как работает Faсade?
+</a>
+<div class="collapse multi-collapse" id="laravel2">
+    <div class="card card-body">
+        <p>
+            <b>Сервис-контейнер в Laravel</b> — это мощное средство для управления зависимостями классов и внедрения
+            зависимостей. Внедрение зависимостей — это распространенный термин, который означает добавление других
+            классов в этот класс через конструктор или, в некоторых случаях, метод-сеттер.
+        </p>
+        <p>
+            Фасады предоставляют "статический" интерфейс к классам, доступным в сервис-контейнере. Laravel поставляется
+            со множеством фасадов, которые предоставляют доступ практически ко всем функциям Laravel. Фасады Laravel
+            служат "статическими прокси" для основополагающих классов в сервис-контейнере, предоставляя преимущество
+            лаконичного, выразительного синтаксиса, сохраняя при этом большую тестируемость и гибкость по сравнению с
+            обычными статическими методами.
+            Все фасады Laravel определены в пространстве имен Illuminate\Support\Facades
+        </p>
+        <a target="_blank" class="btn btn-secondary" href="http://laravel.su/docs/5.4/container">
+            http://laravel.su/docs/5.4/container
+        </a>
+        <a target="_blank" class="btn btn-secondary" href="http://laravel.su/docs/5.4/facades">
+            http://laravel.su/docs/5.4/facades
+        </a>
+    </div>
+</div>
+<a href="#laravel3" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Если ты хочешь после каждой созданной задачи отправлять почту тому, на кого эту задачу поставили - опиши свои
+    действия.
+</a>
+<div class="collapse multi-collapse" id="laravel3">
+    <div class="card card-body">
+        Observer, Mail drivers, Queue
+        <a target="_blank" class="btn btn-secondary" href="http://laravel.su/docs/5.4/facades">
+            http://laravel.su/docs/5.4/facades
+        </a>
+    </div>
+</div>
+<a href="#laravel4" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Должны ли фигурировать в коде вызовы функции env()?
+</a>
+<div class="collapse multi-collapse" id="laravel4">
+    <div class="card card-body">
+        нет
+    </div>
+</div>
+
+<a href="#laravel5" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Зачем нужны параметры роутинга?
+</a>
+<div class="collapse multi-collapse" id="laravel5">
+    <div class="card card-body">
+        захватить сегменты URI
+        <a target="_blank" class="btn btn-secondary" href="http://laravel.su/docs/5.4/routing#route-parameters">
+            http://laravel.su/docs/5.4/routing#route-parameters
+        </a>
+    </div>
+</div>
+
+<a href="#laravel6" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Как можно создать новый класс?
+</a>
+<div class="collapse multi-collapse" id="laravel6">
+    <div class="card card-body">
+        <ul>
+            <li>new Class</li>
+            <li>app(Class::class)</li>
+            <li>DI: __construct(Class $class)</li>
+        </ul>
+        <a target="_blank" class="btn btn-secondary" href="http://laravel.su/docs/5.4">
+            http://laravel.su/docs/5.4
+        </a>
+    </div>
+</div>
+
+<a href="#laravel7" data-toggle="collapse" class="list-group-item list-group-item-action">
+    1. Если ты хочешь проверить может ли юзер изменять объект, как ты будешь это делать?
+    <br>
+    2. Как работают Policies?
+</a>
+<div class="collapse multi-collapse" id="laravel7">
+    <div class="card card-body">
+        1.Authorization, Policies
+        <br>
+        2 .Сначала мы разберем шлюзы, а затем рассмотрим политики
+        <a target="_blank" class="btn btn-secondary" href="http://laravel.su/docs/5.4/authorization">
+            http://laravel.su/docs/5.4/authorization
+        </a>
+    </div>
+</div>
+
+<a href="#laravel8" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Как можно кастомизировать ошибку валидации формы?
+</a>
+<div class="collapse multi-collapse" id="laravel8">
+    <div class="card card-body">
+        используя в form request метод messages
+        <pre>
+            <code class="php">
+                public function messages()
+                {
+                    return [
+                        'title.required' => 'A title is required',
+                        'body.required'  => 'A message is required',
+                    ];
+                }
+            </code>
+        </pre>
+        <a target="_blank" class="btn btn-secondary"
+           href="http://laravel.su/docs/5.4/validation#customizing-the-error-messages">
+            http://laravel.su/docs/5.4/validation#customizing-the-error-messages
+        </a>
+        <p>
+            При необходимости, вы можете использовать свои сообщения об ошибках вместо значений по умолчанию. Существует
+            несколько способов для указания кастомных сообщений. Во-первых, можно передать сообщения в качестве третьего
+            аргумента в метод Validator::make:
+        </p>
+        <pre>
+            <code class="php">
+                $messages = [
+                    'required' => 'The :attribute field is required.',
+                ];
+
+                $validator = Validator::make($input, $rules, $messages);
+            </code>
+        </pre>
+        <p>
+            В этом примере :attributeбудет заменен на имя проверяемого поля. Вы также можете использовать и другие
+            строки-переменные. Пример:
+        </p>
+        <pre>
+            <code class="php">
+              $messages = [
+                    'same'    => 'The :attribute and :other must match.',
+                    'size'    => 'The :attribute must be exactly :size.',
+                    'between' => 'The :attribute must be between :min - :max.',
+                    'in'      => 'The :attribute must be one of the following types: :values',
+                ];
+            </code>
+        </pre>
+        <p>
+            Иногда есть необходимость указать собственное сообщение для конкретного поля, это можно сделать с помощью
+            синтаксиса с точкой. Просто укажите имя атрибута и текст сообщения:
+        </p>
+        <pre>
+            <code class="php">
+              $messages = [
+                    'email.required' => 'We need to know your e-mail address!',
+                ];
+            </code>
+        </pre>
+
+        <p>
+            Также можно определять сообщения в файле локализации вместо того, чтобы передавать их в валидатор напрямую.
+            Для этого добавьте сообщения в массив custom файла локализации resources/lang/xx/validation.php.
+        </p>
+        <pre>
+            <code class="php">
+            'custom' => [
+            'email' => [
+                    'required' => 'We need to know your e-mail address!',
+                ],
+            ],
+            </code>
+        </pre>
+        <p>
+            Если вы хотите, чтобы :attribute был заменен на кастомное имя, можно указать в массиве attributes файле
+            локализации resources/lang/xx/validation.php
+        </p>
+        <pre>
+            <code class="php">
+            'attributes' => [
+            'email' => 'email address',
+        ]
+            </code>
+        </pre>
+
+        <a target="_blank" class="btn btn-secondary" href="http://laravel.su/docs/5.4/validation#custom-error-messages">
+            http://laravel.su/docs/5.4/validation#custom-error-messages
+        </a>
+
+    </div>
+</div>
+
+<hr>
+Базы данных
+<hr>
+<a href="#mysql1" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Какие движки в MySQL ты знаешь?
+</a>
+<div class="collapse multi-collapse" id="mysql1">
+    <div class="card card-body">
+        <p>
+
+        </p>
+        <a target="_blank" class="btn btn-secondary" href="http://laravel.su/docs/5.4/providers">
+            http://laravel.su/docs/5.4/providers
         </a>
     </div>
 </div>
