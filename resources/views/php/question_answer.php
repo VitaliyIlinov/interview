@@ -702,3 +702,172 @@ PHP: OOP (interfaces, traits)
         </pre>
     </div>
 </div>
+
+<hr>
+PHP: Advanced (Iterators, generators, links)
+<hr>
+<a href="advanced1" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Для чего нужен интерфейс ArrayAccess?
+</a>
+<div class="collapse multi-collapse" id="advanced1">
+    <div class="card card-body">
+        Интерфейс обеспечивает доступ к объектам в виде массивов.
+        <pre>
+            <code class="php">
+                ArrayAccess {
+                /* Методы */
+                abstract public offsetExists ( mixed $offset ) : bool  // on isset($obj["key"])
+                abstract public offsetGet ( mixed $offset ) : mixed   // $obj["key"]
+                abstract public offsetSet ( mixed $offset , mixed $value ) : void  // $obj["key"] ='value'
+                abstract public offsetUnset ( mixed $offset ) : void   // unset($obj["key"])
+                }
+            </code>
+        </pre>
+        <a target="_blank" class="btn btn-secondary" href="https://www.php.net/manual/ru/class.arrayaccess.php">
+            php.net
+        </a>
+    </div>
+</div>
+<a href="advanced2" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Для чего нужен интерфейс Iterator?
+</a>
+<div class="collapse multi-collapse" id="advanced2">
+    <div class="card card-body">
+        Интерфейс для внешних итераторов или объектов, которые могут повторять себя изнутри.
+        <pre>
+            <code class="php">
+               Iterator extends Traversable {
+                /* Методы */
+                abstract public rewind ( void ) : void    //Перемотать итератор на первый элемент
+                ||
+                abstract public next ( void ) : void      //Переход к следующему элементу
+
+                abstract public valid ( void ) : bool     //Проверяет корректность||isset текущей позиции
+                abstract public current ( void ) : mixed  //Возврат текущего элемента
+                abstract public key ( void ) : scalar     //Возврат ключа текущего элемента
+                }
+            </code>
+        </pre>
+        <a target="_blank" class="btn btn-secondary" href="https://www.php.net/manual/ru/class.iterator.php">
+            php.net
+        </a>
+    </div>
+</div>
+<a href="advanced3" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Как работают генераторы в PHP? Для чего это можно использовать?
+    Как написать простой генератор?
+</a>
+<div class="collapse multi-collapse" id="advanced3">
+    <div class="card card-body">
+        <p>
+            Генератор позволяет вам писать код, использующий foreach для перебора набора данных без необходимости
+            создания массива в памяти, что может привести к превышению лимита памяти, либо потребует довольно много
+            времени для его создания. Вместо этого, вы можете написать функцию-генератор, которая, по сути, является
+            обычной функцией, за исключением того, что вместо возврата единственного значения, генератор может
+            возвращать (yield) столько раз, сколько необходимо для генерации значений, позволяющих перебрать исходный
+            набор данных.
+        </p>
+        <p>
+            Наглядным примером вышесказанного может послужить использование функции range() как генератора. Стандартная
+            функция range() должна генерировать массив, состоящий из значений, и возвращать его, что может послужить
+            результатом генерации огромных массивов: например, вызов range(0, 1000000), приведёт к использованию более
+            100 МБ используемой памяти.
+        </p>
+        <p>
+            Когда функция генератор вызывается, она вернет объект встроенного класса Generator.
+        </p>
+        <pre>
+            <code class="php">
+                Generator implements Iterator {
+                /* Методы */
+                public current ( void ) : mixed  //получить текущее значение генератора
+                public getReturn ( void ) : mixed  //Получить значение, возвращаемое генератором
+                public key ( void ) : mixed //Получить ключ сгенерированного элемента
+                public next ( void ) : void //Возобновить работу генератора
+                public rewind ( void ) : void //Перемотать итератор
+                public send ( mixed $value ) : mixed //Передать значение в генератор
+                public throw ( Throwable $exception ) : mixed //Бросить исключение в генератор
+                public valid ( void ) : bool //Проверка, закрыт ли итератор
+                public __wakeup ( void ) : void //Callback-функция сериализации
+                }
+            </code>
+        </pre>
+        Примеры :
+        <pre>
+            <code class="php">
+                function getLines($file) {
+                    $f = fopen($file, 'r');
+                    try {
+                        while ($line = fgets($f)) {
+                            yield $line;
+                        }
+                    } finally {
+                        fclose($f);
+                    }
+                }
+
+                foreach (getLines("file.txt") as $n => $line) {
+                    if ($n > 5) break;
+                    echo $line;
+                }
+
+                //another example
+
+                function gen_one_to_three() {
+                    echo 55; //one time
+                    for ($i = 1; $i <= 3; $i++) {
+                        // Обратите внимание, что $i сохраняет свое значение между вызовами.
+                        yield $i;
+                    }
+                }
+                foreach (gen_one_to_three() as $value) {
+                    echo "$value\n";
+                }
+            </code>
+        </pre>
+        <a target="_blank" class="btn btn-secondary"
+           href="https://www.php.net/manual/ru/language.generators.overview.php">
+            php.net
+        </a>
+    </div>
+</div>
+<a href="advanced4" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Как меняется поведение PHP если включить Strict Mode?
+</a>
+<div class="collapse multi-collapse" id="advanced4">
+    <div class="card card-body">
+        <b>declare(strict_types=1);</b> <br>
+        Строгая типизация. Не преобразовывает типы.
+        <a target="_blank" class="btn btn-secondary"
+           href="https://www.php.net/manual/ru/functions.arguments.php#functions.arguments.type-declaration.strict">
+            php.net
+        </a>
+    </div>
+</div>
+
+<a href="advanced5" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Какие побитовые операции ты знаешь
+</a>
+<div class="collapse multi-collapse" id="advanced4">
+    <div class="card card-body">
+        <ul>
+            <li>$a & $b <b>И</b> Устанавливаются только те биты, которые установлены и в $a, и в $b.</li>
+            <li>$a | $b <b>Или</b> Устанавливаются те биты, которые установлены в $a или в $b.</li>
+            <li>$a ^ $b <b>Исключающее или</b> Устанавливаются только те биты, которые установлены либо только в $a, либо
+                только в $b, но не в обоих одновременно.
+            </li>
+            <li>~ $a <b>Отрицание</b> Устанавливаются те биты, которые не установлены в $a, и наоборот.</li>
+            <li>$a << $b <b>Сдвиг влево</b> Все биты переменной $a сдвигаются на $b позиций влево (каждая позиция подразумевает
+                "умножение на 2")
+            </li>
+            <li>$a >> $b <b>Сдвиг вправо</b> Все биты переменной $a сдвигаются на $b позиций вправо (каждая позиция
+                подразумевает "деление на 2")
+            </li>
+        </ul>
+        AND (&), OR (|), NOT (~), XOR (^), <<, >>
+        <a target="_blank" class="btn btn-secondary"
+           href="https://www.php.net/manual/ru/language.operators.bitwise.php">
+            php.net
+        </a>
+    </div>
+</div>
