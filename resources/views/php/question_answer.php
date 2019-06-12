@@ -2029,10 +2029,10 @@ Web servers (apache, nginx, phpfpm, virtual hosts)
         </a>
     </div>
 </div>
-<a href="#web_servers_3" data-toggle="collapse" class="list-group-item list-group-item-action">
+<a href="#web_servers_4" data-toggle="collapse" class="list-group-item list-group-item-action">
     Использовал ли встроенный в PHP вебсервер (php -S). Для чего он нужен?
 </a>
-<div class="collapse multi-collapse" id="web_servers_3">
+<div class="collapse multi-collapse" id="web_servers_4">
     <div class="card card-body">
         встроенный сервер, созданный специально для разработки и тестирования. Теперь вы можете писать и тестировать
         свой код не имея полноценного веб-сервера
@@ -2045,6 +2045,52 @@ Web servers (apache, nginx, phpfpm, virtual hosts)
                  php -S >localhost or your public IP>:8080 -t /home/ec2-user/public public/index.php
             </code>
         </pre>
-
     </div>
 </div>
+
+<hr>
+Networks (TCP vs UDP, HTTP vs HTTPS, DNS, NAT)
+<hr>
+<a href="#network1" data-toggle="collapse" class="list-group-item list-group-item-action">
+    В чем отличие между HTTPS и HTTP? Где лучше использовать HTTP, а где HTTPS? Стоит ли вообще использовать HTTP в наше
+    время?
+</a>
+<div class="collapse multi-collapse" id="network1">
+    <div class="card card-body">
+        <p>
+            HTTP — это протокол, в котором описаны правила передачи данных в интернете. Он помогает браузеру загружать
+            веб-страницы, а серверу — получить информацию, которую пользователь ввёл на сайте.
+            <br>
+            HTTPS — это тот же протокол, но с надстройкой безопасности.
+            По HTTP информация передаётся в обычном виде, а по HTTPS — в зашифрованном. Шифровать данные нужно, чтобы
+            хакеры не смогли ничего прочитать, если перехватят их.
+            <br>
+            Допустим, вы проходите опрос на сайте, который работает по HTTP-протоколу. Вот вы заполнили пустые поля и
+            нажали кнопку «Отправить». Браузер отправляет ваши ответы серверу. В этот момент хакер может перехватить
+            информацию и прочитать, что вы там наотвечали. Вы этого даже не заметите.
+            <br>
+            Скорее всего, хакеров не интересуют ваши ответы на опрос. Но перехватить можно любую информацию. Например,
+            ваши пароли или номер банковской карты.
+            <br>
+            Чтобы этого не произошло, HTTP-протокол решили усовершенствовать. К существующей технологии добавили
+            шифрование и получился HTTPS — безопасный протокол передачи данных.
+            <br>
+            Когда вы вводите что-то на сайте, который работает по HTTPS, перед отправкой данных на сервер браузер
+            зашифровывает информацию. Чтобы расшифровать и прочитать её, нужен специальный ключ, который хранится только
+            на сервере. Такое шифрование называется криптографическим
+        </p>
+    </div>
+</div>
+<a href="#network2" data-toggle="collapse" class="list-group-item list-group-item-action">
+    В чем отличие между TCP и UDP пакетами? Где можно использовать UDP?
+</a>
+<div class="collapse multi-collapse" id="network2">
+    <div class="card card-body">
+        UDP не надо ждать ответа
+        <a target="_blank" class="btn btn-secondary"
+           href="https://thedifference.ru/chem-otlichaetsya-protokol-tcp-ot-udp/">
+            https://thedifference.ru/chem-otlichaetsya-protokol-tcp-ot-udp/
+        </a>
+    </div>
+</div>
+
