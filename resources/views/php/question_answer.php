@@ -1712,3 +1712,141 @@ MySQL Admin (Slow log, Backup)
         Сделать копию и погонять, увеличивать нагрузку и наблюдать за ресурсами сервера
     </div>
 </div>
+
+<hr>
+Technologies
+<hr>
+<a href="#git0" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Git
+</a>
+<div class="collapse multi-collapse" id="git0">
+    <div class="card card-body">
+        Есть 3 зоны:
+        <ul>
+            <li>1. рабочая директория</li>
+            <li>2. проиндексированная</li>
+            <li>3. репозиторий</li>
+        </ul>
+        <p>
+            1.рабочая директория - untracked
+            <br>
+            2. git add file
+            <br>
+            3. индекс - список файлов отслеживаемый системой гит
+            4.git commit
+            <br>
+            5.репозиторий
+        </p>
+        <a target="_blank" class="btn btn-secondary"
+           href="https://learn.javascript.ru/screencast/git#basics-first-commit">
+            https://learn.javascript.ru/screencast/git#basics-first-commit
+        </a>
+    </div>
+</div>
+<a href="#git1" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Чем отличается branch от pull request
+</a>
+<div class="collapse multi-collapse" id="git1">
+    <div class="card card-body">
+        Branch - ветка, pull request -запрос на применения изменение
+    </div>
+</div>
+
+<a href="#git2" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Какими способами можно отменить предыдущий коммит?
+</a>
+<div class="collapse multi-collapse" id="git2">
+    <div class="card card-body">
+        git --amend, git reset , git revert commit
+    </div>
+</div>
+<a href="#git3" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Зачем нужны команды pull и fetch? В чем разница между ними?
+</a>
+<div class="collapse multi-collapse" id="git3">
+    <div class="card card-body">
+        При использовании fetch, git собирает все коммиты из целевой ветки, которых нет в текущей ветке, и сохраняет их
+        в локальном репозитории. Однако он не сливает их в текущую ветку.
+        <br>
+        Pull обновить и применить fetch-обновить.
+        <br>
+        Грубо говоря, по дефолту git pull — это шоткод для последовательности двух команд: git fetch (получение
+        изменений с сервера) и git merge (сливание в локальную копию).
+    </div>
+</div>
+<a href="#git4" data-toggle="collapse" class="list-group-item list-group-item-action">
+    В чем разница между commit и push?
+</a>
+<div class="collapse multi-collapse" id="git4">
+    <div class="card card-body">
+        commit - Запись изменений в репозиторий
+        <br>
+        push - отправить коммиты на удаленный репозитоий
+    </div>
+</div>
+<a href="#git5" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Какие типы reset ты знаешь
+</a>
+<div class="collapse multi-collapse" id="git5">
+    <div class="card card-body">
+        reset --hard LOG_HASH|HEAD - отктываеться до рабочей директории коммита, хеда
+        <br>
+        reset --soft LOG_HASH|HEAD - отктываеться до коммита, не трогая рабочую директорию и проидексированные файлы
+        <br>
+        reset --mixed LOG_HASH|HEAD - отктываеться до коммита, не трогая рабочую директорию (без git add.)
+    </div>
+    <a target="_blank" class="btn btn-secondary"
+       href="https://learn.javascript.ru/screencast/git#reset-mixed">
+        https://learn.javascript.ru/screencast/git#reset-mixed
+    </a>
+</div>
+<a href="#git6" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Что такое cherry-pick, и как его использовать?
+</a>
+<div class="collapse multi-collapse" id="git6">
+    <div class="card card-body">
+        Копирование коммитов<br>
+        <b>git cherry-pick COMMIT_HASH</b>
+        <a target="_blank" class="btn btn-secondary"
+           href="https://learn.javascript.ru/screencast/git#copy-cherry-pick">
+            https://learn.javascript.ru/screencast/git#copy-cherry-pick
+        </a>
+    </div>
+</div>
+<a href="#git7" data-toggle="collapse" class="list-group-item list-group-item-action">
+    git reset, git revert, git rebase
+</a>
+<div class="collapse multi-collapse" id="git7">
+    <div class="card card-body">
+        git reset - отмена коммита<br>
+        git rebase - отредактирование историю разработки<br>
+        git revert - коммит с противополжными изменениями коммита(смотрит изменения в указаном коммите и отменяет
+        изменения еще одним коммитом)<br>
+    </div>
+    <a target="_blank" class="btn btn-secondary"
+       href="https://learn.javascript.ru/screencast/git#revert-starting-video">
+        https://learn.javascript.ru/screencast/git#revert-starting-video
+    </a>
+</div>
+<a href="#git8" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Когда мне стоит использовать git stash
+</a>
+<div class="collapse multi-collapse" id="git8">
+    <div class="card card-body">
+       stash - как корзина на винде удаляем и затем можно восстановить
+    </div>
+</div>
+<a href="#git9" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Когда мне стоит использовать git stash
+</a>
+<div class="collapse multi-collapse" id="git9">
+    <div class="card card-body">
+        В чем разница между командами merge и rebase? Что лучше использовать?
+    </div>
+    <a target="_blank" class="btn btn-secondary" href="/git/rebase">
+        /git/rebase
+    </a>
+    <a target="_blank" class="btn btn-secondary" href="https://learn.javascript.ru/screencast/git#move-rebase">
+        https://learn.javascript.ru/screencast/git#move-rebase
+    </a>
+</div>
