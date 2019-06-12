@@ -1850,3 +1850,33 @@ Technologies
         https://learn.javascript.ru/screencast/git#move-rebase
     </a>
 </div>
+<hr>
+Composer
+<hr>
+<a href="#composer1" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Что делает команда Install, и какие файлики ей нужны для работы?
+    Что делает команда Update, и какие файлики ей нужны для работы?
+</a>
+<div class="collapse multi-collapse" id="composer1">
+    <div class="card card-body">
+        composer.json,composer.lock
+    </div>
+</div>
+<a href="#composer2" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Зачем нужен файлик composer.lock?
+</a>
+<div class="collapse multi-collapse" id="composer2">
+    <div class="card card-body">
+        Запысываються текущие версии жестко! Версии мы можем жестко указать прям в composer.json.
+    </div>
+</div>
+<a href="#composer3" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Что такое semver (семантическое версионирование)?
+</a>
+<div class="collapse multi-collapse" id="composer3">
+    <div class="card card-body">
+        <a target="_blank" class="btn btn-secondary" href="https://semver.org/lang/ru/">
+            https://semver.org/lang/ru/
+        </a>
+    </div>
+</div>
