@@ -1506,3 +1506,209 @@ MySQL Admin (Slow log, Backup)
         Show full proccess list
     </div>
 </div>
+
+<hr>
+Модульное тестирование (Unit)
+<hr>
+<a href="#unit_test1" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Что такое PHPUnit?
+</a>
+<div class="collapse multi-collapse" id="unit_test1">
+    <div class="card card-body">
+        <p>
+            PHPUnit – приложение юнит-тестирования приложений, написанных на языке PHP.
+            <br>
+            Идея юнит-тестирования состоит в том, чтобы проверять на корректность небольшие участки больших программ –
+            прогонять на некоторых «хитрых» тестовых наборах данных.
+        </p>
+    </div>
+</div>
+<a href="#unit_test2" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Что такое TDD?
+</a>
+<div class="collapse multi-collapse" id="unit_test2">
+    <div class="card card-body">
+        Test drive development сначало тесты потом код
+    </div>
+</div>
+<a href="#unit_test3" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Mock, Fixture, Stub, Fake - в чем разница?
+</a>
+<div class="collapse multi-collapse" id="unit_test3">
+    <div class="card card-body">
+        моки - Тестовые двойники,имитируют поведение
+        <br>
+        стабы - заглушки,имитируют данные
+        <br>
+        <pre>
+            <code>
+                class StubTest extends TestCase
+                {
+                    public function testStub()
+                    {
+                        // Создать заглушку для класса SomeClass.
+                        $stub = $this->createMock(SomeClass::class);
+
+                        // Настроить заглушку.
+                        $stub->method('doSomething')
+                             ->willReturn('foo');
+
+                        // Вызов $stub->doSomething() теперь вернёт 'foo'.
+                        $this->assertSame('foo', $stub->doSomething());
+                    }
+                }
+            </code>
+        </pre>
+        <a target="_blank" class="btn btn-secondary" href="https://phpunit.readthedocs.io/ru/latest/test-doubles.html">
+            https://phpunit.readthedocs.io/ru/latest/test-doubles.html
+        </a>
+        Fake - фейковые данные
+        <br>
+        Фикстуры - написание кода для настройки тестового окружения в известное состояние, а затем возврат его в
+        исходное состояние, когда тест будет завершён
+        <br>
+        Но в phpunit моки могут и то и другое
+        <a target="_blank" class="btn btn-secondary" href="https://phpunit.readthedocs.io/ru/latest/fixtures.html">
+            https://phpunit.readthedocs.io/ru/latest/fixtures.html
+        </a>
+    </div>
+</div>
+<a href="#unit_test4" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Для чего нужен Data Provider в PHPUnit?
+</a>
+<div class="collapse multi-collapse" id="unit_test4">
+    <div class="card card-body">
+        Набор входных данных для тестирования
+        <pre>
+            <code>
+                /**
+                 * @dataProvider additionProvider
+                 */
+                public function testAdd($a, $b, $expected)
+                {
+                    $this->assertSame($expected, $a + $b);
+                }
+
+                public function additionProvider()
+                {
+                    return [
+                        [0, 0, 0],
+                        [0, 1, 1],
+                        [1, 0, 1],
+                        [1, 1, 3]
+                    ];
+                }
+            </code>
+        </pre>
+        <a target="_blank" class="btn btn-secondary"
+           href="https://phpunit.readthedocs.io/ru/latest/writing-tests-for-phpunit.html#writing-tests-for-phpunit-data-providers">
+            https://phpunit.readthedocs.io/ru/latest/writing-tests-for-phpunit.html#writing-tests-for-phpunit-data-providers
+        </a>
+    </div>
+</div>
+<a href="#unit_test5" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Что такое покрытие и как его считать? Процент покрытого кода покрытого тестами
+</a>
+<div class="collapse multi-collapse" id="unit_test5">
+    <div class="card card-body">
+        <a target="_blank" class="btn btn-secondary"
+           href="https://phpunit.readthedocs.io/ru/latest/code-coverage-analysis.html">
+            https://phpunit.readthedocs.io/ru/latest/code-coverage-analysis.html
+        </a>
+    </div>
+</div>
+
+<hr>
+Функциональное тестирование
+<hr>
+<a href="#func_test1" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Что такое Codeception?
+</a>
+<div class="collapse multi-collapse" id="func_test1">
+    <div class="card card-body">
+        Либа для тестов
+    </div>
+</div>
+<a href="#func_test2" data-toggle="collapse" class="list-group-item list-group-item-action">
+    В чем отличие Unit-тестов от функциональных тестов
+</a>
+<div class="collapse multi-collapse" id="func_test2">
+    <div class="card card-body">
+        unit - определенный модуль, функциональный - взаимосвзяь модулей
+    </div>
+</div>
+<a href="#func_test3" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Что такое BDD?
+</a>
+<div class="collapse multi-collapse" id="func_test3">
+    <div class="card card-body">
+        Behavior-driven development
+        <br>
+        BDD методология является расширением TDD в том смысле, что перед тем как написать какой-либо тест необходимо
+        сначала описать желаемый результат от добавляемой функциональности на предметно-ориентированном языке. После
+        того как это будет проделано, конструкции этого языка переводятся специалистами или специальным программным
+        обеспечением в описание теста.
+        <a target="_blank" class="btn btn-secondary" href="https://dou.ua/forums/topic/8897/">
+            https://phpunit.readthedocs.io/ru/latest/code-coverage-analysis.html
+        </a>
+    </div>
+</div>
+
+<a href="#func_test4" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Что такое Selenium WebDriver?
+</a>
+<div class="collapse multi-collapse" id="func_test4">
+    <div class="card card-body">
+        Емиляция всего веб браузера
+    </div>
+</div>
+<a href="#integration_test1" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Для чего нужно интеграционное тестирование?
+</a>
+<div class="collapse multi-collapse" id="integration_test1">
+    <div class="card card-body">
+        Интеграция со стронними сервисами
+    </div>
+</div>
+
+<a href="#load_test2" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Что такое нагрузочное тестирование, и для чего оно нужно?
+</a>
+<div class="collapse multi-collapse" id="load_test2">
+    <div class="card card-body">
+        тестирования производительности, сбор показателей и определение производительности и времени отклика
+    </div>
+</div>
+<a href="#load_test3" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Какими единицами можно расчитывать нагрузку?
+</a>
+<div class="collapse multi-collapse" id="load_test3">
+    <div class="card card-body">
+        Время выполнения запроса
+        <br>
+        Потребление оперативной памяти
+        <br>
+        Работа с дисковой подсистемой
+        <a target="_blank" class="btn btn-secondary"
+           href="https://ru.wikipedia.org/wiki/%D0%9D%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D0%BE%D1%87%D0%BD%D0%BE%D0%B5_%D1%82%D0%B5%D1%81%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5">
+            https://ru.wikipedia.org/wiki/%D0%9D%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D0%BE%D1%87%D0%BD%D0%BE%D0%B5_%D1%82%D0%B5%D1%81%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5
+        </a>
+    </div>
+</div>
+
+<a href="#load_test4" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Какие средства для проведения нагрузочного тестирования вы знаете
+</a>
+<div class="collapse multi-collapse" id="load_test4">
+    <div class="card card-body">
+        JMeter ,HP LoadRunner
+    </div>
+</div>
+<a href="#load_test4" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Как провести нагрузочное тестирование таким образом, чтобы не уронить сервис, работающий в продакшене?
+</a>
+<div class="collapse multi-collapse" id="load_test4">
+    <div class="card card-body">
+        Сделать копию и погонять, увеличивать нагрузку и наблюдать за ресурсами сервера
+    </div>
+</div>
