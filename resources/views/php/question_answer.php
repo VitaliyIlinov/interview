@@ -1992,3 +1992,59 @@ API: REST, oauth, HTTP-methods
         Неограничено
     </div>
 </div>
+
+<hr>
+Web servers (apache, nginx, phpfpm, virtual hosts)
+<hr>
+<a href="#web_servers_1" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Зачем нужны virtual hosts?
+</a>
+<div class="collapse multi-collapse" id="web_servers_1">
+    <div class="card card-body">
+        добавление локальных хостов
+    </div>
+</div>
+<a href="#web_servers_2" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Какие принципиальные отличия между apache и nginx?
+</a>
+<div class="collapse multi-collapse" id="web_servers_2">
+    <div class="card card-body">
+        <a target="_blank" class="btn btn-secondary" href="https://ekaterinagoltsova.github.io/posts/apache-vs-nginx/">
+            https://ekaterinagoltsova.github.io/posts/apache-vs-nginx/
+        </a>
+        <a target="_blank" class="btn btn-secondary" href="https://habr.com/ru/post/267721/">
+            https://habr.com/ru/post/267721/
+        </a>
+    </div>
+</div>
+<a href="#web_servers_3" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Зачем нужен phpfpm?
+</a>
+<div class="collapse multi-collapse" id="web_servers_3">
+    <div class="card card-body">
+        процес,который позволяеться выполнять пхп скрипты
+        <a target="_blank" class="btn btn-secondary"
+           href="https://perfect-inc.com/blog/nginx-php-fpm-i-chto-eto-voobshche/">
+            https://perfect-inc.com/blog/nginx-php-fpm-i-chto-eto-voobshche/
+        </a>
+    </div>
+</div>
+<a href="#web_servers_3" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Использовал ли встроенный в PHP вебсервер (php -S). Для чего он нужен?
+</a>
+<div class="collapse multi-collapse" id="web_servers_3">
+    <div class="card card-body">
+        встроенный сервер, созданный специально для разработки и тестирования. Теперь вы можете писать и тестировать
+        свой код не имея полноценного веб-сервера
+        <pre>
+            <code>
+                 $ cd ~/public_html
+                 $ php -S localhost:8000
+
+                 Кроме того,. вы может указать имя конкретного файла-роутера. Например:
+                 php -S >localhost or your public IP>:8080 -t /home/ec2-user/public public/index.php
+            </code>
+        </pre>
+
+    </div>
+</div>
