@@ -1444,3 +1444,65 @@ JOIN
         </a>
     </div>
 </div>
+
+<hr>
+MySQL Admin (Slow log, Backup)
+<hr>
+<a href="#mysql_admin1" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Как сделать дамп базы данных?
+</a>
+<div class="collapse multi-collapse" id="mysql_admin1">
+    <div class="card card-body">
+        <pre>
+            <code>
+                mysqldump -uUSER -pPASSWORD DB_NAME > FILE_NAME_TO_SAVE
+                //example
+                mysqldump -uroot -p123456 mydb > dump.sql
+            </code>
+        </pre>
+        <ul>
+            <li><b>uUser</b> — имя пользователя базы в формате типа -u[root]</li>
+            <li>-<b>pPassword</b> — пароль пользователя в формате типа -p[123456]</li>
+            <li><b>DB_NAME</b> — имя базы данных</li>
+            <li><b>FILE_NAME_TO_SAVE</b> — куда сохранять дамп</li>
+        </ul>
+        <pre>
+            <code>
+            Создаём структуру базы без данных
+            mysqldump --no-data - u USER -pPASSWORD DATABASE > /path/to/file/schema.sql
+
+            Если нужно сделать дамп только одной или нескольких таблиц
+            mysqldump -u USER -pPASSWORD DATABASE TABLE1 TABLE2 TABLE3 > /path/to/file/dump_table.sql
+
+            Создаём бекап и сразу его архивируем
+            mysqldump -u USER -pPASSWORD DATABASE | gzip > /path/to/outputfile.sql.gz
+
+            Создание бекапа с указанием его даты
+            mysqldump -u USER -pPASSWORD DATABASE | gzip > `date +/path/to/outputfile.sql.%Y%m%d.%H%M%S.gz`
+
+            Заливаем бекап в базу данных
+            mysql -u USER -pPASSWORD DATABASE < /path/to/dump.sql
+
+            Заливаем архив бекапа в базу
+            gunzip < /path/to/outputfile.sql.gz | mysql -u USER -pPASSWORD DATABASE
+            или так
+            zcat /path/to/outputfile.sql.gz | mysql -u USER -pPASSWORD DATABASE
+
+            Создаём новую базу данных
+            mysqladmin -u USER -pPASSWORD create NEWDATABASE
+            </code>
+        </pre>
+
+        <a target="_blank" class="btn btn-secondary" href="https://habr.com/ru/post/105954/">
+            https://habr.com/ru/post/105954/
+        </a>
+    </div>
+</div>
+<a href="#mysql_admin2" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Если у нас есть подозрение, что в БД что-то тормозит, как нам найти тормозной запрос средствами БД?
+</a>
+<div class="collapse multi-collapse" id="mysql_admin2">
+    <div class="card card-body">
+        Show full proccess list
+    </div>
+</div>
