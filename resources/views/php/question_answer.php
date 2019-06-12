@@ -1833,7 +1833,7 @@ Technologies
 </a>
 <div class="collapse multi-collapse" id="git8">
     <div class="card card-body">
-       stash - как корзина на винде удаляем и затем можно восстановить
+        stash - как корзина на винде удаляем и затем можно восстановить
     </div>
 </div>
 <a href="#git9" data-toggle="collapse" class="list-group-item list-group-item-action">
@@ -1878,5 +1878,117 @@ Composer
         <a target="_blank" class="btn btn-secondary" href="https://semver.org/lang/ru/">
             https://semver.org/lang/ru/
         </a>
+    </div>
+</div>
+
+<hr>
+API: REST, oauth, HTTP-methods
+<hr>
+<a href="#api0" data-toggle="collapse" class="list-group-item list-group-item-action">
+    HTTP методы?
+</a>
+<div class="collapse multi-collapse" id="api0">
+    <div class="card card-body">
+        <a target="_blank" class="btn btn-secondary" href="https://semver.org/lang/ru/">
+            https://developer.mozilla.org/ru/docs/Web/HTTP/Methods
+        </a>
+
+    </div>
+</div>
+<a href="#api1" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Принципы и соглашения в REST?
+</a>
+<div class="collapse multi-collapse" id="api1">
+    <div class="card card-body">
+        <p>
+            REST — передача/изменения состояния через представления,-это архитектурный стиль, некоторое множество
+            ограничений, для построения распределенных приложений.
+        </p>
+        <ul>
+            <li><b>Конечные точки в URL имя существительное, не глагол</b>
+                <ul>
+                    <li>/farmers not getFarmers</li>
+                    <li>/crops not getCrops</li>
+                </ul>
+            </li>
+            <li><b>Множественное число</b>
+                <ul>
+                    <li>/farmers not farmer</li>
+                    <li>/crops not crop</li>
+                </ul>
+            </li>
+            <li><b>Документация</b> это документация с перечисленными в ней конечными точками, и описывающая список
+                операций для каждой из них.
+            </li>
+            <li><b>Версия вашего приложения</b>
+                <ul>
+                    <li>URI версии -host/v2/farmers,host/v1/farmers</li>
+                    <li>Мультимедиа версии -информации в заголовке Content-Type: application/vnd.farmers.v1+json ||
+                        Accept: application/vnd.farmers.v1+json
+                    </li>
+                </ul>
+            </li>
+            <li><b>Пагинация</b>Отправка большого объема данных через HTTP не очень хорошая идея. Безусловно, возникнут
+                проблемы с производительностью, поскольку сериализация больших объектов JSON станет дорогостоящей. Best
+                practice является разбиение результатов на части, а не отправка всех записей сразу.
+            </li>
+            <li><b>Использование SSL</b> - SSL должен быть! Вы всегда должны применять SSL для своего REST приложения.
+                Доступ к вашему приложения будет осуществляется из любой точки мира, и нет никакой гарантии, что к нему
+                будет обеспечен безопасный доступ. С ростом числа инцидентов с киберпреступностью мы обязательно должны
+                обеспечить безопасность своему приложению.
+            </li>
+            <li><b>Эффективное использование кодов ответов HTTP</b>
+                <ul>
+                    <li><b>GET</b> - Обычно используется для извлечения информации</li>
+                    <li><b>POST</b> -метод наиболее широко используется для создания ресурсов</li>
+                    <li><b>PUT</b> -обновление наиболее широко используется для создания ресурсов</li>
+                    <li><b>DELETE</b> -обновление наиболее широко используется для удаление ресурса</li>
+                    <li><b>HEAD</b> этот метод используется для запроса ресурса c сервера.</li>
+                </ul>
+            </li>
+
+            <li><b>HTTP методы</b></li>
+            <li>что содержится в теле самого запроса</li>
+
+            <li></li>
+            <li></li>
+        </ul>
+        <a target="_blank" class="btn btn-secondary" href="https://habr.com/ru/post/351890/">
+            https://habr.com/ru/post/351890/
+        </a>
+    </div>
+</div>
+
+<a href="#api2" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Какие существуют способы авторизации для API
+</a>
+<div class="collapse multi-collapse" id="api2">
+    <div class="card card-body">
+        Oauth,tokens
+    </div>
+</div>
+<a href="#api3" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Для чего нужен access token в oauth? Есть ли у него время жизни?
+</a>
+<div class="collapse multi-collapse" id="api3">
+    <div class="card card-body">
+        access token - ключ (обычно просто набор символов), предъявление которого является пропуском к защищенным
+        ресурсам. Обращение к ним в самом простом случае происходит по HTTPS с указанием в заголовках или в качестве
+        одного из параметров полученного access token'а.
+        <a target="_blank" class="btn btn-secondary" href="https://habr.com/ru/company/mailru/blog/115163/">
+            https://habr.com/ru/company/mailru/blog/115163/
+        </a>
+    </div>
+</div>
+<a href="#api4" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Для чего нужен refresh token в oauth? В чем его смысл? Есть ли у него время жизни?
+</a>
+<div class="collapse multi-collapse" id="api4">
+    <div class="card card-body">
+        Обычно, access token имеет ограниченный срок годности. Это может быть полезно, например, если он передается по
+        открытым каналам. Чтобы не заставлять пользователя проходить авторизацию после истечения срока действия access
+        token'а, во всех перечисленных выше вариантах, в дополнение к access token'у может возвращаться еще refresh
+        token. По нему можно получить access token с помощью HTTP-запроса, аналогично авторизации по логину и паролю.
+        Неограничено
     </div>
 </div>
