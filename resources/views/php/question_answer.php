@@ -2094,3 +2094,67 @@ Networks (TCP vs UDP, HTTP vs HTTPS, DNS, NAT)
     </div>
 </div>
 
+<hr>
+Security (XSS, CSRF, Brute-force)
+<hr>
+<a href="#security1" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Что такое уязвимость XSS? Как бороться?
+</a>
+<div class="collapse multi-collapse" id="security1">
+    <div class="card card-body">
+        Cross Site Sсriрting - Яваскрипты атака. В генерируемые сервером страницы внедряется непредусмотренный код
+        Javascript, который будет выполнен в пользовательском браузере после открытия этой страницы.
+        комменты
+        <br>
+        екранировать (htmlspecialchars)
+    </div>
+</div>
+<a href="#security2" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Что такое SQL-инъекция? Как ее предотвратить?
+</a>
+<div class="collapse multi-collapse" id="security2">
+    <div class="card card-body">
+        внедрение в данные произвольного SQL кода
+        екранировать (mysql_real_escape_string)
+    </div>
+</div>
+<a href="#security3" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Что такое CSRF? Как бороться?
+</a>
+<div class="collapse multi-collapse" id="security3">
+    <div class="card card-body">
+        Сross Site Request Forgery — «межсайтовая подделка запроса»,Если жертва заходит на сайт, созданный
+        злоумышленником, от её лица тайно отправляется запрос на другой сервер/<br>
+        Каждый раз обновляться токен CSRF
+    </div>
+</div>
+<a href="#security4" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Как правильно хранить пароли? Чем плох md5?
+</a>
+<div class="collapse multi-collapse" id="security4">
+    <div class="card card-body">
+        md5(md5($pass).md5($salt))
+        мдп5-перебер
+        <pre>
+            <code>
+                $hash = crypt('password'); // crypt генерирует соль и хэширует, используя алгоритм по умолчанию
+                // crypt извлекает соль из существующего хэша и хэширует входящий пароль с её использованием
+                if (crypt($password, $hash) == $hash) {
+                   // Пароль верен
+                }
+
+                || hash_hmac ( string $algo , string $data , string $key [, bool $raw_output = FALSE ] ) : string
+                //algo - Имя выбранного алгоритма хеширования (например, "md5", "sha256", "haval160,4" и т.д.)
+                //key - Общий секретный ключ, используемый для генерации HMAC хеш-кода.
+            </code>
+        </pre>
+    </div>
+</div>
+<a href="#security4" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Что такое Brute-force, и как с ним бороться
+</a>
+<div class="collapse multi-collapse" id="security4">
+    <div class="card card-body">
+        Перебор, количество считать
+    </div>
+</div>
