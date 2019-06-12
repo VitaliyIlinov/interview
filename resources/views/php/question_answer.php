@@ -1379,3 +1379,68 @@ Explain
         </a>
     </div>
 </div>
+<hr>
+JOIN
+<hr>
+<a href="#join1" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Какие типы JOIN ты знаешь
+</a>
+<div class="collapse multi-collapse" id="join1">
+    <div class="card card-body">
+        LEFT, RIGHT, INNER, OUTER
+        <a target="_blank" class="btn btn-secondary" href="/mysql/query">
+            /mysql/query
+        </a>
+    </div>
+</div>
+
+<a href="#join2" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Если объеденить через JOIN две таблицы, при этом ни в WHERE ни в ON ничего не написав, то, что мы получим в
+    результате? (SELECT a.*, b.* FROM a JOIN b)
+</a>
+<div class="collapse multi-collapse" id="join2">
+    <div class="card card-body">
+        выборка вернёт т.н. декартово произведение, в котором каждая строка одной таблицы будет сопоставлена с каждой
+        строкой другой таблицы:
+        <a target="_blank" class="btn btn-secondary" href="https://anton-pribora.ru/articles/mysql/mysql-join/">
+            https://anton-pribora.ru/articles/mysql/mysql-join/
+        </a>
+    </div>
+</div>
+
+<a href="#join3" data-toggle="collapse" class="list-group-item list-group-item-action">
+    У нас есть две таблицу: users и profiles. В таблицу profiles есть поле user_id. Как нам выбрать юзеров, у которых
+    нет профиля?
+</a>
+<div class="collapse multi-collapse" id="join3">
+    <div class="card card-body">
+        <pre>
+            <code>
+                SELECT *
+                FROM user
+                left join profiles on user.id = profiles.user_id;
+                where profiles.user_id is null
+
+                SELECT *
+                FROM user
+                WHERE id NOT IN (SELECT user_id FROM profiles );
+
+                SELECT *
+                FROM user
+                WHERE NOT EXISTS (SELECT user_id FROM profiles WHERE user.id=profiles.user_id);
+            </code>
+        </pre>
+        <p>
+            По скорости исполнения вариант с <b>LEFT JOIN</b> сильно проигрывает вариантам со вложеными запросами.
+            Вариант с
+            NOT IN всегда быстрее варианта с <b>NOT EXIST</b> в случаях, когда число записей в таблице user больше числа
+            записей в таблице profiles. В противном случае, <b>NOT IN</b> оказывается быстрее только на таблицах с
+            небольшим числом записей, а на больших объемах уже проигрывает <b>NOT EXIST</b>. Причем чем больше записей в
+            таблице profiles тем существеннее разница в скорости выполнения.
+        </p>
+        <a target="_blank" class="btn btn-secondary"
+           href="https://shpargalki.org.ua/146/poisk-zapisei-v-odnoi-tablitse-kotorym-net-sootvetstviya-v-drugoi-tablitse">
+            https://shpargalki.org.ua/146/poisk-zapisei-v-odnoi-tablitse-kotorym-net-sootvetstviya-v-drugoi-tablitse
+        </a>
+    </div>
+</div>
