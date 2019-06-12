@@ -1283,3 +1283,99 @@ MySQL Indexes
 <hr>
 Transactions
 <hr>
+<a href="#transaction1" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Как работают транзакции?
+</a>
+<div class="collapse multi-collapse" id="transaction1">
+    <div class="card card-body">
+        <a target="_blank" class="btn btn-secondary" href="/mysql/useful_information">
+            /mysql/useful_information
+        </a>
+    </div>
+</div>
+<a href="#transaction2" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Если у меня есть две разные БД, и мне нужно консистентно что-то менять в обоих БД, могу ли я использовать
+    транзакции?
+</a>
+<div class="collapse multi-collapse" id="transaction2">
+    <div class="card card-body">
+        Нет
+    </div>
+</div>
+
+<hr>
+Explain
+<hr>
+<a href="#explain1" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Как профилировать запросы?
+</a>
+<div class="collapse multi-collapse" id="explain1">
+    <div class="card card-body">
+        <p>
+            Профилирование запросов MySQL – это полезный метод анализа общей производительности приложений на основе БД.
+            Лог медленных запросов MySQL (или slow query log) — это лог, в который MySQL отправляет медленные и
+            потенциально проблемные запросы. Эта функция поставляется с MySQL, но по умолчанию отключена. MySQL
+            определяет, какие запросы нужно внести в этот лог, с помощью специальных переменных, которые позволяют
+            профилировать запрос на основе требований к производительности приложения. Обычно в этот лог вносятся
+            запросы, обработка которых занимает больше времени, и запросы, которые неправильно индексы.
+            <b>/etc/mysql/mysql.conf.d/mysqld.cnf</b>
+        </p>
+        <pre>
+            <code>
+            #slow_query_log         = 1   //булево значение включающее лог
+            #slow_query_log_file    = /var/log/mysql/mysql-slow.log  //путь абсолютный путь к файлу лога.
+                                        Владельцем каталога должен быть пользователь mysqld, а также директория должна
+                                        иметь корректные разрешения для чтения и записи. Чаще всего демон mysql работает
+                                        от имени пользователя mysql.
+            #long_query_time = 2 //время в секундах для проверки продолжительности запроса >2
+            #log-queries-not-using-indexes  //тут не надо значение, включает сохранение запросов не использующих индексы
+            #min_examined_row_limit     //указывает минимальное значение количества рядов данных для анализа. Значение
+                                            1000 проигнорирует запросы возвращающие меньше 1000 рядов значений.
+
+            </code>
+        </pre>
+        Изменения вступят только при очередном запуске MySQL, если вам необходимо динамическое изменение параметров,
+        используйте другие методы установки переменных:
+        <pre>
+            <code>
+                mysql> SET GLOBAL slow_query_log = 'ON';
+                mysql> SET GLOBAL slow_query_log_file = '/var/log/mysql/localhost-slow.log';
+                mysql> SET GLOBAL log_queries_not_using_indexes = 'ON';
+                mysql> SET SESSION long_query_time = 1;
+                mysql> SET SESSION min_examined_row_limit = 100;
+            </code>
+        </pre>
+        <a target="_blank" class="btn btn-secondary" href="https://www.8host.com/blog/profilirovanie-zaprosov-mysql/">
+            https://www.8host.com/blog/profilirovanie-zaprosov-mysql/
+        </a>
+        <a target="_blank" class="btn btn-secondary"
+           href="https://devacademy.ru/article/profilirovanie-zaprosov-v-mysql/">
+            https://devacademy.ru/article/profilirovanie-zaprosov-v-mysql/
+        </a>
+    </div>
+</div>
+<a href="#explain2" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Что такое Explain?
+</a>
+<div class="collapse multi-collapse" id="explain2">
+    <div class="card card-body">
+        <p>
+            Когда вы выполняете какой-нибудь запрос, оптимизатор запросов MySQL пытается придумать оптимальный план
+            выполнения этого запроса. Вы можете посмотреть этот самый план используя запрос с ключевым словом EXPLAIN.
+            EXPLAIN – это один из самых мощных инструментов, предоставленных в ваше распоряжение для понимания
+            MySQL-запросов и их оптимизации
+        </p>
+    </div>
+</div>
+<a href="#explain3" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Есть запрос, который тормозит. С чего стоит начать поиск проблем?<br>
+    Куда смотреть в Explain, чтобы понять, что идет не так?
+</a>
+<div class="collapse multi-collapse" id="explain3">
+    <div class="card card-body">
+        Explain
+        <a target="_blank" class="btn btn-secondary" href="/mysql/useful_information">
+            /mysql/useful_information
+        </a>
+    </div>
+</div>
