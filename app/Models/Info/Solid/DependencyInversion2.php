@@ -1,18 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ilinovvitalii
- * Date: 3/26/19
- * Time: 11:31 AM
- */
-
-/**
- * Class DependencyInvertion - Принцип инверсии зависимостей
- * «Зависимости внутри системы строятся на основе абстракций. Модули верхнего уровня не зависят от модулей нижнего
- * уровня. Абстракции не должны зависеть от деталей. Детали должны зависеть от абстракций». Данное определение можно
- * сократить — «зависимости должны строится относительно абстракций, а не деталей». https://habr.com/ru/post/208442/
- *
- */
 class CustomerWrong
 {
     private $currentOrder = null;
@@ -58,6 +44,19 @@ class OrderProcessorWrong
  * зависимость можно внедрить через сеттеры, параметры метода, или Dependency Injection контейнера. Я решил остановится
  * на 2 методе и получил следующий код.
  */
+
+interface IOrderProcessor
+{
+    public function checkout($order);
+}
+
+class OrderProcessor implements IOrderProcessor
+{
+    public function checkout($order)
+    {/*...*/
+    }
+}
+
 class Customer
 {
     private $currentOrder = null;
@@ -87,19 +86,6 @@ class Customer
         return $this->currentOrder->deleteItem($item);
     }
 }
-
-interface IOrderProcessor
-{
-    public function checkout($order);
-}
-
-class OrderProcessor implements IOrderProcessor
-{
-    public function checkout($order)
-    {/*...*/
-    }
-}
-
 /**
  * Таким образом, класс Customer теперь зависит только от абстракции, а конкретную реализацию, т.е. детали, ему не так
  * важны.

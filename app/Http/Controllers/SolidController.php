@@ -31,10 +31,7 @@ class SolidController
      */
     public function singleResponsibility(): View
     {
-        $content = $this->filesystem->get(
-            $this->getPath('SingleResponsibility')
-        );
-        $content = str_replace('<?php', '', $content);
+        $content = $this->getContent('SingleResponsibility');
         return view('solid.single')->with(['content' => $content]);
     }
 
@@ -44,15 +41,10 @@ class SolidController
      */
     public function openClosed(): View
     {
-        $content = $this->filesystem->get(
-            $this->getPath('OpenClosed')
-        );
-        $content2 = $this->filesystem->get(
-            $this->getPath('OpenClosed2')
-        );
-        $content = str_replace('<?php', '', $content);
-        $content2 = str_replace('<?php', '', $content2);
-        return view('solid.openclosed')->with(['content' => $content, 'content2' => $content2]);
+        return view('solid.openclosed')->with([
+            'content'  => $this->getContent('OpenClosed'),
+            'content2' => $this->getContent('OpenClosed2'),
+        ]);
     }
 
     /**
@@ -61,10 +53,7 @@ class SolidController
      */
     public function liskovBarbara(): View
     {
-        $content = $this->filesystem->get(
-            $this->getPath('BarbaraLiskov')
-        );
-        $content = str_replace('<?php', '', $content);
+        $content = $this->getContent('BarbaraLiskov');
         return view('solid.liskov')->with(['content' => $content]);
     }
 
@@ -74,10 +63,7 @@ class SolidController
      */
     public function interfaceSegregation(): View
     {
-        $content = $this->filesystem->get(
-            $this->getPath('InterfaceSegregation')
-        );
-        $content = str_replace('<?php', '', $content);
+        $content = $this->getContent('InterfaceSegregation');
         return view('solid.interfaceSegregation')->with(['content' => $content]);
     }
 
@@ -87,11 +73,21 @@ class SolidController
      */
     public function DependencyInversion(): View
     {
-        $content = $this->filesystem->get(
-            $this->getPath('DependencyInversion')
-        );
-        $content = str_replace('<?php', '', $content);
+        $content = $this->getContent('DependencyInversion') . PHP_EOL . $this->getContent('DependencyInversion2');
         return view('solid.dependecyInvertion')->with(['content' => $content]);
+    }
+
+    /**
+     * @param string $modelPath
+     * @return string
+     * @throws FileNotFoundException
+     */
+    private function getContent(string $modelPath): string
+    {
+        $content = $this->filesystem->get(
+            $this->getPath($modelPath)
+        );
+        return str_replace('<?php', '', $content);
     }
 
     /**

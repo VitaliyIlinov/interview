@@ -37,19 +37,25 @@
     <div class="card card-body">
         В объектно-ориентированных языках программирования существует способы организации взаимодействия между
         классами.
-        <br>
-        <b>Наследование</b> — это когда класс-наследник имеет все поля и методы родительского класса, и, как правило,
-        добавляет какой-то новый функционал или/и поля. Наследование описывается словом «является». Легковой автомобиль
-        является автомобилем.
-        <br>
-        <b>Композиция</b> – Свойство,которое будет содержать ссылку на другой объект этого класса, когда один объект
-        предоставляет другому свою функциональность частично или полностью. Экземпляр зависимого обьекта будет
-        создаваться в конструкторе. Двигатель не существует отдельно от автомобиля. Он создается при создании автомобиля
-        и полностью управляется автомобилем.
-        <br>
-        Агрегация – это когда экземпляр зависимого обьекта создается где-то в другом месте кода, и передается в
-        конструктор в качестве параметра.
-
+        <ul>
+            <li><b>Наследование</b> — это когда класс-наследник имеет все поля и методы родительского класса, и, как
+                правило,
+                добавляет какой-то новый функционал или/и поля. Наследование описывается словом «является». Легковой
+                автомобиль
+                является автомобилем.
+            </li>
+            <li><b>Композиция</b> – Свойство,которое будет содержать ссылку на другой объект этого класса, когда один
+                объект
+                предоставляет другому свою функциональность частично или полностью. Экземпляр зависимого обьекта будет
+                создаваться в конструкторе. Двигатель не существует отдельно от автомобиля. Он создается при создании
+                автомобиля
+                и полностью управляется автомобилем.
+            </li>
+            <li><b>Агрегация</b> – это когда экземпляр зависимого обьекта создается где-то в другом месте кода, и
+                передается в
+                конструктор в качестве параметра.
+            </li>
+        </ul>
         <a href="https://habr.com/ru/post/354046/" target="_blank" class="btn btn-primary">
             https://habr.com/ru/post/354046/
         </a>
@@ -68,8 +74,19 @@
 </a>
 <div class="collapse multi-collapse" id="pattern3">
     <div class="card card-body">
-        <b>Паттерн проектирования</b> — это часто встречающееся решение определённой проблемы при проектировании
-        архитектуры программ.
+        Это часто встречающееся решение определённой проблемы при проектировании архитектуры программ.
+        <ul>
+            <li><b>Проверенные решения.</b> Вы тратите меньше времени, используя готовые решения, вместо повторного
+                изобретения
+                велосипеда.
+            </li>
+            <li><b>Стандартизация кода.</b> Вы делаете меньше просчётов при проектировании, используя типовые
+                унифицированные решения, так как все скрытые проблемы в них уже давно найдены.
+            </li>
+            <li><b>Общий программистский словарь.</b> Вы произносите название паттерна, вместо того, чтобы час объяснять
+                другим программистам, какой крутой дизайн вы придумали и какие классы для этого нужны.
+            </li>
+        </ul>
         <a href="https://refactoring.guru/ru/design-patterns/why-learn-patterns" class="btn btn-secondary">
             https://refactoring.guru/ru/design-patterns/why-learn-patterns
         </a>
@@ -80,8 +97,77 @@
 </a>
 <div class="collapse multi-collapse" id="pattern1">
     <div class="card card-body">
-        <a href="https://refactoring.guru/ru/design-patterns/catalog" class="btn btn-secondary">
+        <ul>
+            <li>
+                <b>Порождающие</b> - Отвечают за удобное и безопасное создание новых объектов
+                <ul>
+                    <li><b>Фабричный метод</b> - Это способ делегирования логики создания объектов
+                        дочерним классам.
+                    </li>
+                    <li><b>Абстрактная фабрика</b> - Это фабрика фабрик. То есть фабрика, группирующая индивидуальные,
+                        но взаимосвязанные/взаимозависимые фабрики без указания для них конкретных классо
+                    </li>
+                    <li><b>Строитель</b> - озволяет создавать сложные объекты пошагово</li>
+                    <li><b>Прототип</b> - позволяет копировать объекты, не вдаваясь в подробности их реализации</li>
+                    <li><b>Одиночка</b> - гарантирует, что у класса есть только один экземпляр</li>
+                </ul>
+            </li>
+            <li><b>Структурные</b> - облегчают проектирование, определяя простой способ реализации взаимоотношений между
+                сущностями.
+                <ul>
+                    <li><b>Адаптер</b>- позволяет объектам с несовместимыми интерфейсами работать вместе.</li>
+                    <li><b>Мост</b> Отделить абстракцию от её реализации так, что они могут изменяться независимо друг
+                        от друга.
+                    </li>
+                    <li><b>Декоратор</b> позволяет динамически добавлять объектам новую функциональность, оборачивая их
+                        в
+                        полезные «обёртки».
+                    </li>
+                    <li><b>Реестр</b>Для реализации централизованного хранения объектов, часто используемых во всем
+                        приложении,как правило, реализуется с помощью абстрактного класса только c статическими методами
+                    </li>
+                    <li><b>Фасад</b></li>
+                    <li><b>Компоновщик (Composite)</b> - Взаимодействие с иерархической группой объектов также, как и с
+                        отдельно взятым экземпляром.
+                    </li>
+                    <li><b>Прокси (Proxy)</b> Создать интерфейс взаимодействия с любым классом, который трудно или
+                        невозможно использовать в оригинальном виде
+                    </li>
+                </ul>
+            </li>
+            <li><b>Поведенческие</b> - Решают задачи эффективного и безопасного взаимодействия между объектами
+                программы.
+                <ul>
+                    <li>
+                        <b>Цепочка обязанностей</b> - Построить цепочку объектов для обработки вызова в последовательном
+                        порядке. Если один объект не может справиться с вызовом, он делегирует вызов для следующего в
+                        цепи и так далее.
+                    </li>
+                    <li><b>Команда</b></li>
+                    <li><b>Итератор</b></li>
+                    <li><b>Посредник (Mediator)</b></li>
+                    <li><b>Хранитель (Memento)</b></li>
+                    <li><b>Наблюдатель (Observer)</b> создаёт механизм подписки, позволяющий одним объектам следить и
+                        реагировать на события, происходящие в других объектах.
+                    </li>
+                    <li><b>Состояние (State)</b></li>
+                    <li><b>Стратегия (Strategy)</b></li>
+                    <li><b>Посетитель (Visitor)</b></li>
+                </ul>
+            </li>
+        </ul>
+        <a target="_blank" href="https://refactoring.guru/ru/design-patterns/catalog" class="btn btn-secondary">
             https://refactoring.guru/ru/design-patterns/catalog
+        </a>
+        <a target="_blank" href="https://designpatternsphp.readthedocs.io/ru/latest/Structural/Proxy/README.html"
+           class="btn btn-secondary">
+            designpatternsphp
+        </a>
+        <a target="_blank" href="https://habr.com/ru/company/mailru/blog/325492" class="btn btn-secondary">
+            habr
+        </a>
+        <a target="_blank" href="https://habr.com/ru/post/214285/" class="btn btn-secondary">
+            habr
         </a>
     </div>
 </div>
@@ -90,6 +176,7 @@
 </a>
 <div class="collapse multi-collapse" id="pattern2">
     <div class="card card-body">
+        синглетон,репозиторий,билдер
         <a href="https://refactoring.guru/ru/design-patterns/catalog" class="btn btn-secondary">
             https://refactoring.guru/ru/design-patterns/catalog
         </a>
@@ -335,14 +422,55 @@ PSR
 </a>
 <div class="collapse multi-collapse" id="psr2">
     <div class="card card-body">
+        <h3>PSR2</h3>
+        <ul>
+            <li>Файлы НЕОБХОДИМО представлять только в кодировке UTF-8 без BOM-байта.</li>
+            <li>Имена классов ДОЛЖНЫ быть объявлены используя StudlyCaps.</li>
+            <li>Константы класса ДОЛЖНЫ быть объявлены в верхнем регистре с подчеркиванием в качестве разделителей.</li>
+            <li>Имена методов ДОЛЖНЫ быть объявлены используя camelCase.</li>
+            <li>Полностью сформированное пространство имен и класс должны иметь следующую структуру \< Vendor Name>\(<
+                Namespace>\)*< Class Name>
+            </li>
+            <li>Каждое пространство имен должно иметь пространство имен верхнего уровня ("Vendor Name").</li>
+            <li>Каждый разделитель пространств имен преобразуется в DIRECTORY_SEPARATOR при загрузке из файловой
+                системы.
+            </li>
+            <li>Полностью сформированное пространство имен и класс дополняются суффиксом .php при загрузке из файловой
+                системы.
+            </li>
+            <li>Для оформления отступов ДОЛЖНЫ использоваться четыре пробела (но не знак табуляции).</li>
+            <li>НЕДОПУСТИМО жёстко ограничивать длину строки; мягкое ограничение ДОЛЖНО составлять 120 символов; СЛЕДУЕТ
+                стараться, чтобы длина строки составляла 80 символов или менее.
+            </li>
+            <li>После определения пространства имён (namespace) и после блока импорта пространств имён (use) ДОЛЖНА быть
+                одна пустая строка.
+            </li>
+            <li>Открывающая фигурная скобка в определении класса ДОЛЖНА располагаться на новой строке, а закрывающая
+                фигурная скобка ДОЛЖНА располагаться на следующей строке после тела класса.
+            </li>
+            <li>Область видимости ДОЛЖНА быть указана явно для всех свойств и методов;</li>
+            <li>Константы PHP true, false и null ДОЛЖНЫ быть написаны в нижнем регистре.</li>
+            <li>Ключевые слова extends и implements ДОЛЖНЫ находиться на той же строке, на которой находится имя
+                класса.
+            </li>
+            <li></li>
+        </ul>
+        <h3>PSR-4</h3>
+        <ul>
+            <li>Полностью сформированное пространство имен и класс должны иметь следующую структуру \< Vendor Name>\(<
+                Namespace>\)*< Class Name>
+            </li>
+            <li>Каждое пространство имен должно иметь пространство имен верхнего уровня ("Vendor Name").</li>
+            <li></li>
+        </ul>
         <a target="_blank" class="btn btn-secondary"
-           href="https://www.php-fig.org/psr/">
-            https://www.php-fig.org/psr/
+           href="http://idealcms.ru/blog/PSR-1-basic-coding-standard.html">
+            http://idealcms.ru/blog/PSR-1-basic-coding-standard.html
         </a>
         <br>
         <a target="_blank" class="btn btn-secondary"
-           href="https://art-lemon.com/chto-takoe-php-fig">
-            https://art-lemon.com/chto-takoe-php-fig
+           href="https://svyatoslav.biz/misc/psr_translation/">
+            https://svyatoslav.biz/misc/psr_translation/
         </a>
     </div>
 </div>
@@ -451,11 +579,11 @@ PHP: Common (session, exceptions)
 </a>
 <div class="collapse multi-collapse" id="common2">
     <div class="card card-body">
-        Exception — это базовый класс для всех исключений в PHP 5 и базовый класс для всех пользовательских исключений в
-        PHP 7.
+        <b>Exception</b> это базовый класс для всех исключений в PHP 5 и базовый класс для всех пользовательских
+        исключений в PHP 7.
         <br>
-        Throwable является родительским интерфейсом для всех объектов, выбрасывающихся с помощью выражения throw в PHP
-        7, включая классы Error( базовый класс для всех внутренних ошибок PHP) и Exception.
+        <b>Throwable</b> является родительским интерфейсом для всех объектов, выбрасывающихся с помощью выражения throw
+        в PHP7, включая классы Error( базовый класс для всех внутренних ошибок PHP) и Exception.
     </div>
 </div>
 <a href="#common3" data-toggle="collapse" class="list-group-item list-group-item-action">
@@ -548,10 +676,10 @@ PHP: OOP (interfaces, traits)
 <div class="collapse multi-collapse" id="oop2">
     <div class="card card-body">
         <a target="_blank" class="btn btn-secondary" href="/php/class_object_oop">
-            www.php.net
+            own
         </a>
         <a target="_blank" class="btn btn-secondary" href="https://www.php.net/manual/ru/language.oop5.magic.php">
-            own
+            www.php.net
         </a>
     </div>
 </div>
@@ -561,6 +689,8 @@ PHP: OOP (interfaces, traits)
 </a>
 <div class="collapse multi-collapse" id="oop3">
     <div class="card card-body">
+        Они нужны для избавления от дублирования кода, ну или например для множественного наследования.
+        <br>
         Traits - это механизм обеспечения повторного использования кода в языках с поддержкой только одиночного
         наследования, таких как PHP. Трейт предназначен для уменьшения некоторых ограничений одиночного наследования,
         позволяя разработчику повторно использовать наборы методов свободно, в нескольких независимых классах и
@@ -653,7 +783,7 @@ PHP: OOP (interfaces, traits)
             </code>
         </pre>
         <p>2. Трейты не могут иметь констант</p>
-        <p>Да, можо использовать в Type hint </p>
+        <p>Да, можо использовать в Type hint</p>
         <a target="_blank" class="btn btn-secondary" href="https://www.php.net/manual/ru/language.oop5.traits.php">
             php.net
         </a>
@@ -931,10 +1061,10 @@ Frameworks Laravel
         </a>
     </div>
 </div>
-<a href="#laravel2" data-toggle="collapse" class="list-group-item list-group-item-action">
+<a href="#laravel3" data-toggle="collapse" class="list-group-item list-group-item-action">
     Как работает Faсade?
 </a>
-<div class="collapse multi-collapse" id="laravel2">
+<div class="collapse multi-collapse" id="laravel3">
     <div class="card card-body">
         <p>
             <b>Сервис-контейнер в Laravel</b> — это мощное средство для управления зависимостями классов и внедрения
@@ -957,11 +1087,11 @@ Frameworks Laravel
         </a>
     </div>
 </div>
-<a href="#laravel3" data-toggle="collapse" class="list-group-item list-group-item-action">
+<a href="#laravel4" data-toggle="collapse" class="list-group-item list-group-item-action">
     Если ты хочешь после каждой созданной задачи отправлять почту тому, на кого эту задачу поставили - опиши свои
     действия.
 </a>
-<div class="collapse multi-collapse" id="laravel3">
+<div class="collapse multi-collapse" id="laravel4">
     <div class="card card-body">
         Observer, Mail drivers, Queue
         <a target="_blank" class="btn btn-secondary" href="http://laravel.su/docs/5.4/facades">
@@ -969,19 +1099,19 @@ Frameworks Laravel
         </a>
     </div>
 </div>
-<a href="#laravel4" data-toggle="collapse" class="list-group-item list-group-item-action">
+<a href="#laravel5" data-toggle="collapse" class="list-group-item list-group-item-action">
     Должны ли фигурировать в коде вызовы функции env()?
 </a>
-<div class="collapse multi-collapse" id="laravel4">
+<div class="collapse multi-collapse" id="laravel5">
     <div class="card card-body">
         нет
     </div>
 </div>
 
-<a href="#laravel5" data-toggle="collapse" class="list-group-item list-group-item-action">
+<a href="#laravel6" data-toggle="collapse" class="list-group-item list-group-item-action">
     Зачем нужны параметры роутинга?
 </a>
-<div class="collapse multi-collapse" id="laravel5">
+<div class="collapse multi-collapse" id="laravel6">
     <div class="card card-body">
         захватить сегменты URI
         <a target="_blank" class="btn btn-secondary" href="http://laravel.su/docs/5.4/routing#route-parameters">
@@ -990,10 +1120,10 @@ Frameworks Laravel
     </div>
 </div>
 
-<a href="#laravel6" data-toggle="collapse" class="list-group-item list-group-item-action">
+<a href="#laravel7" data-toggle="collapse" class="list-group-item list-group-item-action">
     Как можно создать новый класс?
 </a>
-<div class="collapse multi-collapse" id="laravel6">
+<div class="collapse multi-collapse" id="laravel7">
     <div class="card card-body">
         <ul>
             <li>new Class</li>
@@ -1006,12 +1136,12 @@ Frameworks Laravel
     </div>
 </div>
 
-<a href="#laravel7" data-toggle="collapse" class="list-group-item list-group-item-action">
+<a href="#laravel8" data-toggle="collapse" class="list-group-item list-group-item-action">
     1. Если ты хочешь проверить может ли юзер изменять объект, как ты будешь это делать?
     <br>
     2. Как работают Policies?
 </a>
-<div class="collapse multi-collapse" id="laravel7">
+<div class="collapse multi-collapse" id="laravel8">
     <div class="card card-body">
         1.Authorization, Policies
         <br>
@@ -1022,10 +1152,10 @@ Frameworks Laravel
     </div>
 </div>
 
-<a href="#laravel8" data-toggle="collapse" class="list-group-item list-group-item-action">
+<a href="#laravel9" data-toggle="collapse" class="list-group-item list-group-item-action">
     Как можно кастомизировать ошибку валидации формы?
 </a>
-<div class="collapse multi-collapse" id="laravel8">
+<div class="collapse multi-collapse" id="laravel9">
     <div class="card card-body">
         используя в form request метод messages
         <pre>
@@ -1251,7 +1381,18 @@ MySQL Indexes
 </a>
 <div class="collapse multi-collapse" id="index5">
     <div class="card card-body">
-        btree,hash,fulltext ?? primary/unique/key|index
+        <ul>
+            <li><b>btree</b>(хранит элементы в отсортированном порядке) -поиск по диапазонам, =, >, >=, <, <=, or
+                BETWEEN operators
+                <ul>
+                    <li>primary</li>
+                    <li>unique</li>
+                    <li>key|index</li>
+                    <li>FULLTEXT</li>
+                </ul>
+            </li>
+            <li><b>hash</b> MEMORY table "=" очень быстро, не может использоваться для операций диапазонов > и <</li>
+        </ul>
     </div>
 </div>
 <a href="#index6" data-toggle="collapse" class="list-group-item list-group-item-action">
@@ -1373,7 +1514,11 @@ Explain
 </a>
 <div class="collapse multi-collapse" id="explain3">
     <div class="card card-body">
-        Explain
+        <p>
+            Колонка <b>key</b> показывает используемый индекс. Колонка <b>possible_keys</b> показывает все индексы,
+            которые могут быть использованы для этого запроса. Колонка <b>rows</b> показывает число записей, которые
+            пришлось прочитать базе данных для выполнения этого запроса
+        </p>
         <a target="_blank" class="btn btn-secondary" href="/mysql/useful_information">
             /mysql/useful_information
         </a>
@@ -1516,7 +1661,7 @@ MySQL Admin (Slow log, Backup)
 <div class="collapse multi-collapse" id="unit_test1">
     <div class="card card-body">
         <p>
-            PHPUnit – приложение юнит-тестирования приложений, написанных на языке PHP.
+            PHPUnit – это система для юнит-тестирования приложений, написанных на языке PHP.
             <br>
             Идея юнит-тестирования состоит в том, чтобы проверять на корректность небольшие участки больших программ –
             прогонять на некоторых «хитрых» тестовых наборах данных.
@@ -1528,7 +1673,7 @@ MySQL Admin (Slow log, Backup)
 </a>
 <div class="collapse multi-collapse" id="unit_test2">
     <div class="card card-body">
-        Test drive development сначало тесты потом код
+        Test drive development сначало тесты потом код(разработка через тестирование)
     </div>
 </div>
 <a href="#unit_test3" data-toggle="collapse" class="list-group-item list-group-item-action">
@@ -1546,12 +1691,20 @@ MySQL Admin (Slow log, Backup)
                 {
                     public function testStub()
                     {
+                        // Создать подставной объект для класса Observer, имитируя
+                        // метод reportError()
+                        $observer = $this->getMockBuilder(Observer::class)
+                                         ->setMethods(['reportError'])
+                                         ->getMock();
+
                         // Создать заглушку для класса SomeClass.
                         $stub = $this->createMock(SomeClass::class);
 
                         // Настроить заглушку.
                         $stub->method('doSomething')
                              ->willReturn('foo');
+                                ||
+                                returnValue
 
                         // Вызов $stub->doSomething() теперь вернёт 'foo'.
                         $this->assertSame('foo', $stub->doSomething());
@@ -1611,6 +1764,7 @@ MySQL Admin (Slow log, Backup)
 </a>
 <div class="collapse multi-collapse" id="unit_test5">
     <div class="card card-body">
+        Процент покрытого кода тестами
         <a target="_blank" class="btn btn-secondary"
            href="https://phpunit.readthedocs.io/ru/latest/code-coverage-analysis.html">
             https://phpunit.readthedocs.io/ru/latest/code-coverage-analysis.html
@@ -1634,7 +1788,7 @@ MySQL Admin (Slow log, Backup)
 </a>
 <div class="collapse multi-collapse" id="func_test2">
     <div class="card card-body">
-        unit - определенный модуль, функциональный - взаимосвзяь модулей
+        unit - определенный модуль(небольшие участки), функциональный - взаимосвязь модулей
     </div>
 </div>
 <a href="#func_test3" data-toggle="collapse" class="list-group-item list-group-item-action">
@@ -1704,10 +1858,10 @@ MySQL Admin (Slow log, Backup)
         JMeter ,HP LoadRunner
     </div>
 </div>
-<a href="#load_test4" data-toggle="collapse" class="list-group-item list-group-item-action">
+<a href="#load_test5" data-toggle="collapse" class="list-group-item list-group-item-action">
     Как провести нагрузочное тестирование таким образом, чтобы не уронить сервис, работающий в продакшене?
 </a>
-<div class="collapse multi-collapse" id="load_test4">
+<div class="collapse multi-collapse" id="load_test5">
     <div class="card card-body">
         Сделать копию и погонять, увеличивать нагрузку и наблюдать за ресурсами сервера
     </div>
@@ -1850,6 +2004,12 @@ Technologies
         https://learn.javascript.ru/screencast/git#move-rebase
     </a>
 </div>
+<a href="#git10" data-toggle="collapse" class="list-group-item list-group-item-action">
+    В чем разница между командами merge и rebase? Что лучше использовать?
+</a>
+<div class="collapse multi-collapse" id="git10">
+    merge- слияние с сохраненной историей
+</div>
 <hr>
 Composer
 <hr>
@@ -1859,7 +2019,9 @@ Composer
 </a>
 <div class="collapse multi-collapse" id="composer1">
     <div class="card card-body">
-        composer.json,composer.lock
+        Install смотрить сначало в composer.lock затем composer.json
+        <br>
+        Update в composer.json
     </div>
 </div>
 <a href="#composer2" data-toggle="collapse" class="list-group-item list-group-item-action">
@@ -1889,8 +2051,58 @@ API: REST, oauth, HTTP-methods
 </a>
 <div class="collapse multi-collapse" id="api0">
     <div class="card card-body">
-        <a target="_blank" class="btn btn-secondary" href="https://semver.org/lang/ru/">
+        <ul>
+            <li><b>GET</b> запрашивает представление ресурса. Запросы с использованием этого метода могут
+                только извлекать данные.
+            </li>
+            <li><b>HEAD</b> запрашивает ресурс так же, как и метод GET, но без тела ответа. обычно применяется для
+                извлечения метаданных, проверки наличия ресурса (валидация URL) и чтобы узнать, не изменился ли он с
+                момента последнего обращения.
+            </li>
+            <li><b>POST</b> Применяется для передачи пользовательских данных заданному ресурсу. Например, в блогах
+                посетители обычно могут вводить свои комментарии к записям в HTML-форму, после чего они передаются
+                серверу методом POST и он помещает их на страницу. При этом передаваемые данные (в примере с блогами —
+                текст комментария) включаются в тело запроса. Аналогично с помощью метода POST обычно загружаются файлы
+                на сервер.
+            </li>
+            <li><b>PUT</b> Применяется для загрузки содержимого запроса на указанный в запросе URI.<br>
+                Фундаментальное различие методов POST и PUT заключается в понимании предназначений URI ресурсов. Метод
+                POST предполагает, что по указанному URI будет производиться обработка передаваемого клиентом
+                содержимого. Используя PUT, клиент предполагает, что загружаемое содержимое соответствует находящемуся
+                по данному URI ресурсу.<br>
+                Сообщения ответов сервера на метод PUT не кэшируются.
+            </li>
+            <li><b>PATCH</b> Применяется для загрузки содержимого запроса на указанный в запросе URI.</li>
+            <li><b>DELETE</b> Удаляет указанный ресурс.</li>
+            <li><b>OPTIONS</b> используется для описания параметров соединения с ресурсом.</li>
+        </ul>
+        <a target="_blank" class="btn btn-secondary" href="https://developer.mozilla.org/ru/docs/Web/HTTP/Methods">
             https://developer.mozilla.org/ru/docs/Web/HTTP/Methods
+        </a>
+        <a target="_blank" class="btn btn-secondary" href="https://ru.wikipedia.org/wiki/HTTP">
+            https://ru.wikipedia.org/wiki/HTTP
+        </a>
+
+    </div>
+</div>
+
+<a href="#api01" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Коды состояния
+</a>
+<div class="collapse multi-collapse" id="api01">
+    <div class="card card-body">
+        <ul>
+            <li>1xx Информирование о процессе передачи.</li>
+            <li>2xx Информирование о случаях успешного принятия и обработки запроса клиента.</li>
+            <li>3xx Сообщает клиенту, что для успешного выполнения операции необходимо сделать другой запрос</li>
+            <li>4xx Указание ошибок со стороны клиента.</li>
+            <li>5xx ошибка сервера</li>
+        </ul>
+        <a target="_blank" class="btn btn-secondary" href="https://developer.mozilla.org/ru/docs/Web/HTTP/Methods">
+            https://developer.mozilla.org/ru/docs/Web/HTTP/Methods
+        </a>
+        <a target="_blank" class="btn btn-secondary" href="https://ru.wikipedia.org/wiki/HTTP">
+            https://ru.wikipedia.org/wiki/HTTP
         </a>
 
     </div>
@@ -1949,9 +2161,6 @@ API: REST, oauth, HTTP-methods
 
             <li><b>HTTP методы</b></li>
             <li>что содержится в теле самого запроса</li>
-
-            <li></li>
-            <li></li>
         </ul>
         <a target="_blank" class="btn btn-secondary" href="https://habr.com/ru/post/351890/">
             https://habr.com/ru/post/351890/
@@ -2086,6 +2295,9 @@ Networks (TCP vs UDP, HTTP vs HTTPS, DNS, NAT)
 </a>
 <div class="collapse multi-collapse" id="network2">
     <div class="card card-body">
+        Протоколы транспортного уровня.<br>
+        отличие в так называемой “гарантии доставки”. TCP считается надежным,исключает потери данных, дублирование и
+        перемешивание пакетов, задержки.<br>
         UDP не надо ждать ответа
         <a target="_blank" class="btn btn-secondary"
            href="https://thedifference.ru/chem-otlichaetsya-protokol-tcp-ot-udp/">
@@ -2156,5 +2368,35 @@ Security (XSS, CSRF, Brute-force)
 <div class="collapse multi-collapse" id="security4">
     <div class="card card-body">
         Перебор, количество считать
+    </div>
+</div>
+
+<hr>
+Redis and Memcached
+<hr>
+<a href="#cache1" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Стоит ли в кеш ложить данные размером в 2 МБ?
+</a>
+<div class="collapse multi-collapse" id="cache1">
+    <div class="card card-body">
+        нет,не поддерживает
+    </div>
+</div>
+<a href="#cache2" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Стоит ли в кеш ложить данные размером в 2 МБ?
+</a>
+<div class="collapse multi-collapse" id="cache2">
+    <div class="card card-body">
+        нет,не поддерживает,макс 1 мб
+    </div>
+</div>
+
+<a href="#cache3" data-toggle="collapse" class="list-group-item list-group-item-action">
+    В чем принципиальное отличие между Redis и Memcached? Где нам лучше использовать Redis, а где Memcached?
+</a>
+<div class="collapse multi-collapse" id="cache3">
+    <div class="card card-body">
+        мемкеш- сет,гет,делить,и только стр ложить.Если память полная -вытисняет
+        Редис — типы данных разные ложить,ложить на диск если много значей
     </div>
 </div>

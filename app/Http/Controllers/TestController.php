@@ -15,6 +15,7 @@ class TestController
     public function index()
     {
 
+        throw new \Exception('sdf');
         http://site.com/test/index
 
         if (empty($_SESSION['user_id'])) {
