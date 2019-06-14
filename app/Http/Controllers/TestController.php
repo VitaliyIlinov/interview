@@ -2,7 +2,7 @@
 
 namespace app\Http\Controllers;
 
-class TestController
+class TestController implements \Re
 {
 
     function gen_one_to_three() {

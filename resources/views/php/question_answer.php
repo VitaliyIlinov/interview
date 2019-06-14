@@ -63,7 +63,66 @@
         <a href="https://habr.com/ru/post/325478/" target="_blank" class="btn btn-primary">
             https://habr.com/ru/post/325478/
         </a>
+    </div>
+</div>
+<a href="#proektir" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Нарушает ли паттерн Active Record какой-либо из принципов SOLID?
+</a>
+<div class="collapse multi-collapse" id="proektir">
+    <div class="card card-body">
+        Реализации данного шаблона часто нарушают принцип единственной ответственности (SRP), совмещая в одном объекте
+        как представление и внутреннюю логику самого объекта, так и механизмы CRUD, поэтому Active Record может
+        считаться антипаттерном
+        <pre>
+            <code class="php">
+                class Foo
+                {
+                    protected $db;
+                    public $id;
+                    public $bar;
 
+                    public function __construct(PDO $db)
+                    {
+                        $this->db = $db;
+                    }
+
+                    public function do_something()
+                    {
+                        $this->bar .= uniqid();
+                    }
+
+                    public function save()
+                    {
+                        if ($this->id) {
+                            $sql = "UPDATE foo SET bar = :bar WHERE id = :id";
+                            $statement = $this->db->prepare($sql);
+                            $statement->bindParam("bar", $this->bar);
+                            $statement->bindParam("id", $this->id);
+                            $statement->execute();
+                        }
+                        else {
+                            $sql = "INSERT INTO foo (bar) VALUES (:bar)";
+                            $statement = $this->db->prepare($sql);
+                            $statement->bindParam("bar", $this->bar);
+                            $statement->execute();
+                            $this->id = $this->db->lastInsertId();
+                        }
+                    }
+                }
+
+                //Insert
+                $foo = new Foo($db);
+                $foo->bar = 'baz';
+                $foo->save();
+            </code>
+        </pre>
+        <a href="https://ru.wikipedia.org/wiki/ActiveRecord" target="_blank" class="btn btn-primary">
+            https://ru.wikipedia.org/wiki/ActiveRecord
+        </a>
+        <br>
+        <a href="https://habr.com/ru/post/198450/" target="_blank" class="btn btn-primary">
+            https://habr.com/ru/post/198450/
+        </a>
     </div>
 </div>
 <hr>
@@ -151,7 +210,9 @@
                         реагировать на события, происходящие в других объектах.
                     </li>
                     <li><b>Состояние (State)</b></li>
-                    <li><b>Стратегия (Strategy)</b></li>
+                    <li><b>Стратегия (Strategy)</b>Шаблон стратегия позволяет переключаться между алгоритмами или
+                        стратегиями в зависимости от ситуации
+                    </li>
                     <li><b>Посетитель (Visitor)</b></li>
                 </ul>
             </li>
@@ -224,6 +285,29 @@
     </div>
 </div>
 
+<a href="#pattern6" data-toggle="collapse" class="list-group-item list-group-item-action">
+    В чем плюсы и минусы паттерна Singleton?
+</a>
+<div class="collapse multi-collapse" id="pattern6">
+    <div class="card card-body">
+        Один из главных минусов паттерна “Одиночка” — он сильно затрудняет юнит-тестирование. “Одиночка” привносит в
+        программу глобальное состояние, поэтому вы не можете просто взять и изолировать классы, которые полагаются на
+        Singelton. Поэтому, если вы хотите протестировать какой-то класс, то вы обязаны вместе с ним тестировать и
+        Singleton, но это ещё полбеды. Состояние “Одиночки” может меняться, что порождает следующие проблемы:
+        <ul>
+            <li>Порядок тестов теперь имеет значение;</li>
+            <li>Тесты могут иметь нежелательные сторонние эффекты, порождённые Singleton’ом;</li>
+            <li>Вы не можете запускать несколько тестов параллельно;</li>
+            <li>Несколько вызовов одного и того же теста могут приводить к разным результатам.</li>
+        </ul>
+        <br>
+        <a target="_blank" href="https://tproger.ru/translations/singleton-pitfalls/"
+           class="btn btn-secondary">
+            https://tproger.ru/translations/singleton-pitfalls/
+        </a>
+    </div>
+</div>
+
 
 <hr>
 Архитектура
@@ -270,8 +354,6 @@
         <a target="_blank" href=" https://habr.com/ru/company/mailru/blog/301004/" class="btn btn-secondary">
             https://habr.com/ru/company/mailru/blog/301004/
         </a>
-
-
     </div>
 </div>
 <a href="#arc3" data-toggle="collapse" class="list-group-item list-group-item-action">
@@ -281,6 +363,26 @@
 <div class="collapse multi-collapse" id="arc3">
     <div class="card card-body">
         <h2>В процессе</h2>
+    </div>
+</div>
+<a href="#arc4" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Микросервисная архитектура: Зачем и когда использовать? Какие сложности?
+</a>
+<div class="collapse multi-collapse" id="arc4">
+    <div class="card card-body">
+        <a target="_blank" href="https://habr.com/ru/company/raiffeisenbank/blog/346380/" class="btn btn-secondary">
+            https://habr.com/ru/company/raiffeisenbank/blog/346380/
+        </a>
+        <a target="_blank" href="https://habr.com/ru/post/249183/" class="btn btn-secondary">
+            https://habr.com/ru/post/249183/
+        </a>
+        <a target="_blank" href="https://www.dataart.ru/news/microservices-kak-pravil-no-delat-i-kogda-primenyat/"
+           class="btn btn-secondary">
+            https://www.dataart.ru/news/microservices-kak-pravil-no-delat-i-kogda-primenyat/
+        </a>
+        <a target="_blank" href="https://proglib.io/p/microservices/" class="btn btn-secondary">
+            https://proglib.io/p/microservices/
+        </a>
     </div>
 </div>
 
@@ -385,6 +487,19 @@ Workers
         </p>
     </div>
 </div>
+<a href="#workers4" data-toggle="collapse" class="list-group-item list-group-item-action">
+    Как делать мониторинг воркеров? Воркера не смотрят наружу, и нет способа понять, живой воркер или не живой. Какие
+    есть варианты?
+</a>
+<div class="collapse multi-collapse" id="workers4">
+    <div class="card card-body">
+        <p>
+            Supervisord Multi Server Monitoring Tool !!<b>Read stderr log</b>
+        </p>
+    </div>
+</div>
+
+
 <hr>
 PSR
 <hr>
@@ -418,7 +533,7 @@ PSR
     </div>
 </div>
 <a href="#psr2" data-toggle="collapse" class="list-group-item list-group-item-action">
-    PSR-4 (Autoload),PSR-2 (Coding Style Guide) зачем нужен и что решает?
+    PSR-4 (Autoload),PSR-2 (Coding Style Guide) зачем нужен и что решает? PSR-7 (Request) зачем нужен и что решает?
 </a>
 <div class="collapse multi-collapse" id="psr2">
     <div class="card card-body">
@@ -461,6 +576,18 @@ PSR
                 Namespace>\)*< Class Name>
             </li>
             <li>Каждое пространство имен должно иметь пространство имен верхнего уровня ("Vendor Name").</li>
+            <li></li>
+        </ul>
+        <h3>PSR-7</h3>
+        Методы для работы с реквестом
+        <ul>
+            <li>getProtocolVersion</li>
+            <li>getHeaders</li>
+            <li>hasHeader</li>
+            <li>hasHeader</li>
+            <li>getBody</li>
+            <li>getMethod</li>
+            <li>getUri</li>
             <li></li>
         </ul>
         <a target="_blank" class="btn btn-secondary"
