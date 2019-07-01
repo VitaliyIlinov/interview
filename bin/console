@@ -1,0 +1,16 @@
+#!/usr/bin/env php
+<!--+x file -excute -->
+<?php
+var_dump($argc);
+var_dump($argv);
+$argv = $_SERVER['argv'];
+var_dump($argv);
+echo "Are you sure you want to do this?  Type 'yes' to continue: ";
+$handle = fopen ("php://stdin","r");
+$line = fgets($handle);
+if(trim($line) != 'yes'){
+    echo "ABORTING!\n";
+    exit;
+}
+echo "\n";
+echo "Thank you, continuing...";

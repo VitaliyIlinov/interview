@@ -82,6 +82,10 @@ $router->group(['prefix' => 'patterns'], function () use ($router) {
     $router->get('singleton', 'GitController@cherryPick');
 });
 
+$router->group(['prefix' => 'command_line'], function () use ($router) {
+    $router->get('/chmod', 'CommandLineController@chmod');
+});
+
 $router->group(['prefix' => 'test'], function () use ($router) {
     $router->get('/', 'TestController@index');
 });

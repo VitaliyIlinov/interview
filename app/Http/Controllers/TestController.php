@@ -2,7 +2,7 @@
 
 namespace app\Http\Controllers;
 
-class TestController implements \Re
+class TestController
 {
 
     function gen_one_to_three() {
@@ -15,16 +15,7 @@ class TestController implements \Re
     public function index()
     {
 
-        throw new \Exception('sdf');
-        http://site.com/test/index
-
-        if (empty($_SESSION['user_id'])) {
-            echo 'Pleas auth';
-            die;
-        }
-
-
-        $content = file_get_contents('/var/www/images/test.png');
+        $content = file_get_contents(app()->getBasePath('public/img/laravel/laravel-middleware.png'));
         header('Content-Type: image/jpg');
         echo $content;
 

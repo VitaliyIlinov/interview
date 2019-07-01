@@ -150,6 +150,14 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="list-group-item">
+                        <a href="#command_line" class="btn btn-outline-primary">Command Line</a>
+                        <ul id="command_line">
+                            <li class="list-group-item">
+                                <a href="/command_line/chmod" class="btn-outline-primary">Main</a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
 
