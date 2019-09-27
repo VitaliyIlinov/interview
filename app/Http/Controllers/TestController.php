@@ -15,9 +15,10 @@ class TestController
     public function index()
     {
 
-        $content = file_get_contents(app()->getBasePath('public/img/laravel/laravel-middleware.png'));
-        header('Content-Type: image/jpg');
-        echo $content;
+       phpinfo();
+//        $content = file_get_contents(app()->getBasePath('public/img/laravel/laravel-middleware.png'));
+//        header('Content-Type: image/jpg');
+//        echo $content;
 
 
 
