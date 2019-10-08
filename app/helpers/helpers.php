@@ -2,6 +2,7 @@
 
 use app\Core\Application;
 use app\Core\Container;
+use app\Core\LoadEnvironmentVariables;
 use app\Core\View\View;
 
 if (!function_exists('app')) {
@@ -33,13 +34,13 @@ if (!function_exists('view')) {
      */
     function view(string $view, array $data = [], string $layout = 'base'): View
     {
-        $viewObject = app('view');
+        $abstract = app('view');
 
         if (func_num_args() === 0) {
-            return $viewObject;
+            return $abstract;
         }
 
-        return $viewObject->make($view, $data, $layout);
+        return $abstract->make($view, $data, $layout);
     }
 }
 
@@ -64,5 +65,19 @@ if (!function_exists('config')) {
         }
 
         return app('config')->get($key, $default);
+    }
+}
+
+if (!function_exists('env')) {
+    /**
+     * Gets the value of an environment variable.
+     *
+     * @param  string  $key
+     * @param  mixed   $default
+     * @return mixed
+     */
+    function env($key, $default = null)
+    {
+       return LoadEnvironmentVariables::getEnvironmentVariable($key, $default);
     }
 }

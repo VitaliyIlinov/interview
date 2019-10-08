@@ -37,7 +37,6 @@ trait RegistersExceptionHandlers
     protected function registerErrorHandling()
     {
         error_reporting(-1);
-        //ini_set('display_errors', 1);
 
         set_error_handler(function ($level, $message, $file = '', $line = 0) {
             if (error_reporting() & $level) {

@@ -68,7 +68,7 @@ class FileViewFinder
      *
      * @throws \InvalidArgumentException
      */
-    public function find($name)
+    public function find(string $name)
     {
         if (isset($this->views[$name])) {
             return $this->views[$name];

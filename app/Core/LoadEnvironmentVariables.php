@@ -44,12 +44,17 @@ class LoadEnvironmentVariables
         $_SERVER[$name] = $value;
     }
 
+    public static function getEnvironmentVariable($name, $default = null)
+    {
+        return $_ENV[$name] ?? $default;
+    }
+
     /**
      * @param null $file
      */
     public static function LoadEnvironment($file = null)
     {
-        $file = ROOT . DIRECTORY_SEPARATOR .($file ?: '.env');
+        $file = ROOT . DIRECTORY_SEPARATOR . ($file ?: '.env');
         if (!self::isFileExist($file)) {
             return;
         }

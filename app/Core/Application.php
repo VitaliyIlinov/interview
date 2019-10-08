@@ -8,6 +8,7 @@ use app\Exceptions\MethodNotAllowed;
 use app\Exceptions\NotFoundHttpException;
 use app\helpers\Filesystem;
 use app\Providers\ServiceProvider;
+use app\support\Facades\Facade;
 use config\Repository as ConfigRepository;
 
 class Application extends Container
@@ -80,13 +81,39 @@ class Application extends Container
      */
     protected $currentRoute;
 
-    public function __construct($basePath)
+    public function __construct(string $basePath)
     {
-        $this->basePath = $basePath;
+        $this->setBasePath($basePath);
 
         $this->bootstrapContainer();
+
+        $this->registerBaseBindings();
         $this->registerErrorHandling();
         $this->bootstrapRouter();
+    }
+
+    /**
+     * Set the base path for the application.
+     *
+     * @param string $basePath
+     */
+    private function setBasePath(string $basePath)
+    {
+        $this->basePath = rtrim($basePath, '\/');
+    }
+
+    /**
+     * Register the basic bindings into the container.
+     *
+     * @return void
+     */
+    private function registerBaseBindings()
+    {
+        static::setInstance($this);
+
+        $this->instance(self::class, $this);
+
+        $this->instance('env', config('app.env', 'production'));
     }
 
     /**
@@ -99,12 +126,7 @@ class Application extends Container
         $this->registerConfigBindings();
         $this->registerViewBindings();
         $this->registerFilesBindings();
-
-        static::setInstance($this);
-
-        $this->instance(self::class, $this);
-
-        $this->instance('env', config('app.env', 'production'));
+        $this->registerEventsBindings();
     }
 
     /**
@@ -114,7 +136,7 @@ class Application extends Container
      */
     public function path()
     {
-        return $this->basePath.DIRECTORY_SEPARATOR.'app';
+        return $this->basePath . DIRECTORY_SEPARATOR . 'app';
     }
 
     /**
@@ -161,6 +183,18 @@ class Application extends Container
     }
 
     /**
+     * Register the facades for the application.
+     *
+     * @param bool $aliases
+     * @param array $userAliases
+     * @return void
+     */
+    public function withFacades($aliases = true, $userAliases = [])
+    {
+        Facade::setFacadeApplication($this);
+    }
+
+    /**
      * Resolve the given type from the container.
      *
      * @param string $abstract
@@ -196,6 +230,20 @@ class Application extends Container
     {
         $this->singleton('files', function () {
             return new Filesystem;
+        });
+    }
+
+    /**
+     * Register container bindings for the application.
+     *
+     * @return void
+     */
+    private function registerEventsBindings()
+    {
+        $this->singleton('events', function () {
+            $this->register('app\Providers\EventServiceProvider');
+
+            return $this->make('events');
         });
     }
 
@@ -311,6 +359,8 @@ class Application extends Container
     public function dispatch($request = null)
     {
         list($method, $pathInfo) = $this->parseIncomingRequest($request);
+
+        $this->boot();
 
         return $this->sendThroughPipeline($this->middleware, function () use ($method, $pathInfo) {
 
@@ -643,7 +693,8 @@ class Application extends Container
     protected function bootProvider(ServiceProvider $provider)
     {
         if (method_exists($provider, 'boot')) {
-            return call_user_func_array($provider, []);
+            return $this->call([$provider, 'boot']);
+//            return call_user_func_array($provider, 'boot');
         }
     }
 }

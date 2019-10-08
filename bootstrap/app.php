@@ -18,7 +18,7 @@ require_once __DIR__ . '/../app/Core/LoadEnvironmentVariables.php';
 
 $app = new app\Core\Application(ROOT);
 
-//$app->withFacades();
+$app->withFacades();
 
 // $app->withEloquent();
 $app->configure('app');
@@ -64,7 +64,7 @@ $app->middleware([
 |
 */
 // $app->register(App\Providers\AppServiceProvider::class);
-// $app->register(App\Providers\AuthServiceProvider::class);
+ $app->register(app\Providers\ViewServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
 
 /*

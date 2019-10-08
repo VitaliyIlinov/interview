@@ -3,24 +3,17 @@
 namespace app\Core\View;
 
 use app\contracts\Support\Renderable;
-use Exception;
+use app\Core\View\Support\ViewFactory;
 use Throwable;
 
 class View implements Renderable
 {
     /**
-     * The view finder implementation.
+     * The view factory instance.
      *
-     * @var $finder FileViewFinder;
+     * @var ViewFactory
      */
-    private $finder;
-
-    /**
-     * The path to the view file.
-     *
-     * @var string
-     */
-    private $view;
+    protected $factory;
 
     /**
      * The path to the layout file.
@@ -30,84 +23,95 @@ class View implements Renderable
     private $layout;
 
     /**
+     * The view file name.
+     *
+     * @var string
+     */
+    private $view;
+
+    /**
+     * The full path to the view file.
+     *
+     * @var string
+     */
+    private $fullViewPath;
+
+    /**
      * The array of view data.
      *
      * @var array
      */
     private $data = [];
 
-    public function __construct(FileViewFinder $finder)
+    public function __construct(ViewFactory $factory, string $layout, string $view, string $fullViewPath, array $data)
     {
-        $this->finder = $finder;
-    }
-
-    public function with(array $data = [])
-    {
-        $this->data = array_merge($this->data, $data);
-        return $this;
-    }
-
-    public function render()
-    {
-        $this->with(['view' => $this->view]);
-        return $this->renderContents($this->data);
+        $this->factory = $factory;
+        $this->layout = $layout;
+        $this->view = $view;
+        $this->fullViewPath = $fullViewPath;
+        $this->data = $data;
     }
 
     /**
-     * @param $view
-     * @param $data
-     * @param $layout
+     * Add a piece of data to the view.
+     *
+     * @param string|array $key
+     * @param mixed $value
      * @return $this
      */
-    public function make($view, $data, $layout)
+    public function with($key, $value = null)
     {
-        $this->setLayout($layout);
-        $this->setView($view);
-        $this->data = $data;
+        if (is_array($key)) {
+            $this->data = array_merge($this->data, $key);
+        } else {
+            $this->data[$key] = $value;
+        }
+
         return $this;
     }
 
     /**
-     * @param string $view
-     * @return View
+     * @return string
+     * @throws Throwable
      */
-    public function setView(string $view): self
+    public function render(): string
     {
-        $this->view = $this->finder->find(
-            $this->normalizeName($view)
-        );
-        return $this;
+        $this->factory->incrementRender();
+
+        $this->factory->callComposer($this);
+
+        $data = $this->gatherData();
+
+        return $this->renderContents($this->layout, $this->fullViewPath, $data);
     }
 
     /**
-     * @param string $layout
-     * @return View
+     * Get the evaluated contents of the view.
+     *
+     * @return string
      */
-    public function setLayout(string $layout): self
+    protected function gatherData()
     {
-        $this->layout = $this->finder->find(
-            $this->normalizeName($layout)
-        );
-        return $this;
+        return array_merge($this->factory->getShared(), $this->data);
     }
 
     /**
      * Get the contents of the view instance.
      *
+     * @param string $layout
+     * @param string $view
      * @param array $data
      * @return string
      * @throws Throwable
      */
-    private function renderContents(array $data)
+    private function renderContents(string $layout, string $view, array $data): string
     {
         ob_start();
 
         extract($data, EXTR_SKIP);
 
         try {
-            include $this->layout;
-        } catch (Exception $e) {
-            throw $e;
+            require_once $layout;
         } catch (Throwable $e) {
             throw $e;
         }
@@ -116,21 +120,10 @@ class View implements Renderable
     }
 
     /**
-     * Normalize a view name.
-     *
-     * @param string $name
      * @return string
      */
-    private function normalizeName($name)
+    public function getView(): string
     {
-        $delimiter = FileViewFinder::HINT_PATH_DELIMITER;
-
-        if (strpos($name, $delimiter) === false) {
-            return str_replace('.', '/', $name);
-        }
-
-        [$namespace, $name] = explode($delimiter, $name);
-
-        return $namespace . $delimiter . str_replace('.', '/', $name);
+        return $this->view;
     }
 }
