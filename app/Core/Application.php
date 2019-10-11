@@ -88,6 +88,7 @@ class Application extends Container
         $this->bootstrapContainer();
 
         $this->registerBaseBindings();
+
         $this->registerErrorHandling();
         $this->bootstrapRouter();
     }
@@ -113,7 +114,7 @@ class Application extends Container
 
         $this->instance(self::class, $this);
 
-        $this->instance('env', config('app.env', 'production'));
+        $this->instance('env', env('APP_ENV', config('app.env', 'production')));
     }
 
     /**
@@ -148,6 +149,17 @@ class Application extends Container
     public function getBasePath($path = null): string
     {
         return $this->basePath . ($path ? DIRECTORY_SEPARATOR . $path : $path);
+    }
+
+    /**
+     * Get the path to the resources directory.
+     *
+     * @param string $path
+     * @return string
+     */
+    public function resourcePath(string $path = '')
+    {
+        return $this->basePath . DIRECTORY_SEPARATOR . 'resources' . ($path ? DIRECTORY_SEPARATOR . $path : $path);
     }
 
     /**

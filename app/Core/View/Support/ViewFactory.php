@@ -61,24 +61,24 @@ class ViewFactory
         $this->events = $events;
     }
 
+    /**
+     * Get the evaluated view contents for the given view.
+     *
+     * @param string $view
+     * @param array $data
+     * @param string $layout
+     * @return View
+     */
     public function make(string $view, array $data, string $layout)
     {
-        $view = $this->normalizeName($view);
-        $fullViewPath = $this->finder->find($view);
+        $fullViewPath = $this->finder->find(
+            $view = $this->normalizeName($view)
+        );
         $layout = $this->finder->find($this->normalizeName($layout));
+
         return $this->viewInstance($layout, $view, $fullViewPath, $data);
     }
 
-    /**
-     * Set the IoC container instance.
-     *
-     * @param Application $container
-     * @return void
-     */
-    public function setContainer(Application $container)
-    {
-        $this->container = $container;
-    }
     /**
      * Create a new view instance from the given arguments.
      * @param string $layout
@@ -127,10 +127,7 @@ class ViewFactory
         return true;
     }
 
-    public function getShared()
-    {
-        return $this->shared;
-    }
+
 
     /**
      * Increment the rendering counter.
@@ -294,5 +291,27 @@ class ViewFactory
     public function callComposer(View $view)
     {
         $this->events->dispatch('composing: ' . $view->getView(), [$view]);
+    }
+
+    /**
+     * Set the IoC container instance.
+     *
+     * @param Application $container
+     * @return void
+     */
+    public function setContainer(Application $container)
+    {
+        $this->container = $container;
+    }
+
+    /**
+     * Get all of the shared data for the environment.
+     *
+     * @return array
+     */
+
+    public function getShared()
+    {
+        return $this->shared;
     }
 }

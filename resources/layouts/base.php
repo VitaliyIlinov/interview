@@ -56,8 +56,10 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xl-2 col-lg-3 col-md-4">
-
-                <ul class="list-group" id="catalog">
+<!--                --><?//=$catalog?>
+<!--                --><?php //require_once $catalog; ?>
+                <?php require_once resource_path('catalogs/main.php'); ?>
+           <!--     <ul class="list-group" id="catalog">
                     <li class="list-group-item">
                         <a href="#solid" class="btn btn-outline-primary">Solid</a>
                         <ul id="solid">
@@ -119,8 +121,8 @@
                                 </a>
                             </li>
                             <li class="list-group-item">
-                                <a href="#creational-patterns" class="btn btn-outline-primary">Порождающие паттерны</a>
-                                <ul id="creational-patterns">
+                                <a href="#creational_patterns" class="btn btn-outline-primary">Порождающие паттерны</a>
+                                <ul id="creational_patterns">
                                     <li class="list-group-item">
                                         <a href="/patterns/factory_method" class="btn-outline-primary">Фабричный метод
                                         </a>
@@ -166,7 +168,7 @@
                             </li>
                         </ul>
                     </li>
-                </ul>
+                </ul>-->
             </div>
 
             <div class="col-xl-10 col-lg-9 col-md-8">

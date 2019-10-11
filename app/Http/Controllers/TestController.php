@@ -4,14 +4,6 @@ namespace app\Http\Controllers;
 
 class TestController
 {
-
-    function gen_one_to_three() {
-        for ($i = 1; $i <= 3; $i++) {
-            // Обратите внимание, что $i сохраняет свое значение между вызовами.
-            yield $i;
-        }
-    }
-
     public function index()
     {
 

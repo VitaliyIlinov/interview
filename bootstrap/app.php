@@ -1,9 +1,8 @@
 <?php
 
 define('ROOT', dirname(__DIR__));
-
-require_once __DIR__ . '/../app/Core/ClassLoader.php';
-require_once __DIR__ . '/../app/Core/LoadEnvironmentVariables.php';
+require_once ROOT . '/app/Core/ClassLoader.php';
+require_once ROOT . '/app/Core/LoadEnvironmentVariables.php';
 
 /*
 |--------------------------------------------------------------------------

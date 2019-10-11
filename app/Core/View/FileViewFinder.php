@@ -33,14 +33,14 @@ class FileViewFinder
      *
      * @var array
      */
-    protected $views = [];
+    protected $viewPaths = [];
 
     /**
      * The array of views that have been located.
      *
      * @var array
      */
-    protected $layouts = [];
+    protected $layoutPaths = [];
 
     /**
      * Register a view extension with the finder.
@@ -51,13 +51,26 @@ class FileViewFinder
 
     /**
      * Create a new file view loader instance.
-     * @param array $path
+     * @param array $layoutPaths
+     * @param array $viewPaths
      * @param Filesystem $filesystem
      */
-    public function __construct(array $path, Filesystem $filesystem)
+    public function __construct(array $layoutPaths, array $viewPaths, Filesystem $filesystem)
     {
-        $this->paths = $path;
+        $this->setPaths($layoutPaths, $viewPaths);
         $this->files = $filesystem;
+    }
+
+    /**
+     * @param array $layoutPaths
+     * @param array $viewPaths
+     */
+    protected function setPaths(array $layoutPaths, array $viewPaths)
+    {
+        $this->paths = array_merge(
+            $this->layoutPaths = $layoutPaths,
+            $this->viewPaths = $viewPaths
+        );
     }
 
     /**
@@ -70,13 +83,13 @@ class FileViewFinder
      */
     public function find(string $name)
     {
-        if (isset($this->views[$name])) {
-            return $this->views[$name];
+        if (isset($this->paths[$name])) {
+            return $this->paths[$name];
         }
         foreach ($this->paths as $path) {
             foreach ($this->getPossibleViewFiles($name) as $file) {
                 if ($this->files->exists($viewPath = $path . '/' . $file)) {
-                    return $this->views[$name] = $viewPath;
+                    return $this->paths[$name] = $viewPath;
                 }
             }
         }

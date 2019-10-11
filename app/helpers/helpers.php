@@ -81,3 +81,16 @@ if (!function_exists('env')) {
        return LoadEnvironmentVariables::getEnvironmentVariable($key, $default);
     }
 }
+
+if (! function_exists('resource_path')) {
+    /**
+     * Get the path to the resources folder.
+     *
+     * @param  string  $path
+     * @return string
+     */
+    function resource_path(string $path = '')
+    {
+        return app()->resourcePath($path);
+    }
+}

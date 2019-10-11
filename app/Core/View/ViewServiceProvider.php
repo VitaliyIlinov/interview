@@ -29,9 +29,13 @@ class ViewServiceProvider extends ServiceProvider
         $this->app->singleton('view', function ($app) {
 
             $finder = $app['view.finder'];
+
             $factory = $this->createFactory($finder, $app['events']);
+
             $factory->setContainer($app);
+
             $factory->share('app', $app);
+
             return $factory;
         });
     }
@@ -55,7 +59,8 @@ class ViewServiceProvider extends ServiceProvider
     public function registerViewFinder()
     {
         $this->app->singleton('view.finder', function ($app) {
-            return new FileViewFinder($app['config']['view'], $app['files']);
+            $viewConfigs = $app['config']['view'];
+            return new FileViewFinder($viewConfigs['layouts'],$viewConfigs['views'], $app['files']);
         });
     }
 }
