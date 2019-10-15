@@ -5,10 +5,10 @@ var_dump($argc);
 var_dump($argv);
 $argv = $_SERVER['argv'];
 var_dump($argv);
-echo "Are you sure you want to do this?  Type 'yes' to continue: ";
+echo "Are you sure you want to do this?  Type 'y' to continue: ";
 $handle = fopen ("php://stdin","r");
 $line = fgets($handle);
-if(trim($line) != 'yes'){
+if(trim($line) != 'y'){
     echo "ABORTING!\n";
     exit;
 }

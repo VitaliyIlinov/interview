@@ -1,13 +1,11 @@
 <?php
 
 //todo artisan console: create controller&&so on
-//todo done config in lumen load view() /lumen/vendor/laravel/lumen-framework/config/view.php
 //todo RegistersExceptionHandlers
 //todo DI
 //todo response
 //todo events
 //todo middleware
-//todo compile view
 //todo if wrong path to file ->404 NOT 200!!!
 //todo redirect
 /*

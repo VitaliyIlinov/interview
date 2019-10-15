@@ -1,6 +1,9 @@
 <?php
 
+define('START', microtime(true));
+
 define('ROOT', dirname(__DIR__));
+
 require_once ROOT . '/app/Core/ClassLoader.php';
 require_once ROOT . '/app/Core/LoadEnvironmentVariables.php';
 
@@ -78,7 +81,7 @@ $app->middleware([
 */
 
 $app->router->group(['namespace' => 'app\Http\Controllers'], function ($router) {
-    require __DIR__ . '/../routes/web.php';
+    require ROOT . '/routes/web.php';
 });
 
 return $app;

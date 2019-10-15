@@ -21,7 +21,7 @@ class Catalog
                     'text' => 'Single Responsibility',
                 ],
                 'openclosed'            => [
-                    'text' => 'Single Responsibility',
+                    'text' => 'Open closed',
                 ],
                 'liskov_barbara'        => [
                     'text' => 'Single Liskov substitution',
