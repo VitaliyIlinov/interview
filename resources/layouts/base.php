@@ -27,17 +27,23 @@
     </ul>
 </nav>
 <div class="wrapper">
-<div class="container-fluid">
-    <div class="row">
-        <nav class="col-xl-2 col-lg-3 col-md-4 sidebar">
-            <?php require_once resource_path('catalogs/main.php'); ?>
-        </nav>
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-xl-2 col-lg-3 col-md-4 sidebar">
+                <div class="nav-wrapper">
+                    <?php require_once resource_path('catalogs/main.php'); ?>
+                </div>
+            </nav>
 
-        <main class="col-xl-10 col-lg-9 col-md-8">
-            <?php include $view; ?>
-        </main>
+
+            <main class="col-xl-10 col-lg-9 col-md-8 bg-light">
+                <div class="main-wrapper">
+                    <?php include $view; ?>
+                </div>
+            </main>
+
+        </div>
     </div>
-</div>
 </div>
 <footer>
     <div class="container">

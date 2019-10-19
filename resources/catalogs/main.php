@@ -4,12 +4,12 @@
         <li class="list-group-item">
             <a href="#<?= $mainMenuKey ?>" class="">
                 <?= $mainMenuKey ?>
-                <i class="fa fa-angle-down"></i>
+                <i class="fa fa-angle-right"></i>
             </a>
 
-            <ul id="<?= $mainMenuKey ?>">
+            <ul id="<?= $mainMenuKey ?>" class="submenu">
                 <?php foreach ($menuInfo as $subMenuKey => $subMenuKeyInfo): ?>
-                    <li class="list-group-item">
+                    <li class="list-group-item ">
                         <a href="/<?= $mainMenuKey ?>/<?= $subMenuKey ?>"
                            class=""><?= $subMenuKeyInfo['text'] ?></a>
                     </li>
