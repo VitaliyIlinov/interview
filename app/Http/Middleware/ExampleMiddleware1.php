@@ -5,7 +5,7 @@ namespace app\Http\Middleware;
 
 use app\Core\Request;
 
-class ExampleMiddleware
+class ExampleMiddleware1
 {
 
     /**
@@ -18,6 +18,7 @@ class ExampleMiddleware
      */
     public function handle(Request $request, \Closure $next, $options = null)
     {
+        $request->query->set('wer',789);
         return $next($request);
     }
 }

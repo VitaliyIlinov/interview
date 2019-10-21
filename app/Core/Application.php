@@ -436,11 +436,9 @@ class Application extends Container
     protected function sendThroughPipeline(array $middleware, \Closure $then)
     {
         if (count($middleware) > 0) {
-//            var_dump(__FUNCTION__);
-//            return (new Pipeline($this))
-//                ->send('')
-//                ->through($middleware)
-//                ->then($then);
+            return (new Pipeline($this))
+                ->through($middleware)
+                ->then($then);
         }
 
         return $then();
