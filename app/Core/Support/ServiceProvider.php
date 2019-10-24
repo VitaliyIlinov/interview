@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Providers;
+namespace app\Core\Support;
 
 use app\Core\Application;
 

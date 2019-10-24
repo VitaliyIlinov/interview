@@ -1,9 +1,17 @@
 <?php
 
-namespace app\Core;
+namespace app\Core\Bootstrap;
+
+use app\Core\Application;
 
 class LoadEnvironmentVariables
 {
+
+    public function bootstrap(Application $application)
+    {
+        self::LoadEnvironment();
+    }
+
     /**
      * Determine if the given line looks like it's setting a variable.
      *
@@ -79,5 +87,3 @@ class LoadEnvironmentVariables
         return file_exists($file);
     }
 }
-
-LoadEnvironmentVariables::LoadEnvironment();

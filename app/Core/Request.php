@@ -1,17 +1,15 @@
 <?php
 
-
 namespace app\Core;
-
 
 use app\Core\Bag\FileBag;
 use app\Core\Bag\HeaderBag;
 use app\Core\Bag\ParameterBag;
 use app\Core\Bag\ServerBag;
+use RuntimeException;
 
 class Request
 {
-
     public const METHOD_HEAD = 'HEAD';
     public const METHOD_GET = 'GET';
     public const METHOD_POST = 'POST';
@@ -28,7 +26,6 @@ class Request
      *
      */
     public $attributes;
-
 
     /**
      * Request body parameters ($_POST).
@@ -101,6 +98,8 @@ class Request
      */
     protected $method;
 
+    protected $session;
+
     protected static $requestFactory;
 
     /**
@@ -112,7 +111,14 @@ class Request
      * @param array $server The SERVER parameters
      * @param string|resource|null $content The raw body data
      */
-    public function __construct(array $query = [], array $request = [], array $attributes = [], array $cookies = [], array $files = [], array $server = [], $content = null)
+    public function __construct(
+        array $query = [],
+        array $request = [],
+        array $attributes = [],
+        array $cookies = [],
+        array $files = [],
+        array $server = [],
+        $content = null)
     {
         $this->initialize($query, $request, $attributes, $cookies, $files, $server, $content);
     }
@@ -122,15 +128,22 @@ class Request
      *
      * This method also re-initializes all properties.
      *
-     * @param array                $query      The GET parameters
-     * @param array                $request    The POST parameters
-     * @param array                $attributes The request attributes (parameters parsed from the PATH_INFO, ...)
-     * @param array                $cookies    The COOKIE parameters
-     * @param array                $files      The FILES parameters
-     * @param array                $server     The SERVER parameters
-     * @param string|resource|null $content    The raw body data
+     * @param array $query The GET parameters
+     * @param array $request The POST parameters
+     * @param array $attributes The request attributes (parameters parsed from the PATH_INFO, ...)
+     * @param array $cookies The COOKIE parameters
+     * @param array $files The FILES parameters
+     * @param array $server The SERVER parameters
+     * @param string|resource|null $content The raw body data
      */
-    public function initialize(array $query = [], array $request = [], array $attributes = [], array $cookies = [], array $files = [], array $server = [], $content = null)
+    public function initialize(
+        array $query = [],
+        array $request = [],
+        array $attributes = [],
+        array $cookies = [],
+        array $files = [],
+        array $server = [],
+        $content = null)
     {
         $this->request = new ParameterBag($request);
         $this->query = new ParameterBag($query);
@@ -147,7 +160,8 @@ class Request
         $this->basePath = null;
         $this->method = null;
     }
-        /**
+
+    /**
      * Sets a callable able to create a Request instance.
      *
      * This is mainly useful when you need to override the Request class
@@ -161,7 +175,14 @@ class Request
         self::$requestFactory = $callable;
     }
 
-    private static function createRequestFromFactory(array $query = [], array $request = [], array $attributes = [], array $cookies = [], array $files = [], array $server = [], $content = null)
+    private static function createRequestFromFactory(
+        array $query = [],
+        array $request = [],
+        array $attributes = [],
+        array $cookies = [],
+        array $files = [],
+        array $server = [],
+        $content = null)
     {
         if (self::$requestFactory) {
             $request = (self::$requestFactory)($query, $request, $attributes, $cookies, $files, $server, $content);
@@ -175,6 +196,7 @@ class Request
 
         return new static($query, $request, $attributes, $cookies, $files, $server, $content);
     }
+
     /**
      * Creates a new request with values from PHP's super globals.
      *
@@ -196,7 +218,8 @@ class Request
     {
         $method = strtoupper($this->server->get('REQUEST_METHOD', 'GET'));
 
-        if (\in_array($method, ['GET', 'HEAD', 'POST', 'PUT', 'DELETE', 'CONNECT', 'OPTIONS', 'PATCH', 'PURGE', 'TRACE'], true)) {
+        if (\in_array($method,
+            ['GET', 'HEAD', 'POST', 'PUT', 'DELETE', 'CONNECT', 'OPTIONS', 'PATCH', 'PURGE', 'TRACE'], true)) {
             return $this->method = $method;
         }
 
@@ -237,7 +260,6 @@ class Request
             return '/';
         }
 
-
         // Remove the query string from REQUEST_URI
         if (false !== $pos = strpos($requestUri, '?')) {
             $requestUri = substr($requestUri, 0, $pos);
@@ -246,4 +268,43 @@ class Request
         return $requestUri;
     }
 
+    /**
+     * Get the session associated with the request.
+     *
+     * @throws \RuntimeException
+     */
+    public function session()
+    {
+        if (!$this->hasSession()) {
+            throw new RuntimeException('Session store not set on request.');
+        }
+
+        return $this->session;
+    }
+
+    public function hasSession()
+    {
+        return null !== $this->session;
+    }
+
+    /**
+     * Get the session associated with the request.
+     *
+     * @return \Illuminate\Session\Store|null
+     */
+    public function getSession()
+    {
+        return $this->session;
+    }
+
+    /**
+     * Set the session instance on the request.
+     *
+     * @param \Illuminate\Contracts\Session\Session $session
+     * @return void
+     */
+    public function setLaravelSession($session)
+    {
+        $this->session = $session;
+    }
 }

@@ -2,21 +2,34 @@
 
 namespace app\Core;
 
-use app\Core\Traits\RegistersExceptionHandlers;
+use app\Core\Event\EventServiceProvider;
+use app\Core\Support\ServiceProvider;
 use app\Exceptions\HttpResponseException;
 use app\Exceptions\MethodNotAllowed;
 use app\Exceptions\NotFoundHttpException;
 use app\helpers\Filesystem;
-use app\Providers\ServiceProvider;
 use app\support\Facades\Facade;
 use config\Repository as ConfigRepository;
 
 class Application extends Container
 {
-    use RegistersExceptionHandlers;
     public const NOT_FOUND = 0;
     public const METHOD_NOT_ALLOWED = 2;
     public const FOUND = 1;
+
+    /**
+     * The bootstrap classes for the application.
+     *
+     * @var array
+     */
+    private $bootstrappers = [
+        \app\Core\Bootstrap\LoadEnvironmentVariables::class,
+        \app\Core\Bootstrap\LoadConfiguration::class,
+        \app\Core\Bootstrap\HandleExceptions::class,
+        \app\Core\Bootstrap\RegisterFacades::class,
+        \app\Core\Bootstrap\RegisterProviders::class,
+        \app\Core\Bootstrap\BootProviders::class,
+    ];
 
     /**
      * All of the global middleware for the application.
@@ -85,12 +98,25 @@ class Application extends Container
     {
         $this->setBasePath($basePath);
 
-        $this->bootstrapContainer();
-
         $this->registerBaseBindings();
 
-        $this->registerErrorHandling();
+        $this->registerBaseServiceProviders();
+
         $this->bootstrapRouter();
+
+        $this->registerCoreContainerAliases();
+
+        $this->bootstrap();
+    }
+
+    /**
+     * Register all of the base service providers.
+     *
+     * @return void
+     */
+    protected function registerBaseServiceProviders()
+    {
+        $this->register(new EventServiceProvider($this));
     }
 
     /**
@@ -113,21 +139,24 @@ class Application extends Container
         static::setInstance($this);
 
         $this->instance(self::class, $this);
-
-        $this->instance('env', env('APP_ENV', config('app.env', 'production')));
     }
 
     /**
-     * Bootstrap the application container.
+     * Register container bindings for the application.
      *
      * @return void
      */
-    private function bootstrapContainer()
+    private function registerCoreContainerAliases()
     {
-        $this->registerConfigBindings();
-        $this->registerViewBindings();
-        $this->registerFilesBindings();
-        $this->registerEventsBindings();
+        foreach ([
+                     'config' => ConfigRepository::class,
+                     'files' => Filesystem::class,
+                     'request' => Request::class,
+                     'view' => Request::class,
+                 ] as $key => $value) {
+            $this->singleton($key,$value);
+        }
+
     }
 
     /**
@@ -163,6 +192,17 @@ class Application extends Container
     }
 
     /**
+     * Get the path to the resources directory.
+     *
+     * @param string $path
+     * @return string
+     */
+    public function storagePath(string $path = '')
+    {
+        return $this->basePath . DIRECTORY_SEPARATOR . 'storage' . ($path ? DIRECTORY_SEPARATOR . $path : $path);
+    }
+
+    /**
      * Register the core container aliases.
      *
      * @return void
@@ -180,18 +220,6 @@ class Application extends Container
     private function bootstrapRouter()
     {
         $this->router = new Router($this);
-    }
-
-    /**
-     * Register container bindings for the application.
-     *
-     * @return void
-     */
-    private function registerConfigBindings()
-    {
-        $this->singleton('config', function () {
-            return new ConfigRepository;
-        });
     }
 
     /**
@@ -219,44 +247,6 @@ class Application extends Container
             return $this->instances[$abstract];
         }
         return parent::make($abstract, $parameters);
-    }
-
-    /**
-     * Register container bindings for the application.
-     *
-     * @return void
-     */
-    private function registerViewBindings()
-    {
-        $this->singleton('view', function () {
-            return $this->loadComponent('view', 'app\Core\View\ViewServiceProvider');
-        });
-    }
-
-    /**
-     * Register container bindings for the application.
-     *
-     * @return void
-     */
-    private function registerFilesBindings()
-    {
-        $this->singleton('files', function () {
-            return new Filesystem;
-        });
-    }
-
-    /**
-     * Register container bindings for the application.
-     *
-     * @return void
-     */
-    private function registerEventsBindings()
-    {
-        $this->singleton('events', function () {
-            $this->register('app\Providers\EventServiceProvider');
-
-            return $this->make('events');
-        });
     }
 
     /**
@@ -372,7 +362,7 @@ class Application extends Container
     {
         list($method, $pathInfo) = $this->parseIncomingRequest($request);
 
-        $this->boot();
+        $this->bootstrap();
 
         return $this->sendThroughPipeline($this->middleware, function () use ($method, $pathInfo) {
 
@@ -675,6 +665,17 @@ class Application extends Container
 
         if ($this->booted) {
             $this->bootProvider($provider);
+        }
+    }
+
+    private function bootstrap()
+    {
+        foreach ($this->bootstrappers as $bootstrapper) {
+            $this['events']->dispatch('bootstrapping: ' . $bootstrapper, [$this]);
+
+            $this->make($bootstrapper)->bootstrap($this);
+
+            $this['events']->dispatch('bootstrapped: ' . $bootstrapper, [$this]);
         }
     }
 

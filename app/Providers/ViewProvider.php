@@ -2,9 +2,10 @@
 
 namespace app\Providers;
 
+use app\Core\Support\ServiceProvider;
 use app\support\Facades\ViewFacade;
 
-class ViewServiceProvider extends ServiceProvider
+class ViewProvider extends ServiceProvider
 {
     public function boot()
     {

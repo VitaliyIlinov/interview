@@ -8,6 +8,9 @@
 //todo middleware
 //todo if wrong path to file ->404 NOT 200!!!
 //todo redirect
+
+define('START', microtime(true));
+
 /*
 |--------------------------------------------------------------------------
 | Create The Application

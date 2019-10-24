@@ -1,7 +1,8 @@
 <?php
 
-namespace app\Providers;
+namespace app\Core\Event;
 
+use app\Core\Support\ServiceProvider;
 use app\Events\Dispatcher;
 
 class EventServiceProvider extends ServiceProvider

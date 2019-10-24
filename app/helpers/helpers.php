@@ -2,7 +2,7 @@
 
 use app\Core\Application;
 use app\Core\Container;
-use app\Core\LoadEnvironmentVariables;
+use app\Core\Bootstrap\LoadEnvironmentVariables;
 use app\Core\View\View;
 
 if (!function_exists('app')) {
@@ -92,5 +92,17 @@ if (! function_exists('resource_path')) {
     function resource_path(string $path = '')
     {
         return app()->resourcePath($path);
+    }
+}
+if (! function_exists('storage_path')) {
+    /**
+     * Get the path to the resources folder.
+     *
+     * @param  string  $path
+     * @return string
+     */
+    function storage_path(string $path = '')
+    {
+        return app()->storagePath($path);
     }
 }

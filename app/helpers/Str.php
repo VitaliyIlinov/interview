@@ -5,15 +5,22 @@ namespace app\helpers;
 class Str
 {
     /**
+     * The cache of studly-cased words.
+     *
+     * @var array
+     */
+    protected static $studlyCache = [];
+
+    /**
      * Determine if a given string contains a given substring.
      *
-     * @param  string  $haystack
-     * @param  string|array  $needles
+     * @param string $haystack
+     * @param string|array $needles
      * @return bool
      */
     public static function contains($haystack, $needles)
     {
-        foreach ((array) $needles as $needle) {
+        foreach ((array)$needles as $needle) {
             if ($needle !== '' && mb_strpos($haystack, $needle) !== false) {
                 return true;
             }
@@ -25,8 +32,8 @@ class Str
     /**
      * Parse a Class@method style callback into class and method.
      *
-     * @param  string  $callback
-     * @param  string|null  $default
+     * @param string $callback
+     * @param string|null $default
      * @return array
      */
     public static function parseCallback($callback, $default = null)
@@ -37,8 +44,8 @@ class Str
     /**
      * Determine if a given string matches a given pattern.
      *
-     * @param  string|array  $pattern
-     * @param  string  $value
+     * @param string|array $pattern
+     * @param string $value
      * @return bool
      */
     public static function is($pattern, $value)
@@ -60,11 +67,51 @@ class Str
             // pattern such as "library/*", making any string check convenient.
             $pattern = str_replace('\*', '.*', $pattern);
 
-            if (preg_match('#^'.$pattern.'\z#u', $value) === 1) {
+            if (preg_match('#^' . $pattern . '\z#u', $value) === 1) {
                 return true;
             }
         }
 
         return false;
+    }
+
+    /**
+     * Convert a value to studly caps case.
+     *
+     * @param string $value
+     * @return string
+     */
+    public static function studly($value)
+    {
+        $key = $value;
+
+        if (isset(static::$studlyCache[$key])) {
+            return static::$studlyCache[$key];
+        }
+
+        $value = ucwords(str_replace(['-', '_'], ' ', $value));
+
+        return static::$studlyCache[$key] = str_replace(' ', '', $value);
+    }
+
+    /**
+     * Generate a more truly "random" alpha-numeric string.
+     *
+     * @param int $length
+     * @return string
+     */
+    public static function random($length = 16)
+    {
+        $string = '';
+
+        while (($len = strlen($string)) < $length) {
+            $size = $length - $len;
+
+            $bytes = random_bytes($size);
+
+            $string .= substr(str_replace(['/', '+', '='], '', base64_encode($bytes)), 0, $size);
+        }
+
+        return $string;
     }
 }

@@ -134,25 +134,12 @@ return [
     */
 
     'providers' => [
-
-        /*
-         * Laravel Framework Service Providers...
-         */
-        app\Core\View\ViewServiceProvider::class,
-
-
-        /*
-         * Package Service Providers...
-         */
-
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        app\Core\View\ViewServiceProvider::class,
+        app\Core\Session\SessionServiceProvider::class,
+//        App\Providers\RouteServiceProvider::class,
 
     ],
 

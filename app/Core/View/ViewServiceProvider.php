@@ -2,9 +2,9 @@
 
 namespace app\Core\View;
 
+use app\Core\Support\ServiceProvider;
 use app\Core\View\Support\ViewFactory;
 use app\Events\Dispatcher;
-use app\Providers\ServiceProvider;
 
 class ViewServiceProvider extends ServiceProvider
 {
@@ -14,9 +14,16 @@ class ViewServiceProvider extends ServiceProvider
 
     public function register()
     {
+        $this->loadConfig();
+
         $this->registerFactory();
 
         $this->registerViewFinder();
+    }
+
+    private function loadConfig()
+    {
+        $this->app->configure('view');
     }
 
     /**
@@ -60,7 +67,7 @@ class ViewServiceProvider extends ServiceProvider
     {
         $this->app->singleton('view.finder', function ($app) {
             $viewConfigs = $app['config']['view'];
-            return new FileViewFinder($viewConfigs['layouts'],$viewConfigs['views'], $app['files']);
+            return new FileViewFinder($viewConfigs['layouts'], $viewConfigs['views'], $app['files']);
         });
     }
 }

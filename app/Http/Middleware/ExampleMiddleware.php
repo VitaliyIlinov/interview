@@ -18,6 +18,8 @@ class ExampleMiddleware
      */
     public function handle(Request $request, \Closure $next, $options = null)
     {
-        return $next($request);
+        $response = $next($request);
+
+        return $response;
     }
 }

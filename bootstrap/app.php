@@ -1,11 +1,8 @@
 <?php
 
-define('START', microtime(true));
-
 define('ROOT', dirname(__DIR__));
 
 require_once ROOT . '/app/Core/ClassLoader.php';
-require_once ROOT . '/app/Core/LoadEnvironmentVariables.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -19,11 +16,8 @@ require_once ROOT . '/app/Core/LoadEnvironmentVariables.php';
 */
 
 $app = new app\Core\Application(ROOT);
-
-$app->withFacades();
-
+$t = $app['files'];
 // $app->withEloquent();
-$app->configure('app');
 /*
 |--------------------------------------------------------------------------
 | Register Container Bindings
@@ -53,7 +47,7 @@ $app->singleton(
 
 $app->middleware([
     app\Http\Middleware\ExampleMiddleware::class,
-    app\Http\Middleware\ExampleMiddleware1::class,
+    app\Http\Middleware\StartSession::class,
 ]);
 
 /*
@@ -67,7 +61,7 @@ $app->middleware([
 |
 */
 // $app->register(App\Providers\AppServiceProvider::class);
- $app->register(app\Providers\ViewServiceProvider::class);
+ $app->register(app\Providers\ViewProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
 
 /*
@@ -84,5 +78,7 @@ $app->middleware([
 $app->router->group(['namespace' => 'app\Http\Controllers'], function ($router) {
     require ROOT . '/routes/web.php';
 });
-
+$app->router->group(['namespace' => 'app\Http\Admin\Controllers', 'prefix' => 'admin_panel'], function ($router) {
+    require ROOT . '/routes/admin.php';
+});
 return $app;
