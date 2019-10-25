@@ -39,4 +39,6 @@ $app = require __DIR__.'/../bootstrap/app.php';
 |
 */
 
-$app->run();
+$response = $app->run();
+$response->send();
+$app->terminate($response);

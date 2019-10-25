@@ -7,7 +7,9 @@ $router->get('/', function () use ($router) {
     header('Location: ' . 'solid/single_responsibility');
     exit;
 });
-
+$router->get('/str', function () use ($router) {
+    return 'User ';
+});
 $router->group(['prefix' => 'solide', 'middleware' => 'solid|solid2', 'namespace' => 'Solid'],
     function () use ($router) {
         $router->get('single_responsibility', function ($id) {

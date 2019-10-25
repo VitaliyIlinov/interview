@@ -6,6 +6,7 @@ use app\Core\Bag\FileBag;
 use app\Core\Bag\HeaderBag;
 use app\Core\Bag\ParameterBag;
 use app\Core\Bag\ServerBag;
+use app\Core\Session\Store;
 use RuntimeException;
 
 class Request
@@ -58,6 +59,7 @@ class Request
     /**
      * Cookies ($_COOKIE).
      *
+     * @var ParameterBag
      */
     public $cookies;
 
@@ -269,6 +271,25 @@ class Request
     }
 
     /**
+     * Get the full URL for the request.
+     *
+     * @return string
+     */
+    public function fullUrl()
+    {
+        $query = $this->server->get('QUERY_STRING');
+
+//        $question = $this->getBaseUrl().$this->getPathInfo() === '/' ? '/?' : '?';
+
+        return $query;
+    }
+
+    public function isAjax()
+    {
+        return 'XMLHttpRequest' == $this->headers->get('X-Requested-With');
+    }
+
+    /**
      * Get the session associated with the request.
      *
      * @throws \RuntimeException
@@ -290,7 +311,7 @@ class Request
     /**
      * Get the session associated with the request.
      *
-     * @return \Illuminate\Session\Store|null
+     * @return Store|null
      */
     public function getSession()
     {
@@ -300,10 +321,10 @@ class Request
     /**
      * Set the session instance on the request.
      *
-     * @param \Illuminate\Contracts\Session\Session $session
+     * @param Store $session
      * @return void
      */
-    public function setLaravelSession($session)
+    public function setLaravelSession(Store $session)
     {
         $this->session = $session;
     }

@@ -340,16 +340,17 @@ class Application extends Container
      * Run the application and send the response.
      *
      * @param null $request
-     * @return void
+     *
+     * @return Response
      */
     public function run($request = null)
     {
-        $response = $this->dispatch($request);
-        if ($response instanceof Response) {
-            $response->send();
-        } else {
-            echo (string)$response;
-        }
+        return $response = $this->dispatch($request);
+//        if ($response instanceof Response) {
+//            $response->send();
+//        } else {
+//            echo (string)$response;
+//        }
     }
 
     /**
@@ -706,6 +707,26 @@ class Application extends Container
         if (method_exists($provider, 'boot')) {
             return $this->call([$provider, 'boot']);
 //            return call_user_func_array($provider, 'boot');
+        }
+    }
+
+    public function terminate(Response $response)
+    {
+        $this->terminateMiddleware($this['request'], $response);
+    }
+
+    protected function terminateMiddleware($request, $response)
+    {
+        foreach ($this->middleware as $middleware) {
+            if (! is_string($middleware)) {
+                continue;
+            }
+
+            $instance = $this->make($middleware);
+
+            if (method_exists($instance, 'terminate')) {
+                $instance->terminate($request, $response);
+            }
         }
     }
 }

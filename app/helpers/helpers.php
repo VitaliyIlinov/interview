@@ -72,21 +72,21 @@ if (!function_exists('env')) {
     /**
      * Gets the value of an environment variable.
      *
-     * @param  string  $key
-     * @param  mixed   $default
+     * @param string $key
+     * @param mixed $default
      * @return mixed
      */
     function env($key, $default = null)
     {
-       return LoadEnvironmentVariables::getEnvironmentVariable($key, $default);
+        return LoadEnvironmentVariables::getEnvironmentVariable($key, $default);
     }
 }
 
-if (! function_exists('resource_path')) {
+if (!function_exists('resource_path')) {
     /**
      * Get the path to the resources folder.
      *
-     * @param  string  $path
+     * @param string $path
      * @return string
      */
     function resource_path(string $path = '')
@@ -94,15 +94,35 @@ if (! function_exists('resource_path')) {
         return app()->resourcePath($path);
     }
 }
-if (! function_exists('storage_path')) {
+if (!function_exists('storage_path')) {
     /**
      * Get the path to the resources folder.
      *
-     * @param  string  $path
+     * @param string $path
      * @return string
      */
     function storage_path(string $path = '')
     {
         return app()->storagePath($path);
+    }
+}
+
+if (!function_exists('tap')) {
+    /**
+     * Call the given Closure with the given value then return the value.
+     *
+     * @param mixed $value
+     * @param callable|null $callback
+     * @return mixed
+     */
+    function tap($value, $callback = null)
+    {
+        if (is_null($callback)) {
+            return new InvalidArgumentException($value);
+        }
+
+        $callback($value);
+
+        return $value;
     }
 }

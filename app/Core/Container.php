@@ -127,14 +127,40 @@ class Container implements ArrayAccess
      */
     public function singleton(string $abstract, $closure = null)
     {
-        if (!$closure instanceof Closure) {
-            $closure = function ($container, $parameters = []) use ($abstract, $closure) {
-                return $container->make(
-                    $closure, $parameters
-                );
-            };
+        $this->bind($abstract, $closure);
+    }
+
+    /**
+     * Register a binding with the container.
+     * @param string $abstract
+     * @param null $concrete
+     */
+    public function bind(string $abstract, $concrete = null)
+    {
+        if (is_null($concrete)) {
+            $concrete = $abstract;
         }
-        $this->bindings[$abstract] = $closure;
+        if (!$concrete instanceof Closure) {
+            $concrete = $this->getClosure($abstract, $concrete);
+        }
+        $this->bindings[$abstract] = $concrete;
+    }
+
+    /**
+     * Get the Closure to be used when building a type.
+     * @param string $abstract
+     * @param string $concrete
+     * @return Closure
+     */
+    protected function getClosure(string $abstract, string $concrete)
+    {
+        return function ($container, $parameters = []) use ($abstract, $concrete) {
+            if ($abstract == $concrete) {
+                return $container->make($concrete);
+            }
+
+            return $container->make($concrete, $parameters);
+        };
     }
 
     /**

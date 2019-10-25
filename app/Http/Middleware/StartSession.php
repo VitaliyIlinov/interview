@@ -3,11 +3,12 @@
 namespace app\Http\Middleware;
 
 use app\Core\Application;
+use app\Core\Cookie;
 use app\Core\Request;
+use app\Core\Response;
 use app\Core\Session\SessionManager;
-use app\helpers\Str;
+use app\Core\Session\Store;
 use Closure;
-use InvalidArgumentException;
 
 class StartSession
 {
@@ -15,6 +16,13 @@ class StartSession
      * @var Application
      */
     private $manager;
+
+    /**
+     * Indicates if the session was handled for the current request.
+     *
+     * @var bool
+     */
+    protected $sessionHandled = false;
 
     /**
      * StartSession constructor.
@@ -27,26 +35,46 @@ class StartSession
 
     public function handle(Request $request, Closure $next)
     {
-//        if ($this->sessionConfigured()) {
-//            $request->setLaravelSession(
-//                $session = $this->startSession($request)
-//            );
-//
-////            $this->collectGarbage($session);
-//        }
+        $this->sessionHandled = true;
+
+        if ($this->sessionConfigured()) {
+            $request->setLaravelSession(
+                $session = $this->sessionStart($request)
+            );
+            $this->collectGarbage($session);
+        }
 
         $response = $next($request);
+
+        if ($this->sessionConfigured()) {
+            $this->storeCurrentUrl($request, $session);
+
+            $this->addCookieToResponse($response, $session);
+        }
+
         return $response;
     }
 
-    protected function startSession(Request $request)
+    public function terminate($request, $response)
     {
-        $session = $this->manager->driver();
+        if ($this->sessionHandled && $this->sessionConfigured()) {
+            $this->manager->driver()->save();
+        }
+    }
 
-        return tap($this->getSession($request), function ($session) use ($request) {
-            $session->setRequestOnHandler($request);
-
+    protected function sessionStart(Request $request): Store
+    {
+        return tap($this->getSession($request), function ($session) {
+            /**@var $session Store */
             $session->start();
+        });
+    }
+
+    public function getSession(Request $request)
+    {
+        return tap($this->manager->driver(), function ($session) use ($request) {
+            /**@var $session Store */
+            $session->setId($request->cookies->get($session->getName()));
         });
     }
 
@@ -57,6 +85,61 @@ class StartSession
      */
     protected function sessionConfigured()
     {
-        return ! is_null($this->manager->getSessionConfig()['driver'] ?? null);
+        return !is_null($this->manager->getSessionConfig()['driver'] ?? null);
+    }
+
+    protected function collectGarbage(Store $session)
+    {
+        $config = $this->manager->getSessionConfig();
+
+        // Here we will see if this request hits the garbage collection lottery by hitting
+        // the odds needed to perform garbage collection on any given request. If we do
+        // hit it, we'll call this handler to let it delete all the expired sessions.
+        if ($this->configHitsLottery($config)) {
+            $session->getHandler()->gc($this->getSessionLifetimeInSeconds());
+        }
+    }
+
+    /**
+     * Store the current URL for the request if necessary.
+     *
+     * @param Request $request
+     * @param $session
+     */
+    protected function storeCurrentUrl(Request $request, Store $session)
+    {
+        if ($request->getMethod() === Request::METHOD_GET && !$request->isAjax()) {
+            $session->setPreviousUrl($request->fullUrl());
+        }
+    }
+
+    protected function addCookieToResponse(Response $response, Store $session)
+    {
+        $lifeTime = $this->manager->getSessionConfig()['lifetime'];
+        $response->headers->setCookie(new Cookie(
+            $session->getName(), $session->getId(), $lifeTime
+        ));
+    }
+
+    /**
+     * Determine if the configuration odds hit the lottery.
+     *
+     * @param array $config
+     * @return bool
+     * @throws \Exception
+     */
+    protected function configHitsLottery(array $config)
+    {
+        return random_int(1, $config['lottery'][1]) <= $config['lottery'][0];
+    }
+
+    /**
+     * Get the session lifetime in seconds.
+     *
+     * @return int
+     */
+    protected function getSessionLifetimeInSeconds()
+    {
+        return ($this->manager->getSessionConfig()['lifetime'] ?? null) * 60;
     }
 }

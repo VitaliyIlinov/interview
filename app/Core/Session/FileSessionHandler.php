@@ -3,6 +3,7 @@
 namespace app\Core\Session;
 
 use app\helpers\Filesystem;
+use app\helpers\Finder\Finder;
 use SessionHandlerInterface;
 
 class FileSessionHandler implements SessionHandlerInterface
@@ -10,7 +11,7 @@ class FileSessionHandler implements SessionHandlerInterface
     /**
      * The filesystem instance.
      *
-     * @var \Illuminate\Filesystem\Filesystem
+     * @var Filesystem
      */
     protected $files;
 
@@ -35,33 +36,69 @@ class FileSessionHandler implements SessionHandlerInterface
         $this->minutes = $minutes;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function close()
     {
         // TODO: Implement close() method.
     }
 
-    public function destroy($session_id)
+    /**
+     * @inheritDoc
+     */
+    public function destroy($sessionId)
     {
         // TODO: Implement destroy() method.
     }
 
-    public function gc($maxlifetime)
+    /**
+     * @inheritDoc
+     */
+    public function gc($lifetime)
     {
-        // TODO: Implement gc() method.
+        $files = Finder::create()
+            ->in($this->path)
+            ->files()
+            ->date(time() - $lifetime);
+
+        /**
+         * @var $file \SplFileInfo
+         */
+        foreach ($files as $file) {
+            $this->files->delete($file->getRealPath());
+        }
     }
 
+    /**
+     * @inheritDoc
+     */
     public function open($save_path, $name)
     {
         // TODO: Implement open() method.
     }
 
-    public function read($session_id)
+    /**
+     * @inheritDoc
+     */
+    public function read($sessionId)
     {
-        // TODO: Implement read() method.
+        if ($this->files->isFile($path = $this->path . '/' . $sessionId)) {
+            if ($this->files->lastModified($path) >= time()) {
+                return $this->files->sharedGet($path);
+            }
+        }
+
+        return '';
     }
 
-    public function write($session_id, $session_data)
+    /**
+     * @inheritDoc
+     */
+    public function write($sessionId, $sessionData)
     {
-        // TODO: Implement write() method.
+        $this->files->put($this->path.'/'.$sessionId, $sessionData, true);
+
+        return true;
     }
 }

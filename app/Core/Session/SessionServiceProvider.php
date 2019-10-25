@@ -4,6 +4,7 @@ namespace app\Core\Session;
 
 use app\Core\Application;
 use app\Core\Support\ServiceProvider;
+use app\Http\Middleware\StartSession;
 
 class SessionServiceProvider extends ServiceProvider
 {
@@ -14,6 +15,9 @@ class SessionServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->configure('session');
+
+        //todo NOT WORKING
+        $this->app->singleton(StartSession::class);
 
         $this->registerSessionManager();
 

@@ -248,6 +248,11 @@ class Response
                 header($name.': '.$value, $replace, $this->statusCode);
             }
         }
+        // cookies
+        /**@var $cookie Cookie*/
+        foreach ($this->headers->getCookies() as $cookie) {
+            header('Set-Cookie: '.$cookie->setRaw(), false, $this->statusCode);
+        }
 
         // status
         header(sprintf('HTTP/%s %s %s', '1.0', $this->statusCode, $this->statusText), true, $this->statusCode);

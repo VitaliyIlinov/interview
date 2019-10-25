@@ -34,11 +34,11 @@ class SessionManager
      * Get a driver instance.
      *
      * @param string $driver
-     * @return mixed
+     * @return Store
      *
      * @throws InvalidArgumentException
      */
-    public function driver($driver = null)
+    public function driver($driver = null): Store
     {
         $driver = $driver ?: $this->getDefaultDriver();
 
@@ -62,11 +62,11 @@ class SessionManager
      * Create a new driver instance.
      *
      * @param string $driver
-     * @return mixed
+     * @return Store
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    protected function createDriver($driver)
+    protected function createDriver($driver): Store
     {
         // First, we will determine if a custom driver creator exists for the given driver and
         // if it does not we will check for a creator method for the driver. Custom creator
@@ -84,7 +84,7 @@ class SessionManager
      * Create an instance of the file session driver.
      *
      */
-    protected function createFileDriver()
+    protected function createFileDriver(): Store
     {
         $lifetime = $this->getSessionConfig()['lifetime'];
 
@@ -93,7 +93,7 @@ class SessionManager
         ));
     }
 
-    protected function buildSession(SessionHandlerInterface $handler)
+    protected function buildSession(SessionHandlerInterface $handler): Store
     {
         return new Store($this->getSessionConfig()['cookie'], $handler);
     }
