@@ -59,7 +59,7 @@ class Container implements ArrayAccess
         return static::$instance = $container;
     }
 
-    public function make($concrete, $parameters = [])
+    public function make($concrete, array $parameters = [])
     {
         return $this->resolve($concrete, $parameters);
     }
@@ -73,24 +73,42 @@ class Container implements ArrayAccess
      */
     public function resolve($abstract, $parameters = [])
     {
-        $abstractBind = $this->getBind($abstract);
+        if (isset($this->instances[$abstract])) {
+            return $this->instances[$abstract];
+        }
+        $abstractBind = $this->getBind($abstract,$parameters);
         // If the concrete type is actually a Closure, we will just execute it and
         // hand back the results of the functions, which allows functions to be
         // used as resolvers for more fine-tuned resolution of these objects.
-        if ($abstractBind instanceof \Closure) {
-            return $this->instances[$abstract] = $abstractBind($this, $parameters);
+
+        $object = $this->build($abstractBind,$parameters);
+        return $this->instance($abstract,$object);
+    }
+
+    /**
+     * Instantiate a concrete instance of the given type.
+     *
+     * @param string|Closure $concrete
+     * @param $parameters
+     * @return mixed
+     * @throws \ReflectionException
+     */
+    public function build($concrete,$parameters)
+    {
+        if ($concrete instanceof \Closure) {
+            return $concrete($this, $parameters);
         }
 
-        $reflector = new \ReflectionClass($abstract);
+        $reflector = new \ReflectionClass($concrete);
 
         if (!$reflector->isInstantiable()) {
-            throw new \ReflectionException("Target [$abstract] is not instantiable.");
+            throw new \ReflectionException("Target [$concrete] is not instantiable.");
         }
 
         $constructor = $reflector->getConstructor();
 
         if (is_null($constructor)) {
-            return new $abstract;
+            return new $concrete;
         }
 
         $dependencies = [];
@@ -156,7 +174,7 @@ class Container implements ArrayAccess
     {
         return function ($container, $parameters = []) use ($abstract, $concrete) {
             if ($abstract == $concrete) {
-                return $container->make($concrete);
+                return $container->build($concrete,$parameters);
             }
 
             return $container->make($concrete, $parameters);

@@ -243,9 +243,6 @@ class Application extends Container
      */
     public function make($abstract, $parameters = [])
     {
-        if (isset($this->instances[$abstract])) {
-            return $this->instances[$abstract];
-        }
         return parent::make($abstract, $parameters);
     }
 
