@@ -3,6 +3,7 @@
 use app\Core\Application;
 use app\Core\Container;
 use app\Core\Bootstrap\LoadEnvironmentVariables;
+use app\Core\Session\SessionManager;
 use app\Core\View\View;
 
 if (!function_exists('app')) {
@@ -124,5 +125,29 @@ if (!function_exists('tap')) {
         $callback($value);
 
         return $value;
+    }
+}
+
+if (! function_exists('session')) {
+    /**
+     * Get / set the specified session value.
+     *
+     * If an array is passed as the key, we will assume you want to set an array of values.
+     *
+     * @param array|string $key
+     * @param mixed $default
+     * @return SessionManager
+     */
+    function session($key = null, $default = null): SessionManager
+    {
+        if (is_null($key)) {
+            return app('session');
+        }
+
+        if (is_array($key)) {
+            return app('session')->put($key);
+        }
+
+        return app('session')->get($key, $default);
     }
 }

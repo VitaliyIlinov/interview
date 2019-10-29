@@ -7,6 +7,11 @@ use app\helpers\Str;
 use InvalidArgumentException;
 use SessionHandlerInterface;
 
+/**
+ * Class SessionManager
+ * @package app\Core\Session
+ * @mixin Store
+ */
 class SessionManager
 {
     /**
@@ -127,5 +132,17 @@ class SessionManager
     public function setDefaultDriver($name)
     {
         $this->getSessionConfig()['driver'] = $name;
+    }
+
+    /**
+     * Dynamically call the default driver instance.
+     *
+     * @param  string  $method
+     * @param  array   $parameters
+     * @return mixed
+     */
+    public function __call($method, $parameters)
+    {
+        return $this->driver()->$method(...$parameters);
     }
 }

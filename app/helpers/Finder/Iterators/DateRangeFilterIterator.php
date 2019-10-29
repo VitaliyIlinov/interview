@@ -27,6 +27,6 @@ class DateRangeFilterIterator extends \FilterIterator
         }
 
         $fileDate = $fileInfo->getMTime();
-        return $fileDate >= $this->date;
+        return $this->date >= $fileDate;
     }
 }

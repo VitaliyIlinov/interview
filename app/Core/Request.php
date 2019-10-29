@@ -277,7 +277,7 @@ class Request
      */
     public function fullUrl()
     {
-        $query = $this->server->get('QUERY_STRING');
+        $query = $this->server->get('HTTP_REFERER', $this->server->get('REQUEST_URI'));
 
 //        $question = $this->getBaseUrl().$this->getPathInfo() === '/' ? '/?' : '?';
 

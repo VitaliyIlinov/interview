@@ -16,7 +16,6 @@ class SessionServiceProvider extends ServiceProvider
     {
         $this->app->configure('session');
 
-        //todo NOT WORKING
         $this->app->singleton(StartSession::class);
 
         $this->registerSessionManager();
@@ -28,6 +27,10 @@ class SessionServiceProvider extends ServiceProvider
     private function registerSessionManager()
     {
         $this->app->singleton('session', function ($app) {
+            /**
+             * @var $app Application
+             */
+//            $app->alias('session',SessionManager::class);
             return new SessionManager($app);
         });
     }

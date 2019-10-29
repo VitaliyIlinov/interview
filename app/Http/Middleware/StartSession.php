@@ -115,9 +115,8 @@ class StartSession
 
     protected function addCookieToResponse(Response $response, Store $session)
     {
-        $lifeTime = $this->manager->getSessionConfig()['lifetime'];
         $response->headers->setCookie(new Cookie(
-            $session->getName(), $session->getId(), $lifeTime
+            $session->getName(), $session->getId(), time() + $this->getSessionLifetimeInSeconds()
         ));
     }
 

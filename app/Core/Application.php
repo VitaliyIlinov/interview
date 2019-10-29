@@ -3,6 +3,7 @@
 namespace app\Core;
 
 use app\Core\Event\EventServiceProvider;
+use app\Core\Session\SessionManager;
 use app\Core\Support\ServiceProvider;
 use app\Exceptions\HttpResponseException;
 use app\Exceptions\MethodNotAllowed;
@@ -152,9 +153,9 @@ class Application extends Container
                      'config' => ConfigRepository::class,
                      'files' => Filesystem::class,
                      'request' => Request::class,
-                     'view' => Request::class,
+                     'session' => SessionManager::class,
                  ] as $key => $value) {
-            $this->singleton($key,$value);
+            $this->alias($key,$value);
         }
 
     }
@@ -243,6 +244,7 @@ class Application extends Container
      */
     public function make($abstract, $parameters = [])
     {
+        $abstract = $this->getAlias($abstract);
         return parent::make($abstract, $parameters);
     }
 
@@ -359,8 +361,6 @@ class Application extends Container
     public function dispatch($request = null)
     {
         list($method, $pathInfo) = $this->parseIncomingRequest($request);
-
-        $this->bootstrap();
 
         return $this->sendThroughPipeline($this->middleware, function () use ($method, $pathInfo) {
 

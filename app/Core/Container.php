@@ -137,6 +137,20 @@ class Container implements ArrayAccess
     }
 
     /**
+     * Register an existing instance as shared in the container.
+     *
+     * @param string $abstract
+     * @param mixed $instance
+     * @return mixed
+     */
+    public function alias(string $abstract, $instance)
+    {
+        $this->aliases[$abstract] = $instance;
+
+        return $instance;
+    }
+
+    /**
      * Register binding in the container.
      *
      * @param string $abstract

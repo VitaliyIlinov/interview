@@ -16,7 +16,6 @@ require_once ROOT . '/app/Core/ClassLoader.php';
 */
 
 $app = new app\Core\Application(ROOT);
-$t = $app['files'];
 // $app->withEloquent();
 /*
 |--------------------------------------------------------------------------

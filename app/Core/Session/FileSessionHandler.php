@@ -84,7 +84,7 @@ class FileSessionHandler implements SessionHandlerInterface
     public function read($sessionId)
     {
         if ($this->files->isFile($path = $this->path . '/' . $sessionId)) {
-            if ($this->files->lastModified($path) >= time()) {
+            if ($this->files->lastModified($path) >= time() - ($this->minutes*60)) {
                 return $this->files->sharedGet($path);
             }
         }

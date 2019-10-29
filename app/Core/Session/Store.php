@@ -3,7 +3,6 @@
 namespace app\Core\Session;
 
 use app\helpers\Str;
-use Illuminate\Support\Arr;
 use SessionHandlerInterface;
 
 class Store
@@ -109,7 +108,7 @@ class Store
     /**
      * Prepare the serialized session data for storage.
      *
-     * @param  string  $data
+     * @param string $data
      * @return string
      */
     protected function prepareForStorage($data)
@@ -205,5 +204,26 @@ class Store
     public function getId(): string
     {
         return $this->id;
+    }
+
+    /**
+     * Get an item from the session.
+     * @param string $key
+     * @param mixed $default
+     * @return mixed|null
+     */
+    public function get(string $key, $default = null)
+    {
+        return $this->attributes[$key] ?? $default;
+    }
+
+    /**
+     * Get all of the session data.
+     *
+     * @return array
+     */
+    public function all(): array
+    {
+        return $this->attributes;
     }
 }
