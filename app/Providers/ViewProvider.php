@@ -3,17 +3,20 @@
 namespace app\Providers;
 
 use app\Core\Support\ServiceProvider;
+use app\Http\View\Composers\AdminView;
+use app\Http\View\Composers\Catalog;
 use app\support\Facades\ViewFacade;
 
 class ViewProvider extends ServiceProvider
 {
     public function boot()
     {
-        ViewFacade::share(
-            'catalog', 'sdfsdfsd'
-        );
+        //todo admin && front
+//        ViewFacade::creator(
+//            '*', AdminView::class
+//        );
         ViewFacade::composer(
-            '*', 'app\Http\View\Composers\Catalog'
+            '*', Catalog::class
         );
 
 //        // Using Closure based composers...

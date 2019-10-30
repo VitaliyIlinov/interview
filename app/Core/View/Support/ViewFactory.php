@@ -76,7 +76,9 @@ class ViewFactory
         );
         $layout = $this->finder->find($this->normalizeName($layout));
 
-        return $this->viewInstance($layout, $view, $fullViewPath, $data);
+        return tap($this->viewInstance($layout, $view, $fullViewPath, $data), function ($view) {
+            $this->callCreator($view);
+        });
     }
 
     /**
@@ -127,8 +129,6 @@ class ViewFactory
         return true;
     }
 
-
-
     /**
      * Increment the rendering counter.
      *
@@ -177,6 +177,24 @@ class ViewFactory
     }
 
     /**
+     * Register a view composer event.
+     *
+     * @param array|string $views
+     * @param \Closure|string $callback
+     * @return array
+     */
+    public function creator($views, $callback)
+    {
+        $composers = [];
+
+        foreach ((array)$views as $view) {
+            $composers[] = $this->addViewEvent($view, $callback, 'creating: ');
+        }
+
+        return $composers;
+    }
+
+    /**
      * Add an event for a given view.
      *
      * @param string $view
@@ -218,14 +236,14 @@ class ViewFactory
     /**
      * Register a class based view composer.
      *
-     * @param  string    $view
-     * @param  string    $class
-     * @param  string    $prefix
+     * @param string $view
+     * @param string $class
+     * @param string $prefix
      * @return \Closure
      */
     protected function addClassEvent($view, $class, $prefix)
     {
-        $name = $prefix.$view;
+        $name = $prefix . $view;
 
         // When registering a class based view "composer", we will simply resolve the
         // classes from the application IoC container then call the compose method
@@ -242,8 +260,8 @@ class ViewFactory
     /**
      * Build a class based container callback Closure.
      *
-     * @param  string  $class
-     * @param  string  $prefix
+     * @param string $class
+     * @param string $prefix
      * @return \Closure
      */
     protected function buildClassEventCallback($class, $prefix)
@@ -263,8 +281,8 @@ class ViewFactory
     /**
      * Parse a class based composer name.
      *
-     * @param  string  $class
-     * @param  string  $prefix
+     * @param string $class
+     * @param string $prefix
      * @return array
      */
     protected function parseClassEvent($class, $prefix)
@@ -275,13 +293,14 @@ class ViewFactory
     /**
      * Determine the class event method based on the given prefix.
      *
-     * @param  string  $prefix
+     * @param string $prefix
      * @return string
      */
     protected function classEventMethodForPrefix($prefix)
     {
         return Str::contains($prefix, 'composing') ? 'compose' : 'create';
     }
+
     /**
      * Call the composer for a given view.
      *
@@ -291,6 +310,17 @@ class ViewFactory
     public function callComposer(View $view)
     {
         $this->events->dispatch('composing: ' . $view->getView(), [$view]);
+    }
+
+    /**
+     * Call the composer for a given view.
+     *
+     * @param View $view
+     * @return void
+     */
+    public function callCreator(View $view)
+    {
+        $this->events->dispatch('creating: ' . $view->getView(), [$view]);
     }
 
     /**

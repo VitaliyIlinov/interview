@@ -177,9 +177,29 @@ class Store
      * @param mixed $value
      * @return void
      */
-    public function put(string $key, $value = null)
+    public function put($key, $value = null)
     {
-        $this->attributes[$key] = $value;
+        if (!is_array($key)) {
+            $key = [$key => $value];
+        }
+        foreach ($key as $arrayKey => $arrayValue) {
+            $this->attributes[$arrayKey] = $arrayValue;
+        }
+    }
+
+    public function remove(string $key)
+    {
+        unset($this->attributes[$key]);
+    }
+
+    /**
+     * Remove all of the items from the session.
+     *
+     * @return void
+     */
+    public function flush()
+    {
+        $this->attributes = [];
     }
 
     /**

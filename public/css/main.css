@@ -1,7 +1,15 @@
-body {
+html, body {
+    height: 100%;
+    overflow: auto;
+    display: table;
+    width: 100%;
+}
+footer{
+    display: table-footer-group;
+}
+body{
     font-size: 0.9rem;
 }
-
 .navbar-brand {
     padding-top: .75rem;
     padding-bottom: .75rem;

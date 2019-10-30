@@ -72,6 +72,15 @@ class Cookie
             $str .= '; expires='.gmdate('D, d-M-Y H:i:s T', $this->getExpiresTime()).'; Max-Age='.$this->getMaxAge();
         }
 
+        if ($this->getPath()) {
+            $str .= '; path='.$this->getPath();
+        }
+
         return $str;
+    }
+
+    public function getPath()
+    {
+        return '/';
     }
 }

@@ -9,6 +9,7 @@ use app\Exceptions\HttpResponseException;
 use app\Exceptions\MethodNotAllowed;
 use app\Exceptions\NotFoundHttpException;
 use app\helpers\Filesystem;
+use app\Http\Middleware\Role;
 use app\support\Facades\Facade;
 use config\Repository as ConfigRepository;
 
@@ -93,7 +94,7 @@ class Application extends Container
      *
      * @var array
      */
-    protected $currentRoute;
+    private $currentRoute;
 
     public function __construct(string $basePath)
     {
@@ -154,6 +155,7 @@ class Application extends Container
                      'files' => Filesystem::class,
                      'request' => Request::class,
                      'session' => SessionManager::class,
+                     'role' => Role::class,
                  ] as $key => $value) {
             $this->alias($key,$value);
         }
@@ -306,7 +308,7 @@ class Application extends Container
     }
 
     /**
-     * Add new middleware to the application.
+     * Add new global middleware to the application.
      *
      * @param \Closure|array $middleware
      * @return $this
@@ -446,13 +448,13 @@ class Application extends Container
         $this->currentRoute = $routeInfo;
 
         $action = $routeInfo[1];
-//        if (isset($action['middleware'])) {
-//            $middleware = $this->gatherMiddlewareClassNames($action['middleware']);
-//
-//            return $this->prepareResponse($this->sendThroughPipeline($middleware, function () {
-//                return $this->callActionOnArrayBasedRoute($this->currentRoute);
-//            }));
-//        }
+        if (isset($action['middleware'])) {
+            $middleware = $this->gatherMiddlewareClassNames($action['middleware']);
+
+            return $this->prepareResponse($this->sendThroughPipeline($middleware, function () {
+                return $this->callActionOnArrayBasedRoute($this->currentRoute);
+            }));
+        }
 
         return $this->prepareResponse(
             $this->callActionOnArrayBasedRoute($routeInfo)
@@ -726,4 +728,13 @@ class Application extends Container
             }
         }
     }
+
+    /**
+     * @return array
+     */
+    public function getCurrentRoute(): array
+    {
+        return $this->currentRoute;
+    }
+
 }

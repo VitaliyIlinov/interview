@@ -17,33 +17,8 @@
     <link href="/css/animate.css" rel="stylesheet">
 </head>
 <body>
-<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Company name</a>
-    <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
-    <ul class="navbar-nav px-3">
-        <li class="nav-item text-nowrap">
-            <a class="nav-link" href="#">Sign out</a>
-        </li>
-    </ul>
-</nav>
-<div class="wrapper">
-    <div class="container-fluid">
-        <div class="row">
-            <nav class="col-xl-2 col-lg-3 col-md-4 sidebar">
-                <div class="nav-wrapper">
-                    <?php require_once resource_path('catalogs/main.php'); ?>
-                </div>
-            </nav>
-
-
-            <main class="col-xl-10 col-lg-9 col-md-8 bg-light">
-                <div class="main-wrapper">
-                    <?php require_once $view; ?>
-                </div>
-            </main>
-
-        </div>
-    </div>
+<div class="container">
+    <?php require_once $view; ?>
 </div>
 <footer>
     <div class="container">

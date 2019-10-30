@@ -1,5 +1,7 @@
 <?php
 
+//todo alias @see Role middleware && route middleware
+//todo redirect
 //todo artisan console: create controller&&so on
 //todo RegistersExceptionHandlers
 //todo DI

@@ -44,9 +44,14 @@ $app->singleton(
 |
 */
 
+/*
+ * Global middleware
+ */
 $app->middleware([
-    app\Http\Middleware\ExampleMiddleware::class,
     app\Http\Middleware\StartSession::class,
+]);
+$app->routeMiddleware([
+    'role' => app\Http\Middleware\Role::class,
 ]);
 
 /*
@@ -60,7 +65,7 @@ $app->middleware([
 |
 */
 // $app->register(App\Providers\AppServiceProvider::class);
- $app->register(app\Providers\ViewProvider::class);
+$app->register(app\Providers\ViewProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
 
 /*
@@ -77,7 +82,9 @@ $app->middleware([
 $app->router->group(['namespace' => 'app\Http\Controllers'], function ($router) {
     require ROOT . '/routes/web.php';
 });
-$app->router->group(['namespace' => 'app\Http\Admin\Controllers', 'prefix' => 'admin_panel'], function ($router) {
+$app->router->group(['namespace'  => 'app\Http\Admin\Controllers',
+                     'prefix'     => 'admin_panel',
+], function ($router) {
     require ROOT . '/routes/admin.php';
 });
 return $app;
