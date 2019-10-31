@@ -13,6 +13,8 @@ class AuthController
             'login'    => $request->request->get('login'),
         ]);
         header('Location: ' . '/admin_panel');
+
+        return redirect();
     }
 
     public function destroy()

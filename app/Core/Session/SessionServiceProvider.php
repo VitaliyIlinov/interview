@@ -27,12 +27,9 @@ class SessionServiceProvider extends ServiceProvider
     private function registerSessionManager()
     {
         $this->app->singleton('session', function ($app) {
-            /**
-             * @var $app Application
-             */
-//            $app->alias('session',SessionManager::class);
             return new SessionManager($app);
         });
+        $this->app->alias('session',SessionManager::class);
     }
 
     private function registerSessionDriver()

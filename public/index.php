@@ -1,6 +1,6 @@
 <?php
 
-//todo alias @see Role middleware && route middleware
+//todo app/Http/View/Composers/Catalog.php download in admin
 //todo redirect
 //todo artisan console: create controller&&so on
 //todo RegistersExceptionHandlers

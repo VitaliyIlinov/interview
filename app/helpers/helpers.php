@@ -151,3 +151,25 @@ if (! function_exists('session')) {
         return app('session')->get($key, $default);
     }
 }
+
+if (! function_exists('redirect')) {
+    /**
+     * Get an instance of the redirector.
+     *
+     * @param  string|null  $to
+     * @param  int  $status
+     * @param  array  $headers
+     * @param  bool|null  $secure
+     * @return \app\Core\Router\Redirector
+     */
+    function redirect($to = null, $status = 302, $headers = [], $secure = null)
+    {
+        $redirector = new \app\Core\Router\Redirector(app());
+
+        if (is_null($to)) {
+            return $redirector;
+        }
+
+        return $redirector->to($to, $status, $headers, $secure);
+    }
+}

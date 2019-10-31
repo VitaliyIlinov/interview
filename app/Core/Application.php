@@ -3,15 +3,12 @@
 namespace app\Core;
 
 use app\Core\Event\EventServiceProvider;
-use app\Core\Session\SessionManager;
+use app\Core\Router\RouteServiceProvider;
 use app\Core\Support\ServiceProvider;
 use app\Exceptions\HttpResponseException;
 use app\Exceptions\MethodNotAllowed;
 use app\Exceptions\NotFoundHttpException;
-use app\helpers\Filesystem;
-use app\Http\Middleware\Role;
 use app\support\Facades\Facade;
-use config\Repository as ConfigRepository;
 
 class Application extends Container
 {
@@ -106,9 +103,9 @@ class Application extends Container
 
         $this->bootstrapRouter();
 
-        $this->registerCoreContainerAliases();
-
         $this->bootstrap();
+
+        $this->registerCoreContainerAliases();
     }
 
     /**
@@ -119,6 +116,7 @@ class Application extends Container
     protected function registerBaseServiceProviders()
     {
         $this->register(new EventServiceProvider($this));
+//        $this->register(new RouteServiceProvider($this));
     }
 
     /**
@@ -141,6 +139,8 @@ class Application extends Container
         static::setInstance($this);
 
         $this->instance(self::class, $this);
+
+        $this->singleton('config', \config\Repository::class);
     }
 
     /**
@@ -150,16 +150,9 @@ class Application extends Container
      */
     private function registerCoreContainerAliases()
     {
-        foreach ([
-                     'config' => ConfigRepository::class,
-                     'files' => Filesystem::class,
-                     'request' => Request::class,
-                     'session' => SessionManager::class,
-                     'role' => Role::class,
-                 ] as $key => $value) {
-            $this->alias($key,$value);
+        foreach ($this['config']['app']['aliases'] as $key => $alias){
+            $this->alias($key,$alias);
         }
-
     }
 
     /**
@@ -205,17 +198,6 @@ class Application extends Container
         return $this->basePath . DIRECTORY_SEPARATOR . 'storage' . ($path ? DIRECTORY_SEPARATOR . $path : $path);
     }
 
-    /**
-     * Register the core container aliases.
-     *
-     * @return void
-     */
-    protected function registerContainerAliases()
-    {
-        $this->aliases = [
-            //
-        ];
-    }
 
     /**
      * @return void
@@ -623,7 +605,15 @@ class Application extends Container
      */
     protected function gatherMiddlewareClassNames($middleware)
     {
-        return is_string($middleware) ? explode('|', $middleware) : (array)$middleware;
+        $middleware = is_string($middleware) ? explode('|', $middleware) : (array)$middleware;
+        return array_map(function ($name) {
+            list($name, $parameters) = array_pad(explode(':', $name, 2), 2, null);
+
+            return ($this->routeMiddleware[$name]
+                    ? $this->routeMiddleware[$name]
+                    : $name
+                ) . ':' . $parameters;
+        }, $middleware);
     }
 
     /**
