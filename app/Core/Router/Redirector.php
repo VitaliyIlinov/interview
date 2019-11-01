@@ -3,6 +3,7 @@
 namespace app\Core\Router;
 
 use app\Core\Application;
+use app\Core\RedirectResponse;
 
 class Redirector
 {
@@ -37,5 +38,21 @@ class Redirector
         $path = $this->app->make('url')->to($path, [], $secure);
 
         return $this->createRedirect($path, $status, $headers);
+    }
+
+    /**
+     * Create a new redirect response.
+     *
+     * @param  string  $path
+     * @param  int     $status
+     * @param  array   $headers
+     */
+    protected function createRedirect($path, $status, $headers)
+    {
+        $redirect = new RedirectResponse($path, $status, $headers);
+
+        $redirect->setRequest($this->app->make('request'));
+
+        return $redirect;
     }
 }
