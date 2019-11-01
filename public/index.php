@@ -1,7 +1,7 @@
 <?php
 
 //todo app/Http/View/Composers/Catalog.php download in admin
-//todo redirect
+//todo get default prefix for front && back(admin)
 //todo artisan console: create controller&&so on
 //todo RegistersExceptionHandlers
 //todo DI

@@ -246,4 +246,17 @@ class Store
     {
         return $this->attributes;
     }
+
+    /**
+     * Flash a key / value pair to the session.
+     *
+     * @param  string  $key
+     * @param  mixed   $value
+     * @return void
+     */
+    public function flash(string $key, $value = true)
+    {
+        $this->put($key, $value);
+
+    }
 }

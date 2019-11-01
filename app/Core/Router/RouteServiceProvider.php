@@ -26,9 +26,10 @@ class RouteServiceProvider extends ServiceProvider
      */
     private function registerRouter()
     {
-        $this->app->singleton('router', function ($app) {
-            return new Router($app['events'], $app);
-        });
+        //todo
+//        $this->app->singleton('router', function ($app) {
+//            return new Router($app['events'], $app);
+//        });
     }
 
     /**
@@ -38,7 +39,9 @@ class RouteServiceProvider extends ServiceProvider
      */
     private function registerUrlGenerator()
     {
-        //todo
+        $this->app->singleton('url', function ($app) {
+            return new UrlGenerator($app, $app['request']);
+        });
     }
 
     /**
@@ -48,6 +51,17 @@ class RouteServiceProvider extends ServiceProvider
      */
     private function registerRedirector()
     {
-        //todo
+        $this->app->singleton('redirect', function ($app) {
+            $redirector = new Redirector($app['url']);
+
+            // If the session is set on the application instance, we'll inject it into
+            // the redirector instance. This allows the redirect responses to allow
+            // for the quite convenient "with" methods that flash to the session.
+            if (isset($app['session.store'])) {
+                $redirector->setSession($app['session.store']);
+            }
+
+            return $redirector;
+        });
     }
 }

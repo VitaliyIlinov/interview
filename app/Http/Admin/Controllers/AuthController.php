@@ -12,13 +12,13 @@ class AuthController
             'password' => $request->request->get('password'),
             'login'    => $request->request->get('login'),
         ]);
-        header('Location: ' . '/admin_panel');
 
-        return redirect();
+        return redirect()->to('/admin_panel');
     }
 
     public function destroy()
     {
         session()->flush();
+        return redirect()->to('/admin_panel');
     }
 }

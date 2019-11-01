@@ -290,6 +290,83 @@ class Request
     }
 
     /**
+     * Gets the request's scheme.
+     *
+     * @return string
+     */
+    public function getScheme()
+    {
+        return $this->isSecure() ? 'https' : 'http';
+    }
+
+    /**
+     * Checks whether the request is secure or not.
+     *
+     * @return bool
+     */
+    public function isSecure(): bool
+    {
+        $https = $this->server->get('HTTPS');
+
+        return !empty($https) && 'off' !== strtolower($https);
+    }
+
+    /**
+     * Get the root URL for the application.
+     *
+     * @return string
+     */
+    public function root()
+    {
+        return rtrim($this->getSchemeAndHttpHost(), '/');
+    }
+
+    /**
+     * Gets the scheme and HTTP host.
+     *
+     * If the URL was called with basic authentication, the user
+     * and the password are not added to the generated string.
+     *
+     * @return string The scheme and HTTP host
+     */
+    public function getSchemeAndHttpHost()
+    {
+        return $this->getScheme() . '://' . $this->getHttpHost();
+    }
+
+    /**
+     * Returns the HTTP host being requested.
+     *
+     * The port name will be appended to the host if it's non-standard.
+     *
+     * @return string
+     */
+    public function getHttpHost()
+    {
+        return $this->server->get('HTTP_HOST') ?? $this->server->get('SERVER_NAME');
+    }
+
+
+    /**
+     * Returns the root URL from which this request is executed.
+     *
+     * The base URL never ends with a /.
+     *
+     * This is similar to getBasePath(), except that it also includes the
+     * script filename (e.g. index.php) if one exists.
+     *
+     * @return string The raw URL (i.e. not urldecoded)
+     */
+    public function getBaseUrl()
+    {
+        if (null === $this->baseUrl) {
+//            $this->baseUrl = $this->server->get('HTTP_HOST');
+        }
+
+        return $this->baseUrl;
+    }
+
+    /**
      * Get the session associated with the request.
      *
      * @throws \RuntimeException

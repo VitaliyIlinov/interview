@@ -24,8 +24,7 @@ class Role
 
         if (session()->get('password') !== self::CREDENTIAL['pass'] ||
             session()->get('login') !== self::CREDENTIAL['login']) {
-            header('Location: ' . 'admin_panel/login');
-            exit;
+            return redirect('admin_panel/login');
         }
 
         return $next($request);

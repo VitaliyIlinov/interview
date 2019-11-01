@@ -3,6 +3,8 @@
 use app\Core\Application;
 use app\Core\Container;
 use app\Core\Bootstrap\LoadEnvironmentVariables;
+use app\Core\RedirectResponse;
+use app\Core\Router\Redirector;
 use app\Core\Session\SessionManager;
 use app\Core\View\View;
 
@@ -160,16 +162,16 @@ if (! function_exists('redirect')) {
      * @param  int  $status
      * @param  array  $headers
      * @param  bool|null  $secure
-     * @return \app\Core\Router\Redirector
+     * @return RedirectResponse|Redirector
      */
     function redirect($to = null, $status = 302, $headers = [], $secure = null)
     {
-        $redirector = new \app\Core\Router\Redirector(app());
-
+        /**@var $redirect Redirector*/
+        $redirect = app('redirect');
         if (is_null($to)) {
-            return $redirector;
+            return $redirect;
         }
 
-        return $redirector->to($to, $status, $headers, $secure);
+        return $redirect->to($to, $status, $headers, $secure);
     }
 }

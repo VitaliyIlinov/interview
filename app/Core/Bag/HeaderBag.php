@@ -121,6 +121,22 @@ class HeaderBag implements \IteratorAggregate, \Countable
     }
 
     /**
+     * Removes a header.
+     *
+     * @param string $key The HTTP header name
+     */
+    public function remove($key)
+    {
+        $key = str_replace('_', '-', strtolower($key));
+
+        unset($this->headers[$key]);
+
+        if ('cache-control' === $key) {
+            $this->cacheControl = [];
+        }
+    }
+
+    /**
      * Returns the number of headers.
      *
      * @return int The number of headers

@@ -12,6 +12,7 @@ $router->get('/login', function () use ($router) {
 $router->post('/login', 'AuthController@login');
 $router->get('/destroy', 'AuthController@destroy');
 $router->get('/test', 'TestController@test');
+$router->get('/redirect', 'TestController@redirect');
 
 $router->group(['middleware' => ['role:admin']], function ($router) {
     /**@var $router Router*/
