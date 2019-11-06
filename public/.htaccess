@@ -17,5 +17,11 @@
     # Handle Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^ index.php [L]
+    RewriteRule !.(js|gif|jpg|png|css|eot|svg|ttf|woff|woff2|map)$ index.php [L]
+#    RewriteRule ^ index.php [L]
+
+#     RewriteCond %{REQUEST_FILENAME} !-d
+##     RewriteCond %{REQUEST_URI} (.+)$
+#     RewriteCond %{REQUEST_FILENAME} .*\.(jpeg|jpg|gif|png|map)$
+#     RewriteRule (libs) 404.php?rr=%1&REQUEST_FILENAME=%{REQUEST_FILENAME}&REQUEST_URI=%{REQUEST_URI}&SCRIPT_FILENAME=%{SCRIPT_FILENAME} [QSA]
 </IfModule>

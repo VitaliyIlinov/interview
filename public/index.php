@@ -1,7 +1,7 @@
 <?php
 
-//todo app/Http/View/Composers/Catalog.php download in admin
-//todo get default prefix for front && back(admin)
+//todo get default prefix for front && back(admin)  https://hackware.ru/?p=5587
+//todo @see app/Http/View/Composers/Catalog.php download in admin
 //todo artisan console: create controller&&so on
 //todo RegistersExceptionHandlers
 //todo DI
@@ -9,7 +9,6 @@
 //todo events
 //todo middleware
 //todo if wrong path to file ->404 NOT 200!!!
-//todo redirect
 
 define('START', microtime(true));
 

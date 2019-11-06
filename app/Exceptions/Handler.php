@@ -39,7 +39,7 @@ class Handler implements ExceptionHandler
     {
         return new Response(
             $this->getContent($e),
-            200,
+            $e->getCode(),
             $request->headers->all()
         );
     }

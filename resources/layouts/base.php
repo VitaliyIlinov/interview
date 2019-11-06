@@ -11,10 +11,10 @@
     <!-- Bootstrap core CSS -->
     <link href="/libs/bootstrap-4.3.1-dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <!-- Custom styles for this template -->
-    <link href="/libs/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/libs/fontawesome/css/all.min.css" rel="stylesheet">
     <link href="/libs/highlightjs/styles/darkula.css" rel="stylesheet">
     <link href="/css/main.css" rel="stylesheet">
-    <link href="/css/animate.css" rel="stylesheet">
+    <link href="/libs/animate/animate.css" rel="stylesheet">
 </head>
 <body>
 <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">

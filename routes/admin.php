@@ -17,9 +17,10 @@ $router->get('/redirect', 'TestController@redirect');
 $router->group(['middleware' => ['role:admin']], function ($router) {
     /**@var $router Router*/
 
-    $router->get('/', function () use ($router) {
-        var_dump(session()->all());
-    });
+//    $router->get('/', function () use ($router) {
+//        var_dump(session()->all());
+//    });
+    $router->get('/', 'HomeController@home');
 
 });
 
