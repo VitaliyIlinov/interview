@@ -6,7 +6,7 @@ use app\Core\Application;
 use app\Core\View\View;
 use Memcached;
 
-class Catalog
+class FrontCatalog
 {
     /**
      * @var Application

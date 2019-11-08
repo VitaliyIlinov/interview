@@ -5,9 +5,9 @@
 
 use app\Core\Router;
 
-$router->get('/login', function () use ($router) {
+$router->get('/login', ['as'=>'login', function () use ($router) {
     return view('login');
-});
+}]);
 
 $router->post('/login', 'AuthController@login');
 $router->get('/destroy', 'AuthController@destroy');
@@ -15,13 +15,12 @@ $router->get('/test', 'TestController@test');
 $router->get('/redirect', 'TestController@redirect');
 
 $router->group(['middleware' => ['role:admin']], function ($router) {
-    /**@var $router Router*/
+    /**@var $router Router */
 
 //    $router->get('/', function () use ($router) {
 //        var_dump(session()->all());
 //    });
     $router->get('/', 'HomeController@home');
-
 });
 
 

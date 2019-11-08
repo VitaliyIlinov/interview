@@ -44,6 +44,7 @@ class UrlGenerator
      * @param string $path
      * @param array $extra
      * @param bool $secure
+     *
      * @return string
      */
     public function to($path, $extra = [], $secure = null)
@@ -63,6 +64,7 @@ class UrlGenerator
      * @param string $root
      * @param string $path
      * @param string $tail
+     *
      * @return string
      */
     protected function trimUrl($root, $path, $tail = '')
@@ -84,6 +86,7 @@ class UrlGenerator
      * Determine if the given path is a valid URL.
      *
      * @param string $path
+     *
      * @return bool
      */
     private function isValidUrl($path)
@@ -98,9 +101,10 @@ class UrlGenerator
     /**
      * Get the URL to a named route.
      *
-     * @param  string  $name
-     * @param  mixed   $parameters
-     * @param  bool|null  $secure
+     * @param string $name
+     * @param mixed $parameters
+     * @param bool|null $secure
+     *
      * @return string
      *
      * @throws \InvalidArgumentException
@@ -113,6 +117,12 @@ class UrlGenerator
 
         $uri = $this->app->router->namedRoutes[$name];
 
-        //todo
+        $uri = $this->to($uri, [], $secure);
+
+        if (!empty($parameters)) {
+            $uri .= '?' . http_build_query($parameters);
+        }
+
+        return $uri;
     }
 }

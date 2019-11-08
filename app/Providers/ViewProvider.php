@@ -3,30 +3,25 @@
 namespace app\Providers;
 
 use app\Core\Support\ServiceProvider;
-use app\Http\View\Composers\AdminView;
-use app\Http\View\Composers\Catalog;
+use app\Http\View\Composers\AdminCatalog;
+use app\Http\View\Composers\FrontCatalog;
 use app\support\Facades\ViewFacade;
 
 class ViewProvider extends ServiceProvider
 {
     public function boot()
     {
-        ViewFacade::creator(
-            'admin.*', AdminView::class
+        ViewFacade::composer(
+            'admin.*', AdminCatalog::class
         );
         ViewFacade::composer(
-            'front.*', Catalog::class
+            'front.*', FrontCatalog::class
         );
 
 //        // Using Closure based composers...
 //        ViewFacade::composer('*', function (View $view) {
 //            $view->with('yes',__METHOD__);
 //        });
-
-        // Using class based composers...
-        ViewFacade::composer(
-            'docker.main', 'app\Http\View\Composers\Catalog'
-        );
 
         ViewFacade::composer(
             ['profile', 'dashboard'],

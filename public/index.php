@@ -1,8 +1,7 @@
 <?php
 
-//todo https://hackware.ru/?p=5587
-//todo @see app/Http/Middleware/Role.php
-// && app\Http\Controllers\Admin\AuthController name route
+//todo https://hackware.ru/?p=5587  && http://hostgid.net/baza-znanii/-htaccess/chto-takoe-mod-rewrite.html
+//todo controller middleware @see https://laravel.com/docs/5.8/controllers#controller-middleware
 //todo @see app/Http/View/Composers/Catalog.php download in admin
 //todo artisan console: create controller&&so on
 //todo RegistersExceptionHandlers
