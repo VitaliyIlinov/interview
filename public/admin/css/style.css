@@ -1850,7 +1850,7 @@ Leftsidebar - dark
 .sidebar-dark.nav-left-sidebar .navbar-nav .nav-item .badge{
     position: absolute;
     right: 40px;
-    display: none;
+    /*display: none;*/
 }
 
 /*-----navigation dark ---*/

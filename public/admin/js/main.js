@@ -98,35 +98,5 @@ jQuery(document).ready(function($) {
 
         });
     }
-    // ============================================================== 
-    // dropzone script
-    // ============================================================== 
-
- //     if ($('.dz-clickable').length) {
- //            $(".dz-clickable").dropzone({ url: "/file/post" });
- // }
 
 }); // AND OF JQUERY
-
-
-// $(function() {
-//     "use strict";
-
-
-    
-
-   // var monkeyList = new List('test-list', {
-    //    valueNames: ['name']
-
-     // });
-  // var monkeyList = new List('test-list-2', {
-    //    valueNames: ['name']
-
-   // });
-
-
-
-   
-   
-
-// });
