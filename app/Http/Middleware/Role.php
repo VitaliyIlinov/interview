@@ -23,7 +23,9 @@ class Role
     {
 
         if (session()->get('password') !== self::CREDENTIAL['pass'] ||
-            session()->get('login') !== self::CREDENTIAL['login']) {
+            session()->get('login') !== self::CREDENTIAL['login'])
+        {
+            session()->put('role', 'admin');
             return redirect('admin_panel/login');
         }
 

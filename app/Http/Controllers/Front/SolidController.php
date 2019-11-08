@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Http\Controllers;
+namespace app\Http\Controllers\Front;
 
 use app\Core\Application;
 use app\Core\View\View;
@@ -99,7 +99,7 @@ class SolidController
         return str_replace(
             '/',
             DIRECTORY_SEPARATOR,
-            $this->app->path() . "/Models/Info/Solid/{$file}.php"
+            $this->app->path() . "/Models/Front/Info/Solid/{$file}.php"
         );
     }
 }

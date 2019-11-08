@@ -7,14 +7,11 @@
     <meta name="author" content="Vitaliy Ilinov">
     <meta name="generator" content="Jekyll v3.8.5">
     <title>Study</title>
-
-    <!-- Bootstrap core CSS -->
     <link href="/libs/bootstrap-4.3.1-dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-    <!-- Custom styles for this template -->
     <link href="/libs/fontawesome/css/all.min.css" rel="stylesheet">
     <link href="/libs/highlightjs/styles/darkula.css" rel="stylesheet">
-    <link href="/css/main.css" rel="stylesheet">
     <link href="/libs/animate/animate.css" rel="stylesheet">
+    <link href="/front/css/main.css" rel="stylesheet">
 </head>
 <body>
 <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
@@ -53,7 +50,7 @@
 <script src="/libs/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
 <script src="/libs/bootstrap-4.3.1-dist/js/bootstrap.js"></script>
 <script src="/libs/highlightjs/highlight.pack.js"></script>
-<script src="/js/main.js"></script>
+<script src="/front/js/main.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 </body>
 </html>

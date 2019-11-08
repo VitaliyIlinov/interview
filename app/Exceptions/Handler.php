@@ -39,7 +39,7 @@ class Handler implements ExceptionHandler
     {
         return new Response(
             $this->getContent($e),
-            $e->getCode(),
+            !$e->getCode() == 0 ?: 404,
             $request->headers->all()
         );
     }
@@ -48,6 +48,7 @@ class Handler implements ExceptionHandler
      * Gets the HTML content associated with the given exception.
      *
      * @param Throwable $e
+     *
      * @return string
      */
     private function getContent(Throwable $e): string

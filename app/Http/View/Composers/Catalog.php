@@ -2,11 +2,27 @@
 
 namespace app\Http\View\Composers;
 
+use app\Core\Application;
 use app\Core\View\View;
 use Memcached;
 
 class Catalog
 {
+    /**
+     * @var Application
+     */
+    private $application;
+
+    /**
+     * Catalog constructor.
+     *
+     * @param Application $application
+     */
+    public function __construct(Application $application)
+    {
+        $this->application = $application;
+    }
+
     /**
      * Bind data to the view.
      *

@@ -1,6 +1,8 @@
 <?php
 
-//todo get default prefix for front && back(admin)  https://hackware.ru/?p=5587
+//todo https://hackware.ru/?p=5587
+//todo @see app/Http/Middleware/Role.php
+// && app\Http\Controllers\Admin\AuthController name route
 //todo @see app/Http/View/Composers/Catalog.php download in admin
 //todo artisan console: create controller&&so on
 //todo RegistersExceptionHandlers

@@ -11,12 +11,11 @@ class ViewProvider extends ServiceProvider
 {
     public function boot()
     {
-        //todo admin && front
-//        ViewFacade::creator(
-//            '*', AdminView::class
-//        );
+        ViewFacade::creator(
+            'admin.*', AdminView::class
+        );
         ViewFacade::composer(
-            '*', Catalog::class
+            'front.*', Catalog::class
         );
 
 //        // Using Closure based composers...

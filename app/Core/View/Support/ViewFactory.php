@@ -55,6 +55,14 @@ class ViewFactory
         'css'       => 'file',
     ];
 
+    /**
+     * The view prefix
+     *
+     * @var string|null
+     */
+    private $viewPrefix;
+
+
     public function __construct(FileViewFinder $finder, Dispatcher $events)
     {
         $this->finder = $finder;
@@ -72,9 +80,9 @@ class ViewFactory
     public function make(string $view, array $data, string $layout)
     {
         $fullViewPath = $this->finder->find(
-            $view = $this->normalizeName($view)
+            $view = $this->normalizeName($this->getViewWithPrefix($view))
         );
-        $layout = $this->finder->find($this->normalizeName($layout));
+        $layout = $this->finder->find($this->normalizeName($this->getViewWithPrefix($layout)));
 
         return tap($this->viewInstance($layout, $view, $fullViewPath, $data), function ($view) {
             $this->callCreator($view);
@@ -343,5 +351,23 @@ class ViewFactory
     public function getShared()
     {
         return $this->shared;
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return string|null
+     */
+    private function getViewWithPrefix(string $name): string
+    {
+        return $this->viewPrefix ? $this->viewPrefix . DIRECTORY_SEPARATOR . $name : $name;
+    }
+
+    /**
+     * @param string|null $viewPrefix
+     */
+    public function setViewPrefix(?string $viewPrefix): void
+    {
+        $this->viewPrefix = $viewPrefix;
     }
 }

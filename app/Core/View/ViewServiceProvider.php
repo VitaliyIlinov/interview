@@ -49,8 +49,10 @@ class ViewServiceProvider extends ServiceProvider
 
     /**
      * Create a new Factory Instance.
+     *
      * @param FileViewFinder $finder
      * @param Dispatcher $dispatcher
+     *
      * @return Support\ViewFactory
      */
     protected function createFactory(FileViewFinder $finder, Dispatcher $dispatcher)

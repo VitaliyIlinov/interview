@@ -3,15 +3,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="libs/bootstrap-4.3.1-dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="libs/fonts/circular-std/style.css">
-    <link rel="stylesheet" href="admin/css/style.css">
-    <link rel="stylesheet" href="libs/fontawesome/css/all.min.css">
-    <link rel="stylesheet" href="libs/charts/chartist-bundle/chartist.css">
-    <link rel="stylesheet" href="libs/charts/morris-bundle/morris.css">
-    <link rel="stylesheet" href="libs/fonts/material-design-iconic-font/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="libs/charts/c3charts/c3.css">
-    <link rel="stylesheet" href="libs/fonts/flag-icon-css/flag-icon.min.css">
+    <link rel="stylesheet" href="/libs/bootstrap-4.3.1-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/libs/fonts/circular-std/style.css">
+    <link rel="stylesheet" href="/admin/css/style.css">
+    <link rel="stylesheet" href="/libs/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/libs/charts/chartist-bundle/chartist.css">
+    <link rel="stylesheet" href="/libs/charts/morris-bundle/morris.css">
+    <link rel="stylesheet" href="/libs/fonts/material-design-iconic-font/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="/libs/charts/c3charts/c3.css">
+    <link rel="stylesheet" href="/libs/fonts/flag-icon-css/flag-icon.min.css">
     <title>Concept - Bootstrap 4 Admin Dashboard Template</title>
 </head>
 
@@ -510,18 +510,18 @@
 
 </div>
 
-<script src="libs/jquery-3.4.1.min.js"></script>
-<script src="libs/bootstrap-4.3.1-dist/js/bootstrap.bundle.js"></script>
-<script src="libs/slimscroll/jquery.slimscroll.js"></script>
-<script src="admin/js/main.js"></script>
-<script src="libs/charts/chartist-bundle/chartist.min.js"></script>
-<script src="libs/charts/sparkline/jquery.sparkline.js"></script>
-<script src="libs/charts/morris-bundle/raphael.min.js"></script>
-<script src="libs/charts/morris-bundle/morris.js"></script>
-<script src="libs/charts/c3charts/c3.min.js"></script>
-<script src="libs/charts/c3charts/d3-5.4.0.min.js"></script>
-<script src="libs/charts/c3charts/C3chartjs.js"></script>
-<script src="admin/js/dashboard-ecommerce.js"></script>
+<script src="/libs/jquery-3.4.1.min.js"></script>
+<script src="/libs/bootstrap-4.3.1-dist/js/bootstrap.bundle.js"></script>
+<script src="/libs/slimscroll/jquery.slimscroll.js"></script>
+<script src="/admin/js/main.js"></script>
+<script src="/libs/charts/chartist-bundle/chartist.min.js"></script>
+<script src="/libs/charts/sparkline/jquery.sparkline.js"></script>
+<script src="/libs/charts/morris-bundle/raphael.min.js"></script>
+<script src="/libs/charts/morris-bundle/morris.js"></script>
+<script src="/libs/charts/c3charts/c3.min.js"></script>
+<script src="/libs/charts/c3charts/d3-5.4.0.min.js"></script>
+<script src="/libs/charts/c3charts/C3chartjs.js"></script>
+<script src="/admin/js/dashboard-ecommerce.js"></script>
 </body>
 
 </html>

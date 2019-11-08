@@ -29,6 +29,7 @@ class Pipeline
 
     /**
      * Pipeline constructor.
+     *
      * @param Application $container
      */
     public function __construct(Application $container)
@@ -40,6 +41,7 @@ class Pipeline
      * Set the array of pipes.
      *
      * @param array|mixed $pipes
+     *
      * @return Pipeline
      */
     public function through(array $pipes)
@@ -52,13 +54,14 @@ class Pipeline
     /**
      * Run the pipeline with a final destination callback.
      *
-     * @param  Closure  $destination
+     * @param Closure $destination
+     *
      * @return mixed
      */
     public function then(Closure $destination)
     {
         $pipeline = array_reduce(
-            $this->pipes, $this->carry(), $this->prepareDestination($destination)
+            array_reverse($this->pipes), $this->carry(), $this->prepareDestination($destination)
         );
 
         return $pipeline($this->container->make(Request::class));
@@ -78,7 +81,7 @@ class Pipeline
                     // otherwise we'll resolve the pipes out of the container and call it with
                     // the appropriate method and arguments, returning the results back out.
                     return $pipe($passable, $stack);
-                } elseif (! is_object($pipe)) {
+                } elseif (!is_object($pipe)) {
                     [$name, $parameters] = $this->parsePipeString($pipe);
 
                     // If the pipe is a string we will parse the string and resolve the class out
@@ -104,7 +107,8 @@ class Pipeline
     /**
      * Get the final piece of the Closure onion.
      *
-     * @param  \Closure  $destination
+     * @param \Closure $destination
+     *
      * @return \Closure
      */
     protected function prepareDestination(Closure $destination)
@@ -117,7 +121,8 @@ class Pipeline
     /**
      * Parse full pipe string to get name and parameters.
      *
-     * @param  string $pipe
+     * @param string $pipe
+     *
      * @return array
      */
     protected function parsePipeString($pipe)

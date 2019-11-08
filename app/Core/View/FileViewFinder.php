@@ -51,6 +51,7 @@ class FileViewFinder
 
     /**
      * Create a new file view loader instance.
+     *
      * @param array $layoutPaths
      * @param array $viewPaths
      * @param Filesystem $filesystem
@@ -77,6 +78,7 @@ class FileViewFinder
      * Find the given view in the list of paths.
      *
      * @param string $name
+     *
      * @return string
      *
      * @throws \InvalidArgumentException
@@ -101,6 +103,7 @@ class FileViewFinder
      * Get an array of possible view files.
      *
      * @param string $name
+     *
      * @return array
      */
     protected function getPossibleViewFiles($name)

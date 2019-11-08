@@ -23,10 +23,6 @@ class AdminView
 
     public function create(View $view)
     {
-        $action = $this->app->getCurrentRoute()[1];
-        if($action['prefix']==='admin_panel'){
-
-        }
 
     }
 }

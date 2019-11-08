@@ -51,7 +51,8 @@ $app->middleware([
     app\Http\Middleware\StartSession::class,
 ]);
 $app->routeMiddleware([
-    'role' => app\Http\Middleware\Role::class,
+    'role'       => app\Http\Middleware\Role::class,
+    'viewPrefix' => app\Http\Middleware\SetPrefixView::class,
 ]);
 
 /*
@@ -79,11 +80,16 @@ $app->register(app\Providers\ViewProvider::class);
 |
 */
 
-$app->router->group(['namespace' => 'app\Http\Controllers'], function ($router) {
+$app->router->group([
+    'namespace'  => 'app\Http\Controllers\Front',
+    'middleware' => 'viewPrefix:front',
+], function ($router) {
     require ROOT . '/routes/web.php';
 });
-$app->router->group(['namespace'  => 'app\Http\Admin\Controllers',
-                     'prefix'     => 'admin_panel',
+$app->router->group([
+    'namespace'  => 'app\Http\Controllers\Admin',
+    'prefix'     => 'admin_panel',
+    'middleware' => 'viewPrefix:admin',
 ], function ($router) {
     require ROOT . '/routes/admin.php';
 });

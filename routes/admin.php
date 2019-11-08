@@ -6,7 +6,7 @@
 use app\Core\Router;
 
 $router->get('/login', function () use ($router) {
-    return view('admin.login',[],'admin.base');
+    return view('login');
 });
 
 $router->post('/login', 'AuthController@login');
