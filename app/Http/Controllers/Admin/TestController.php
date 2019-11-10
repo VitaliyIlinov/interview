@@ -8,7 +8,7 @@ class TestController
 
     public function test()
     {
-        return view('admin.test',[],'admin.base');
+        return view('test');
     }
 
     public function redirect()

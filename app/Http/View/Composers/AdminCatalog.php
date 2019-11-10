@@ -35,9 +35,9 @@ class AdminCatalog
                 'text'    => 'Dashboard',
                 'icon'    => 'fa fa-fw fa-user-circle',
                 'submenu' => [
-                    'finance' => [
-                        'text' => 'Finance',
-                        'link' => 'Finance',
+                    'dashboard' => [
+                        'text' => 'Dashboard',
+                        'link' => '',
                     ],
                 ],
             ],
@@ -45,6 +45,10 @@ class AdminCatalog
                 'icon'    => 'fa fa-fw fa-rocket',
                 'text'    => 'UI element',
                 'submenu' => [
+                    'css_animate'      => [
+                        'text' => 'Css animate',
+                        'link' => 'css_animate',
+                    ],
                     'cards'      => [
                         'text' => 'Cards',
                         'link' => 'cards',
@@ -65,19 +69,23 @@ class AdminCatalog
                         'text' => 'Typography',
                         'link' => 'typography',
                     ],
+                    'accordions' => [
+                        'text' => 'Accordions',
+                        'link' => 'accordions',
+                    ],
                     'tabs'       => [
                         'text' => 'Tabs',
                         'link' => 'tabs',
                     ],
                 ],
             ],
-            'chart'      => [
+            'charts'      => [
                 'text'    => 'Chart',
                 'icon'    => 'fas fa-fw fa-chart-pie',
                 'submenu' => [
-                    'Guage' => [
-                        'text' => 'Guage',
-                        'link' => 'guage',
+                    'gauge' => [
+                        'text' => 'Gauge',
+                        'link' => 'gauge',
                     ],
                 ],
             ],
@@ -89,9 +97,9 @@ class AdminCatalog
                         'text' => 'Form Elements',
                         'link' => 'form_elements',
                     ],
-                    'parsely_validations' => [
-                        'text' => 'Parsely Validations',
-                        'link' => 'parsely_validations',
+                    'form_validation' => [
+                        'text' => 'Parsely\Form Validation',
+                        'link' => 'form_validation',
                     ],
                     'multiselect'         => [
                         'text' => 'Multiselect',
@@ -143,7 +151,7 @@ class AdminCatalog
                         'text' => 'Calendar',
                         'link' => 'calendar',
                     ],
-                    'sortable_nestable list' => [
+                    'sortable_nestable_list' => [
                         'text' => 'Sortable/Nestable List',
                         'link' => 'sortable_nestable',
                     ],
@@ -173,6 +181,10 @@ class AdminCatalog
                         'text' => 'Email Detail',
                         'link' => 'email_detail',
                     ],
+                    'email_compose' => [
+                        'text' => 'Email Compose',
+                        'link' => 'email_compose',
+                    ],
                     'message_chat' => [
                         'text' => 'Message Chat',
                         'link' => 'message_chat',
@@ -183,21 +195,21 @@ class AdminCatalog
                 'text'    => 'Icons',
                 'icon'    => 'fas fa-fw fa-columns',
                 'submenu' => [
-                    'fontawesome_icons' => [
+                    'icon_fontawesome' => [
                         'text' => 'FontAwesome',
-                        'link' => 'fontawesome_icons',
+                        'link' => 'icon_fontawesome',
                     ],
-                    'material_icons'    => [
+                    'icon_material'    => [
                         'text' => 'Material Icons',
-                        'link' => 'material_icons',
+                        'link' => 'icon_material',
                     ],
-                    'simpleline_icons'  => [
+                    'icon_simple'  => [
                         'text' => 'Simpleline',
-                        'link' => 'simpleline_icons',
+                        'link' => 'icon_simple',
                     ],
-                    'themify_icons'     => [
+                    'icon_themify'     => [
                         'text' => 'Themify',
-                        'link' => 'themify_icons',
+                        'link' => 'icon_themify',
                     ],
                 ],
             ],

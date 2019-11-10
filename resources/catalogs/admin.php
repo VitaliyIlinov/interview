@@ -9,7 +9,7 @@
             <ul class="nav flex-column">
                 <?php foreach ($menuInfo['submenu'] as $subMenuKey => $subMenuKeyInfo): ?>
                     <li class="nav-item">
-                        <a href="<?= $mainMenuKey ?>/<?= $subMenuKeyInfo['link'] ?>" class="nav-link">
+                        <a href="/admin_panel/<?= $mainMenuKey ?>/<?= $subMenuKeyInfo['link'] ?>" class="nav-link">
                             <?= $subMenuKeyInfo['text'] ?>
                         </a>
                     </li>

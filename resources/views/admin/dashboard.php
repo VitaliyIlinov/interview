@@ -44,7 +44,7 @@
                                     <td>1</td>
                                     <td>
                                         <div class="m-r-10">
-                                            <img src="/img/product-pic.jpg" alt="user"
+                                            <img src="/admin/img/product-pic.jpg" alt="user"
                                                  class="rounded" width="45">
                                         </div>
                                     </td>
@@ -60,7 +60,7 @@
                                     <td>2</td>
                                     <td>
                                         <div class="m-r-10">
-                                            <img src="/img/product-pic-2.jpg" alt="user"
+                                            <img src="/admin/img/product-pic-2.jpg" alt="user"
                                                  class="rounded" width="45">
                                         </div>
                                     </td>
@@ -76,7 +76,7 @@
                                     <td>3</td>
                                     <td>
                                         <div class="m-r-10">
-                                            <img src="/img/product-pic-3.jpg" alt="user"
+                                            <img src="/admin/img/product-pic-3.jpg" alt="user"
                                                  class="rounded" width="45">
                                         </div>
                                     </td>
@@ -92,7 +92,7 @@
                                     <td>4</td>
                                     <td>
                                         <div class="m-r-10">
-                                            <img src="/img/product-pic-4.jpg" alt="user"
+                                            <img src="/admin/img/product-pic-4.jpg" alt="user"
                                                  class="rounded" width="45">
                                         </div>
                                     </td>
@@ -488,23 +488,3 @@
         </div>
     </div>
 </div>
-
-<div class="footer">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                Copyright © 2018 Concept. All rights reserved. Dashboard by
-                <a href="https://colorlib.com/wp/">Colorlib</a>
-                .
-            </div>
-            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                <div class="text-md-right footer-links d-none d-sm-block">
-                    <a href="javascript: void(0);">About</a>
-                    <a href="javascript: void(0);">Support</a>
-                    <a href="javascript: void(0);">Contact Us</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-

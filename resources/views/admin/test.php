@@ -1,1 +1,2 @@
-<img src="/img/product-pic-23.jpg" alt="user" class="rounded" width="45">
+<?php
+echo __FILE__;

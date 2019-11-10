@@ -7,12 +7,12 @@
     <link rel="stylesheet" href="/libs/fonts/circular-std/style.css">
     <link rel="stylesheet" href="/admin/css/style.css">
     <link rel="stylesheet" href="/libs/fontawesome/css/all.min.css">
-    <link rel="stylesheet" href="/libs/charts/chartist-bundle/chartist.css">
-    <link rel="stylesheet" href="/libs/charts/morris-bundle/morris.css">
     <link rel="stylesheet" href="/libs/fonts/material-design-iconic-font/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="/libs/charts/c3charts/c3.css">
-    <link rel="stylesheet" href="/libs/fonts/flag-icon-css/flag-icon.min.css">
-    <base target="_blank" href="admin_panel/">
+    <link rel="stylesheet" href="/libs/fonts/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet" href="/libs/fonts/themify-icons/themify-icons.css">
+    <link rel="stylesheet" href="/libs/animate/animate.css">
+
+    <script src="/libs/jquery-3.4.1.min.js"></script>
     <title>Concept - Bootstrap 4 Admin Dashboard Template</title>
 </head>
 
@@ -46,7 +46,7 @@
                                         <a href="#" class="list-group-item list-group-item-action active">
                                             <div class="notification-info">
                                                 <div class="notification-list-user-img">
-                                                    <img src="/img/avatar-2.jpg" alt=""
+                                                    <img src="/admin/img/avatar-2.jpg" alt=""
                                                          class="user-avatar-md rounded-circle">
                                                 </div>
                                                 <div class="notification-list-user-block"><span
@@ -59,7 +59,7 @@
                                         <a href="#" class="list-group-item list-group-item-action">
                                             <div class="notification-info">
                                                 <div class="notification-list-user-img">
-                                                    <img src="/img/avatar-3.jpg" alt=""
+                                                    <img src="/admin/img/avatar-3.jpg" alt=""
                                                          class="user-avatar-md rounded-circle">
                                                 </div>
                                                 <div class="notification-list-user-block"><span
@@ -72,7 +72,7 @@
                                         <a href="#" class="list-group-item list-group-item-action">
                                             <div class="notification-info">
                                                 <div class="notification-list-user-img">
-                                                    <img src="/img/avatar-4.jpg" alt=""
+                                                    <img src="/admin/img/avatar-4.jpg" alt=""
                                                          class="user-avatar-md rounded-circle">
                                                 </div>
                                                 <div class="notification-list-user-block"><span
@@ -85,7 +85,7 @@
                                         <a href="#" class="list-group-item list-group-item-action">
                                             <div class="notification-info">
                                                 <div class="notification-list-user-img">
-                                                    <img src="/img/avatar-5.jpg" alt=""
+                                                    <img src="/admin/img/avatar-5.jpg" alt=""
                                                          class="user-avatar-md rounded-circle">
                                                 </div>
                                                 <div class="notification-list-user-block"><span
@@ -113,34 +113,34 @@
                                 <div class="row">
                                     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
                                         <a href="#" class="connection-item">
-                                            <img src="/img/github.png" alt="">
+                                            <img src="/admin/img/github.png" alt="">
                                             <span>Github</span></a>
                                     </div>
                                     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
                                         <a href="#" class="connection-item">
-                                            <img src="/img/dribbble.png" alt="">
+                                            <img src="/admin/img/dribbble.png" alt="">
                                             <span>Dribbble</span></a>
                                     </div>
                                     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
                                         <a href="#" class="connection-item">
-                                            <img src="/img/dropbox.png" alt="">
+                                            <img src="/admin/img/dropbox.png" alt="">
                                             <span>Dropbox</span></a>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
                                         <a href="#" class="connection-item">
-                                            <img src="/img/bitbucket.png" alt="">
+                                            <img src="/admin/img/bitbucket.png" alt="">
                                             <span>Bitbucket</span></a>
                                     </div>
                                     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
                                         <a href="#" class="connection-item">
-                                            <img src="/img/mail_chimp.png" alt="">
+                                            <img src="/admin/img/mail_chimp.png" alt="">
                                             <span>Mail chimp</span></a>
                                     </div>
                                     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
                                         <a href="#" class="connection-item">
-                                            <img src="/img/slack.png" alt="">
+                                            <img src="/admin/img/slack.png" alt="">
                                             <span>Slack</span></a>
                                     </div>
                                 </div>
@@ -155,7 +155,7 @@
                     <li class="nav-item dropdown nav-user">
                         <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
-                            <img src="/img/avatar-1.jpg" alt="" class="user-avatar-md rounded-circle">
+                            <img src="/admin/img/avatar-1.jpg" alt="" class="user-avatar-md rounded-circle">
                         </a>
                         <div class="dropdown-menu dropdown-menu-right nav-user-dropdown"
                              aria-labelledby="navbarDropdownMenuLink2">
@@ -203,20 +203,30 @@
 
     <div class="dashboard-wrapper">
         <?php require_once $view; ?>
+        <div class="footer">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        Copyright © 2018 Concept. All rights reserved. Dashboard by
+                        <a href="https://colorlib.com/wp/">Colorlib</a>
+                        .
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="text-md-right footer-links d-none d-sm-block">
+                            <a href="javascript: void(0);">About</a>
+                            <a href="javascript: void(0);">Support</a>
+                            <a href="javascript: void(0);">Contact Us</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 </div>
 
-<script src="/libs/jquery-3.4.1.min.js"></script>
 <script src="/libs/bootstrap-4.3.1-dist/js/bootstrap.bundle.js"></script>
 <script src="/libs/slimscroll/jquery.slimscroll.js"></script>
-<script src="/libs/charts/chartist-bundle/chartist.min.js"></script>
-<script src="/libs/charts/sparkline/jquery.sparkline.js"></script>
-<script src="/libs/charts/morris-bundle/raphael.min.js"></script>
-<script src="/libs/charts/morris-bundle/morris.js"></script>
-<script src="/libs/charts/c3charts/c3.min.js"></script>
-<script src="/libs/charts/c3charts/d3-5.4.0.min.js"></script>
-<script src="/libs/charts/c3charts/C3chartjs.js"></script>
 <script src="/admin/js/main.js"></script>
 </body>
 

@@ -39,7 +39,7 @@ class Handler implements ExceptionHandler
     {
         return new Response(
             $this->getContent($e),
-            !$e->getCode() == 0 ?: 404,
+            !$e->getCode() == 0 ? $e->getCode() : 404,
             $request->headers->all()
         );
     }
