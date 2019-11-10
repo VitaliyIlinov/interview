@@ -28,7 +28,7 @@
         <div class="row">
             <nav class="col-xl-2 col-lg-3 col-md-4 sidebar">
                 <div class="nav-wrapper">
-                    <?php require_once resource_path('catalogs/main.php'); ?>
+                    <?php require_once resource_path('helpers/front/catalogs.php'); ?>
                 </div>
             </nav>
 

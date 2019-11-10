@@ -1237,7 +1237,7 @@ Top Header
     margin-right: 1rem;
     line-height: inherit;
     white-space: nowrap;
-    padding: 11px 20px;
+    padding: 0 20px;
     font-size: 30px;
     text-transform: uppercase;
     font-weight: 700;
@@ -1641,7 +1641,7 @@ Left Navigation Sidebar
     position: fixed;
     width: 264px;
     height: 100%;
-    top: 60px;
+    /*top: 60px;*/
     overflow: auto;
     background-color: #fff;
     -webkit-box-shadow: 0px 0px 28px 0px rgba(82, 63, 105, 0.13);
@@ -1937,7 +1937,7 @@ Container / Wrapper
 
 .dashboard-main-wrapper {
     min-height: 100%;
-    padding-top: 60px;
+    /*padding-top: 60px;*/
     position: relative;
 }
 
@@ -1949,7 +1949,7 @@ Container / Wrapper
 }
 
 .dashboard-content {
-    padding: 30px 30px 60px 30px;
+    padding: 15px 30px 60px 30px;
 }
 
 

@@ -405,4 +405,9 @@ class Request
     {
         $this->session = $session;
     }
+
+    public function getServer()
+    {
+        return $this->server;
+    }
 }

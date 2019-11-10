@@ -22,8 +22,16 @@ $router->group(['prefix' => 'test'], function (Router $router) {
 });
 
 $router->group(['middleware' => ['role:admin']], function (Router $router) {
-    $router->get('/', 'DashboardController@index');
-    $router->get('dashboard', 'DashboardController@index');
+
+    $router->get('/', function () {
+        return redirect()->route('dashboard');
+    });
+
+    $router->group(['prefix' => 'dashboard'], function (Router $router) {
+        $router->get('/main', ['as' => 'dashboard', function () {
+            return view('dashboard.dashboard');
+        }]);
+    });
 
     $router->group(['prefix' => 'ui_element'], function (Router $router) {
         $router->get('/css_animate', function () {
@@ -136,6 +144,12 @@ $router->group(['middleware' => ['role:admin']], function (Router $router) {
         });
         $router->get('/icon_themify', function () {
             return view('icons.icon_themify');
+        });
+    });
+
+    $router->group(['prefix' => 'documentation'], function (Router $router) {
+        $router->get('/plugin_sources', function () {
+            return view('documentation.plugin_sources');
         });
     });
 

@@ -24,40 +24,45 @@ class AdminCatalog
 
     public function compose(View $view)
     {
-        $view->with('menu', $this->getMenu());
-        $view->with('feature', $this->getFeature());
+        $view->with('menu', array_merge(
+                ['Menu' => 'divider'],
+                $this->getMenu(),
+                ['Feature' => 'divider'],
+                $this->getFeature()
+            )
+        );
     }
 
     private function getMenu()
     {
         return [
-            'dashboard'  => [
-                'text'    => 'Dashboard',
-                'icon'    => 'fa fa-fw fa-user-circle',
+            'dashboard' => [
+                'text' => 'Dashboard',
+                'icon' => 'fa fa-fw fa-user-circle',
                 'submenu' => [
-                    'dashboard' => [
+                    'main' => [
                         'text' => 'Dashboard',
-                        'link' => '',
+                        'link' => 'main',
                     ],
                 ],
             ],
             'ui_element' => [
-                'icon'    => 'fa fa-fw fa-rocket',
-                'text'    => 'UI element',
+                'icon' => 'fa fa-fw fa-rocket',
+                'text' => 'UI element',
                 'submenu' => [
-                    'css_animate'      => [
+                    'css_animate' => [
                         'text' => 'Css animate',
                         'link' => 'css_animate',
                     ],
-                    'cards'      => [
+                    'cards' => [
                         'text' => 'Cards',
                         'link' => 'cards',
                     ],
-                    'general'    => [
+                    'general' => [
                         'text' => 'General',
                         'link' => 'general',
                     ],
-                    'carousel'   => [
+                    'carousel' => [
                         'text' => 'Carousel',
                         'link' => 'carousel',
                     ],
@@ -73,15 +78,15 @@ class AdminCatalog
                         'text' => 'Accordions',
                         'link' => 'accordions',
                     ],
-                    'tabs'       => [
+                    'tabs' => [
                         'text' => 'Tabs',
                         'link' => 'tabs',
                     ],
                 ],
             ],
-            'charts'      => [
-                'text'    => 'Chart',
-                'icon'    => 'fas fa-fw fa-chart-pie',
+            'charts' => [
+                'text' => 'Chart',
+                'icon' => 'fas fa-fw fa-chart-pie',
                 'submenu' => [
                     'gauge' => [
                         'text' => 'Gauge',
@@ -89,11 +94,11 @@ class AdminCatalog
                     ],
                 ],
             ],
-            'forms'      => [
-                'text'    => 'Forms',
-                'icon'    => 'fab fa-fw fa-wpforms',
+            'forms' => [
+                'text' => 'Forms',
+                'icon' => 'fab fa-fw fa-wpforms',
                 'submenu' => [
-                    'form_elements'       => [
+                    'form_elements' => [
                         'text' => 'Form Elements',
                         'link' => 'form_elements',
                     ],
@@ -101,29 +106,29 @@ class AdminCatalog
                         'text' => 'Parsely\Form Validation',
                         'link' => 'form_validation',
                     ],
-                    'multiselect'         => [
+                    'multiselect' => [
                         'text' => 'Multiselect',
                         'link' => 'multiselect',
                     ],
-                    'date_picker'         => [
+                    'date_picker' => [
                         'text' => 'Date Picker',
                         'link' => 'date_picker',
                     ],
-                    'bootstrap_select'    => [
+                    'bootstrap_select' => [
                         'text' => 'Bootstrap Select',
                         'link' => 'bootstrap_select',
                     ],
                 ],
             ],
-            'tables'     => [
-                'text'    => 'Tables',
-                'icon'    => 'fas fa-fw fa-table',
+            'tables' => [
+                'text' => 'Tables',
+                'icon' => 'fas fa-fw fa-table',
                 'submenu' => [
                     'general_tables' => [
                         'text' => 'General Tables',
                         'link' => 'general_tables',
                     ],
-                    'data_tables'    => [
+                    'data_tables' => [
                         'text' => 'Data Tables',
                         'link' => 'data_tables',
                     ],
@@ -136,18 +141,18 @@ class AdminCatalog
     {
         return [
             'pages' => [
-                'text'    => 'pages',
-                'icon'    => 'fas fa-fw fa-file',
+                'text' => 'pages',
+                'icon' => 'fas fa-fw fa-file',
                 'submenu' => [
-                    'pricing_tables'         => [
+                    'pricing_tables' => [
                         'text' => 'Pricing Tables',
                         'link' => 'pricing_tables',
                     ],
-                    'timeline'               => [
+                    'timeline' => [
                         'text' => 'Timeline',
                         'link' => 'timeline',
                     ],
-                    'calendar'               => [
+                    'calendar' => [
                         'text' => 'Calendar',
                         'link' => 'calendar',
                     ],
@@ -155,25 +160,25 @@ class AdminCatalog
                         'text' => 'Sortable/Nestable List',
                         'link' => 'sortable_nestable',
                     ],
-                    'media_objects'          => [
+                    'media_objects' => [
                         'text' => 'Media Objects',
                         'link' => 'media_objects',
                     ],
-                    'cropper'                => [
+                    'cropper' => [
                         'text' => 'Cropper',
                         'link' => 'cropper',
                     ],
-                    'color_picker'           => [
+                    'color_picker' => [
                         'text' => 'Color Picker',
                         'link' => 'color_picker',
                     ],
                 ],
             ],
-            'apps'  => [
-                'text'    => 'Apps',
-                'icon'    => 'fas fa-fw fa-inbox',
+            'apps' => [
+                'text' => 'Apps',
+                'icon' => 'fas fa-fw fa-inbox',
                 'submenu' => [
-                    'inbox'        => [
+                    'inbox' => [
                         'text' => 'Inbox',
                         'link' => 'inbox',
                     ],
@@ -192,24 +197,34 @@ class AdminCatalog
                 ],
             ],
             'icons' => [
-                'text'    => 'Icons',
-                'icon'    => 'fas fa-fw fa-columns',
+                'text' => 'Icons',
+                'icon' => 'fas fa-fw fa-columns',
                 'submenu' => [
                     'icon_fontawesome' => [
                         'text' => 'FontAwesome',
                         'link' => 'icon_fontawesome',
                     ],
-                    'icon_material'    => [
+                    'icon_material' => [
                         'text' => 'Material Icons',
                         'link' => 'icon_material',
                     ],
-                    'icon_simple'  => [
+                    'icon_simple' => [
                         'text' => 'Simpleline',
                         'link' => 'icon_simple',
                     ],
-                    'icon_themify'     => [
+                    'icon_themify' => [
                         'text' => 'Themify',
                         'link' => 'icon_themify',
+                    ],
+                ],
+            ],
+            'documentation' => [
+                'text' => 'Documentation',
+                'icon' => 'fas fa-fw fa-book',
+                'submenu' => [
+                    'plugin_sources' => [
+                        'text' => 'Plugin sources',
+                        'link' => 'plugin_sources',
                     ],
                 ],
             ],
