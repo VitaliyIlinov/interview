@@ -61,6 +61,7 @@
 
 <script src="/libs/bootstrap-4.3.1-dist/js/bootstrap.bundle.js"></script>
 <script src="/libs/slimscroll/jquery.slimscroll.js"></script>
+<script src="/libs/sortable/sortable.min.js"></script>
 <script src="/admin/js/main.js"></script>
 </body>
 

@@ -156,7 +156,7 @@ class AdminCatalog
                         'text' => 'Calendar',
                         'link' => 'calendar',
                     ],
-                    'sortable_nestable_list' => [
+                    'sortable_nestable' => [
                         'text' => 'Sortable/Nestable List',
                         'link' => 'sortable_nestable',
                     ],

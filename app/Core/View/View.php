@@ -4,6 +4,7 @@ namespace app\Core\View;
 
 use app\contracts\Support\Renderable;
 use app\Core\View\Support\ViewFactory;
+use Exception;
 use Throwable;
 
 class View implements Renderable
@@ -106,6 +107,8 @@ class View implements Renderable
      */
     private function renderContents(string $layout, string $view, array $data): string
     {
+        $obLevel = ob_get_level();
+
         ob_start();
 
         extract($data, EXTR_SKIP);
@@ -113,10 +116,28 @@ class View implements Renderable
         try {
             require_once $layout;
         } catch (Throwable $e) {
-            throw $e;
+            $this->handleViewException($e, $obLevel);
         }
 
         return ltrim(ob_get_clean());
+    }
+
+    /**
+     * Handle a view exception.
+     *
+     * @param  Exception  $e
+     * @param  int  $obLevel
+     * @return void
+     *
+     * @throws Exception
+     */
+    protected function handleViewException(Exception $e, $obLevel)
+    {
+        while (ob_get_level() > $obLevel) {
+            ob_end_clean();
+        }
+
+        throw $e;
     }
 
     /**

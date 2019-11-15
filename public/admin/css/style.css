@@ -854,71 +854,13 @@ html body .display-7 {
 /*-----------------------
 Background Color / Color
 -------------------------*/
-
-.bg-primary {
-    background-color: #5969ff !important;
-    color: #fff !important;
+.bg-light-dark{
+    background-color: #d0d4d8 !important;
 }
 
-.bg-brand {
-    background-color: #ffc750 !important;
+.bg-blue-light {
+    background-color: #C8EBFB;
 }
-
-.bg-secondary {
-    background-color: #ff407b !important;
-    color: #fff !important;
-}
-
-.bg-success {
-    background-color: #2ec551 !important;
-}
-
-.bg-danger {
-    background-color: #ef172c !important;
-}
-
-.bg-warning {
-    background-color: #ffc108 !important;
-}
-
-.bg-info {
-    background-color: #25d5f2 !important;
-}
-
-.bg-light {
-    background-color: #f9f9ff !important;
-}
-
-.bg-dark {
-    background-color: #2e2f39 !important;
-}
-
-.bg-primary-light {
-    background-color: #dbdeff !important;
-    color: #fff !important;
-}
-
-.bg-info-light {
-    background-color: #dffaff !important;
-    color: #fff;
-}
-
-.bg-secondary-light {
-    background-color: #ffdbe6 !important;
-}
-
-.bg-danger-light {
-    background-color: #fbd3d5 !important;
-}
-
-.bg-brand-light {
-    background-color: #fff2d5 !important;
-}
-
-.bg-success-light {
-    background-color: #c5fad3 !important;
-}
-
 
 /*-----------------------
 Borders
@@ -3968,15 +3910,6 @@ Pills vertical
 2.11  Listgroup
 -------------------------*/
 
-.list-group-item {
-    position: relative;
-    display: block;
-    padding: 16px 20px;
-    margin-bottom: -1px;
-    border: 1px solid #e6e6f2;
-}
-
-
 /* -----------------------
 2.12  Multiselect
 -------------------------*/
@@ -5304,176 +5237,6 @@ Vertical Timeline - by CodyHouse.co
 6.12 Shortable / Nesetable
 -------------------------*/
 
-.dashboard-short-list {}
-
-.drag-handle,
-.drag-indicator {
-    cursor: move;
-    cursor: -webkit-grab;
-    cursor: grab;
-}
-
-.card-header+.list-group .list-group-item:first-child {
-    border-top: 0;
-}
-
-.list-group-bordered .list-group-item {
-    border-color: rgba(19, 29, 40, .125);
-}
-
-/*.list-group-item:first-child {
-    border-width: 0 0 1px;
-}*/
-
-.drag-indicator {
-    display: inline-block;
-    margin: 0 .5em;
-    height: 8px;
-    width: 6px;
-    background-image: url(/images/drag-indicator.png);
-    -webkit-transform: translate3d(-.5em, 0, 0);
-    transform: translate3d(-.5em, 0, 0);
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-
-.dashboard-short-list .list-group-item {
-    display: flex;
-}
-
-.dd {
-    position: relative;
-    display: block;
-    margin: 0;
-    padding: 0;
-    max-width: 100%;
-    list-style: none;
-    font-size: 13px;
-    line-height: 20px;
-}
-
-.dd-list {
-    display: block;
-    position: relative;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    width: 100%;
-}
-
-.dd-list .dd-list {
-    padding-left: 30px;
-}
-
-.dd-collapsed .dd-list {
-    display: none;
-}
-
-.dd-item,
-.dd-empty,
-.dd-placeholder {
-    display: block;
-    position: relative;
-    margin: 0;
-    padding: 0;
-    min-height: 20px;
-    font-size: 13px;
-    line-height: 20px;
-}
-
-.dd-handle {
-    margin-bottom: -1px;
-    padding: .75rem 1rem;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    background-color: #fff;
-    border-top: 1px solid rgba(19, 29, 40, .125);
-    border-bottom: 1px solid rgba(19, 29, 40, .125);
-}
-
-.dd-handle:hover {
-    color: #5969ff;
-    background: #fff;
-}
-
-.dd-item>button {
-    display: block;
-    position: relative;
-    cursor: pointer;
-    float: left;
-    width: 34px;
-    height: 20px;
-    margin: 18px 0;
-    padding: 0;
-    text-indent: 100%;
-    white-space: nowrap;
-    overflow: hidden;
-    border: 0;
-    background: transparent;
-    font-size: 12px;
-    line-height: 1;
-    text-align: center;
-    font-weight: bold;
-}
-
-.dd-item>button:before {
-    content: '+';
-    display: block;
-    position: absolute;
-    width: 100%;
-    text-align: center;
-    text-indent: 0;
-    font-size: 14px;
-}
-
-.dd-item>button[data-action="collapse"]:before {
-    content: '-';
-}
-
-.dd-placeholder,
-.dd-empty {
-    margin: 5px 0;
-    padding: 0;
-    min-height: 30px;
-    background: #f5f5f5;
-    border: 1px dashed #b6bcbf;
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-}
-
-.dd-empty {
-    border: 1px dashed #bbb;
-    min-height: 100px;
-    background-color: #f5f5f5;
-    background-image: -webkit-linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff), -webkit-linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff);
-    background-image: -moz-linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff), -moz-linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff);
-    background-image: linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff), linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff);
-    background-size: 60px 60px;
-    background-position: 0 0, 30px 30px;
-}
-
-.dd-dragel {
-    position: absolute;
-    pointer-events: none;
-    z-index: 9999;
-}
-
-.dd-dragel>.dd-item .dd-handle {
-    margin-top: 0;
-}
-
-.dd-dragel .dd-handle {
-    -webkit-box-shadow: 2px 4px 6px 0 rgba(0, 0, 0, .1);
-    box-shadow: 2px 4px 6px 0 rgba(0, 0, 0, .1);
-}
-
-
 /**
 * Nestable Extras
 */
@@ -5986,15 +5749,6 @@ Vertical Timeline - by CodyHouse.co
     vertical-align: middle;
     padding: 0;
     margin: 0 30px 0 0;
-}
-
-.btn-group,
-.btn-group-vertical {
-    position: relative;
-    display: -webkit-inline-box;
-    display: -ms-inline-flexbox;
-    display: inline-flex;
-    vertical-align: middle;
 }
 
 .email-filters input {

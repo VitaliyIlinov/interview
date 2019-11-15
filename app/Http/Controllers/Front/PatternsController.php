@@ -69,7 +69,7 @@ class PatternsController
         return str_replace(
             '/',
             DIRECTORY_SEPARATOR,
-            $this->app->path() . "/Models/Info/Patterns/{$file}.php"
+            $this->app->path() . "/Models/Front/Info/Patterns/{$file}.php"
         );
     }
 }

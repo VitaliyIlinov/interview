@@ -273,12 +273,7 @@
         <br>
         <pre>
             <code class="php">
-                <?= str_replace(
-                    '<?php',
-                    '',
-                    app('files')->get(
-                        app()->path() . '/Models/Info/Patterns/Creational/Builder.php')
-                ); ?>
+                <?=$buider?>
             </code>
         </pre>
 

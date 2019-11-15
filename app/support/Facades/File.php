@@ -19,6 +19,6 @@ class File extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'files';
+        return Filesystem::class;
     }
 }
