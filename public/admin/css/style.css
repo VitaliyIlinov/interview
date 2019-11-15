@@ -361,12 +361,6 @@ address {}
     border: #7f83a2 1px solid;
 }
 
-.custom-control-input {
-    position: absolute;
-    z-index: -1;
-    opacity: 0;
-}
-
 .custom-control-label {
     margin-bottom: 0;
 }
@@ -6303,10 +6297,6 @@ Vertical Timeline - by CodyHouse.co
 
 .chat-team-sidebar .chat-team-sidebar-top {
     padding: 1.5rem;
-}
-
-.align-items-center {
-    align-items: center !important;
 }
 
 .chat-team-sidebar .nav {

@@ -410,4 +410,20 @@ class Request
     {
         return $this->server;
     }
+//
+//    public function __get($key)
+//    {
+//        return $this->all($key);
+//    }
+//    /**
+//     * Get all of the input and files for the request.
+//     *
+//     * @param  array|mixed  $keys
+//     * @return array
+//     */
+//    public function all($keys = null)
+//    {
+//        $input = array_replace_recursive($this->input(), $this->allFiles());
+//        return $input;
+//    }
 }

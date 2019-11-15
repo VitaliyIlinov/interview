@@ -4,6 +4,7 @@ use app\Core\Application;
 use app\Core\Container;
 use app\Core\Bootstrap\LoadEnvironmentVariables;
 use app\Core\RedirectResponse;
+use app\Core\Request;
 use app\Core\Router\Redirector;
 use app\Core\Session\SessionManager;
 use app\Core\View\View;
@@ -173,5 +174,29 @@ if (! function_exists('redirect')) {
         }
 
         return $redirect->to($to, $status, $headers, $secure);
+    }
+}
+
+if (! function_exists('request')) {
+    /**
+     * Get an instance of the current request or an input item from the request.
+     *
+     * @param  array|string  $key
+     * @param  mixed   $default
+     * @return Request|string|array
+     */
+    function request($key = null, $default = null)
+    {
+//        if (is_null($key)) {
+            return app(Request::class);
+//        }
+
+//        if (is_array($key)) {
+//            return app(Request::class)->only($key);
+//        }
+//
+//        $value = app(Request::class)->__get($key);
+//
+//        return is_null($value) ? $default : $value;
     }
 }

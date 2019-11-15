@@ -173,7 +173,7 @@ class Application extends Container
      */
     public function getBasePath($path = null): string
     {
-        return $this->basePath . ($path ? DIRECTORY_SEPARATOR . $path : $path);
+        return $this->path() . ($path ? DIRECTORY_SEPARATOR . $path : $path);
     }
 
     /**

@@ -28,9 +28,7 @@ $router->group(['middleware' => ['role:admin']], function (Router $router) {
     });
 
     $router->group(['prefix' => 'dashboard'], function (Router $router) {
-        $router->get('/main', ['as' => 'dashboard', function () {
-            return view('dashboard.dashboard');
-        }]);
+        $router->get('/main', ['as' => 'dashboard','uses'=>'DashboardController@index']);
     });
 
     $router->group(['prefix' => 'ui_element'], function (Router $router) {
@@ -151,6 +149,10 @@ $router->group(['middleware' => ['role:admin']], function (Router $router) {
         $router->get('/plugin_sources', function () {
             return view('documentation.plugin_sources');
         });
+    });
+
+    $router->group(['prefix' => 'ajax'], function (Router $router) {
+        $router->post('/change_todo_list', ['as' => 'changeTodoList','uses'=>'AjaxController@changeTodoList']);
     });
 
 });
