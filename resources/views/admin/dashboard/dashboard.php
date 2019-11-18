@@ -16,7 +16,13 @@
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer clearfix">
-                        <button type="button" class="btn btn-info float-right"><i class="fas fa-plus"></i> Add item
+                        <button type="button"
+                                data-description="new"
+                                data-toggle="modal"
+                                data-target="#edit-new-form"
+                                class="btn btn-info float-right">
+                            <i class="fas fa-plus"></i>
+                            Add item
                         </button>
                     </div>
                 </div>
