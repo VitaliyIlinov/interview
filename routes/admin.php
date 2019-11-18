@@ -152,7 +152,12 @@ $router->group(['middleware' => ['role:admin']], function (Router $router) {
     });
 
     $router->group(['prefix' => 'ajax'], function (Router $router) {
-        $router->post('/change_todo_list', ['as' => 'changeTodoList','uses'=>'AjaxController@changeTodoList']);
+        $router->group(['prefix' => 'todo_list'], function (Router $router) {
+            $router->post('/sort', ['as' => 'sortTodoList','uses'=>'AjaxController@sortTodoList']);
+            $router->post('/edit_desc', ['as' => 'editDescTodoList','uses'=>'AjaxController@editDescTodoList']);
+            $router->post('/edit_desc', ['as' => 'newDescTodoList','uses'=>'AjaxController@newDescTodoList']);
+            $router->post('/edit_done', ['as' => 'editDoneTodoList','uses'=>'AjaxController@editDoneTodoList']);
+        });
     });
 
 });
