@@ -2,12 +2,14 @@
 
 namespace app\Http\Controllers\Admin;
 
+use app\Http\Controllers\Admin\Traits\TodoList;
+
 class DashboardController
 {
-    static public $pathToList = 'Models/Admin/helpers/todo_list.php';
+    use TodoList;
 
     public function index()
     {
-        return view('dashboard.dashboard')->with('todolist', require_once app()->getBasePath(self::$pathToList));
+        return view('dashboard.dashboard')->with('todolist', $this->getTodoListData());
     }
 }

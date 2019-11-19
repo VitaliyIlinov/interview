@@ -2,51 +2,59 @@
 
 namespace app\Http\Controllers\Admin;
 
+use app\Http\Controllers\Admin\Traits\TodoList;
+
 class AjaxController
 {
+    use TodoList;
+
     public function editDoneTodoList()
     {
-        $key = request()->request->get('key');
-        $value = request()->request->get('value');
-        $filePath = app()->getBasePath(DashboardController::$pathToList);
-        $todoList = require_once $filePath;
-        $todoList[$key]['is_done'] = $value;
-        $todoList[$key]['created_time'] = date("Y-m-d H:i:s");
-        $contents = var_export($todoList, true);
-        file_put_contents($filePath, "<?php\n return {$contents};\n");
+        $id = request()->request->get('key');
+        $todoList = $this->getTodoListData();
+        $todoList[$id] = $this->setTodoRow(
+            null,
+            request()->request->get('value')
+        );
+        $this->putTodoListFile($todoList);
 
-        return 1;
+        return $todoList;
+    }
+
+    public function editDescTodoList()
+    {
+        $id = request()->request->get('key');
+        $todoList = $this->getTodoListData();
+        $todoList[$id] = $this->setTodoRow(
+            request()->request->get('description')
+        );
+        $this->putTodoListFile($todoList);
+
+        return $todoList;
+    }
+
+    public function newDescTodoList()
+    {
+        $todoList = $this->getTodoListData();
+        $todoList[] = $this->setTodoRow(
+            request()->request->get('description')
+        );
+        $this->putTodoListFile($todoList);
+
+        return $todoList;
     }
 
     public function sortTodoList()
     {
         $values = request()->request->get('value');
         $filePath = app()->getBasePath(DashboardController::$pathToList);
-        $todoList = require_once $filePath;
-        foreach ($values as $key => $value){
+        $todoList = require $filePath;
+        foreach ($values as $key => $value) {
             $todoListw[$key] = $todoList[$value];
         }
         $contents = var_export($todoListw, true);
-        file_put_contents($filePath, "<?php\n return {$contents};\n");
-        return 1;
-    }
-
-    public function editDescTodoList()
-    {
-        $id = request()->request->get('id');
-        $description = request()->request->get('description');
-        $filePath = app()->getBasePath(DashboardController::$pathToList);
-        $todoList = require_once $filePath;
-        $todoList[$id]['description'] = $description;
-        $todoList[$id]['created_time'] = date("Y-m-d H:i:s");
-        $contents = var_export($todoList, true);
-        file_put_contents($filePath, "<?php\n return {$contents};\n");
-
-        return 1;
-    }
-
-    public function todoListAction()
-    {
-
+        file_put_contents($filePath, "<?php\n return {$contents};\n", LOCK_EX);
+        $new = require $filePath;
+        return print_r($new, true);
     }
 }
