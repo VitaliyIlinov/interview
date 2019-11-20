@@ -1,11 +1,11 @@
 <?php
 
-namespace app\Core;
+namespace app\Core\Response;
 
 use app\Core\Bag\ResponseHeaderBag;
-use app\contracts\Support\Renderable;
+use app\Core\Request;
 
-class Response
+abstract class BaseResponse
 {
     /**
      * Status codes translation table.
@@ -85,11 +85,6 @@ class Response
     ];
 
     /**
-     * @var ResponseHeaderBag
-     */
-    public $headers;
-
-    /**
      * @var string
      */
     protected $content;
@@ -105,6 +100,16 @@ class Response
     protected $statusText;
 
     /**
+     * @var ResponseHeaderBag
+     */
+    public $headers;
+
+    /**
+     * @var string
+     */
+    protected $version;
+
+    /**
      * @param string $content
      * @param int $status
      * @param array $headers
@@ -114,6 +119,23 @@ class Response
         $this->headers = new ResponseHeaderBag($headers);
         $this->setContent($content);
         $this->setStatusCode($status);
+        $this->setProtocolVersion('1.0');
+    }
+
+    /**
+     * Sets the HTTP protocol version (1.0 or 1.1).
+     *
+     * @param string $version
+     *
+     * @return $this
+     *
+     * @final
+     */
+    final function setProtocolVersion(string $version)
+    {
+        $this->version = $version;
+
+        return $this;
     }
 
     /**
@@ -129,11 +151,6 @@ class Response
      */
     public function setContent($content)
     {
-
-        if ($content instanceof Renderable) {
-            $content = $content->render();
-        }
-
         if (null !== $content && !\is_string($content) && !is_numeric($content) && !\is_callable([
                 $content,
                 '__toString',
@@ -147,15 +164,27 @@ class Response
         return $this;
     }
 
+
+    /**
+     * Gets the current response content.
+     *
+     * @return string Content
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
+
     /**
      * Sets the response status code.
      *
      * If the status text is null it will be automatically populated for the known
      * status codes and left empty otherwise.
      *
-     * @return $this
+     * @param int $code
+     * @param null $text
      *
-     * @throws \InvalidArgumentException When the HTTP status code is not valid
+     * @return $this
      *
      * @final
      */
@@ -184,6 +213,22 @@ class Response
     }
 
     /**
+     * Set a header on the Response.
+     *
+     * @param string $key
+     * @param array|string $values
+     * @param bool $replace
+     *
+     * @return $this
+     */
+    public function header($key, $values, $replace = true)
+    {
+        $this->headers->set($key, $values, $replace);
+
+        return $this;
+    }
+
+    /**
      * Is response invalid?
      *
      * @see http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
@@ -203,11 +248,56 @@ class Response
      * the Request that is "associated" with this Response.
      *
      * @param Request $request
+     *
      * @return self
      */
     public function prepare(Request $request)
     {
+        $headers = $this->headers;
+
+        if ($this->isInformational() || $this->isEmpty()) {
+            $this->setContent(null);
+            $headers->remove('Content-Type');
+            $headers->remove('Content-Length');
+        } else {
+            if (!$headers->has('Content-Type')) {
+                $format = $request->getRequestFormat();
+                if (null !== $format && $mimeType = $request->getMimeType($format)) {
+                    $headers->set('Content-Type', $mimeType);
+                }
+            }
+            if (!$headers->has('Content-Type')) {
+                $headers->set('Content-Type', 'text/html; charset=UTF-8');
+            }
+
+            // Check if we need to send extra expire info headers
+            if (false !== strpos($headers->get('Cache-Control'), 'no-cache')) {
+                $headers->set('pragma', 'no-cache');
+                $headers->set('expires', -1);
+            }
+        }
+
         return $this;
+    }
+
+    /**
+     * Is response informative?
+     *
+     * @final
+     */
+    final function isInformational(): bool
+    {
+        return $this->statusCode >= 100 && $this->statusCode < 200;
+    }
+
+    /**
+     * Is the response empty?
+     *
+     * @final
+     */
+    final function isEmpty(): bool
+    {
+        return \in_array($this->statusCode, [204, 304]);
     }
 
     /**
@@ -245,20 +335,21 @@ class Response
         foreach ($this->headers as $name => $values) {
             $replace = 0 === strcasecmp($name, 'Content-Type');
             foreach ($values as $value) {
-                header($name.': '.$value, $replace, $this->statusCode);
+                header($name . ': ' . $value, $replace, $this->statusCode);
             }
         }
         // cookies
-        /**@var $cookie Cookie*/
+        /**@var $cookie Cookie */
         foreach ($this->headers->getCookies() as $cookie) {
-            header('Set-Cookie: '.$cookie->setRaw(), false, $this->statusCode);
+            header('Set-Cookie: ' . $cookie->setRaw(), false, $this->statusCode);
         }
 
         // status
-        header(sprintf('HTTP/%s %s %s', '1.0', $this->statusCode, $this->statusText), true, $this->statusCode);
+        header(sprintf('HTTP/%s %s %s', $this->version, $this->statusCode, $this->statusText), true, $this->statusCode);
 
         return $this;
     }
+
     /**
      * Sends content for the current web response.
      *
@@ -270,5 +361,4 @@ class Response
 
         return $this;
     }
-
 }

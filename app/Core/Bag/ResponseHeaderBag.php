@@ -8,11 +8,10 @@ class ResponseHeaderBag extends HeaderBag
 {
     protected $cookies = [];
 
-    protected $headerNames = [];
-
     public function __construct(array $headers = [])
     {
         parent::__construct($headers);
+
         if (!isset($this->headers['cache-control'])) {
             $this->set('Cache-Control', '');
         }

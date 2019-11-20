@@ -3,6 +3,8 @@
 namespace app\Core;
 
 use app\Core\Event\EventServiceProvider;
+use app\Core\Response\BaseResponse;
+use app\Core\Response\Response;
 use app\Core\Router\RouteServiceProvider;
 use app\Core\Support\ServiceProvider;
 use app\Exceptions\HttpResponseException;
@@ -591,7 +593,7 @@ class Application extends Container
     {
         $request = app(Request::class);
 
-        if (!$response instanceof Response) {
+        if (!$response instanceof BaseResponse) {
             $response = new Response($response);
         }
         return $response->prepare($request);
@@ -699,7 +701,7 @@ class Application extends Container
         }
     }
 
-    public function terminate(Response $response)
+    public function terminate(BaseResponse $response)
     {
         $this->terminateMiddleware($this['request'], $response);
     }

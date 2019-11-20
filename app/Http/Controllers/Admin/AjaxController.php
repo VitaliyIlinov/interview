@@ -10,28 +10,28 @@ class AjaxController
 
     public function editDoneTodoList()
     {
-        $todoList = $this->setIsDone(
+        $result = $this->setIsDone(
             filter_var(request()->request->get('is_done'), FILTER_VALIDATE_BOOLEAN)
         )->saveTodoListRow(request()->request->get('id'));
 
-        return print_r($todoList, true);
+        return response()->json($result);
     }
 
     public function editDescTodoList()
     {
-        $todoList = $this->setDescription(request()->request->get('description'))
+        $result = $this->setDescription(request()->request->get('description'))
             ->saveTodoListRow(request()->request->get('id'));
 
-        return print_r($todoList, true);
+        return response()->json($result);
     }
 
     public function newDescTodoList()
     {
-        $todoList = $this->setDescription(request()->request->get('description'))
+        $result = $this->setDescription(request()->request->get('description'))
             ->setIsDone(false)
             ->saveTodoListRow();
 
-        return print_r($todoList, true);
+        return response()->json($result);
     }
 
     public function sortTodoList()
@@ -43,6 +43,6 @@ class AjaxController
         }
         $this->putTodoListFile($todoListNew);
 
-        return print_r($todoListNew, true);
+        return response()->json($todoListNew);
     }
 }

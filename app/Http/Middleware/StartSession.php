@@ -5,7 +5,8 @@ namespace app\Http\Middleware;
 use app\Core\Application;
 use app\Core\Cookie;
 use app\Core\Request;
-use app\Core\Response;
+use app\Core\Response\BaseResponse;
+use app\Core\Response\Response;
 use app\Core\Session\SessionManager;
 use app\Core\Session\Store;
 use Closure;
@@ -113,7 +114,7 @@ class StartSession
         }
     }
 
-    protected function addCookieToResponse(Response $response, Store $session)
+    protected function addCookieToResponse(BaseResponse $response, Store $session)
     {
         $response->headers->setCookie(new Cookie(
             $session->getName(), $session->getId(), time() + $this->getSessionLifetimeInSeconds()

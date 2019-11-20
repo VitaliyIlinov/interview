@@ -2,8 +2,6 @@
 
 namespace app\Core\Bag;
 
-use Traversable;
-
 class HeaderBag implements \IteratorAggregate, \Countable
 {
 
@@ -80,6 +78,19 @@ class HeaderBag implements \IteratorAggregate, \Countable
 
         return $headers[$key];
     }
+
+    /**
+     * Returns true if the HTTP header is defined.
+     *
+     * @param string $key The HTTP header
+     *
+     * @return bool true if the parameter exists, false otherwise
+     */
+    public function has($key)
+    {
+        return \array_key_exists(str_replace('_', '-', strtolower($key)), $this->all());
+    }
+
 
     /**
      * Sets a header by name.

@@ -1,8 +1,8 @@
 <?php
 
-namespace app\Core;
+namespace app\Core\Response;
 
-
+use app\Core\Request;
 use app\Core\Session\Store;
 
 class RedirectResponse extends Response
@@ -15,7 +15,6 @@ class RedirectResponse extends Response
      * @var Store
      */
     protected $session;
-
 
     /**
      * The request instance.
@@ -31,7 +30,8 @@ class RedirectResponse extends Response
         $this->setTargetUrl($url);
 
         if (!$this->isRedirect()) {
-            throw new \InvalidArgumentException(sprintf('The HTTP status code is not a redirect ("%s" given).', $status));
+            throw new \InvalidArgumentException(sprintf('The HTTP status code is not a redirect ("%s" given).',
+                $status));
         }
 
         if (301 == $status && !\array_key_exists('cache-control', $headers)) {
@@ -43,18 +43,22 @@ class RedirectResponse extends Response
      * Is the response a redirect of some form?
      *
      * @final
+     *
      * @param string|null $location
+     *
      * @return bool
      */
     public function isRedirect(?string $location = null): bool
     {
-        return \in_array($this->statusCode, [201, 301, 302, 303, 307, 308]) && (null === $location ?: $location == $this->headers->get('Location'));
+        return \in_array($this->statusCode,
+                [201, 301, 302, 303, 307, 308]) && (null === $location ?: $location == $this->headers->get('Location'));
     }
 
     /**
      * Sets the redirect target of this response.
      *
      * @param string $url The URL to redirect to
+     *
      * @return RedirectResponse
      * @throws \InvalidArgumentException
      */
@@ -89,6 +93,7 @@ class RedirectResponse extends Response
      * Set the request instance.
      *
      * @param Request $request
+     *
      * @return void
      */
     public function setRequest(Request $request)
@@ -107,8 +112,9 @@ class RedirectResponse extends Response
     /**
      * Flash a piece of data to the session.
      *
-     * @param  string|array  $key
-     * @param  mixed  $value
+     * @param string|array $key
+     * @param mixed $value
+     *
      * @return static
      */
     public function with($key, $value = null)

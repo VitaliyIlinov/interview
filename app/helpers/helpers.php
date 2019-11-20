@@ -3,8 +3,9 @@
 use app\Core\Application;
 use app\Core\Container;
 use app\Core\Bootstrap\LoadEnvironmentVariables;
-use app\Core\RedirectResponse;
+use app\Core\Response\RedirectResponse;
 use app\Core\Request;
+use app\Core\Response\ResponseFactory;
 use app\Core\Router\Redirector;
 use app\Core\Session\SessionManager;
 use app\Core\View\View;
@@ -174,6 +175,27 @@ if (! function_exists('redirect')) {
         }
 
         return $redirect->to($to, $status, $headers, $secure);
+    }
+}
+
+if (! function_exists('response')) {
+    /**
+     * Return a new response from the application.
+     *
+     * @param  string  $content
+     * @param  int     $status
+     * @param  array   $headers
+     * @return ResponseFactory|\app\Core\Response\Response
+     */
+    function response($content = '', $status = 200, array $headers = [])
+    {
+        $factory = new ResponseFactory;
+
+        if (func_num_args() === 0) {
+            return $factory;
+        }
+
+        return $factory->make($content, $status, $headers);
     }
 }
 

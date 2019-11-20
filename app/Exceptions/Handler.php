@@ -4,7 +4,7 @@ namespace app\Exceptions;
 
 use app\contracts\Debug\ExceptionHandler;
 use app\Core\Request;
-use app\Core\Response;
+use app\Core\Response\Response;
 use Throwable;
 
 class Handler implements ExceptionHandler

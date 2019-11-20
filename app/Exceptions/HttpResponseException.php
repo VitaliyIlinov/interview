@@ -2,7 +2,7 @@
 
 namespace app\Exceptions;
 
-use app\Core\Response;
+use app\Core\Response\Response;
 use RuntimeException;
 
 class HttpResponseException extends RuntimeException

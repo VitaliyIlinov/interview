@@ -3,7 +3,7 @@
 namespace app\contracts\Debug;
 
 use app\Core\Request;
-use app\Core\Response;
+use app\Core\Response\Response;
 use Throwable;
 
 interface ExceptionHandler

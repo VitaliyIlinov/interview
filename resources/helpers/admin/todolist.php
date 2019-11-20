@@ -113,7 +113,7 @@
                     data: {value: sortable.toArray()},
                     success: function (data) {
                         // window.location = self.location.href;
-                        console.log(data);
+                        // console.log(data);
                     },
                 });
                 //todo
@@ -126,7 +126,6 @@
             onFilter: function (evt) {
                 var ctrl = evt.target,
                     item = evt.item;
-                console.log(evt);
                 if (Sortable.utils.is(ctrl, ".custom-control-input")) {  // Click on edit link
                     $.ajax({
                         url: '<?=app('url')->route('editDoneTodoList');?>',

@@ -100,6 +100,16 @@ class Request
      */
     protected $method;
 
+    /**
+     * @var string
+     */
+    protected $format;
+
+    /**
+     * @var array
+     */
+    protected static $formats;
+
     protected $session;
 
     protected static $requestFactory;
@@ -197,6 +207,64 @@ class Request
         }
 
         return new static($query, $request, $attributes, $cookies, $files, $server, $content);
+    }
+
+    /**
+     * Gets the request format.
+     *
+     * Here is the process to determine the format:
+     *
+     *  * format defined by the user (with setRequestFormat())
+     *  * _format request attribute
+     *  * $default
+     *
+     * @param string|null $default The default format
+     *
+     * @return string|null The request format
+     */
+    public function getRequestFormat($default = 'html')
+    {
+        if (null === $this->format) {
+            $this->format = $this->attributes->get('_format');
+        }
+
+        return null === $this->format ? $default : $this->format;
+    }
+
+    /**
+     * Gets the mime type associated with the format.
+     *
+     * @param string $format The format
+     *
+     * @return string|null The associated mime type (null if not found)
+     */
+    public function getMimeType($format)
+    {
+        if (null === static::$formats) {
+            static::initializeFormats();
+        }
+
+        return isset(static::$formats[$format]) ? static::$formats[$format][0] : null;
+    }
+
+    /**
+     * Initializes HTTP request formats.
+     */
+    protected static function initializeFormats()
+    {
+        static::$formats = [
+            'html' => ['text/html', 'application/xhtml+xml'],
+            'txt' => ['text/plain'],
+            'js' => ['application/javascript', 'application/x-javascript', 'text/javascript'],
+            'css' => ['text/css'],
+            'json' => ['application/json', 'application/x-json'],
+            'jsonld' => ['application/ld+json'],
+            'xml' => ['text/xml', 'application/xml', 'application/x-xml'],
+            'rdf' => ['application/rdf+xml'],
+            'atom' => ['application/atom+xml'],
+            'rss' => ['application/rss+xml'],
+            'form' => ['application/x-www-form-urlencoded'],
+        ];
     }
 
     /**

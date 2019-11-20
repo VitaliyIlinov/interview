@@ -2,8 +2,8 @@
 
 namespace app\Core\Router;
 
-use app\Core\Application;
-use app\Core\RedirectResponse;
+
+use app\Core\Response\RedirectResponse;
 use app\Core\Session\Store;
 
 class Redirector
