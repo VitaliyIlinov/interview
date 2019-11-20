@@ -10,7 +10,7 @@
                 <input type="checkbox" class="custom-control-input"
                     <?= $option['is_done'] == 'true' ? 'checked' : '' ?>
                 />
-                <label class="custom-control-label"> <?= $option['description'] ?></label>
+                <label class="custom-control-label"><?= $option['description'] ?></label>
             </div>
             <?php if (isset($option['created_time'])): ?>
                 <small class="badge badge-info ml-3">
@@ -131,7 +131,7 @@
                     $.ajax({
                         url: '<?=app('url')->route('editDoneTodoList');?>',
                         method: 'POST',
-                        data: {key: item.dataset.id, value: !ctrl.checked},
+                        data: {id: item.dataset.id, is_done: !ctrl.checked},
                         success: function (data) {
                             console.log(data);
                         },
