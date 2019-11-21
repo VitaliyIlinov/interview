@@ -1,41 +1,16 @@
 [
     {
-        "description": "controller middleware @see https:\/\/laravel.com\/docs\/5.8\/controllers#controller-middleware",
         "is_done": false,
-        "created_time": "2019-11-18 00:16:13"
+        "description": "https:\/\/chuibility.github.io\/inspinia\/code_editor.html",
+        "created_time": "2019-11-21 01:59:53"
     },
     {
-        "description": "https:\/\/hackware.ru\/?p=5587  && http:\/\/hostgid.net\/baza-znanii\/-htaccess\/chto-takoe-mod-rewrite.html",
         "is_done": false,
-        "created_time": "2019-11-20 02:49:07"
-    },
-    {
-        "description": "@see app\/Http\/View\/Composers\/Catalog.php download in admin",
-        "is_done": false,
-        "created_time": "14:17:03"
-    },
-    {
-        "description": " artisan console: create controller&&so on",
-        "is_done": false
+        "description": "https:\/\/chuibility.github.io\/inspinia\/form_editors.html",
+        "created_time": "2019-11-21 01:58:25"
     },
     {
         "description": "RegistersExceptionHandlers",
-        "is_done": false
-    },
-    {
-        "description": "DI",
-        "is_done": false
-    },
-    {
-        "description": "response",
-        "is_done": false
-    },
-    {
-        "description": "events",
-        "is_done": false
-    },
-    {
-        "description": "middleware",
         "is_done": false
     },
     {
@@ -43,17 +18,47 @@
         "is_done": false
     },
     {
-        "description": "route('editDoneTodoList') -route generator to todoList",
+        "description": "add info from https:\/\/hackware.ru\/?p=5587  && http:\/\/hostgid.net\/baza-znanii\/-htaccess\/chto-takoe-mod-rewrite.html",
+        "is_done": false,
+        "created_time": "2019-11-21 02:01:06"
+    },
+    {
+        "description": " artisan console: create controller&&so on",
         "is_done": false
     },
     {
+        "description": "controller middleware @see https:\/\/laravel.com\/docs\/5.8\/controllers#controller-middleware",
         "is_done": false,
-        "description": "11",
-        "created_time": "2019-11-20 00:46:51"
+        "created_time": "2019-11-18 00:16:13"
     },
     {
+        "description": "events",
         "is_done": true,
-        "description": "12",
-        "created_time": "2019-11-20 02:42:43"
+        "created_time": "2019-11-21 02:01:16"
+    },
+    {
+        "description": "DI",
+        "is_done": true,
+        "created_time": "2019-11-21 02:01:13"
+    },
+    {
+        "description": "route('editDoneTodoList') -route generator to todoList",
+        "is_done": true,
+        "created_time": "2019-11-21 01:59:42"
+    },
+    {
+        "description": "middleware",
+        "is_done": true,
+        "created_time": "2019-11-21 01:59:38"
+    },
+    {
+        "description": "response",
+        "is_done": true,
+        "created_time": "2019-11-21 01:59:34"
+    },
+    {
+        "description": "@see app\/Http\/View\/Composers\/Catalog.php download in admin",
+        "is_done": true,
+        "created_time": "2019-11-21 01:59:29"
     }
 ]
