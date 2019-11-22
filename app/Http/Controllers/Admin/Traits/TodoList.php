@@ -22,6 +22,7 @@ trait TodoList
 
     /**
      * @param string $description
+     *
      * @return TodoList
      */
     public function setDescription(string $description): self
@@ -32,6 +33,7 @@ trait TodoList
 
     /**
      * @param bool $is_done
+     *
      * @return TodoList
      */
     public function setIsDone(bool $is_done): self
@@ -40,19 +42,21 @@ trait TodoList
         return $this;
     }
 
-    protected function getTodoListData(): array
+    protected function getTodoListData(?string $filePath = null): array
     {
-        return json_decode(File::get($this->getPathToFile()), true);
+        $filePath = $this->getPathToFile($filePath ?: $this->todoPath);
+        return json_decode(File::get($filePath), true);
     }
 
     protected function putTodoListFile(array $content, ?string $filePath = null): bool
     {
-        return File::put($this->getPathToFile() ?: $filePath, json_encode($content, JSON_PRETTY_PRINT));
+        $filePath = $this->getPathToFile($filePath ?: $this->todoPath);
+        return File::put($filePath, json_encode($content, JSON_PRETTY_PRINT));
     }
 
-    protected function getPathToFile(): string
+    protected function getPathToFile(string $filePath): string
     {
-        return app()->getBasePath($this->todoPath);
+        return app()->getBasePath($filePath);
     }
 
     protected function getDate(): string
@@ -63,8 +67,8 @@ trait TodoList
     protected function setTodoRow()
     {
         return array_filter([
-            'is_done' => $this->is_done,
-            'description' => $this->description,
+            'is_done'      => $this->is_done,
+            'description'  => $this->description,
             'created_time' => $this->getDate(),
         ], function ($val) {
             return !is_null($val);
@@ -73,6 +77,7 @@ trait TodoList
 
     /**
      * @param int $id
+     *
      * @return array
      */
     protected function saveTodoListRow(?int $id = null): array
@@ -87,5 +92,13 @@ trait TodoList
 
         $this->putTodoListFile($todoList);
         return $todoList;
+    }
+
+    /**
+     * @param string $todoPath
+     */
+    public function setTodoPath(string $todoPath): void
+    {
+        $this->todoPath = $todoPath;
     }
 }

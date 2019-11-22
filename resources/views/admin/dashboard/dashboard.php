@@ -6,7 +6,7 @@
     </div>
     <div class="ecommerce-widget">
         <div class="row">
-            <div class="col-12">
+            <div class="col-6">
                 <div class="card">
                     <h3 class="card-header">
                         To Do List
@@ -15,6 +15,26 @@
                         <?php require resource_path('helpers/admin/todolist.php'); ?>
                     </div>
                     <!-- /.card-body -->
+                    <div class="card-footer clearfix">
+                        <button type="button"
+                                data-url="<?=app('url')->route('newDescTodoList');?>"
+                                data-toggle="modal"
+                                data-target="#edit-new-form"
+                                class="btn btn-info float-right">
+                            <i class="fas fa-plus"></i>
+                            Add item
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card">
+                    <h3 class="card-header">
+                        Goals
+                    </h3>
+                    <div class="card-body p-0">
+                        <?php require resource_path('helpers/admin/todolist.php'); ?>
+                    </div>
                     <div class="card-footer clearfix">
                         <button type="button"
                                 data-url="<?=app('url')->route('newDescTodoList');?>"
