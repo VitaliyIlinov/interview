@@ -149,6 +149,9 @@ $router->group(['middleware' => ['role:admin']], function (Router $router) {
         $router->get('/plugin_sources', function () {
             return view('documentation.plugin_sources');
         });
+        $router->get('/literature', function () {
+            return view('documentation.literature');
+        });
     });
 
     $router->group(['prefix' => 'ajax'], function (Router $router) {

@@ -226,6 +226,10 @@ class AdminCatalog
                         'text' => 'Plugin sources',
                         'link' => 'plugin_sources',
                     ],
+                    'literature' => [
+                        'text' => 'literature sources',
+                        'link' => 'literature',
+                    ],
                 ],
             ],
         ];

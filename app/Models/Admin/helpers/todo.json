@@ -60,5 +60,10 @@
         "description": "@see app\/Http\/View\/Composers\/Catalog.php download in admin",
         "is_done": true,
         "created_time": "2019-11-21 01:59:29"
+    },
+    {
+        "is_done": false,
+        "description": "https:\/\/buildmedia.readthedocs.org\/media\/pdf\/designpatternsphp-ru\/latest\/designpatternsphp-ru.pdf",
+        "created_time": "2019-11-22 10:41:45"
     }
 ]
