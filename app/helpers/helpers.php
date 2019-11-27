@@ -189,6 +189,7 @@ if (! function_exists('response')) {
      */
     function response($content = '', $status = 200, array $headers = [])
     {
+        //todo true abstract factory (contracts)
         $factory = new ResponseFactory;
 
         if (func_num_args() === 0) {
