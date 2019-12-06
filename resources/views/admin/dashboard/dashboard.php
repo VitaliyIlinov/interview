@@ -12,7 +12,8 @@
                         To Do List
                     </h3>
                     <div class="card-body p-0">
-                        <?php require resource_path('helpers/admin/todolist.php'); ?>
+<!--                        --><?php //require resource_path('helpers/admin/todolist.php'); ?>
+                        <?=\app\support\Facades\ToDoWidget::render();?>
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer clearfix">

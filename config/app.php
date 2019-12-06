@@ -138,7 +138,11 @@ return [
          */
         app\Core\View\ViewServiceProvider::class,
         app\Core\Session\SessionServiceProvider::class,
-//        App\Providers\RouteServiceProvider::class,
+
+        /*
+       * Application Service Providers...
+       */
+        app\Providers\WidgetProviders::class,
 
     ],
 
