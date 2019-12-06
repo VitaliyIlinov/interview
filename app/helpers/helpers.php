@@ -7,6 +7,7 @@ use app\Core\Response\RedirectResponse;
 use app\Core\Request;
 use app\Core\Response\ResponseFactory;
 use app\Core\Router\Redirector;
+use app\Core\Router\UrlGenerator;
 use app\Core\Session\SessionManager;
 use app\Core\View\View;
 
@@ -175,6 +176,26 @@ if (! function_exists('redirect')) {
         }
 
         return $redirect->to($to, $status, $headers, $secure);
+    }
+}
+if (! function_exists('url')) {
+    /**
+     * Generate a url for the application.
+     *
+     * @param  string  $path
+     * @param  mixed   $parameters
+     * @param  bool    $secure
+     * @return UrlGenerator|string
+     */
+    function url($path = null, $parameters = [], $secure = null)
+    {
+        /**@var $url UrlGenerator*/
+        $url = app(UrlGenerator::class);
+        if (is_null($path)) {
+            return $url;
+        }
+
+        return $url->to($path, $parameters, $secure);
     }
 }
 

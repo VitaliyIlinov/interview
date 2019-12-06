@@ -17,7 +17,7 @@
                     <!-- /.card-body -->
                     <div class="card-footer clearfix">
                         <button type="button"
-                                data-url="<?=app('url')->route('newDescTodoList');?>"
+                                data-url="<?=url()->route('newDescTodoList');?>"
                                 data-toggle="modal"
                                 data-target="#edit-new-form"
                                 class="btn btn-info float-right">
@@ -37,7 +37,7 @@
                     </div>
                     <div class="card-footer clearfix">
                         <button type="button"
-                                data-url="<?=app('url')->route('newDescTodoList');?>"
+                                data-url="<?=url()->route('newDescTodoList');?>"
                                 data-toggle="modal"
                                 data-target="#edit-new-form"
                                 class="btn btn-info float-right">

@@ -154,8 +154,9 @@ return [
     */
 
     'aliases' => [
-        'files'   => app\helpers\Filesystem::class,
+        'files' => app\helpers\Filesystem::class,
         'request' => app\Core\Request::class,
+        'url' => app\Core\Router\UrlGenerator::class,
 //        'View' => Illuminate\Support\Facades\View::class,
     ],
 

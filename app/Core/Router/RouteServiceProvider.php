@@ -39,7 +39,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     private function registerUrlGenerator()
     {
-        $this->app->singleton('url', function ($app) {
+        $this->app->singleton(UrlGenerator::class, function ($app) {
             return new UrlGenerator($app, $app['request']);
         });
     }

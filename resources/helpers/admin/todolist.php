@@ -20,7 +20,7 @@
             <span class="btn-group ml-auto">
                 <button class="btn btn-sx p-1"
                         data-toggle="modal"
-                        data-url="<?= app('url')->route('editDescTodoList'); ?>"
+                        data-url="<?= url()->route('editDescTodoList'); ?>"
                         data-target="#edit-new-form">
                     <i class="fas fa-edit"></i>
                 </button
@@ -108,7 +108,7 @@
             onUpdate: function (/**Event*/evt) {
                 console.log(sortable.toArray());
                 $.ajax({
-                    url: '<?=app('url')->route('sortTodoList');?>',
+                    url: '<?=url()->route('sortTodoList');?>',
                     method: 'POST',
                     data: {value: sortable.toArray()},
                     success: function (data) {
@@ -128,7 +128,7 @@
                     item = evt.item;
                 if (Sortable.utils.is(ctrl, ".custom-control-input")) {  // Click on edit link
                     $.ajax({
-                        url: '<?=app('url')->route('editDoneTodoList');?>',
+                        url: '<?=url()->route('editDoneTodoList');?>',
                         method: 'POST',
                         data: {id: item.dataset.id, is_done: !ctrl.checked},
                         success: function (data) {

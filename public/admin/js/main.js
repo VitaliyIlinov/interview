@@ -1,7 +1,6 @@
-
-jQuery(document).ready(function($) {
+$(document).ready(function($) {
     'use strict';
-
+    $('#navbarNav').find('[href="'+  window.location.pathname +'"]').closest('div.submenu').prev('a').click();
     // ============================================================== 
     // Notification list
     // ============================================================== 
@@ -69,34 +68,5 @@ jQuery(document).ready(function($) {
 
     }
 
-    // ============================================================== 
-    // tooltip
-    // ============================================================== 
-    if ($('[data-toggle="tooltip"]').length) {
-            
-            $('[data-toggle="tooltip"]').tooltip()
-
-        }
-
-     // ============================================================== 
-    // popover
-    // ============================================================== 
-       if ($('[data-toggle="popover"]').length) {
-            $('[data-toggle="popover"]').popover()
-
-    }
-     // ============================================================== 
-    // Chat List Slim Scroll
-    // ============================================================== 
-        
-
-        if ($('.chat-list').length) {
-            $('.chat-list').slimScroll({
-            color: 'false',
-            width: '100%'
-
-
-        });
-    }
 
 }); // AND OF JQUERY
