@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="/libs/fonts/simple-line-icons/css/simple-line-icons.css">
     <link rel="stylesheet" href="/libs/fonts/themify-icons/themify-icons.css">
     <link rel="stylesheet" href="/libs/animate/animate.css">
+    <link href="/libs/toastr/build/toastr.css" rel="stylesheet" type="text/css"/>
 
     <script src="/libs/jquery-3.4.1.min.js"></script>
     <title>Concept - Bootstrap 4 Admin Dashboard Template</title>
@@ -62,6 +63,7 @@
 <script src="/libs/bootstrap-4.3.1-dist/js/bootstrap.bundle.js"></script>
 <script src="/libs/slimscroll/jquery.slimscroll.js"></script>
 <script src="/libs/sortable/sortable.min.js"></script>
+<script src="/libs/toastr/build/toastr.min.js"></script>
 <script src="/admin/js/main.js"></script>
 </body>
 

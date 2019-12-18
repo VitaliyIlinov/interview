@@ -2,20 +2,24 @@
 
 namespace app\Http\Controllers\Admin;
 
-use app\Http\Controllers\Admin\Traits\TodoList;
+use app\support\Facades\ToDoWidget;
 
 class DashboardController
 {
-    use TodoList;
-
-    private $goalPath = 'Models/Admin/helpers/goals.json';
 
     public function index()
     {
         return view('dashboard.dashboard')->with([
-            'todolist' => $this->getTodoListData(),
-            'goals'    => $this->getTodoListData($this->goalPath),
-
+            'todolist' => ToDoWidget::render(
+                ToDoWidget::setFilePath(ToDoController::PATH)->getListData(),
+                'widgets/todo',
+                'todo_list'
+            ),
+            'goals' => ToDoWidget::render(
+                ToDoWidget::setFilePath(GoalsController::PATH)->getListData(),
+                'widgets/todo',
+                'goals_list'
+            ),
         ]);
     }
 }

@@ -86,14 +86,28 @@ class View implements Renderable
         return $this->renderContents($this->layout, $this->fullViewPath, $data);
     }
 
+    public function renderView(): string
+    {
+        $this->layout = $this->fullViewPath;
+        return $this->render();
+    }
+
     /**
      * Get the evaluated contents of the view.
      *
-     * @return string
+     * @return array
      */
-    protected function gatherData()
+    protected function gatherData(): array
     {
-        return array_merge($this->factory->getShared(), $this->data);
+        $data = array_merge($this->factory->getShared(), $this->data);
+
+        foreach ($data as $key => $value) {
+            if ($value instanceof Renderable) {
+                $data[$key] = $value->render();
+            }
+        }
+
+        return $data;
     }
 
     /**
@@ -114,7 +128,7 @@ class View implements Renderable
         extract($data, EXTR_SKIP);
 
         try {
-            require_once $layout;
+            require $layout;
         } catch (Throwable $e) {
             $this->handleViewException($e, $obLevel);
         }
@@ -125,13 +139,13 @@ class View implements Renderable
     /**
      * Handle a view exception.
      *
-     * @param  Exception  $e
+     * @param  Throwable  $e
      * @param  int  $obLevel
      * @return void
      *
-     * @throws Exception
+     * @throws Throwable
      */
-    protected function handleViewException(Exception $e, $obLevel)
+    protected function handleViewException(Throwable $e, $obLevel)
     {
         while (ob_get_level() > $obLevel) {
             ob_end_clean();

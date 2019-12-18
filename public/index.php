@@ -10,6 +10,8 @@
 //todo events
 //todo middleware
 //todo if wrong path to file ->404 NOT 200!!!
+//todo beautiful alert
+//todo https://codeseven.github.io/toastr/demo.html
 
 define('START', microtime(true));
 

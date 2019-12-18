@@ -274,7 +274,61 @@ class Request
      */
     public static function createFromGlobals()
     {
-        return self::createRequestFromFactory($_GET, $_POST, [], $_COOKIE, $_FILES, $_SERVER);
+        $request =  self::createRequestFromFactory($_GET, $_POST, [], $_COOKIE, $_FILES, $_SERVER);
+        if (0 === strpos($request->headers->get('CONTENT_TYPE'), 'application/x-www-form-urlencoded')
+            && \in_array(strtoupper($request->server->get('REQUEST_METHOD', 'GET')), ['PUT', 'DELETE', 'PATCH'])
+        ) {
+            parse_str($request->getContent(), $data);
+            $request->request = new ParameterBag($data);
+        }
+        return $request;
+    }
+
+    /**
+     * Returns the request body content.
+     *
+     * @param bool $asResource If true, a resource will be returned
+     *
+     * @return string|resource The request body content or a resource to read the body stream
+     *
+     * @throws \LogicException
+     */
+    private function getContent($asResource = false)
+    {
+        $currentContentIsResource = \is_resource($this->content);
+
+        if (true === $asResource) {
+            if ($currentContentIsResource) {
+                rewind($this->content);
+
+                return $this->content;
+            }
+
+            // Content passed in parameter (test)
+            if (\is_string($this->content)) {
+                $resource = fopen('php://temp', 'r+');
+                fwrite($resource, $this->content);
+                rewind($resource);
+
+                return $resource;
+            }
+
+            $this->content = false;
+
+            return fopen('php://input', 'rb');
+        }
+
+        if ($currentContentIsResource) {
+            rewind($this->content);
+
+            return stream_get_contents($this->content);
+        }
+
+        if (null === $this->content || false === $this->content) {
+            $this->content = file_get_contents('php://input');
+        }
+
+        return $this->content;
     }
 
     /**

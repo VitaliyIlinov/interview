@@ -6,7 +6,6 @@ use app\Core\Application;
 
 class LoadEnvironmentVariables
 {
-
     public function bootstrap(Application $application)
     {
         self::LoadEnvironment();
@@ -16,7 +15,6 @@ class LoadEnvironmentVariables
      * Determine if the given line looks like it's setting a variable.
      *
      * @param string $line
-     *
      * @return bool
      */
     private static function isSetter($line)
@@ -28,7 +26,6 @@ class LoadEnvironmentVariables
      * Determine if the line in the file is a comment, e.g. begins with a #.
      *
      * @param string $line
-     *
      * @return bool
      */
     private static function isComment($line)
@@ -41,9 +38,8 @@ class LoadEnvironmentVariables
     /**
      * Set an environment variable.
      *
-     * @param string $name
-     * @param string|null $value
-     *
+     * @param string            $name
+     * @param string|null|mixed $value
      * @return void
      */
     public static function setEnvironmentVariable($name, $value = null)
@@ -54,7 +50,22 @@ class LoadEnvironmentVariables
 
     public static function getEnvironmentVariable($name, $default = null)
     {
-        return $_ENV[$name] ?? $default;
+        $value = $_ENV[$name] ?? $default;
+        switch (strtolower($value)) {
+            case 'true':
+            case '(true)':
+                return true;
+            case 'false':
+            case '(false)':
+                return false;
+            case 'empty':
+            case '(empty)':
+                return '';
+            case 'null':
+            case '(null)':
+                return;
+        }
+        return $value;
     }
 
     /**
@@ -70,7 +81,7 @@ class LoadEnvironmentVariables
         $lines = preg_split("/(\r\n|\n|\r)/", $content);
         foreach ($lines as $line) {
             if (!self::isComment($line) && self::isSetter($line)) {
-                list($name, $value) = array_map('trim', explode('=', $line, 2));
+                [$name, $value] = array_map('trim', explode('=', $line, 2));
                 if ($value !== '') {
                     self::setEnvironmentVariable($name, $value);
                 }

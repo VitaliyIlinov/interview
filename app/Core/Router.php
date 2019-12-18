@@ -279,6 +279,33 @@ class Router
         return $this;
     }
 
+    /**
+     * Register a route with the application.
+     *
+     * @param  string  $uri
+     * @param  mixed  $action
+     * @return $this
+     */
+    public function patch($uri, $action)
+    {
+        $this->addRoute('PATCH', $uri, $action);
+
+        return $this;
+    }
+
+    /**
+     * Register a route with the application.
+     *
+     * @param  string  $uri
+     * @param  mixed  $action
+     * @return $this
+     */
+    public function put($uri, $action)
+    {
+        $this->addRoute('PUT', $uri, $action);
+
+        return $this;
+    }
 
     /**
      * Get the raw routes for the application.

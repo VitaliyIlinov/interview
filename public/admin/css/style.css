@@ -243,14 +243,6 @@ ul li {}
  Form
 ---------------------*/
 
-label {
-    display: inline-block;
-    max-width: 100%;
-    margin-bottom: 5px;
-    font-size: 15px;
-    color: #71748d;
-}
-
 .form-control {
     display: block;
     width: 100%;
@@ -349,102 +341,6 @@ address {}
 
 /* Custom-Chekbox
 -------------------------------------------------------------- */
-
-.custom-control {
-    position: relative;
-    min-height: 1.5rem;
-    padding-left: 1.5rem;
-}
-
-.custom-control-input:checked~input[type="checkbox"] {
-    background: #3d404e;
-    border: #7f83a2 1px solid;
-}
-
-.custom-control-label {
-    margin-bottom: 0;
-}
-
-.custom-checkbox .custom-control-input:checked~.custom-control-label::before {
-    background-color: #5969ff;
-    border-color: #5969ff;
-}
-
-.custom-control-input:checked~.custom-control-label::before {
-    color: #fff;
-    background-color: #5969ff;
-}
-
-.custom-checkbox .custom-control-input:checked~.custom-control-label::after {}
-
-.custom-control-label::after {
-    position: absolute;
-    top: 7px;
-    left: 0;
-    display: block;
-    width: 1rem;
-    height: 1rem;
-    content: "";
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: 50% 50%;
-}
-
-.custom-control-label::before {
-    position: absolute;
-    top: 7px;
-    left: 0;
-    display: block;
-    width: 1rem;
-    height: 1rem;
-    pointer-events: none;
-    content: "";
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    background-color: #ffffff;
-    border: 2px solid #d2d2e4;
-}
-
-.custom-radio .custom-control-input:checked~.custom-control-label::before {
-    background-color: #5969ff;
-    border-color: #5969ff;
-}
-
-.custom-control-input:disabled~.custom-control-label::before {
-    background-color: #efeff6;
-}
-
-.custom-select-font-size {
-    font-size: 14px;
-}
-
-.custom-control-input:focus~.custom-control-label::before {
-    box-shadow: none;
-}
-
-.custom-valid.custom-control-input.is-valid:checked~.custom-control-label::before,
-.was-validated .custom-control-input:valid:checked~.custom-control-label::before {
-    background-color: #34ce57;
-    border-color: #34ce57;
-}
-
-.custom-control-input.is-invalid~.custom-control-label::before,
-.was-validated .custom-control-input:invalid~.custom-control-label::before {
-    background-color: #ffdadd;
-    border-color: #efa2a9;
-}
-
-.custom-control-input:disabled~.custom-control-label {
-    color: #9295b0;
-}
-
-.custom-control-input.is-valid~.custom-control-label::before,
-.was-validated .custom-control-input:valid~.custom-control-label::before {
-    background-color: #c6ffd3;
-    border: 2px solid #68df83;
-}
 
 .input-group-text {
     display: -ms-flexbox;
@@ -5747,12 +5643,6 @@ Vertical Timeline - by CodyHouse.co
 
 .email-filters input {
     margin-right: 8px;
-}
-
-.custom-control-label {
-    position: static;
-    display: inline-block;
-    line-height: 2;
 }
 
 .email-filters .email-filters-right {

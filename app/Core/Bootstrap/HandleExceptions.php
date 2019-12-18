@@ -38,13 +38,12 @@ class HandleExceptions
     /**
      * Convert PHP errors to ErrorException instances.
      *
-     * @param  int  $level
-     * @param  string  $message
-     * @param  string  $file
-     * @param  int  $line
-     * @param  array  $context
+     * @param int    $level
+     * @param string $message
+     * @param string $file
+     * @param int    $line
+     * @param array  $context
      * @return void
-     *
      * @throws ErrorException
      */
     public function handleError($level, $message, $file = '', $line = 0, $context = [])
@@ -56,35 +55,32 @@ class HandleExceptions
 
     /**
      * Handle an uncaught exception from the application.
-     *
      * Note: Most exceptions can be handled via the try / catch block in
      * the HTTP and Console kernels. But, fatal error exceptions must
      * be handled differently since they are not normal exceptions.
      *
-     * @param  Throwable  $e
+     * @param Throwable $e
      * @return void
      */
     public function handleException($e)
     {
-        if (! $e instanceof \Exception) {
+        if (!$e instanceof \Exception) {
             $e = new FatalThrowableError($e);
         }
-//
-//        try {
-//            $this->getExceptionHandler()->report($e);
-//        } catch (Exception $e) {
-//            //
-//        }
+
+        try {
+            $this->getExceptionHandler()->report($e);
+        } catch (Exception $e) {
+            //
+        }
 
         $this->renderHttpResponse($e);
-
     }
-
 
     /**
      * Render an exception as an HTTP response and send it.
      *
-     * @param  Exception  $e
+     * @param Exception $e
      * @return void
      */
     protected function renderHttpResponse(Exception $e)
@@ -99,7 +95,7 @@ class HandleExceptions
      */
     public function handleShutdown()
     {
-        if (! is_null($error = error_get_last()) && $this->isFatal($error['type'])) {
+        if (!is_null($error = error_get_last()) && $this->isFatal($error['type'])) {
             $this->handleException($this->fatalExceptionFromError($error, 0));
         }
     }
@@ -107,7 +103,7 @@ class HandleExceptions
     /**
      * Create a new fatal exception instance from an error array.
      *
-     * @param array $error
+     * @param array    $error
      * @param int|null $traceOffset
      * @return FatalErrorException
      */
@@ -124,7 +120,7 @@ class HandleExceptions
     /**
      * Determine if the error type is fatal.
      *
-     * @param  int  $type
+     * @param int $type
      * @return bool
      */
     protected function isFatal($type)
@@ -134,9 +130,8 @@ class HandleExceptions
 
     /**
      * Get an instance of the exception handler.
-     *
      */
-    protected function getExceptionHandler()
+    protected function getExceptionHandler(): ExceptionHandler
     {
         return $this->app->make(ExceptionHandler::class);
     }

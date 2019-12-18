@@ -47,8 +47,8 @@ $router->group(['middleware' => ['role:admin']], function (Router $router) {
         $router->get('/list_group', function () {
             return view('uielement.listgroup');
         });
-        $router->get('/typography', function () {
-            return view('uielement.typography');
+        $router->get('/toastr', function () {
+            return view('uielement.toastr');
         });
         $router->get('/accordions', function () {
             return view('uielement.accordions');
@@ -156,10 +156,21 @@ $router->group(['middleware' => ['role:admin']], function (Router $router) {
 
     $router->group(['prefix' => 'ajax'], function (Router $router) {
         $router->group(['prefix' => 'todo_list'], function (Router $router) {
-            $router->post('/sort', ['as' => 'sortTodoList','uses'=>'AjaxController@sortTodoList']);
-            $router->post('/edit_desc', ['as' => 'editDescTodoList','uses'=>'AjaxController@editDescTodoList']);
-            $router->post('/new_desc', ['as' => 'newDescTodoList','uses'=>'AjaxController@newDescTodoList']);
-            $router->post('/edit_done', ['as' => 'editDoneTodoList','uses'=>'AjaxController@editDoneTodoList']);
+            $router->put('/sort', ['as' => 'sortTodoList','uses'=>'ToDoController@sort']);
+            $router->patch('/edit_desc', ['as' => 'editDescTodoList','uses'=>'ToDoController@editDesc']);
+            $router->post('/new_desc', ['as' => 'newDescTodoList','uses'=>'ToDoController@newDesc']);
+            $router->patch('/edit_done', ['as' => 'editDoneTodoList','uses'=>'ToDoController@editDone']);
+            $router->delete('/delete', ['as' => 'deleteTodoList','uses'=>'ToDoController@delete']);
+        });
+//        POST — создание ресурса.
+//        PUT — замена ресурса целиком.
+//        PATCH — редактирование ресурса.
+        $router->group(['prefix' => 'goals_list'], function (Router $router) {
+            $router->put('/sort', ['as' => 'sortGoalsList','uses'=>'GoalsController@sort']);
+            $router->patch('/edit_desc', ['as' => 'editDescGoalsList','uses'=>'GoalsController@editDesc']);
+            $router->post('/new_desc', ['as' => 'newDescGoalsList','uses'=>'GoalsController@newDesc']);
+            $router->patch('/edit_done', ['as' => 'editDoneGoalsList','uses'=>'GoalsController@editDone']);
+            $router->delete('/delete', ['as' => 'deleteGoalsList','uses'=>'GoalsController@delete']);
         });
     });
 

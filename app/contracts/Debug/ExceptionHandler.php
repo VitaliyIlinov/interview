@@ -3,7 +3,7 @@
 namespace app\contracts\Debug;
 
 use app\Core\Request;
-use app\Core\Response\Response;
+use app\Core\Response\BaseResponse;
 use Throwable;
 
 interface ExceptionHandler
@@ -14,7 +14,7 @@ interface ExceptionHandler
      * @param  Throwable  $e
      * @return void
      */
-    public function report(Throwable $e): void;
+    public function report(Throwable $e);
 
     /**
      * Determine if the exception should be reported.
@@ -29,7 +29,7 @@ interface ExceptionHandler
      *
      * @param  Request  $request
      * @param  Throwable  $e
-     * @return Response
+     * @return BaseResponse
      */
-    public function render(Request $request, Throwable $e): Response;
+    public function render(Request $request, Throwable $e): BaseResponse;
 }

@@ -9,6 +9,7 @@ use app\Core\Response\ResponseFactory;
 use app\Core\Router\Redirector;
 use app\Core\Router\UrlGenerator;
 use app\Core\Session\SessionManager;
+use app\Core\View\Support\ViewFactory;
 use app\Core\View\View;
 
 if (!function_exists('app')) {
@@ -36,9 +37,9 @@ if (!function_exists('view')) {
      * @param string $view
      * @param array $data
      * @param string $layout
-     * @return View
+     * @return View|ViewFactory
      */
-    function view(string $view, array $data = [], string $layout = 'base'): View
+    function view(string $view, array $data = [], string $layout = 'base')
     {
         $abstract = app('view');
 

@@ -70,6 +70,10 @@ class AdminCatalog
                         'text' => 'List Group',
                         'link' => 'list_group',
                     ],
+                    'toastr' => [
+                        'text' => 'Toastr notification',
+                        'link' => 'toastr',
+                    ],
                     'typography' => [
                         'text' => 'Typography',
                         'link' => 'typography',
