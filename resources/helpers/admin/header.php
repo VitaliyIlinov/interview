@@ -1,6 +1,7 @@
 <div class="dashboard-header">
     <nav class="navbar navbar-expand-lg bg-white">
         <a class="navbar-brand" href="/admin_panel">Home</a>
+        <a class="navbar-brand" target="_blank" href="/">Front</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -14,8 +15,9 @@
                 </li>
                 <li class="nav-item dropdown notification">
                     <a class="nav-link nav-icons" href="#" id="navbarDropdownMenuLink1" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false"><i class="fas fa-fw fa-bell"></i> <span
-                            class="indicator"></span></a>
+                       aria-haspopup="true" aria-expanded="false"><i class="fas fa-fw fa-bell"></i>
+                        <span class="indicator"></span>
+                    </a>
                     <ul class="dropdown-menu dropdown-menu-right notification-dropdown">
                         <li>
                             <div class="notification-title"> Notification</div>
@@ -27,9 +29,9 @@
                                                 <img src="/admin/img/avatar-2.jpg" alt=""
                                                      class="user-avatar-md rounded-circle">
                                             </div>
-                                            <div class="notification-list-user-block"><span
-                                                    class="notification-list-user-name">Jeremy Rakestraw</span>accepted
-                                                your invitation to join the team.
+                                            <div class="notification-list-user-block">
+                                                <span class="notification-list-user-name">Jeremy Rakestra</span>
+                                                acceptedyour invitation to join the team.
                                                 <div class="notification-date">2 min ago</div>
                                             </div>
                                         </div>
@@ -40,9 +42,9 @@
                                                 <img src="/admin/img/avatar-3.jpg" alt=""
                                                      class="user-avatar-md rounded-circle">
                                             </div>
-                                            <div class="notification-list-user-block"><span
-                                                    class="notification-list-user-name">John Abraham </span>is
-                                                now following you
+                                            <div class="notification-list-user-block">
+                                                <span class="notification-list-user-name">John Abraham </span>
+                                                is now following you
                                                 <div class="notification-date">2 days ago</div>
                                             </div>
                                         </div>
@@ -53,9 +55,9 @@
                                                 <img src="/admin/img/avatar-4.jpg" alt=""
                                                      class="user-avatar-md rounded-circle">
                                             </div>
-                                            <div class="notification-list-user-block"><span
-                                                    class="notification-list-user-name">Monaan Pechi</span> is
-                                                watching your main repository
+                                            <div class="notification-list-user-block">
+                                                <span class="notification-list-user-name">Monaan Pechi</span>
+                                                is watching your main repository
                                                 <div class="notification-date">2 min ago</div>
                                             </div>
                                         </div>
@@ -66,9 +68,9 @@
                                                 <img src="/admin/img/avatar-5.jpg" alt=""
                                                      class="user-avatar-md rounded-circle">
                                             </div>
-                                            <div class="notification-list-user-block"><span
-                                                    class="notification-list-user-name">Jessica Caruso</span>accepted
-                                                your invitation to join the team.
+                                            <div class="notification-list-user-block">
+                                                <span class="notification-list-user-name">Jessica Caruso</span>
+                                                accepted your invitation to join the team.
                                                 <div class="notification-date">2 min ago</div>
                                             </div>
                                         </div>
@@ -92,34 +94,40 @@
                                 <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
                                     <a href="#" class="connection-item">
                                         <img src="/admin/img/github.png" alt="">
-                                        <span>Github</span></a>
+                                        <span>Github</span>
+                                    </a>
                                 </div>
                                 <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
                                     <a href="#" class="connection-item">
                                         <img src="/admin/img/dribbble.png" alt="">
-                                        <span>Dribbble</span></a>
+                                        <span>Dribbble</span>
+                                    </a>
                                 </div>
                                 <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
                                     <a href="#" class="connection-item">
                                         <img src="/admin/img/dropbox.png" alt="">
-                                        <span>Dropbox</span></a>
+                                        <span>Dropbox</span>
+                                    </a>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
                                     <a href="#" class="connection-item">
                                         <img src="/admin/img/bitbucket.png" alt="">
-                                        <span>Bitbucket</span></a>
+                                        <span>Bitbucket</span>
+                                    </a>
                                 </div>
                                 <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
                                     <a href="#" class="connection-item">
                                         <img src="/admin/img/mail_chimp.png" alt="">
-                                        <span>Mail chimp</span></a>
+                                        <span>Mail chimp</span>
+                                    </a>
                                 </div>
                                 <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
                                     <a href="#" class="connection-item">
                                         <img src="/admin/img/slack.png" alt="">
-                                        <span>Slack</span></a>
+                                        <span>Slack</span>
+                                    </a>
                                 </div>
                             </div>
                         </li>

@@ -10,36 +10,44 @@
         "created_time": "2019-11-21 01:58:25"
     },
     {
-        "description": "RegistersExceptionHandlers",
-        "is_done": false
-    },
-    {
-        "description": "if wrong path to file ->404 NOT 200!!!",
-        "is_done": false
-    },
-    {
         "description": "add info from https:\/\/hackware.ru\/?p=5587  && http:\/\/hostgid.net\/baza-znanii\/-htaccess\/chto-takoe-mod-rewrite.html",
         "is_done": false,
         "created_time": "2019-11-21 02:01:06"
     },
     {
-        "description": " artisan console: create controller&&so on",
-        "is_done": false
+        "description": "events",
+        "is_done": false,
+        "created_time": "2019-12-19 10:30:04"
+    },
+    {
+        "is_done": false,
+        "description": "https:\/\/buildmedia.readthedocs.org\/media\/pdf\/designpatternsphp-ru\/latest\/designpatternsphp-ru.pdf",
+        "created_time": "2019-12-18 14:39:03"
+    },
+    {
+        "is_done": false,
+        "description": "cache for app\/Http\/View\/Composers\/Catalog.php",
+        "created_time": "2019-12-19 10:29:12"
+    },
+    {
+        "is_done": false,
+        "description": "artisan console: create controller&&so on",
+        "created_time": "2019-12-19 10:29:26"
+    },
+    {
+        "is_done": false,
+        "description": "add beautiful alert",
+        "created_time": "2019-12-19 10:30:23"
+    },
+    {
+        "description": "if wrong path to file ->404 NOT 200!!!",
+        "is_done": true,
+        "created_time": "2019-12-19 10:31:12"
     },
     {
         "description": "controller middleware @see https:\/\/laravel.com\/docs\/5.8\/controllers#controller-middleware",
         "is_done": true,
         "created_time": "2019-12-18 10:42:45"
-    },
-    {
-        "description": "events",
-        "is_done": true,
-        "created_time": "2019-11-21 02:01:16"
-    },
-    {
-        "description": "DI",
-        "is_done": true,
-        "created_time": "2019-11-21 02:01:13"
     },
     {
         "description": "route('editDoneTodoList') -route generator to todoList",
@@ -57,8 +65,8 @@
         "created_time": "2019-11-21 01:59:29"
     },
     {
-        "is_done": false,
-        "description": "https:\/\/buildmedia.readthedocs.org\/media\/pdf\/designpatternsphp-ru\/latest\/designpatternsphp-ru.pdf",
-        "created_time": "2019-12-18 14:39:03"
+        "description": "DI",
+        "is_done": true,
+        "created_time": "2019-11-21 02:01:13"
     }
 ]

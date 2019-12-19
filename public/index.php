@@ -1,18 +1,5 @@
 <?php
 
-//todo https://hackware.ru/?p=5587  && http://hostgid.net/baza-znanii/-htaccess/chto-takoe-mod-rewrite.html
-//todo controller middleware @see https://laravel.com/docs/5.8/controllers#controller-middleware
-//todo @see app/Http/View/Composers/Catalog.php download in admin
-//todo artisan console: create controller&&so on
-//todo RegistersExceptionHandlers
-//todo DI
-//todo response
-//todo events
-//todo middleware
-//todo if wrong path to file ->404 NOT 200!!!
-//todo beautiful alert
-//todo https://codeseven.github.io/toastr/demo.html
-
 define('START', microtime(true));
 
 /*

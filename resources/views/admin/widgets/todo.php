@@ -24,7 +24,7 @@
                                style="word-break: break-word;"><?= $option['description']; ?></label>
                     </div>
                     <?php if (isset($option['created_time'])): ?>
-                        <small class="badge-info ml-3 position-absolute" style="right: 20px;top:0">
+                        <small class="badge-info ml-3 position-absolute" style="right: 0;top:0">
                             <i class="far fa-clock"></i> <?= $option['created_time'] ?>
                         </small>
                     <?php endif; ?>
@@ -128,7 +128,7 @@
                         clone = modal.prev('ul').children().last().clone();
                         clone.find('label').text(description);
                         clone.attr('data-id', ++clone.data().id);
-                        clone.appendTo('#<?= $action ?>');
+                        clone.prependTo('#<?= $action ?>');
                     }
                     toastr.options.progressBar = true;
                     toastr.success('All is OK')

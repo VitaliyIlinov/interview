@@ -14,7 +14,7 @@
     <link href="/libs/toastr/build/toastr.css" rel="stylesheet" type="text/css"/>
 
     <script src="/libs/jquery-3.4.1.min.js"></script>
-    <title>Concept - Bootstrap 4 Admin Dashboard Template</title>
+    <title>Admin-<?=config('app.name')?></title>
 </head>
 
 <body>
@@ -36,7 +36,7 @@
     </div>
 
     <div class="dashboard-wrapper">
-        <?php require resource_path('helpers/admin/header.php'); ?>
+        <?php require_once resource_path('helpers/admin/header.php'); ?>
         <?php require_once $view; ?>
         <div class="footer">
             <div class="container-fluid">
@@ -44,7 +44,6 @@
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
                         Copyright © 2018 Concept. All rights reserved. Dashboard by
                         <a href="https://colorlib.com/wp/">Colorlib</a>
-                        .
                     </div>
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
                         <div class="text-md-right footer-links d-none d-sm-block">
