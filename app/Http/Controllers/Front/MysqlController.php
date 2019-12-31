@@ -4,33 +4,46 @@ namespace app\Http\Controllers\Front;
 
 class MysqlController
 {
+    private $isEditor = true;
+
     public function engine()
     {
-        return view('mysql.engine');
+        return $this->getView('mysql.engine');
     }
 
     public function indexes()
     {
-        return view('mysql.indexes');
+        return $this->getView('mysql.indexes');
     }
 
     public function usefulInformation()
     {
-        return view('mysql.useful_information');
+        return $this->getView('mysql.useful_information');
     }
 
     public function relationType()
     {
-        return view('mysql.relation_type');
+        return $this->getView('mysql.relation_type');
     }
 
     public function query()
     {
-        return view('mysql.query');
+        return $this->getView('mysql.query');
     }
 
     public function joins()
     {
-        return view('mysql.joins');
+        return $this->getView('mysql.joins');
     }
+
+    private function isEdit(): bool
+    {
+        return role('admin') && $this->isEditor;
+    }
+
+    private function getView(string $path)
+    {
+        return view($path)->with(['isEditor' => $this->isEdit()]);
+    }
+
 }

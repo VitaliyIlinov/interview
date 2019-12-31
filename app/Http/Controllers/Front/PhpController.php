@@ -6,20 +6,22 @@ use app\helpers\Filesystem;
 
 class PhpController
 {
+    private $isEditor = true;
+
     public function classObjectOpp()
     {
-        return view('php.class_object_oop');
+        return $this->getView('php.class_object_oop');
     }
 
     public function kissAndDry()
     {
-        return view('php.kiss_and_dry');
+        return $this->getView('php.kiss_and_dry');
     }
 
     public function questionAnswer(Filesystem $filesystem)
     {
         $content = $this->getPath('Builder');
-        return view('php.question_answer')->with(['buider' => $content]);
+        return $this->getView('php.question_answer', ['buider' => $content]);
     }
 
     /**
@@ -33,5 +35,15 @@ class PhpController
             DIRECTORY_SEPARATOR,
             app()->path() . "/Models/Front/Info/Patterns/Creational/{$file}.php"
         );
+    }
+
+    private function isEdit(): bool
+    {
+        return role('admin') && $this->isEditor;
+    }
+
+    private function getView(string $path, array $content=[])
+    {
+        return view($path)->with($content)->with(['isEditor' => $this->isEdit()]);
     }
 }

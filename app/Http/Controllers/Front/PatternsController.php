@@ -9,6 +9,8 @@ use app\helpers\Filesystem;
 
 class PatternsController
 {
+    private $isEditor = true;
+
     /**
      * @var Filesystem
      */
@@ -71,5 +73,15 @@ class PatternsController
             DIRECTORY_SEPARATOR,
             $this->app->path() . "/Models/Front/Info/Patterns/{$file}.php"
         );
+    }
+
+    private function isEdit(): bool
+    {
+        return role('admin') && $this->isEditor;
+    }
+
+    private function getView(string $path)
+    {
+        return view($path)->with(['isEditor' => $this->isEdit()]);
     }
 }

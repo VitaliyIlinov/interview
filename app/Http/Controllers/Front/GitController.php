@@ -9,19 +9,30 @@ use app\helpers\Filesystem;
 
 class GitController
 {
+    private $isEditor = true;
 
     public function rebase()
     {
-        return view('git.rebase');
+        return $this->getView('git.rebase');
     }
 
     public function merge()
     {
-        return view('git.merge');
+        return $this->getView('git.merge');
     }
 
     public function cherryPick()
     {
-        return view('git.cherry_pick');
+        return $this->getView('git.cherry_pick');
+    }
+
+    private function isEdit(): bool
+    {
+        return role('admin') && $this->isEditor;
+    }
+
+    private function getView(string $path)
+    {
+        return view($path)->with(['isEditor' => $this->isEdit()]);
     }
 }
