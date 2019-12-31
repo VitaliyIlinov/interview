@@ -201,25 +201,12 @@ class Application extends Container
         return $this->basePath . DIRECTORY_SEPARATOR . 'storage' . ($path ? DIRECTORY_SEPARATOR . $path : $path);
     }
 
-
     /**
      * @return void
      */
     private function bootstrapRouter()
     {
         $this->router = new Router($this);
-    }
-
-    /**
-     * Register the facades for the application.
-     *
-     * @param bool $aliases
-     * @param array $userAliases
-     * @return void
-     */
-    public function withFacades($aliases = true, $userAliases = [])
-    {
-        Facade::setFacadeApplication($this);
     }
 
     /**

@@ -9,6 +9,8 @@ use app\helpers\Filesystem;
 
 class SolidController
 {
+    private $isEditor = true;
+
     /**
      * @var Filesystem
      */
@@ -32,7 +34,7 @@ class SolidController
     public function singleResponsibility(): View
     {
         $content = $this->getContent('SingleResponsibility');
-        return view('solid.single')->with(['content' => $content]);
+        return $this->getView('solid.single', ['content' => $content]);
     }
 
     /**
@@ -41,8 +43,8 @@ class SolidController
      */
     public function openClosed(): View
     {
-        return view('solid.openclosed')->with([
-            'content'  => $this->getContent('OpenClosed'),
+        return $this->getView('solid.openclosed', [
+            'content' => $this->getContent('OpenClosed'),
             'content2' => $this->getContent('OpenClosed2'),
         ]);
     }
@@ -54,7 +56,7 @@ class SolidController
     public function liskovBarbara(): View
     {
         $content = $this->getContent('BarbaraLiskov');
-        return view('solid.liskov')->with(['content' => $content]);
+        return $this->getView('solid.liskov', ['content' => $content]);
     }
 
     /**
@@ -64,7 +66,7 @@ class SolidController
     public function interfaceSegregation(): View
     {
         $content = $this->getContent('InterfaceSegregation');
-        return view('solid.interfaceSegregation')->with(['content' => $content]);
+        return $this->getView('solid.interfaceSegregation', ['content' => $content]);
     }
 
     /**
@@ -74,7 +76,7 @@ class SolidController
     public function DependencyInversion(): View
     {
         $content = $this->getContent('DependencyInversion') . PHP_EOL . $this->getContent('DependencyInversion2');
-        return view('solid.dependecyInvertion')->with(['content' => $content]);
+        return $this->getView('solid.dependecyInvertion', ['content' => $content]);
     }
 
     /**
@@ -101,5 +103,15 @@ class SolidController
             DIRECTORY_SEPARATOR,
             $this->app->path() . "/Models/Front/Info/Solid/{$file}.php"
         );
+    }
+
+    private function isEdit(): bool
+    {
+        return role('admin') && $this->isEditor;
+    }
+
+    private function getView($path, $content)
+    {
+        return view($path)->with($content)->with(['isEditor' => $this->isEdit()]);
     }
 }

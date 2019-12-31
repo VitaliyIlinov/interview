@@ -49,7 +49,9 @@
         <p class="text-center">&copy; Company 2017-2019</p>
     </div>
 </footer>
-<?php require_once resource_path('helpers/front/modal.php'); ?>
+<?php if (!empty($isEditor)) : ?>
+    <?= \app\support\Facades\EditorWidget::render($this->getView()); ?>
+<?php endif; ?>
 <script src="/libs/bootstrap-4.3.1-dist/js/bootstrap.js"></script>
 <script src="/libs/highlightjs/highlight.pack.js"></script>
 <script src="/libs/toastr/build/toastr.min.js"></script>

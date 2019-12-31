@@ -32,13 +32,13 @@ class AuthController
             return redirect()->route('login');
         }
         $this->sessionManager->put('role', 'admin');
-        return redirect()->to('/admin_panel');
+        return redirect()->route('dashboard');
 
     }
 
     public function destroy()
     {
         session()->flush();
-        return redirect()->to('/admin_panel');
+        return redirect()->route('dashboard');
     }
 }

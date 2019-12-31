@@ -222,6 +222,17 @@ if (! function_exists('response')) {
     }
 }
 
+if (! function_exists('role')) {
+    /**
+     * @param string $role
+     * @return bool
+     */
+    function role(string $role):bool
+    {
+        return  app(\app\Models\User::class)->hasRole($role);
+    }
+}
+
 if (! function_exists('request')) {
     /**
      * Get an instance of the current request or an input item from the request.

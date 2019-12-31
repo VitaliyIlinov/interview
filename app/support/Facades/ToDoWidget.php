@@ -19,6 +19,6 @@ class ToDoWidget extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return \app\Widgets\TodoList\ToDo::class;
+        return ToDo::class;
     }
 }

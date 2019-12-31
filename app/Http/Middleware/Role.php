@@ -38,7 +38,7 @@ class Role
         if (!$this->user->hasRole($role)) {
             return app()->abort(
                 403,
-                sprintf('Permission Denied. Please <a href ="%s">login</a>',
+                sprintf('Permission Denied. Please <a href="%s">login</a>',
                     url()->route('login')
                 )
             );

@@ -161,6 +161,7 @@ return [
         'files' => app\helpers\Filesystem::class,
         'request' => app\Core\Request::class,
         'url' => app\Core\Router\UrlGenerator::class,
+        \app\Core\View\FileViewFinder::class => 'view.finder'
 //        'View' => Illuminate\Support\Facades\View::class,
     ],
 

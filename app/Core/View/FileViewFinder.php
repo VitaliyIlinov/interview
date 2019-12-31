@@ -96,7 +96,7 @@ class FileViewFinder
             }
         }
 
-        throw new InvalidArgumentException("View [{$name}] not found.");
+         throw new InvalidArgumentException("View [{$name}] not found.");
     }
 
     /**

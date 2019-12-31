@@ -31,7 +31,7 @@
     $('#contentEdit').on('shown.bs.modal', function (e) {
         var modal = $(this);
         $.ajax({
-            url: "/content/read?path=solid/openclosed",
+            url: "/content/read?path=<?=$path;?>",
             method: 'get',
             success: function (data) {
                 modal.find('.modal-body textarea').val(data);
@@ -46,7 +46,7 @@
             url: "/content/save",
             method: 'put',
             data:{
-                path:'solid/openclosed',
+                path:'<?=$path;?>',
                 content: form.find('textarea').val()
             },
             success: function (data) {

@@ -51,8 +51,8 @@ class ViewFactory
      */
     protected $extensions = [
         'blade.php' => 'blade',
-        'php'       => 'php',
-        'css'       => 'file',
+        'php' => 'php',
+        'css' => 'file',
     ];
 
     /**
@@ -61,7 +61,6 @@ class ViewFactory
      * @var string|null
      */
     private $viewPrefix;
-
 
     public function __construct(FileViewFinder $finder, Dispatcher $events)
     {
@@ -73,16 +72,16 @@ class ViewFactory
      * Get the evaluated view contents for the given view.
      *
      * @param string $view
-     * @param array $data
+     * @param array  $data
      * @param string $layout
      * @return View
      */
     public function make(string $view, array $data, string $layout)
     {
         $fullViewPath = $this->finder->find(
-            $view = $this->normalizeName($this->getViewWithPrefix($view))
+            $view = $this->getViewWithPrefix($view)
         );
-        $layout = $this->finder->find($this->normalizeName($this->getViewWithPrefix($layout)));
+        $layout = $this->finder->find($this->getViewWithPrefix($layout));
 
         return tap($this->viewInstance($layout, $view, $fullViewPath, $data), function ($view) {
             $this->callCreator($view);
@@ -91,10 +90,11 @@ class ViewFactory
 
     /**
      * Create a new view instance from the given arguments.
+     *
      * @param string $layout
      * @param string $view
      * @param string $fullViewPath
-     * @param array $data
+     * @param array  $data
      * @return View
      */
     protected function viewInstance(string $layout, string $view, string $fullViewPath, array $data)
@@ -106,7 +106,7 @@ class ViewFactory
      * Add a piece of shared data to the environment.
      *
      * @param array|string $key
-     * @param mixed $value
+     * @param mixed        $value
      * @return mixed
      */
     public function share($key, $value = null)
@@ -169,7 +169,7 @@ class ViewFactory
     /**
      * Register a view composer event.
      *
-     * @param array|string $views
+     * @param array|string    $views
      * @param \Closure|string $callback
      * @return array
      */
@@ -187,7 +187,7 @@ class ViewFactory
     /**
      * Register a view composer event.
      *
-     * @param array|string $views
+     * @param array|string    $views
      * @param \Closure|string $callback
      * @return array
      */
@@ -205,9 +205,9 @@ class ViewFactory
     /**
      * Add an event for a given view.
      *
-     * @param string $view
+     * @param string          $view
      * @param \Closure|string $callback
-     * @param string $prefix
+     * @param string          $prefix
      * @return \Closure|null
      */
     protected function addViewEvent(string $view, $callback, $prefix = 'composing: ')
@@ -226,7 +226,7 @@ class ViewFactory
     /**
      * Add a listener to the event dispatcher.
      *
-     * @param string $name
+     * @param string   $name
      * @param \Closure $callback
      * @return void
      */
@@ -355,12 +355,15 @@ class ViewFactory
 
     /**
      * @param string $name
-     *
      * @return string|null
      */
-    private function getViewWithPrefix(string $name): string
+    public function getViewWithPrefix(string $name): string
     {
-        return $this->viewPrefix ? $this->viewPrefix . DIRECTORY_SEPARATOR . $name : $name;
+        return $this->normalizeName(
+            $this->viewPrefix
+                ? $this->viewPrefix . DIRECTORY_SEPARATOR . $name
+                : $name
+        );
     }
 
     /**
