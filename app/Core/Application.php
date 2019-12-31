@@ -7,6 +7,7 @@ use app\Core\Response\BaseResponse;
 use app\Core\Response\Response;
 use app\Core\Router\RouteServiceProvider;
 use app\Core\Support\ServiceProvider;
+use app\Exceptions\HttpException;
 use app\Exceptions\HttpResponseException;
 use app\Exceptions\MethodNotAllowed;
 use app\Exceptions\NotFoundHttpException;
@@ -346,7 +347,7 @@ class Application extends Container
      */
     public function dispatch($request = null)
     {
-        list($method, $pathInfo) = $this->parseIncomingRequest($request);
+        [$method, $pathInfo] = $this->parseIncomingRequest($request);
 
         return $this->sendThroughPipeline($this->middleware, function () use ($method, $pathInfo) {
 
@@ -486,7 +487,7 @@ class Application extends Container
     {
         $uses = $routeInfo[1]['uses'];
 
-        list($controller, $method) = explode('@', $uses);
+        [$controller, $method] = explode('@', $uses);
 
         if (!method_exists($instance = $this->make($controller), $method)) {
             throw new NotFoundHttpException;
@@ -609,7 +610,7 @@ class Application extends Container
     {
         $middleware = is_string($middleware) ? explode('|', $middleware) : (array)$middleware;
         return array_map(function ($name) {
-            list($name, $parameters) = array_pad(explode(':', $name, 2), 2, null);
+            [$name, $parameters] = array_pad(explode(':', $name, 2), 2, null);
 
             return ($this->routeMiddleware[$name]
                     ? $this->routeMiddleware[$name]
@@ -727,6 +728,21 @@ class Application extends Container
     public function getCurrentRoute(): array
     {
         return $this->currentRoute;
+    }
+
+    /**
+     * @param        $code
+     * @param string $message
+     * @param array  $headers
+     * @throws NotFoundHttpException|HttpException
+     */
+    public function abort($code, $message = '', array $headers = [])
+    {
+        if ($code == 404) {
+            throw new NotFoundHttpException($message);
+        }
+
+        throw new HttpException($message, $code);
     }
 
 }

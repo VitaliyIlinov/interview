@@ -1,7 +1,7 @@
 <?php
 
-namespace app\Core\Models;
+namespace app\Models;
 
-class BaseModel
+abstract class BaseModel
 {
 }

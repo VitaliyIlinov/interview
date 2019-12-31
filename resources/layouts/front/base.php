@@ -11,7 +11,9 @@
     <link href="/libs/fontawesome/css/all.min.css" rel="stylesheet">
     <link href="/libs/highlightjs/styles/darkula.css" rel="stylesheet">
     <link href="/libs/animate/animate.css" rel="stylesheet">
+    <link href="/libs/toastr/build/toastr.css" rel="stylesheet" type="text/css"/>
     <link href="/front/css/main.css" rel="stylesheet">
+    <script src="/libs/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
@@ -19,7 +21,7 @@
     <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
-            <a class="nav-link" href="<?=url()->route('dashboard')?>">Admin panel</a>
+            <a class="nav-link" href="<?= url()->route('dashboard') ?>">Admin panel</a>
         </li>
     </ul>
 </nav>
@@ -47,9 +49,10 @@
         <p class="text-center">&copy; Company 2017-2019</p>
     </div>
 </footer>
-<script src="/libs/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+<?php require_once resource_path('helpers/front/modal.php'); ?>
 <script src="/libs/bootstrap-4.3.1-dist/js/bootstrap.js"></script>
 <script src="/libs/highlightjs/highlight.pack.js"></script>
+<script src="/libs/toastr/build/toastr.min.js"></script>
 <script src="/front/js/main.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 </body>

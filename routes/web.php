@@ -26,6 +26,11 @@ $router->get('user/{name}', function ($name = null) {
     return $name;
 });
 
+$router->group(['prefix' => 'content','middleware'=>'role:admin'], function () use ($router) {
+    $router->get('read', 'AjaxController@readContent');
+    $router->put('save', 'AjaxController@saveContent');
+});
+
 $router->group(['prefix' => 'solid'], function () use ($router) {
     $router->get('single_responsibility', 'SolidController@singleResponsibility');
     $router->get('openclosed', 'SolidController@openClosed');

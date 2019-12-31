@@ -128,7 +128,7 @@
                         clone = modal.prev('ul').children().last().clone();
                         clone.find('label').text(description);
                         clone.attr('data-id', ++clone.data().id);
-                        clone.prependTo('#<?= $action ?>');
+                        clone.appendTo('#<?= $action ?>');
                     }
                     toastr.options.progressBar = true;
                     toastr.success('All is OK')

@@ -83,6 +83,7 @@ class Handler implements ExceptionHandler
      */
     protected function prepareResponse(Request $request, Throwable $e): Response
     {
+
         return new Response(
             $this->renderExceptionContent($e, config('app.debug')),
             !$e->getCode() == 0 ? $e->getCode() : 500,
