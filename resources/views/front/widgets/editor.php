@@ -1,3 +1,11 @@
+<link href="/libs/codemirror-5.50.2/doc/docs.css"  rel="stylesheet">
+<link href="/libs/codemirror-5.50.2/lib/codemirror.css"  rel="stylesheet">
+<link href="/libs/codemirror-5.50.2/addon/hint/show-hint.css"  rel="stylesheet">
+<style>
+    .CodeMirror{
+        height: auto;
+    }
+</style>
 <!-- Button trigger modal -->
 <button type="button" style="background: rgba(47,57,84,.6); top: 100px;right: 0" class="btn position-fixed" data-toggle="modal" data-target="#contentEdit">
     <i class="fa fa-cog fa-2x"> </i>
@@ -16,7 +24,7 @@
             </div>
             <div class="modal-body">
                 <form method="post" action="">
-                    <textarea class="form-control" name="content" rows="22"></textarea>
+                    <textarea id="editor" class="form-control" name="content" rows="30"></textarea>
                 </form>
 
             </div>
@@ -28,13 +36,22 @@
     </div>
 </div>
 <script>
-    $('#contentEdit').on('shown.bs.modal', function (e) {
+
+    $('#contentEdit').on('show.bs.modal', function (e) {
         var modal = $(this);
         $.ajax({
             url: "/content/read?path=<?=$path;?>",
             method: 'get',
             success: function (data) {
                 modal.find('.modal-body textarea').val(data);
+                CodeMirror.commands.autocomplete = function(cm) {
+                    cm.showHint({hint: CodeMirror.hint.anyword});
+                }
+                var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
+                    mode: "text/html",
+                    extraKeys: {"Ctrl-Space": "autocomplete"},
+                    value: document.documentElement.innerHTML
+                });
             },
             error:function (data) {
                 alert(data.responseJSON.message);
@@ -58,3 +75,11 @@
         })
     });
 </script>
+<script src="/libs/codemirror-5.50.2/lib/codemirror.js"></script>
+<script src="/libs/codemirror-5.50.2/addon/hint/show-hint.js"></script>
+<script src="/libs/codemirror-5.50.2/addon/hint/xml-hint.js"></script>
+<script src="/libs/codemirror-5.50.2/addon/hint/html-hint.js"></script>
+<script src="/libs/codemirror-5.50.2/mode/xml/xml.js"></script>
+<script src="/libs/codemirror-5.50.2/mode/javascript/javascript.js"></script>
+<script src="/libs/codemirror-5.50.2/mode/css/css.js"></script>
+<script src="/libs/codemirror-5.50.2/mode/htmlmixed/htmlmixed.js"></script>
