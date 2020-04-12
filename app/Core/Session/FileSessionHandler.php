@@ -99,7 +99,10 @@ class FileSessionHandler implements SessionHandlerInterface
      */
     public function write($sessionId, $sessionData)
     {
-        $this->files->put($this->path.'/'.$sessionId, $sessionData, true);
+        if (!$this->files->isDirectory($this->path)) {
+            $this->files->makeDirectory($this->path);
+        }
+        $this->files->put($this->path . '/' . $sessionId, $sessionData, true);
 
         return true;
     }

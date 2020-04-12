@@ -116,14 +116,7 @@ docker rm daemon
 <p>Чтобы создать свой образ, сперва вам нужно создать Dockerfile: это текстовый файл с инструкциями и аргументами.
     Краткое описание инструкций, которые мы собираемся использовать в примере:
 </p>
-<ul>
-    <li>FROM – задать базовый образ</li>
-    <li>RUN – выполнить команду в контейнере</li>
-    <li>CMD – установить исполняемый файл для контейнера</li>
-    <li>VOLUME – создать точку монтирования для тома</li>
-    <li>ENV – задать переменную среды</li>
-    <li>WORKDIR – установить рабочий каталог</li>
-</ul>
+
 
 <h2>Заметки</h2>
 DockerHub -лежат все образы
@@ -144,3 +137,85 @@ docker exec -it [containerID] /bin/bash
 docker commit dca8b8fe8685 test:v2 //сохранить изменения контейнера dca8b8fe8685(зайти итерактивно и что-то изменить) в образ test:v2
     </code>
 </pre>
+<h3>Docker Build</h3>
+<p>
+    Контейнер собирается из файла <b>Dockerfile</b>. Пример:
+<pre>
+    <code>
+        FROM ubuntu:18.04
+        MAINTAINER vitaliy ilinov <ilinov123@gmail.com>
+
+        ENV DEBIAN_FRONTEND=noninteractive \
+            ONE =1
+
+        ARG PHP_VERSION=7.2
+
+        RUN apt-get update && apt-get install
+
+        COPY from/path /to/path/
+
+        WORKDIR /var/www/app/
+
+        CMD /to/path/entrypoint.sh
+    </code>
+</pre>
+
+<ul>
+    <li><b>FROM</b> – задать базовый образ</li>
+    <li><b>MAINTAINER</b> – Владелец</li>
+    <li><b>RUN</b> – выполнить команду в контейнере</li>
+    <li><b>ENV</b> – задать переменную среды</li>
+    <li><b>ARG</b> – Аргументы при билде,с дефолтным значением.</li>
+    <li><b>COPY</b> – Копирует данные в контейнер</li>
+    <li><b>WORKDIR</b> – установить рабочий каталог</li>
+    <li><b>CMD</b> – установить исполняемый файл для контейнера</li>
+</ul>
+</p>
+<p>
+    Запуск построения контейнера происходит с помощью:
+<pre>
+    <code>
+         docker build \
+        --build-arg PHP_VERSION=$(PHP_VERSION) \
+        --force-rm  \
+        -t $(IMAGE_NAME) . \
+     	--no-cache
+    </code>
+</pre>
+
+<ul>
+    <li><b>build-arg</b> – аргументы при билде контейнера</li>
+    <li><b>t</b> – Тег билда</li>
+    <li><b>force-rm</b> – Always remove intermediate containers</li>
+    <li><b>--no-cache</b> – Do not use cache when building the image</li>
+</ul>
+</p>
+
+<h3>Docker контейнер</h3>
+<p>
+    Контейнер собирается из файла <b>Dockerfile</b>. Пример:
+<pre>
+    <code>
+        docker run -d \
+        --name $(IMAGE_NAME) \
+        -v ${PWD}:/var/www/app/ \
+        -p 80:80 \
+        $(IMAGE_NAME)
+    </code>
+     <code>
+        docker exec -ti $(IMAGE_NAME) bash
+    </code>
+     <code>
+       @docker logs $(IMAGE_NAME)
+    </code>
+</pre>
+
+<ul>
+    <li><b>t</b> – Allocate a pseudo-TTY</li>
+    <li><b>i</b> – Keep STDIN open even if not attached</li>
+    <li><b>d</b> – Run container in background and print container ID</li>
+    <li><b>--name</b> – Имя контейнера</li>
+    <li><b>p</b> –  Publish a container's port(s) to the host</li>
+    <li><b>-v, --volume list </b> –  Bind mount a volume</li>
+    <li><b>$(IMAGE_NAME)</b> – container name</li>
+</ul>
