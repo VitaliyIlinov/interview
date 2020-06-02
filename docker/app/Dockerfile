@@ -2,12 +2,14 @@
 FROM php:7.2-fpm
 MAINTAINER vitaliy ilinov <ilinov123@gmail.com>
 
-ARG user
+# console command: id -u
+# 1000 - is USER;
+# && creating file in MOUNT volume will be from current user
 ARG uid
 
 # Install and enable xDebug
 RUN pecl install xdebug \
-&& docker-php-ext-enable xdebug
+    && docker-php-ext-enable xdebug
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
@@ -16,20 +18,18 @@ RUN apt-get update && apt-get install -y \
     nano \
     zip \
     unzip \
-    git \
+    autoconf \
+    make \
     curl
 
-# Install composer
+## Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-COPY /docker/after-build.sh /docker/after-build.sh
-RUN bash /docker/after-build.sh
-
 # Create system user
-RUN useradd -G www-data,root -u $uid -d /home/$user $user
-RUN mkdir -p /home/$user/.composer && \
-    chown -R $user:$user /home/$user
+RUN usermod -u ${uid} www-data \
+    && groupmod -g ${uid} www-data
 
-# Change current user
-USER $user
-CMD ["php-fpm"]
+COPY ./ /docker
+
+#additional
+RUN bash /docker/after-build.sh

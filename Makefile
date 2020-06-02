@@ -20,51 +20,39 @@ else
 	@echo "without foo"
 endif
 
-.PHONY: composer-install
-composer-install:
-	@echo "composer install..."
-	@docker-compose exec $(uid) composer install
-
-.PHONY: logs
-logs:
-	@docker-compose logs -f
-
-.PHONY: config
-config:
-	@docker-compose config
-
-
-.PHONY: build
-build: uid:=1000
-build: user:=iliya
+build: uid:=$(shell id -u)
 build:
-	@echo "build... or you can docker-compose build"
+	@echo "build..."
 	 docker build \
   	--build-arg uid=$(uid) \
-  	--build-arg user=$(user) \
  	--force-rm  \
  	--no-cache \
- 	-t $(IMAGE_NAME) .
+ 	-t $(IMAGE_NAME) ./docker/app/
 
-.PHONY: up
 up:
 	docker-compose up -d
 
-.PHONY: down
 down:
 	docker-compose down
 
-.PHONY: stop
-stop:
-	docker-compose stop
+restart:
+	docker-compose down
 
-.PHONY: bash
-bash: bash
+bash: up
 	docker-compose exec $(IMAGE_NAME) bash
 
-.PHONY: del
+logs:
+	@docker-compose logs ${ARGS}
+
+config:
+	@docker-compose config
+
 del:
 	@docker container rm $(shell docker ps -aq) -f
+
+clear_logs:
+	sudo rm -R $(FOLDER_LOG_PATH)/*
+	sudo rm -R $(DB_DATA_PATH)/*
 
 help:
 	@echo 'Targets:'

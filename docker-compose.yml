@@ -1,18 +1,6 @@
 version: '3'
 #https://www.digitalocean.com/community/tutorials/how-to-containerize-a-laravel-application-for-development-with-docker-compose-on-ubuntu-18-04-ru
 services:
-  #Nginx Service https://hub.docker.com/_/nginx
-  nginx:
-    image: nginx:latest
-    container_name: nginx
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - ${APP_PATH_DIR}:${APP_PATH_CONTAINER}
-      - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
-      - ./storage/nginx/:/var/log/nginx
-
   #MySQL Service https://hub.docker.com/_/mysql
   db:
     image: mysql:8.0.12
@@ -22,9 +10,9 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
     ports:
-      - "3307:3306"
+      - "${DB_PORT}:3306"
     volumes:
-      - ./storage/mysql:/var/lib/mysql/
+      - ${DB_DATA_PATH}:/var/lib/mysql
       - ./docker/mysql/conf.d:/etc/mysql/conf.d
       - ./docker/mysql/init:/docker-entrypoint-initdb.d
 
@@ -35,22 +23,30 @@ services:
     ports:
       - 8080:8080
 
+  #Nginx Service https://hub.docker.com/_/nginx
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ${APP_PATH_DIR}:${APP_PATH_CONTAINER}
+      - ${FOLDER_LOG_PATH}/nginx/:/var/log/nginx
+      - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
+
   #PHP Service
   app:
-    build:
-      args:
-        user: iliya
-        uid: 1000
-      context: .
-      dockerfile: ./docker/app/Dockerfile
-      #or image if exist/You can create by make build
     image: app
     container_name: app
-    env_file:
-      - ./.env
     working_dir: ${APP_PATH_CONTAINER}
     volumes:
       - ${APP_PATH_DIR}:${APP_PATH_CONTAINER}
-      - ./storage/php/:/var/log/php
+      - ${FOLDER_LOG_PATH}/app/:/var/log/php
       - ./docker/php/conf.d:/usr/local/etc/php/conf.d
 #      - ./docker/php-fpm/pool.d/www.conf:/usr/local/etc/php-fpm.d/custom.conf
+
+#todo
+# does not work(docker bug)
+#   env_file:
+#   - ./docker/app/.env
