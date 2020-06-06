@@ -29,19 +29,13 @@ class Role
      *
      * @param Request $request
      * @param Closure $next
-     * @param string  $role
+     * @param string $role
      * @return mixed
-     * @throws NotFoundHttpException
      */
     public function handle(Request $request, Closure $next, string $role)
     {
         if (!$this->user->hasRole($role)) {
-            return app()->abort(
-                403,
-                sprintf('Permission Denied. Please <a href="%s">login</a>',
-                    url()->route('login')
-                )
-            );
+            return redirect()->route('login');
         }
 
         return $next($request);

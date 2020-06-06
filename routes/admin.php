@@ -8,7 +8,7 @@ use app\Core\Router;
 $router->get('/login', [
     'as' => 'login',
     function () use ($router) {
-        return view('login');
+        return view('login')->renderView();
     },
 ]);
 

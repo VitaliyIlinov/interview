@@ -7,6 +7,9 @@ use app\Core\View\View;
 
 class AdminCatalog
 {
+    private $exclude = [
+        'admin/login'
+    ];
     /**
      * @var Application
      */
@@ -24,6 +27,9 @@ class AdminCatalog
 
     public function compose(View $view)
     {
+        if (in_array($view->getView(), $this->exclude)) {
+            return;
+        }
         $view->with('menu', array_merge(
                 ['Menu' => 'divider'],
                 $this->getMenu(),
