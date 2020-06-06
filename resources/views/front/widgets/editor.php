@@ -1,11 +1,12 @@
-<link href="/libs/codemirror-5.50.2/lib/codemirror.css"  rel="stylesheet">
+<link href="/libs/codemirror-5.50.2/lib/codemirror.css" rel="stylesheet">
 <style>
-    .CodeMirror{
+    .CodeMirror {
         height: auto;
     }
 </style>
 <!-- Button trigger modal -->
-<button type="button" style="background: rgba(47,57,84,.6); top: 100px;right: 0" class="btn position-fixed" data-toggle="modal" data-target="#contentEdit">
+<button type="button" style="background: rgba(47,57,84,.6); top: 100px;right: 0" class="btn position-fixed"
+        data-toggle="modal" data-target="#contentEdit">
     <i class="fa fa-cog fa-2x"> </i>
 </button>
 
@@ -35,6 +36,7 @@
 </div>
 <script>
 
+    let editor;
     $('#contentEdit').one('show.bs.modal', function (e) {
         var modal = $(this);
         $.ajax({
@@ -42,28 +44,32 @@
             method: 'get',
             success: function (data) {
                 modal.find('.modal-body textarea').val(data);
-                var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
+                editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
                     lineNumbers: true,
                     autoRefresh: true,
                 });
             },
-            error:function (data) {
+            error: function (data) {
                 alert(data.responseJSON.message);
             },
         });
     }).on('click', '[type="submit"]', function (event) {
-        var form = $(event.delegateTarget).find('form');
+        if (editor.isClean()) {
+            return;
+        }
+        //var form = $(event.delegateTarget).find('form');
         $.ajax({
             url: "/content/save",
             method: 'put',
-            data:{
-                path:'<?=$path;?>',
-                content: form.find('textarea').val()
+            data: {
+                path: '<?=$path;?>',
+                content: editor.getValue()
             },
             success: function (data) {
-                location.reload();
+                alert('Changes is saved.Please reload page');
+                //location.reload();
             },
-            error:function (data) {
+            error: function (data) {
                 alert(data.responseJSON.message);
             },
         })
