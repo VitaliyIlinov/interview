@@ -11,7 +11,7 @@ $(document).ready(function () {
         if (target[0] === '#') {
             e.preventDefault();
             $(this).closest('li').toggleClass(options.catalog_anim_class);
-            $(target).slideToggle("slow");
+            $(target).slideToggle("fast");
         }
     });
     setActiveCategory(options.current_path, options.catalog_anim_class);

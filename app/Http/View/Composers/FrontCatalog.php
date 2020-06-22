@@ -144,6 +144,11 @@ class FrontCatalog
                     'text' => 'Main',
                 ],
             ],
+            'web_socket'       => [
+                'main' => [
+                    'text' => 'Web sockets',
+                ],
+            ],
         ];
 //        $mc = new Memcached();
 //        $mc->addServer("localhost", 11211);

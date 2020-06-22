@@ -1,5 +1,5 @@
 <!--https://www.gotbootstrap.com/themes/smartadmin/4.0.2/settings_layout_options.html-->
-<ul class="list-group" id="catalog">
+<ul class="list-group collapse show" id="catalog">
     <?php foreach ($catalog as $mainMenuKey => $menuInfo): ?>
         <li class="list-group-item">
             <a href="#<?= $mainMenuKey ?>" class="">
