@@ -158,8 +158,8 @@ return [
     */
 
     'aliases' => [
-        'Files' => app\support\Facades\File::class,
-        'Request' => app\support\Facades\Request::class,
+        'Files' => \app\helpers\Filesystem::class,
+        'Request' => \app\Core\Request::class,
         'Url' => app\Core\Router\UrlGenerator::class,
     ],
 
