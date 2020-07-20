@@ -69,7 +69,7 @@ class ViewServiceProvider extends ServiceProvider
     {
         $this->app->singleton('view.finder', function ($app) {
             $viewConfigs = $app['config']['view'];
-            return new FileViewFinder($viewConfigs['layouts'], $viewConfigs['views'], $app['files']);
+            return new FileViewFinder($viewConfigs['layouts'], $viewConfigs['views'], $app['Files']);
         });
     }
 }

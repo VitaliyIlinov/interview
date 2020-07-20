@@ -691,7 +691,7 @@ class Application extends Container
 
     public function terminate(BaseResponse $response)
     {
-        $this->terminateMiddleware($this['request'], $response);
+        $this->terminateMiddleware($this['Request'], $response);
     }
 
     protected function terminateMiddleware($request, $response)

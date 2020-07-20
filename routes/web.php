@@ -8,7 +8,7 @@ $router->get('/', function () use ($router) {
 });
 
 $router->group(['prefix' => 'test'], function () use ($router) {
-    $router->get('/t', ['uses' => 'TestController@t', 'as' => 't']);
+    $router->get('/', ['uses' => 'TestController@index', 'as' => 't']);
 });
 
 $router->get('posts/{postId}/comments/{commentId}', function ($postId, $commentId) {

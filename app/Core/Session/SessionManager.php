@@ -94,7 +94,7 @@ class SessionManager
         $lifetime = $this->getSessionConfig()['lifetime'];
 
         return $this->buildSession(new FileSessionHandler(
-            $this->app['files'], $this->getSessionConfig()['files'], $lifetime
+            $this->app['Files'], $this->getSessionConfig()['files'], $lifetime
         ));
     }
 

@@ -10,5 +10,9 @@ class RegisterFacades
     public function bootstrap(Application $app)
     {
         Facade::setFacadeApplication($app);
+
+        AliasLoader::getInstance(
+            $app->make('config')->get('app.aliases', [])
+        )->register();
     }
 }

@@ -4,6 +4,14 @@ html, body {
     display: table;
     width: 100%;
 }
+p{
+    margin-top: 0;
+    margin-bottom: 2rem;
+    font-size: 1rem;
+    line-height: 1.8rem;
+    color: rgba(9,9,16,.7);
+    font-family: cursive;
+}
 footer{
     display: table-footer-group;
 }

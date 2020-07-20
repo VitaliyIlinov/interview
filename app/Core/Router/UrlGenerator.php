@@ -79,7 +79,7 @@ class UrlGenerator
      */
     protected function getRootUrl()
     {
-        return $this->app->make('request')->root();
+        return $this->app->make('Request')->root();
     }
 
     /**

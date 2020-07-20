@@ -40,7 +40,7 @@ class RouteServiceProvider extends ServiceProvider
     private function registerUrlGenerator()
     {
         $this->app->singleton(UrlGenerator::class, function ($app) {
-            return new UrlGenerator($app, $app['request']);
+            return new UrlGenerator($app, $app['Request']);
         });
     }
 
@@ -52,7 +52,7 @@ class RouteServiceProvider extends ServiceProvider
     private function registerRedirector()
     {
         $this->app->singleton('redirect', function ($app) {
-            $redirector = new Redirector($app['url']);
+            $redirector = new Redirector($app['Url']);
 
             // If the session is set on the application instance, we'll inject it into
             // the redirector instance. This allows the redirect responses to allow
