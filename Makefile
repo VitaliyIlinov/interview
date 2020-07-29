@@ -38,7 +38,7 @@ down:
 restart:
 	docker-compose down
 
-bash: up
+bash:
 	docker-compose exec $(IMAGE_NAME) bash
 
 logs:

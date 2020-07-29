@@ -138,6 +138,7 @@ return [
          */
         app\Core\View\ViewServiceProvider::class,
         app\Core\Session\SessionServiceProvider::class,
+        app\Core\Database\DatabaseServiceProvider::class,
 
         /*
        * Application Service Providers...
@@ -158,9 +159,10 @@ return [
     */
 
     'aliases' => [
-        'Files' => \app\helpers\Filesystem::class,
-        'Request' => \app\Core\Request::class,
+        'Files' => app\helpers\Filesystem::class,
+        'Request' => app\Core\Request::class,
         'Url' => app\Core\Router\UrlGenerator::class,
+        'DB' => app\support\Facades\DB::class,
     ],
 
 ];

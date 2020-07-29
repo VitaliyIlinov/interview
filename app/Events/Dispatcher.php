@@ -3,6 +3,7 @@
 namespace app\Events;
 
 use app\Core\Container;
+use app\helpers\Arr;
 use app\helpers\Str;
 
 class Dispatcher
@@ -101,6 +102,12 @@ class Dispatcher
     public function dispatch($event, $payload = [], $halt = false)
     {
         $responses = [];
+        // When the given "event" is actually an object we will assume it is an event
+        // object and use the class as the event name and this event itself as the
+        // payload to the handler, which makes object based events quite simple.
+        [$event, $payload] = $this->parseEventAndPayload(
+            $event, $payload
+        );
 
         foreach ($this->getListeners($event) as $listener) {
             $responses[] = $listener($event, $payload);
@@ -108,7 +115,21 @@ class Dispatcher
 
         return $halt ? null : $responses;
     }
+    /**
+     * Parse the given event and payload and prepare them for dispatching.
+     *
+     * @param  mixed  $event
+     * @param  mixed  $payload
+     * @return array
+     */
+    protected function parseEventAndPayload($event, $payload)
+    {
+        if (is_object($event)) {
+            [$payload, $event] = [[$event], get_class($event)];
+        }
 
+        return [$event, Arr::wrap($payload)];
+    }
     /**
      * @param string $eventName
      * @return array

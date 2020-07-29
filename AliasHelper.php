@@ -23,3 +23,11 @@ class Request
 class Url
 {
 }
+
+/**
+ * @see  app\support\Facades\DB::class
+ * @mixin  app\support\Facades\DB::class
+ */
+class DB
+{
+}

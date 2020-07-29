@@ -2,6 +2,8 @@
 
 namespace app\Core\Debug;
 
+use app\Exceptions\WrapHtmlException;
+
 class ExceptionHandler
 {
     /**
@@ -19,7 +21,7 @@ class ExceptionHandler
         $this->debug = $debug;
     }
 
-    public function getHtml(\Throwable $throwable): string
+    public function getHtml(WrapHtmlException $throwable): string
     {
         return $this->decorate($this->getContent($throwable), $this->getStylesheet($throwable));
     }
@@ -41,7 +43,7 @@ class ExceptionHandler
 EOF;
     }
 
-    private function getContent(\Throwable $exception): string
+    private function getContent(WrapHtmlException $exception): string
     {
         switch ($exception->getCode()) {
             case 404:
@@ -57,47 +59,44 @@ EOF;
                 </div>
 EOF;
         }
-        $content = sprintf(<<<'EOF'
+        $content = '';
+        try {
+            $count = count($exception->getAllPrevious());
+            $total = $count + 1;
+            foreach ($exception->toArray() as $position => $e) {
+                $ind = $count - $position + 1;
+                $class = $this->formatClass($e['class']);
+                $message = nl2br($this->escapeHtml($e['message']));
+                $content .= sprintf(<<<'EOF'
                     <div class="trace trace-as-html">
                         <table class="trace-details">
                             <thead class="trace-head"><tr><th>
                                 <h3 class="trace-class">
-                                    <span class="text-muted">(%d)</span>
+                                    <span class="text-muted">(%d/%d)</span>
                                     <span class="exception_title">%s</span>
                                 </h3>
                                 <p class="break-long-words trace-message">%s</p>
                             </th></tr></thead>
                             <tbody>
 EOF
-            ,
-            count($exception->getPrevious() ?? []) + 1,
-            get_class($exception),
-            nl2br($this->escapeHtml($exception->getMessage()))
-        );
-        foreach ($exception->getTrace() as $trace) {
-            $content .= '<tr><td>';
-            if ($trace['function']) {
-                $content .= sprintf(
-                    'at <span class="trace-class">%s</span><span class="trace-type">%s</span><span class="trace-method">%s</span>(<span class="trace-arguments">%s</span>)',
-                    $trace['class'] ?? '--',
-                    $trace['type'] ?? '--',
-                    $trace['function'],
-                    '$trace[args])'
-                );
+                    , $ind, $total, $class, $message);
+                foreach ($e['trace'] as $trace) {
+                    $content .= '<tr><td>';
+                    if ($trace['function']) {
+                        $content .= sprintf('at <span class="trace-class">%s</span><span class="trace-type">%s</span><span class="trace-method">%s</span>',
+                            $this->formatClass($trace['class']), $trace['type'], $trace['function']);
+                    }
+                    if (isset($trace['file']) && isset($trace['line'])) {
+                        $content .=$this->formatPath( $trace['file'],$trace['line']);
+                    }
+                    $content .= "</td></tr>\n";
+                }
+
+                $content .= "</tbody>\n</table>\n</div>\n";
             }
-            if (isset($trace['file']) && isset($trace['line'])) {
-                $content .= sprintf(
-                    '<span class="block trace-file-path">in <span title="%s%3$s"><strong>%s</strong>%s</span></span>',
-                    $this->escapeHtml($trace['file']),
-                    $trace['file'],
-                    0 < $trace['line'] ? ' line ' . $trace['line'] : ''
-                );
-            }
-            $content .= "</td></tr>\n";
+        } catch (\Exception $e) {
+
         }
-
-        $content .= "</tbody>\n</table>\n</div>\n";
-
         return <<<EOF
             <div class="exception-summary">
                 <div class="container">
@@ -118,7 +117,7 @@ EOF;
      *
      * @return string The stylesheet as a string
      */
-    public function getStylesheet(\Throwable $exception)
+    public function getStylesheet(WrapHtmlException $exception)
     {
         if (!$this->debug) {
             return <<<'EOF'
@@ -184,5 +183,18 @@ EOF;
     private function escapeHtml($str)
     {
         return htmlspecialchars($str, ENT_COMPAT | ENT_SUBSTITUTE);
+    }
+
+    private function formatClass($class)
+    {
+        $parts = explode('\\', $class);
+
+        return sprintf('<abbr title="%s">%s</abbr>', $class, array_pop($parts));
+    }
+
+    private function formatPath($path, $line)
+    {
+        $file = $this->escapeHtml(preg_match('#[^/\\\\]*+$#', $path, $file) ? $file[0] : $path);
+        return sprintf('<span class="block trace-file-path">in <span title="%s%3$s"><strong>%s</strong>%s</span></span>', $this->escapeHtml($path), $file, 0 < $line ? ' line '.$line : '');
     }
 }

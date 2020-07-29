@@ -1,5 +1,5 @@
 #https://hub.docker.com/_/php
-FROM php:7.2-fpm
+FROM php:7.4-fpm
 MAINTAINER vitaliy ilinov <ilinov123@gmail.com>
 
 # console command: id -u
@@ -8,8 +8,10 @@ MAINTAINER vitaliy ilinov <ilinov123@gmail.com>
 ARG uid
 
 # Install and enable xDebug
-RUN pecl install xdebug \
-    && docker-php-ext-enable xdebug
+
+COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/bin/
+
+RUN install-php-extensions pdo_mysql xdebug
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
@@ -20,17 +22,17 @@ RUN apt-get update && apt-get install -y \
     unzip \
     autoconf \
     make \
-    curl \
-    npm
+    wget \
+    curl
 
 ## Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Create system user
-RUN usermod -u ${uid} www-data \
-    && groupmod -g ${uid} www-data
+RUN usermod -u ${uid} www-data && groupmod -g ${uid} www-data
 
 COPY ./ /docker
 
+RUN cp /docker/php.ini-development "$PHP_INI_DIR/php.ini"
 #additional
 RUN bash /docker/after-build.sh

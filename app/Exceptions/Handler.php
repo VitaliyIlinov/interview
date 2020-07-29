@@ -11,6 +11,7 @@ use app\Core\Response\BaseResponse;
 use app\Core\Response\JsonResponse;
 use app\Core\Response\Response;
 use app\helpers\Arr;
+use Exception;
 use Throwable;
 
 class Handler implements ExceptionHandler
@@ -66,7 +67,9 @@ class Handler implements ExceptionHandler
 
     public function render(Request $request, Throwable $e): BaseResponse
     {
-        if ($e instanceof Responsable) {
+        if (method_exists($e, 'render')) {
+            return $e->render();
+        } elseif ($e instanceof Responsable) {
             return $e->toResponse($request);
         }
         return $request->isAjax()
@@ -85,8 +88,8 @@ class Handler implements ExceptionHandler
     {
         return new Response(
             $this->renderExceptionContent($e, config('app.debug')),
-            !$e->getCode() == 0 ? $e->getCode() : 500,
-            $request->headers->all()
+            $this->isHttpException($e) ? $e->getStatusCode() : 500,
+            $this->isHttpException($e) ? $e->getHeaders() : []
         );
     }
 
@@ -99,11 +102,11 @@ class Handler implements ExceptionHandler
     protected function convertExceptionToArray(Throwable $e)
     {
         return config('app.debug') ? [
-            'message' => $e->getMessage(),
+            'message'   => $e->getMessage(),
             'exception' => get_class($e),
-            'file' => $e->getFile(),
-            'line' => $e->getLine(),
-            'trace' => array_map(function ($trace) {
+            'file'      => $e->getFile(),
+            'line'      => $e->getLine(),
+            'trace'     => array_map(function ($trace) {
                 return Arr::except($trace, ['args']);
             }, $e->getTrace()),
         ] : [
@@ -131,12 +134,25 @@ class Handler implements ExceptionHandler
     /**
      * Gets the HTML content associated with the given exception.
      *
-     * @param Throwable $e
+     * @param Exception $e
      * @param bool      $debug
      * @return string
      */
-    private function renderExceptionContent(Throwable $e, bool $debug = true): string
+    private function renderExceptionContent(Exception $e, bool $debug = true): string
     {
-        return (new ExceptionHandlerDebug($debug))->getHtml($e);
+        return (new ExceptionHandlerDebug($debug))->getHtml(
+            WrapHtmlException::create($e)
+        );
+    }
+
+    /**
+     * Determine if the given exception is an HTTP exception.
+     *
+     * @param Exception $e
+     * @return bool
+     */
+    protected function isHttpException(Exception $e): bool
+    {
+        return $e instanceof HttpExceptionInterface;
     }
 }

@@ -132,4 +132,44 @@ class Str
 
         return false;
     }
+
+    /**
+     * Replace a given value in the string sequentially with an array.
+     *
+     * @param  string  $search
+     * @param  array   $replace
+     * @param  string  $subject
+     * @return string
+     */
+    public static function replaceArray($search, array $replace, $subject)
+    {
+        foreach ($replace as $value) {
+            $subject = static::replaceFirst($search, $value, $subject);
+        }
+
+        return $subject;
+    }
+
+    /**
+     * Replace the first occurrence of a given value in the string.
+     *
+     * @param  string  $search
+     * @param  string  $replace
+     * @param  string  $subject
+     * @return string
+     */
+    public static function replaceFirst($search, $replace, $subject)
+    {
+        if ($search == '') {
+            return $subject;
+        }
+
+        $position = strpos($subject, $search);
+
+        if ($position !== false) {
+            return substr_replace($subject, $replace, $position, strlen($search));
+        }
+
+        return $subject;
+    }
 }

@@ -732,4 +732,14 @@ class Application extends Container
         throw new HttpException($message, $code);
     }
 
+    /**
+     * Determine if the application is running in the console.
+     *
+     * @return bool
+     */
+    public function runningInConsole()
+    {
+        return php_sapi_name() === 'cli' || php_sapi_name() === 'phpdbg';
+    }
+
 }

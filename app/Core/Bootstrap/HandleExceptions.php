@@ -59,12 +59,12 @@ class HandleExceptions
      * the HTTP and Console kernels. But, fatal error exceptions must
      * be handled differently since they are not normal exceptions.
      *
-     * @param Throwable $e
+     * @param \Throwable $e
      * @return void
      */
     public function handleException($e)
     {
-        if (!$e instanceof \Exception) {
+        if (!$e instanceof Exception) {
             $e = new FatalThrowableError($e);
         }
 
@@ -73,8 +73,11 @@ class HandleExceptions
         } catch (Exception $e) {
             //
         }
-
-        $this->renderHttpResponse($e);
+        if ($this->app->runningInConsole()) {
+            //$this->renderForConsole($e);
+        } else {
+            $this->renderHttpResponse($e);
+        }
     }
 
     /**
@@ -96,7 +99,7 @@ class HandleExceptions
     public function handleShutdown()
     {
         if (!is_null($error = error_get_last()) && $this->isFatal($error['type'])) {
-            $this->handleException($this->fatalExceptionFromError($error, 0));
+            $this->handleException($this->fatalExceptionFromError($error));
         }
     }
 
@@ -109,12 +112,9 @@ class HandleExceptions
      */
     protected function fatalExceptionFromError(array $error, $traceOffset = null)
     {
-
-        $t = new FatalErrorException(
+        return new FatalErrorException(
             $error['message'], $error['type'], 0, $error['file'], $error['line'], $traceOffset
         );
-
-        return $t;
     }
 
     /**

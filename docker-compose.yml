@@ -10,7 +10,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
     ports:
-      - "${DB_PORT}:3306"
+      - 3307:3306
     volumes:
       - ${DB_DATA_PATH}:/var/lib/mysql
       - ./docker/mysql/conf.d:/etc/mysql/conf.d
@@ -28,12 +28,14 @@ services:
     image: nginx:latest
     container_name: nginx
     ports:
-      - "80:80"
+      - "81:80"
       - "443:443"
     volumes:
       - ${APP_PATH_DIR}:${APP_PATH_CONTAINER}
       - ${FOLDER_LOG_PATH}/nginx/:/var/log/nginx
       - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
+    links:
+      - app
 
   #PHP Service
   app:
@@ -45,6 +47,8 @@ services:
       - ${FOLDER_LOG_PATH}/app/:/var/log/php
       - ./docker/php/conf.d:/usr/local/etc/php/conf.d
 #      - ./docker/php-fpm/pool.d/www.conf:/usr/local/etc/php-fpm.d/custom.conf
+    links:
+      - db
 
 #todo
 # does not work(docker bug)
