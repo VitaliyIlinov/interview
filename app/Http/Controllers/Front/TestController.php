@@ -8,10 +8,6 @@ class TestController
 {
     public function index()
     {
-        //билдер
-        //фабрика
-        //слушатель
-        //facade
         \DB::listen(function(QueryExecuted $query) {
             $r=1;
             /**
