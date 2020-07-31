@@ -33,6 +33,11 @@ $app->singleton(
     app\Exceptions\Handler::class
 );
 
+$app->singleton(
+    component\Contracts\Console\Kernel::class,
+    app\Console\Kernel::class
+);
+
 /*
 |--------------------------------------------------------------------------
 | Register Middleware

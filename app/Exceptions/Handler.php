@@ -11,6 +11,7 @@ use app\Core\Response\BaseResponse;
 use app\Core\Response\JsonResponse;
 use app\Core\Response\Response;
 use app\helpers\Arr;
+use component\Console\Output\OutputInterface;
 use Exception;
 use Throwable;
 
@@ -154,5 +155,17 @@ class Handler implements ExceptionHandler
     protected function isHttpException(Exception $e): bool
     {
         return $e instanceof HttpExceptionInterface;
+    }
+
+    /**
+     * Render an exception to the console.
+     *
+     * @param  OutputInterface  $output
+     * @param  Exception  $e
+     * @return void
+     */
+    public function renderForConsole($output, Exception $e)
+    {
+       //
     }
 }

@@ -4,6 +4,8 @@ namespace app\contracts\Debug;
 
 use app\Core\Request;
 use app\Core\Response\BaseResponse;
+use component\Console\Output\OutputInterface;
+use Exception;
 use Throwable;
 
 interface ExceptionHandler
@@ -32,4 +34,13 @@ interface ExceptionHandler
      * @return BaseResponse
      */
     public function render(Request $request, Throwable $e): BaseResponse;
+
+    /**
+     * Render an exception to the console.
+     *
+     * @param  OutputInterface  $output
+     * @param  Exception  $e
+     * @return void
+     */
+    public function renderForConsole($output, Exception $e);
 }
